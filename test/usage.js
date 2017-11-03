@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 /**
  * sample script to show usage of module
  */

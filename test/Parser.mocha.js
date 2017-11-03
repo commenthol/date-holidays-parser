@@ -11,7 +11,7 @@ var p = new Parser()
 var parser = p.parse.bind(p)
 
 if (~process.argv.indexOf('--writetests')) {
-  ;(function () {
+  (function () {
     var store = {}
     var filename = path.resolve(__dirname, 'fixtures', 'parser.js')
     for (var name in exp) {
@@ -20,7 +20,7 @@ if (~process.argv.indexOf('--writetests')) {
     }
     var js = serializeToModule(store, {beautify: true, comment: 'eslint-disable'})
     require('fs').writeFileSync(filename, js, 'utf8')
-    console.log(filename, 'written')
+    console.log(filename, 'written') // eslint-disable-line
   })()
 }
 

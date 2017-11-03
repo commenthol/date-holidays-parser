@@ -1,7 +1,7 @@
 'use strict'
 
 const moment = require('moment-timezone')
-const pad0 = require('../../src/internal/utils').pad0
+const pad0 = require('../src/internal/utils').pad0
 
 const toIso = exports.toIso = function toIso (date) {
   var days = 'sun,mon,tue,wed,thu,fri,sat'.split(',')

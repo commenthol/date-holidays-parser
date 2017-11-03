@@ -27,28 +27,28 @@ class CalEventFactory {
     switch (opts.fn) {
       case 'easter':
         return new Easter(opts)
-        // #ifndef nojulian
+      // #ifndef nojulian
       case 'julian':
         return new Julian(opts)
-        // #endif
-        // #ifndef nohebrew
+      // #endif
+      // #ifndef nohebrew
       case 'hebrew':
         return new Hebrew(opts)
-        // #endif
-        // #ifndef noislamic
+      // #endif
+      // #ifndef noislamic
       case 'islamic':
         return new Hijri(opts)
-        // #endif
-        // #ifndef noequinox
+      // #endif
+      // #ifndef noequinox
       case 'equinox':
         return new Equinox(opts)
-        // #endif
-        // #ifndef nochinese
+      // #endif
+      // #ifndef nochinese
       case 'chinese':
       case 'korean':
       case 'vietnamese':
         return new Chinese(opts)
-        // #endif
+      // #endif
       default:
         return new CalEvent(opts)
     }

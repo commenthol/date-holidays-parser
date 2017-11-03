@@ -1,8 +1,9 @@
 node_modules/
-coverage/
-output/
-attic/
-tmp/
+/coverage
+/output
+/attic
+/tmp
+/lib
 *.log
 *.tgz
 *.sh

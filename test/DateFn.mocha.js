@@ -5,7 +5,7 @@
 // const _ = require('lodash')
 const assert = require('assert')
 const DateFn = require('../src/DateFn')
-const fixResult = require('./lib/helper').fixResult
+const fixResult = require('./helpers').fixResult
 
 describe('#DateFn', function () {
   describe('Fixed Date', function () {

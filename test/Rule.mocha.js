@@ -1,7 +1,7 @@
 /* global describe, it */
 
 const assert = require('assert')
-const fixResult = require('./lib/helper').fixResult
+const fixResult = require('./helpers').fixResult
 const Rule = require('../src/Rule')
 const testcases = require('./fixtures/parser')
 const CalEventFactory = require('../src/CalEventFactory')

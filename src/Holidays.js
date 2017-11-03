@@ -14,10 +14,11 @@ const {toYear, toDate} = require('./internal/utils')
 const Data = require('./Data')
 const DateFn = require('./DateFn')
 
-var TYPES = ['public', 'bank', 'school', 'optional', 'observance']
+const TYPES = ['public', 'bank', 'school', 'optional', 'observance']
 
 /**
  * @class
+ * @param {Object} data - holiday data object - see data/holidays.json
  * @param {String|Object} country - if object use `{ country: {String}, state: {String}, region: {String} }`
  * @param {String} [state] - specifies state
  * @param {String} [region] - specifies region
@@ -27,15 +28,19 @@ var TYPES = ['public', 'bank', 'school', 'optional', 'observance']
  * @param {Array} opts.types - holiday types to consider
  * @example
  * ```js
- * new Holiday('US', 'la', 'no') // is the same as
- * new Holiday('us.la.no')       // is the same as
- * new Holiday({ country: 'us', state: 'la', region: 'no'})
+ * new Holiday(data, 'US', 'la', 'no') // is the same as
+ * new Holiday(data, 'us.la.no')       // is the same as
+ * new Holiday(data, { country: 'us', state: 'la', region: 'no'})
  * ```
  */
-function Holidays (country, state, region, opts) {
+function Holidays (data, country, state, region, opts) {
   if (!(this instanceof Holidays)) {
-    return new Holidays(country, state, region, opts)
+    return new Holidays(data, country, state, region, opts)
   }
+  if (!data) {
+    throw new TypeError('need holiday data')
+  }
+  this._data = data
   this.init(country, state, region, opts)
 }
 module.exports = Holidays
@@ -47,47 +52,35 @@ Holidays.prototype = {
    * @param {String} [state] - specifies state
    * @param {String} [region] - specifies region
    * @param {Object} [opts] - options
-   * @param {Array|String} opts.languages - set language(s) with ISO 639-1 shortcodes
-   * @param {String} opts.timezone - set timezone
-   * @param {Array} opts.types - holiday types to consider
-   * @param {Object} [opts.data] - holiday data object - see data/holidays.json
+   * @param {Array|String} [opts.languages] - set language(s) with ISO 639-1 shortcodes
+   * @param {String} [opts.timezone] - set timezone
+   * @param {Array} [opts.types] - holiday types to consider
    */
-  init (country, state, region, opts) {
-    var self = this
+  init (...args) {
+    const [country, state, region, opts] = getArgs(...args)
 
     // reset settings
     this.__conf = null
     this.holidays = {}
     this.setLanguages()
-
-    if (typeof region === 'object') {
-      opts = region
-      region = null
-    } else if (typeof state === 'object') {
-      opts = state
-      state = null
-    }
-    opts = opts || {}
     this._setTypes(opts.types)
 
     this.__conf = Data.splitName(country, state, region)
-    if (this.__conf) {
-      this.__data = new Data(this.__conf, opts.data)
-      if (opts.languages) {
-        this.setLanguages(opts.languages)
-      } else {
-        this.setLanguages(this.__data.getLanguages())
-      }
-      var holidays = this.__data.getHolidays()
-      if (holidays) {
-        this.__timezone = opts.timezone || this.__data.getTimezones()[0]
-        Object.keys(holidays).forEach(function (rule) {
-          self.setHoliday(rule, holidays[rule])
-        })
-        return true
-      }
+    this.__data = new Data(opts.data || this._data, this.__conf)
+
+    if (opts.languages) {
+      this.setLanguages(opts.languages)
     } else {
-      this.__data = new Data(null, opts.data)
+      this.setLanguages(this.__data.getLanguages())
+    }
+
+    const holidays = this.__data.getRules()
+    if (holidays) {
+      this.__timezone = opts.timezone || this.__data.getTimezones()[0]
+      Object.keys(holidays).forEach((rule) => {
+        this.setHoliday(rule, holidays[rule])
+      })
+      return true
     }
   },
 
@@ -113,7 +106,7 @@ Holidays.prototype = {
     // assign a name to rule
     if (!opts || typeof opts === 'string') {
       opts = opts || rule
-      var lang = this.getLanguages()[0]
+      const lang = this.getLanguages()[0]
       opts = _.set({type: 'public'}, ['name', lang], opts)
     }
 
@@ -139,13 +132,13 @@ Holidays.prototype = {
 
     this.holidays[rule] = opts
 
-    var fn = new DateFn(rule, this.holidays)
+    const fn = new DateFn(rule, this.holidays)
     if (fn.ok) {
       this.holidays[rule].fn = fn
       return true
     } else {
       // throw Error('could not parse rule: ' + rule) // NEXT
-      console.log('could not parse rule: ' + rule)
+      console.log('could not parse rule: ' + rule) // eslint-disable-line
     }
     return false
   },
@@ -166,29 +159,29 @@ Holidays.prototype = {
   getHolidays (year, language) {
     year = toYear(year)
 
-    var _this = this
-    var arr = []
-    var langs = this.getLanguages()
+    let arr = []
+    const langs = this.getLanguages()
     if (language) {
       langs.unshift(language)
     }
 
-    Object.keys(this.holidays).forEach(function (rule) {
-      if (_this.holidays[rule].fn) {
-        _this._dateByRule(year, rule).forEach(function (o) {
-          arr.push(_this._translate(o, langs))
+    Object.keys(this.holidays).forEach((rule) => {
+      if (this.holidays[rule].fn) {
+        this._dateByRule(year, rule).forEach((o) => {
+          arr.push(this._translate(o, langs))
         })
       }
     })
 
     // sort by date
-    arr = arr.sort(function (a, b) {
-      return (+a.start) - (+b.start)
-    })
+    arr = arr
+      .sort(function (a, b) {
+        return (+a.start) - (+b.start)
+      })
       .map(function (a, i) {
-        var b = arr[i + 1]
+        const b = arr[i + 1]
         if (b && (a.name === b.name) && (+a.start) === (+b.start)) {
-          for (var type of TYPES) {
+          for (const type of TYPES) {
             if (type === a.type || type === b.type) {
               a.filter = true
               b.type = type
@@ -219,12 +212,11 @@ Holidays.prototype = {
    */
   isHoliday (date) {
     date = date || new Date()
-    var hd
-    var year = toYear(date)
-    var rules = Object.keys(this.holidays)
-    for (var i in rules) {
-      hd = [].concat(this._dateByRule(year, rules[i]))
-      for (var j in hd) {
+    const year = toYear(date)
+    const rules = Object.keys(this.holidays)
+    for (const i in rules) {
+      const hd = [].concat(this._dateByRule(year, rules[i]))
+      for (const j in hd) {
         if (hd[j] && date >= hd[j].start && date < hd[j].end) {
           return this._translate(hd[j])
         }
@@ -241,7 +233,7 @@ Holidays.prototype = {
    * @return {Object} shortcode, name pairs of supported countries, states, regions
    */
   query (country, state, lang) {
-    var o = Data.splitName(country, state)
+    const o = Data.splitName(country, state)
     if (!o || !o.country) {
       return this.getCountries(lang)
     } else if (!o.state) {
@@ -328,7 +320,7 @@ Holidays.prototype = {
     if (typeof language === 'string') {
       language = [ language ]
     }
-    var tmp = {}
+    const tmp = {}
     this.__languages = [].concat(
       language,
       'en',
@@ -358,19 +350,19 @@ Holidays.prototype = {
    * @param {String} rule
    */
   _dateByRule (year, rule) {
-    var _rule = this.holidays[rule]
-    var dates = _rule.fn.inYear(year).get(this.__timezone)
-
-    dates = dates.map((date) => {
-      var odate = _.merge({},
-        _.omit(date, ['substitute']),
-        _.omit(_rule, ['fn', 'enable', 'disable', 'substitute', 'active'])
-      )
-      if (_rule.substitute && date.substitute) {
-        odate.substitute = true
-      }
-      return odate
-    })
+    const _rule = this.holidays[rule]
+    const dates = _rule.fn.inYear(year)
+      .get(this.__timezone)
+      .map((date) => {
+        const odate = _.merge({},
+          _.omit(date, ['substitute']),
+          _.omit(_rule, ['fn', 'enable', 'disable', 'substitute', 'active'])
+        )
+        if (_rule.substitute && date.substitute) {
+          odate.substitute = true
+        }
+        return odate
+      })
 
     return dates
   },
@@ -385,18 +377,18 @@ Holidays.prototype = {
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
       langs = langs || this.getLanguages()
-      var name
-      var subst
-      for (var i in langs) {
-        if ((name = o.name[langs[i]])) {
+      for (let i in langs) {
+        const name = o.name[langs[i]]
+        if (name) {
           o.name = name
           break
         }
       }
       if (o.substitute) {
-        for (i in langs) {
-          subst = this.__data.getSubstitueNames()
-          if ((name = subst[langs[i]])) {
+        for (let i in langs) {
+          const subst = this.__data.getSubstitueNames()
+          const name = subst[langs[i]]
+          if (name) {
             o.name += ' (' + name + ')'
             break
           }
@@ -414,9 +406,9 @@ Holidays.prototype = {
    */
   _setTypes (t) {
     t = t || []
-    var types = {}
+    const types = {}
     TYPES.map(function (type) {
-      for (var i in t) {
+      for (const i in t) {
         if (type !== t[i]) {
           return
         }
@@ -435,4 +427,19 @@ Holidays.prototype = {
   _hasType (type) {
     return !!this.__types[type]
   }
+}
+
+function getArgs (country, state, region, opts) {
+  if (typeof region === 'object') {
+    opts = region
+    region = null
+  } else if (typeof state === 'object') {
+    opts = state
+    state = null
+  } else if (typeof country === 'object') {
+    opts = country
+    country = null
+  }
+  opts = opts || {}
+  return [country, state, region, opts]
 }

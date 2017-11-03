@@ -41,7 +41,6 @@ for (let y = 1969; y <= 2100; y++) {
     }
   }
 }
-console.log('/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, ''))
-// console.log(out)
+console.log('/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')) // eslint-disable-line
 
 process.exit()
