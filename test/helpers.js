@@ -25,17 +25,6 @@ exports.fixResult = function fixResult (arr) {
   })
 }
 
-// function toString (date) {
-//   var year = pad0(date.getFullYear(), 4)
-//   var month = pad0(date.getMonth() + 1)
-//   var day = pad0(date.getDate())
-//   var hours = pad0(date.getHours())
-//   var minutes = pad0(date.getMinutes())
-//   var seconds = pad0(date.getSeconds())
-//
-//   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
-// }
-
 exports.moveToTimezone = function (date, timezone) {
   if (!timezone) {
     return date
