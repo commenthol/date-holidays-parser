@@ -3,9 +3,10 @@
 const CalEventMap = require('./CalEventMap')
 const calendar = require('./internal/hebrew-calendar')
 const {toTimezone} = require('./internal/utils')
-const format = require('date-fns/format')
+
 const addDays = require('date-fns/add_days')
 const addHours = require('date-fns/add_hours')
+const format = require('date-fns/format')
 
 class Hebrew extends CalEventMap {
   constructor (opts) {

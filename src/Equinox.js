@@ -7,6 +7,7 @@ const earth = new planetpos.Planet(require('astronomia/data/vsop87Bearth'))
 
 const {toTimezone} = require('./internal/utils')
 const CalEvent = require('./CalEvent')
+
 const addDays = require('date-fns/add_days')
 const startOfDay = require('date-fns/start_of_day')
 

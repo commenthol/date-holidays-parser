@@ -2,12 +2,12 @@
 
 const {isDate, toTimezone} = require('./internal/utils')
 const addDays = require('date-fns/add_days')
-const startOfDay = require('date-fns/start_of_day')
-const isSameDay = require('date-fns/is_same_day')
-const format = require('date-fns/format')
 const addHours = require('date-fns/add_hours')
 const compareAsc = require('date-fns/compare_asc')
+const format = require('date-fns/format')
+const isSameDay = require('date-fns/is_same_day')
 const setYear = require('date-fns/set_year')
+const startOfDay = require('date-fns/start_of_day')
 
 class CalEvent {
   constructor (opts) {
