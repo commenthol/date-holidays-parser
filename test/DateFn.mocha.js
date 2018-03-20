@@ -628,7 +628,7 @@ describe('#DateFn', function () {
         end: 'tue 2018-01-09 00:00',
         substitute: true
       }]
-      // log(fixResult(res))
+      // console.log(fixResult(res))
       assert.deepEqual(fixResult(res), exp)
     })
     it('01-01 and if monday then next monday for 2017', function () {

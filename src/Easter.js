@@ -2,7 +2,8 @@
 
 const easter = require('date-easter')
 const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+const addDays = require('date-fns/add_days')
+const addMinutes = require('date-fns/add_minutes')
 
 class Easter extends CalEvent {
   /**
@@ -21,7 +22,8 @@ class Easter extends CalEvent {
   }
 
   inYear (year) {
-    const d = (new CalDate(this._fn(year))).setOffset(this.offset)
+    let d = addDays(new Date(this._fn(year)), this.offset)
+    d = addMinutes(d, new Date().getTimezoneOffset())
     this.dates.push(d)
     return this
   }

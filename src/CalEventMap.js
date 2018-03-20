@@ -1,7 +1,7 @@
 'use strict'
 
 const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+const addDays = require('date-fns/add_days')
 
 /**
  * Mapper class for mapped calenders like hijri and hebrew
@@ -29,13 +29,12 @@ class CalEventMap extends CalEvent {
             break
           }
         }
-        const d = (new CalDate({
-          year: y,
-          month: firstDays[i] + 1,
-          day: firstDays[i + 1]
-        })).setOffset(this.opts.day - 1)
+        const d = addDays(
+          new Date(y, firstDays[i], (firstDays[i + 1])),
+          this.opts.day - 1
+        )
 
-        if (d.year === year) {
+        if (d.getFullYear() === year) {
           this.dates.push(d)
         }
       }

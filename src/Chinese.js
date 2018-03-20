@@ -2,7 +2,7 @@
 
 const CalChinese = require('date-chinese')
 const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+const addDays = require('date-fns/add_days')
 
 class Chinese extends CalEvent {
   /**
@@ -32,12 +32,12 @@ class Chinese extends CalEvent {
     if (opts.solarterm) {
       jde = this.cal.solarTerm(opts.solarterm, year)
       date = this.cal.fromJDE(jde).toGregorian()
-      d = new CalDate(date).setOffset(opts.day - 1)
+      d = addDays(new Date(date.year, date.month - 1, date.day), opts.day - 1)
     } else {
       this.cal.set(opts.cycle, opts.year, opts.month, opts.leapMonth, opts.day)
       jde = this.cal.toJDE(year)
       date = this.cal.fromJDE(jde).toGregorian()
-      d = new CalDate(date)
+      d = new Date(date.year, date.month - 1, date.day)
     }
 
     this.dates.push(d)
