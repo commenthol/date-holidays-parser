@@ -2,7 +2,7 @@
 
 const julian = require('astronomia/lib/julian')
 const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+const addDays = require('date-fns/add_days')
 
 class Julian extends CalEvent {
   inYear (year) {
@@ -10,7 +10,7 @@ class Julian extends CalEvent {
       return this
     }
     const cal = new julian.CalendarJulian(year, this.opts.month, this.opts.day).toGregorian()
-    const d = (new CalDate(cal)).setOffset(this.offset)
+    const d = addDays(new Date(cal.year, cal.month - 1, cal.day), this.offset)
     this.dates.push(d)
     return this
   }

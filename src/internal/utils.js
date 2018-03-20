@@ -1,5 +1,8 @@
 'use strict'
 
+const addHours = require('date-fns/add_hours')
+const addMinutes = require('date-fns/add_minutes')
+
 /**
  * {
  *   0: 'sunday', ...
@@ -91,4 +94,20 @@ exports.toDate = function toDate (str, isUTC) {
       return new Date(year, month - 1, day)
     }
   }
+}
+
+exports.toTimezone = function toTimezone (str, timezone = Intl.DateTimeFormat().resolvedOptions().timeZone) {
+  let date
+  if (/^[+-]\d{2}:\d{2}?$/.test(timezone)) {
+    const timezoneParts = timezone.split(':')
+    const hours = Number.parseInt(timezoneParts[0])
+    const minutes = Number.parseInt(timezoneParts[1]) + new Date().getTimezoneOffset()
+    date = addMinutes(addHours(new Date(str), hours), minutes)
+  } else {
+    date = new Date(
+      new Date(str).toLocaleString('en-US', { timeZone: timezone })
+    )
+  }
+
+  return date
 }

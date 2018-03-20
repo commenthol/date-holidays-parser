@@ -1,9 +1,9 @@
 'use strict'
 
-const moment = require('moment-timezone')
-const pad0 = require('../src/internal/utils').pad0
+const {pad0, toTimezone} = require('../src/internal/utils')
 
 const toIso = exports.toIso = function toIso (date) {
+  date = new Date(date)
   var days = 'sun,mon,tue,wed,thu,fri,sat'.split(',')
 
   var y = pad0(date.getFullYear(), 4)
@@ -25,22 +25,11 @@ exports.fixResult = function fixResult (arr) {
   })
 }
 
-function toString (date) {
-  var year = pad0(date.getFullYear(), 4)
-  var month = pad0(date.getMonth() + 1)
-  var day = pad0(date.getDate())
-  var hours = pad0(date.getHours())
-  var minutes = pad0(date.getMinutes())
-  var seconds = pad0(date.getSeconds())
-
-  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
-}
-
 exports.moveToTimezone = function (date, timezone) {
   if (!timezone) {
     return date
   }
-  return new Date(moment.tz(toString(date), timezone).format())
+  return toTimezone(date, timezone).toString()
 }
 
 function localDate (str) {

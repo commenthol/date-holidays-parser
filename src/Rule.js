@@ -4,8 +4,10 @@
 
 'use strict'
 
-const CalDate = require('caldate')
 const DAYS = require('./internal/utils').DAYS
+const addDays = require('date-fns/add_days')
+const setHours = require('date-fns/set_hours')
+const setMinutes = require('date-fns/set_minutes')
 
 class Rule {
   /**
@@ -64,7 +66,7 @@ class Rule {
    * }
    */
   dateDir (rule) {
-    this.calEvent.dates.forEach((date) => {
+    this.calEvent.dates.forEach((date, i) => {
       let offset
       let count = rule.count - 1
       const weekday = date.getDay()
@@ -87,7 +89,7 @@ class Rule {
         }
       }
       if (offset) {
-        date.setOffset(offset)
+        this.calEvent.dates[i] = addDays(date, offset)
       }
     })
   }
@@ -105,16 +107,19 @@ class Rule {
     const dates = []
 
     this.calEvent.dates = this.calEvent.dates.map((date) => {
+      let substitute = false
+      let _filter, _lock, duration
+
       if (date._lock) {
         return date
       }
       const weekday = date.getDay()
       if (~(rule.if).indexOf(DAYS[weekday])) {
         if (this.modifier === 'and') {
-          dates.push(new CalDate(date))
-          date.substitute = true
+          dates.push(new Date(date))
+          substitute = true
         }
-        date._filter = false
+        _filter = false
         let offset = 0
         let then = DAYS[rule.then]
         if (rule.then && then !== 'undefined') {
@@ -129,37 +134,43 @@ class Rule {
               offset = 7
             }
           }
-          date.setOffset(offset)
-          date._lock = true
-          if (this.modifier === 'substitutes') date.substitute = true
+          date = addDays(date, offset)
+          _lock = true
+          if (this.modifier === 'substitutes') substitute = true
         }
         (rule.rules || []).forEach((rule) => {
           switch (rule.rule) {
             case 'time':
-              date.setTime(rule.hour, rule.minute)
+              date = setHours(setMinutes(date, rule.minute), rule.hour)
               break
             case 'duration':
-              date.duration = rule.duration
+              duration = rule.duration
               break
           }
         })
       } else if (this.modifier === 'substitutes') {
-        date._filter = true
+        _filter = true
       }
+
+      date.substitute = substitute
+      date._filter = _filter
+      date._lock = _lock
+      date.duration = duration
+
       return date
     })
     this.calEvent.dates = dates.concat(this.calEvent.dates)
   }
 
   time (rule) {
-    this.calEvent.dates.forEach((date) => {
-      date.setTime(rule.hour, rule.minute)
+    this.calEvent.dates.forEach((date, i) => {
+      this.calEvent.dates[i] = setHours(setMinutes(date, rule.minute), rule.hour)
     })
   }
 
   duration (rule) {
-    this.calEvent.dates.forEach((date) => {
-      date.duration = rule.duration
+    this.calEvent.dates.forEach((date, i) => {
+      this.calEvent.dates[i].duration = rule.duration
     })
   }
 
@@ -179,17 +190,17 @@ class Rule {
   year (rule) {
     this.calEvent.dates = this.calEvent.dates.map((date) => {
       if (rule.cardinality) {
-        if (rule.cardinality === 'leap' && this._isLeapYear(date.year)) {
+        if (rule.cardinality === 'leap' && this._isLeapYear(date.getFullYear())) {
           return date
-        } else if (rule.cardinality === 'non-leap' && !this._isLeapYear(date.year)) {
+        } else if (rule.cardinality === 'non-leap' && !this._isLeapYear(date.getFullYear())) {
           return date
-        } else if (rule.cardinality === 'even' && (date.year + 1) % 2) {
+        } else if (rule.cardinality === 'even' && (date.getFullYear() + 1) % 2) {
           return date
-        } else if (rule.cardinality === 'odd' && date.year % 2) {
+        } else if (rule.cardinality === 'odd' && date.getFullYear() % 2) {
           return date
         }
       } else if (rule.every !== undefined && rule.since !== undefined) {
-        let tmp = (date.year - rule.since) % rule.every
+        let tmp = (date.getFullYear() - rule.since) % rule.every
         if (tmp === 0) {
           return date
         }
