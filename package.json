@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "1.2.1",
+  "version": "1.2.2-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -26,8 +26,7 @@
   },
   "scripts": {
     "all": "npm run clean && npm run lint && npm run build && npm test",
-    "build": "npm run build:cjs",
-    "build:cjs": "babel -d lib src",
+    "build": "babel -d lib src",
     "build:es5": "BABEL_ENV=es5 babel -d es src",
     "clean": "rimraf lib es coverage .nyc_output",
     "clean:all": "rimraf node_modules && npm run clean",
@@ -74,8 +73,8 @@
   },
   "dependencies": {
     "astronomia": "^2.0.0",
-    "caldate": "^1.0.1",
-    "date-chinese": "^1.0.4",
+    "caldate": "^1.0.2",
+    "date-chinese": "^1.0.5",
     "date-easter": "^0.2.2",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",

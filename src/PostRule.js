@@ -1,8 +1,6 @@
 'use strict'
 
-const _ = {
-  get: require('lodash.get')
-}
+const _get = require('lodash.get')
 const CalEvent = require('./CalEvent')
 const Parser = require('./Parser')
 
@@ -54,7 +52,7 @@ class PostRule {
       let dateFn = this.holidays[ruleStr].fn
       if (dateFn && dateFn.ruleStr !== this.ruleStr) {
         let tmpEv = dateFn.inYear(year)
-        let tmpEvType = _.get(tmpEv, 'opts.type') || 'public'
+        let tmpEvType = _get(tmpEv, 'opts.type') || 'public'
         for (let i = 1; i < this.events.length; i++) {
           if (found[i]) continue
           let isEqualDate = tmpEv.event.isEqualDate(this.events[i])
