@@ -10,7 +10,7 @@ install:
   - npm install
 
 before_script:
-  - npm run babel
+  - npm run build
 
 script:
   - npm test

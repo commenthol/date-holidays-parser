@@ -1,5 +1,9 @@
 # CHANGELOG
 
+v1.2.1
+- remove es5 `module`, `jsnext:main` from package.json to ease integration with
+  tools like `create-react-app`
+
 v1.2.0
 - parser moved to own repo `date-holidays-parser`
 
