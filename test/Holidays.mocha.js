@@ -6,7 +6,7 @@ require('core-js/es6') // for IE11
 
 const assert = require('assert')
 const Holidays = require('../src')
-const {toIso, localDate, moveToTimezone} = require('./helpers')
+const { toIso, localDate, moveToTimezone } = require('./helpers')
 
 const fixtures = {
   holidays: require('./fixtures/holidays.json'),
@@ -23,8 +23,8 @@ describe('#Holidays', function () {
     })
 
     it('can set opts without given country', function () {
-      const hd = new Holidays(fixtures.custom, {timezone: 'UTC'})
-      assert.equal(hd.__timezone, 'UTC')
+      const hd = new Holidays(fixtures.custom, { timezone: 'UTC' })
+      assert.strictEqual(hd.__timezone, 'UTC')
     })
   })
 
@@ -33,7 +33,7 @@ describe('#Holidays', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.getCountries()
       assert.ok(typeof res === 'object')
-      assert.equal(res.DE, 'Deutschland')
+      assert.strictEqual(res.DE, 'Deutschland')
     })
 
     it('for states of a country', function () {
@@ -57,7 +57,7 @@ describe('#Holidays', function () {
         ST: 'Sachsen-Anhalt',
         TH: 'Thüringen'
       }
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('for states of a country in french', function () {
@@ -73,12 +73,12 @@ describe('#Holidays', function () {
         A: 'Stadt Augsburg',
         EVANG: 'Überwiegend evangelische Gemeinden'
       }
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('and get list of regions names in default language', function () {
       const res = new Holidays(fixtures.holidays).getRegions('de', 'by')
-      assert.deepEqual(res, {
+      assert.deepStrictEqual(res, {
         A: 'Stadt Augsburg',
         EVANG: 'Überwiegend evangelische Gemeinden'
       })
@@ -118,70 +118,70 @@ describe('#Holidays', function () {
         'America/Adak',
         'Pacific/Honolulu'
       ]
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('for languages', function () {
       const hd = new Holidays(fixtures.holidays, 'BE')
       const res = hd.getLanguages()
       const exp = ['fr', 'nl', 'de', 'en']
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('for languages with no country set', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.getLanguages()
       const exp = [ 'en' ]
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('for languages after init', function () {
       const hd = new Holidays(fixtures.holidays)
       hd.init('BE')
-      const res = hd.getLanguages()
-      const exp = ['fr', 'nl', 'de', 'en']
-      assert.deepEqual(res, exp)
+      var res = hd.getLanguages()
+      var exp = ['fr', 'nl', 'de', 'en']
+      assert.deepStrictEqual(res, exp)
     })
 
     it('for dayoff', function () {
       const hd = new Holidays(fixtures.holidays, 'BE')
       const res = hd.getDayOff()
       const exp = 'sunday'
-      assert.equal(res, exp)
+      assert.strictEqual(res, exp)
     })
 
     it('for dayoff with no country set', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.getDayOff()
-      assert.equal(res, void 0)
+      assert.strictEqual(res, void 0)
     })
 
     it('for all countries', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.query()
       assert.ok(typeof res === 'object')
-      assert.equal(res.AT, 'Österreich')
+      assert.strictEqual(res.AT, 'Österreich')
     })
 
     it('for all states of AT', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.query('AT')
       assert.ok(typeof res === 'object')
-      assert.equal(res['1'], 'Burgenland')
+      assert.strictEqual(res['1'], 'Burgenland')
     })
 
     it('for all regions of DE BY', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.query('DE', 'BY')
       assert.ok(typeof res === 'object')
-      assert.equal(res.A, 'Stadt Augsburg')
+      assert.strictEqual(res.A, 'Stadt Augsburg')
     })
 
     it('for all regions of de-', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.query('de-by')
       assert.ok(typeof res === 'object')
-      assert.equal(res.A, 'Stadt Augsburg')
+      assert.strictEqual(res.A, 'Stadt Augsburg')
     })
   })
 
@@ -199,7 +199,7 @@ describe('#Holidays', function () {
         type: 'public'
       }
       assert.ok(res)
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('a birthday', function () {
@@ -215,7 +215,7 @@ describe('#Holidays', function () {
         type: 'public'
       }
       assert.ok(res)
-      assert.deepEqual(res, exp)
+      assert.deepStrictEqual(res, exp)
     })
 
     it('a holiday to false such removing', function () {
@@ -230,7 +230,7 @@ describe('#Holidays', function () {
         () => {
           hd.setHoliday('01-07', {
             name: 'throws',
-            active: {from: 2010, to: 2015}
+            active: { from: 2010, to: 2015 }
           })
         }, /\.active is not of type Array: 01-07/
       )
@@ -243,7 +243,7 @@ describe('#Holidays', function () {
         () => {
           hd.setHoliday('01-07', {
             name: 'throws',
-            active: [{to: '2000'}, {}]
+            active: [{ to: '2000' }, {}]
           })
         }, /\.active needs .from or .to property: 01-07/
       )
@@ -253,9 +253,9 @@ describe('#Holidays', function () {
     it('can set a holiday with .active array', function () {
       const hd = new Holidays(fixtures.holidays, 'it')
       hd.setHoliday('01-07', {
-        name: {it: 'ok'},
+        name: { it: 'ok' },
         type: 'optional',
-        active: [{to: 2001}, {from: 2010, to: 2015}, {from: 2017}]
+        active: [{ to: 2001 }, { from: 2010, to: 2015 }, { from: 2017 }]
       })
       assert.ok(hd.isHoliday(new Date('2000-01-07')))
       assert.ok(!hd.isHoliday(new Date('2001-01-07')))
@@ -315,7 +315,7 @@ describe('#Holidays', function () {
       const res = hd.getHolidays()[0]
       const str = localDate((new Date()).getFullYear() + '-01-01 00:00:00')
       const exp = moveToTimezone(new Date(str), 'Europe/Vienna')
-      assert.equal(toIso(res.start), toIso(exp))
+      assert.strictEqual(toIso(res.start), toIso(exp))
     })
 
     it('for year 2016 using a string', function () {
@@ -323,7 +323,7 @@ describe('#Holidays', function () {
       const res = hd.getHolidays('2016')[0]
       const str = '2016-01-01 00:00:00'
       const exp = moveToTimezone(localDate(str), 'Europe/Vienna')
-      assert.equal(toIso(res.start), toIso(exp))
+      assert.strictEqual(toIso(res.start), toIso(exp))
     })
 
     it('for year 2016 using a number', function () {
@@ -331,7 +331,7 @@ describe('#Holidays', function () {
       const res = hd.getHolidays(2016)[0]
       const str = '2016-01-01 00:00:00'
       const exp = moveToTimezone(localDate(str), 'Europe/Vienna')
-      assert.equal(toIso(res.start), toIso(exp))
+      assert.strictEqual(toIso(res.start), toIso(exp))
     })
 
     it('of non-duplicated public German/BW holidays for 2017', function () {
@@ -344,7 +344,7 @@ describe('#Holidays', function () {
           assert.ok(false, p.name + ' is duplicated')
         }
         if (p.name === 'Reformationstag') {
-          assert.equal(p.type, 'public') // is public not school!
+          assert.strictEqual(p.type, 'public') // is public not school!
         }
         tmp[p.name] = true
       })
@@ -388,11 +388,11 @@ describe('#Holidays', function () {
         tmp[p.name] = toIso(p.start)
       })
       // console.log(tmp)
-      assert.deepEqual(tmp, exp)
+      assert.deepStrictEqual(tmp, exp)
     })
 
     it('of public German holidays for 2015', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', {types: ['public']})
+      const hd = new Holidays(fixtures.holidays, 'de', { types: ['public'] })
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
       const res = hd.getHolidays(2015)
       const tmp = {}
@@ -412,11 +412,11 @@ describe('#Holidays', function () {
         tmp[p.name] = toIso(p.start)
       })
       // console.log(tmp)
-      assert.deepEqual(tmp, exp)
+      assert.deepStrictEqual(tmp, exp)
     })
 
     it('of German holidays for 2015 in english', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', {languages: ['en']})
+      const hd = new Holidays(fixtures.holidays, 'de', { languages: ['en'] })
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
       const res = hd.getHolidays(2015)
       const tmp = {}
@@ -426,7 +426,7 @@ describe('#Holidays', function () {
         tmp[p.name] = toIso(p.start)
       })
       // console.log(tmp)
-      assert.deepEqual(tmp, exp)
+      assert.deepStrictEqual(tmp, exp)
     })
 
     it('of German holidays for 2015 in english #2', function () {
@@ -440,7 +440,7 @@ describe('#Holidays', function () {
         tmp[p.name] = toIso(p.start)
       })
       // console.log(tmp)
-      assert.deepEqual(tmp, exp)
+      assert.deepStrictEqual(tmp, exp)
     })
 
     it('of German holidays for 2015 in english #3', function () {
@@ -455,17 +455,17 @@ describe('#Holidays', function () {
         tmp[p.name] = toIso(p.start)
       })
       // console.log(tmp)
-      assert.deepEqual(tmp, exp)
+      assert.deepStrictEqual(tmp, exp)
     })
 
     it('should get only holidays of type "public"', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', {types: ['public']})
+      const hd = new Holidays(fixtures.holidays, 'de', { types: ['public'] })
       const res = Array.from(new Set(hd.getHolidays(2018).map(i => i.type)))
       assert.deepStrictEqual(res, ['public'])
     })
 
     it('should get holidays of type "public" and "observance"', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', {types: ['public', 'observance']})
+      const hd = new Holidays(fixtures.holidays, 'de', { types: ['public', 'observance'] })
       const res = Array.from(new Set(hd.getHolidays(2018).map(i => i.type)))
       assert.deepStrictEqual(res, ['public', 'observance'])
     })
@@ -482,7 +482,7 @@ describe('#Holidays', function () {
     it('if 2015-01-01 is a holiday in Spain and return `Año Nuevo`', function () {
       const hd = new Holidays(fixtures.holidays, 'es')
       const res = hd.isHoliday(new Date('2015-01-01T12:00'))
-      assert.equal(res.name, 'Año Nuevo')
+      assert.strictEqual(res.name, 'Año Nuevo')
     })
 
     it('if 2015-01-01 is holiday in Iceland', function () {
@@ -497,8 +497,8 @@ describe('#Holidays', function () {
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
       const res = hd.isHoliday(new Date('2015-12-28'))
       assert.ok(res)
-      assert.equal(res.substitute, true)
-      assert.equal(res.name, 'Boxing Day (substitute day)')
+      assert.strictEqual(res.substitute, true)
+      assert.strictEqual(res.name, 'Boxing Day (substitute day)')
     })
 
     it('if 2013-12-31:10:00 is yet not a holiday in Germany', function () {
@@ -534,7 +534,7 @@ describe('#Holidays', function () {
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
       const res = hd.isHoliday(localDate('2011-03-17 00:00'))
       assert.ok(res)
-      assert.equal(res.name, 'Festa Nazionale 2011')
+      assert.strictEqual(res.name, 'Festa Nazionale 2011')
     })
 
     it('if 2015-12-07 can be disabled', function () {
@@ -562,8 +562,8 @@ describe('#Holidays', function () {
       })
       const d = localDate('2015-12-05 00:00')
       const res = hd.isHoliday(d)
-      assert.equal(toIso(res.start), 'sat 2015-12-05 00:00')
-      assert.equal(toIso(res.end), 'sun 2015-12-06 00:00')
+      assert.strictEqual(toIso(res.start), 'sat 2015-12-05 00:00')
+      assert.strictEqual(toIso(res.end), 'sun 2015-12-06 00:00')
     })
 
     it('if 2015-12-07 can not be disabled for 2016', function () {
@@ -578,8 +578,8 @@ describe('#Holidays', function () {
       })
       const d = localDate('2016-12-05 00:00')
       const res = hd.isHoliday(d)
-      assert.equal(toIso(res.start), 'mon 2016-12-05 00:00')
-      assert.equal(toIso(res.end), 'tue 2016-12-06 00:00')
+      assert.strictEqual(toIso(res.start), 'mon 2016-12-05 00:00')
+      assert.strictEqual(toIso(res.end), 'tue 2016-12-06 00:00')
     })
   })
 
@@ -604,7 +604,7 @@ describe('#Holidays', function () {
           type: 'public' }
       ]
       const list = hd.getHolidays(2017)
-      assert.deepEqual(list, exp)
+      assert.deepStrictEqual(list, exp)
     })
   })
 })

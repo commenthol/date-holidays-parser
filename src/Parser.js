@@ -158,7 +158,7 @@ class Parser {
   }
 
   parse (rule) {
-    this.setup = {str: rule, rule: rule}
+    this.setup = { str: rule, rule: rule }
     this.error = 0
     this.tokens = []
     this._tokenize(this.setup)

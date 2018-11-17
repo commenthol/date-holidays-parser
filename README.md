@@ -195,8 +195,14 @@ Please do not forget to set the correct charset!
   <script src="your-bundle.js" charset="UTF-8"></script>
 ```
 
-Testing is done with `zuul`. For local browser tests run `npm run zuul
+Testing was done with `zuul`. For local browser tests run `npm run zuul
 -- --local 3000` and open <http://localhost:3000/__zuul>.
+
+requires manual install of
+
+```
+npm i zuul@3 browserify@10
+```
 
 ## Data
 

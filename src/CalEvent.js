@@ -1,6 +1,6 @@
 'use strict'
 
-const {isDate} = require('./internal/utils')
+const { isDate } = require('./internal/utils')
 const CalDate = require('caldate')
 
 class CalEvent {
@@ -54,7 +54,7 @@ class CalEvent {
       }
       const _date = date.toDate()
       for (let a of active) {
-        const {from, to} = a
+        const { from, to } = a
         if (
           date.year === year &&
           ((from && to && from <= _date && to > _date) ||

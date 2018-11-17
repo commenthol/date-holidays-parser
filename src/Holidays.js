@@ -10,7 +10,7 @@ const _ = {
   omit: require('lodash.omit'),
   set: require('lodash.set')
 }
-const {toYear, toDate} = require('./internal/utils')
+const { toYear, toDate } = require('./internal/utils')
 const Data = require('./Data')
 const DateFn = require('./DateFn')
 
@@ -107,7 +107,7 @@ Holidays.prototype = {
     if (!opts || typeof opts === 'string') {
       opts = opts || rule
       const lang = this.getLanguages()[0]
-      opts = _.set({type: 'public'}, ['name', lang], opts)
+      opts = _.set({ type: 'public' }, ['name', lang], opts)
     }
 
     // convert active properties to Date
@@ -121,7 +121,7 @@ Holidays.prototype = {
         if (!(from || to)) {
           throw TypeError('.active needs .from or .to property: ' + rule)
         }
-        return {from, to}
+        return { from, to }
       })
     }
 

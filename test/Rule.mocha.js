@@ -17,7 +17,7 @@ describe('#Rule', function () {
       start: 'mon 2018-01-08 00:00',
       end: 'tue 2018-01-09 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve time rule', function () {
@@ -30,7 +30,7 @@ describe('#Rule', function () {
       start: 'thu 2015-01-01 14:00',
       end: 'fri 2015-01-02 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateIfThen with time', function () {
@@ -43,7 +43,7 @@ describe('#Rule', function () {
       start: 'sun 2016-05-01 00:00',
       end: 'mon 2016-05-02 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateDir', function () {
@@ -56,7 +56,7 @@ describe('#Rule', function () {
       start: 'wed 2016-11-16 00:00',
       end: 'thu 2016-11-17 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateDir using day count before', function () {
@@ -69,7 +69,7 @@ describe('#Rule', function () {
       start: 'sat 2016-11-19 00:00',
       end: 'sun 2016-11-20 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateDir using day count after', function () {
@@ -82,7 +82,7 @@ describe('#Rule', function () {
       start: 'thu 2016-12-01 00:00',
       end: 'fri 2016-12-02 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule year', function () {
@@ -95,7 +95,7 @@ describe('#Rule', function () {
       start: 'sun 2015-11-01 00:00',
       end: 'mon 2015-11-02 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateBridge', function () {
@@ -108,7 +108,7 @@ describe('#Rule', function () {
       start: 'tue 2015-09-22 00:00',
       end: 'wed 2015-09-23 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule weekday', function () {
@@ -121,6 +121,6 @@ describe('#Rule', function () {
       start: 'sun 2013-09-22 00:00',
       end: 'mon 2013-09-23 00:00'
     }]
-    assert.deepEqual(fixResult(calEvent.get()), exp)
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 })
