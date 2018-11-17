@@ -54,12 +54,13 @@ const grammar = (function () {
 
     modifier: /^(substitutes|and|if equal|then|if)\b/,
     rule_year: /^(?:in (even|odd|leap|non-leap) years|every (\d+) years? since 0*(\d{1,4}))/,
+    rule_weekday: /(not )?on ((?:(?:_weekdays)(?:,\s?)?)*)/,
     rule_date_if_then: /^if ((?:(?:_weekdays)(?:,\s?)?)*) then (?:_direction _days)?/,
     rule_day_dir_date: /^(?:_counts )?_days _direction/,
     rule_bridge: /^is (?:([^ ]+) )?holiday/,
     rule_same_day: /^#\d+/,
 
-    rule_type_if_then: /if ((?:(?:_weekdays),?)*) then/,
+    rule_type_if_then: /if ((?:(?:_weekdays)(?:,\s?)?)*) then/,
     rule_type_dir: /_days _direction$/,
     rule_type_bridge: / if .* is .* holiday$/,
 
@@ -90,6 +91,9 @@ const grammar = (function () {
   (/_months/, raw._months)
   ()
 
+  raw.rule_weekday = replace(raw.rule_weekday, '')
+  (/_weekdays/g, raw._weekdays)
+  ()
   raw.rule_date_if_then = replace(raw.rule_date_if_then, '')
   (/_direction/g, raw._direction)
   (/_weekdays/g, raw._weekdays)
@@ -141,6 +145,7 @@ class Parser {
       '_chineseLunar',
       '_dateMonth',
       '_ruleDateIfThen',
+      '_ruleWeekday',
       '_ruleYear',
       '_ruleDateDir',
       '_ruleBridge',
@@ -443,6 +448,21 @@ class Parser {
         res.rules = p.tokens
       }
       o.str = ' ' + p.setup.str // ' ' required such that the _tokenize function finalizes the loop
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _ruleWeekday (o) {
+    let cap
+    if ((cap = grammar.rule_weekday.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      let res = {
+        rule: 'weekday',
+        not: !!cap.shift(),
+        if: (cap.shift()).split(/(?:,\s?)/)
+      }
       this.tokens.push(res)
       return true
     }

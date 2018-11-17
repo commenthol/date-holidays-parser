@@ -151,6 +151,23 @@ class Rule {
     this.calEvent.dates = dates.concat(this.calEvent.dates)
   }
 
+  /**
+   * @param {object} rule
+   * {
+   *   rule: "weekday",
+   *   if: ["sunday", "saturday"],
+   *   not: false,
+   * }
+   */
+  weekday (rule) {
+    this.calEvent.dates = this.calEvent.dates.map((date) => {
+      const weekday = date.getDay()
+      let match = (rule.if).indexOf(DAYS[weekday]) !== -1
+      if (rule.not) match = !match
+      if (match) return date
+    }).filter(date => date)
+  }
+
   time (rule) {
     this.calEvent.dates.forEach((date) => {
       date.setTime(rule.hour, rule.minute)
@@ -194,9 +211,7 @@ class Rule {
           return date
         }
       }
-    }).filter((date) => {
-      return date
-    })
+    }).filter(date => date)
   }
 
   /**

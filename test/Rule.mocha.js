@@ -110,4 +110,17 @@ describe('#Rule', function () {
     }]
     assert.deepEqual(fixResult(calEvent.get()), exp)
   })
+
+  it('can resolve rule weekday', function () {
+    var tc = testcases['09-22 on sunday, saturday']
+    var calEvent = new CalEventFactory(tc[0]).inYear(2013)
+    var ruleFn = new Rule()
+    ruleFn.setEvent(calEvent).resolve(tc[1])
+    var exp = [{
+      date: '2013-09-22 00:00:00',
+      start: 'sun 2013-09-22 00:00',
+      end: 'mon 2013-09-23 00:00'
+    }]
+    assert.deepEqual(fixResult(calEvent.get()), exp)
+  })
 })

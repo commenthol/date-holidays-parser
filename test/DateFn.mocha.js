@@ -819,6 +819,47 @@ describe('#DateFn', function () {
     })
   })
 
+  describe('Enable Date only for certain weekdays', function () {
+    it('09-22 on sunday, saturday for 2013', function () {
+      var fn = new DateFn('09-22 on sunday, saturday')
+      var res = fn.inYear(2013).get()
+      var exp = [{
+        date: '2013-09-22 00:00:00',
+        start: 'sun 2013-09-22 00:00',
+        end: 'mon 2013-09-23 00:00'
+      }]
+      assert.deepEqual(fixResult(res), exp)
+    })
+    it('09-22 on sunday, saturday for 2015', function () {
+      var fn = new DateFn('09-22 on sunday, saturday')
+      var res = fn.inYear(2015).get()
+      var exp = []
+      assert.deepEqual(fixResult(res), exp)
+    })
+    it('12-26 not on friday, monday for 2014', function () {
+      var fn = new DateFn('12-26 not on friday, monday')
+      var res = fn.inYear(2014).get() // is friday
+      var exp = []
+      assert.deepEqual(fixResult(res), exp)
+    })
+    it('12-26 not on friday, monday for 2015', function () {
+      var fn = new DateFn('12-26 not on friday, monday')
+      var res = fn.inYear(2015).get()
+      var exp = [{
+        date: '2015-12-26 00:00:00',
+        start: 'sat 2015-12-26 00:00',
+        end: 'sun 2015-12-27 00:00'
+      }]
+      assert.deepEqual(fixResult(res), exp)
+    })
+    it('12-26 not on friday, monday for 2016', function () {
+      var fn = new DateFn('12-26 not on friday, monday')
+      var res = fn.inYear(2016).get() // is monday
+      var exp = []
+      assert.deepEqual(fixResult(res), exp)
+    })
+  })
+
   describe('Bridge Days', function () {
     it('09-22 if 09-21 and 09-23 is public holiday', function () {
       var holidays = {
