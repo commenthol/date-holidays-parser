@@ -21,6 +21,9 @@ const Equinox = require('./Equinox')
 // #ifndef nochinese
 const Chinese = require('./Chinese')
 // #endif
+// #ifndef nobengali
+const BengaliRevised = require('./BengaliRevised')
+// #endif
 
 class CalEventFactory {
   constructor (opts) {
@@ -48,6 +51,10 @@ class CalEventFactory {
       case 'korean':
       case 'vietnamese':
         return new Chinese(opts)
+      // #endif
+      // #ifndef nobengali
+      case 'bengali-revised':
+        return new BengaliRevised(opts)
       // #endif
       default:
         return new CalEvent(opts)

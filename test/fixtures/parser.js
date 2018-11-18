@@ -349,6 +349,22 @@ module.exports = {
       timezone: undefined
     }
   ],
+  'bengali-revised 1425-1-1': [
+    {
+      'fn': 'bengali-revised',
+      'day': 1,
+      'month': 1,
+      'year': 1425
+    }
+  ],
+  'bengali-revised 1-1': [
+    {
+      'fn': 'bengali-revised',
+      'day': 1,
+      'month': 1,
+      'year': undefined
+    }
+  ],
   '1 day before vietnamese 01-0-01': [
     {
       fn: 'vietnamese',

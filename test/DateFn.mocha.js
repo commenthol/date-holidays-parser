@@ -259,6 +259,30 @@ describe('#DateFn', function () {
         assert.deepStrictEqual(fixResult(res), exp)
       })
     })
+
+    describe('bengali-revised', function () {
+      it('bengali-revised 1-1', function () {
+        var fn = new DateFn('bengali-revised 1-1')
+        var res = fn.inYear(2015).get()
+        var exp = [{
+          date: '2015-04-14 00:00:00',
+          start: 'tue 2015-04-14 00:00',
+          end: 'wed 2015-04-15 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+    })
+
+    it('bengali-revised 12-1', function () {
+      var fn = new DateFn('bengali-revised 12-1')
+      var res = fn.inYear(2015).get()
+      var exp = [{
+        date: '2015-03-15 00:00:00',
+        start: 'sun 2015-03-15 00:00',
+        end: 'mon 2015-03-16 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
   })
 
   describe('Different start-time', function () {

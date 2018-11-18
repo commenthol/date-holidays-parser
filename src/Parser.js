@@ -51,6 +51,7 @@ const grammar = (function () {
     islamic: /^0?(\d{1,2}) (_islamicMonths)(?: 0*(\d{1,}))?/,
     chineseLunar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
     chineseSolar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-(\d{1,2}) solarterm/,
+    bengaliRevised: /^(bengali-revised) (?:-?0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
 
     modifier: /^(substitutes|and|if equal|then|if)\b/,
     rule_year: /^(?:in (even|odd|leap|non-leap) years|every (\d+) years? since 0*(\d{1,4}))/,
@@ -142,6 +143,7 @@ class Parser {
       '_equinox',
       '_chineseSolar',
       '_chineseLunar',
+      '_bengaliRevised',
       '_dateMonth',
       '_ruleDateIfThen',
       '_ruleWeekday',
@@ -340,6 +342,22 @@ class Parser {
         leapMonth: !!toNumber(cap.shift()),
         day: toNumber(cap.shift()),
         timezone: cap.shift()
+      }
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _bengaliRevised (o) {
+    let cap
+    if ((cap = grammar.bengaliRevised.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      let res = {
+        fn: cap.shift(),
+        year: toNumber(cap.shift()),
+        month: toNumber(cap.shift()),
+        day: toNumber(cap.shift())
       }
       this.tokens.push(res)
       return true
