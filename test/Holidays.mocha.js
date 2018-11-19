@@ -60,6 +60,12 @@ describe('#Holidays', function () {
       assert.deepEqual(res, exp)
     })
 
+    it('for states of a country in french', function () {
+      var hd = Holidays(fixtures.holidays)
+      var res = hd.getStates('ch', 'fr')
+      assert.strictEqual(res.ZH, 'Canton de Zurich')
+    })
+
     it('for regions', function () {
       var hd = new Holidays(fixtures.holidays)
       var res = hd.getRegions('de', 'by')

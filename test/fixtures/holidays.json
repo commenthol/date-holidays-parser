@@ -3621,7 +3621,12 @@
       },
       "states": {
         "ZH": {
-          "name": "Kanton Zürich"
+          "names": {
+            "de": "Kanton Zürich",
+            "fr": "Canton de Zurich",
+            "en": "Canton of Zürich",
+            "it": "Cantone di Zurigo"
+          }
         },
         "BE": {
           "name": "Kanton Bern",
