@@ -1,5 +1,5 @@
 /**
- * @copyright 2016 (c) commenthol
+ * @copyright 2016- (c) commenthol
  * @license ISC
  */
 
@@ -405,17 +405,13 @@ Holidays.prototype = {
    * @return {Object} new array of types
    */
   _setTypes (t) {
-    t = t || []
-    const types = {}
-    TYPES.map(function (type) {
-      for (const i in t) {
-        if (type !== t[i]) {
-          return
-        }
+    t = t || TYPES
+    this.__types = TYPES.reduce((types, type) => {
+      if (t.indexOf(type) !== -1) {
+        types[type] = 1
       }
-      types[type] = 1
-    })
-    this.__types = types
+      return types
+    }, {})
   },
 
   /**

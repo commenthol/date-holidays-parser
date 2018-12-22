@@ -1,4 +1,4 @@
-examples/browser/bundle.js
+node_modules/
 coverage/
 attic/
 lib/

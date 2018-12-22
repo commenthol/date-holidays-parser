@@ -1,5 +1,11 @@
 # CHANGELOG
 
+v1.2.3
+- fix: holidays types not correctly filtered (date-holidays#56) 
+
+v1.2.2
+- refactor: keep bundle sizes small
+
 v1.2.1
 - remove es5 `module`, `jsnext:main` from package.json to ease integration with
   tools like `create-react-app`

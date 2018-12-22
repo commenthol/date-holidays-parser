@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "1.2.2",
+  "version": "1.2.3-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/commenthol/date-holidays-parser/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commenthol/date-holidays-parser.git"
+  },
   "license": "ISC",
   "author": "commenthol <commenthol@gmail.com>",
   "contributors": [],
@@ -20,10 +24,6 @@
     "doc": "docs",
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/commenthol/date-holidays-parser.git"
-  },
   "scripts": {
     "all": "npm run clean && npm run lint && npm run build && npm test",
     "build": "babel -d lib src",
@@ -32,7 +32,7 @@
     "clean:all": "rimraf node_modules && npm run clean",
     "coverage": "nyc -r text -r html npm test",
     "doc": "jsdox -o docs src/Holidays.js",
-    "lint": "eslint '**/*.js'",
+    "lint": "eslint --fix '**/*.js'",
     "prepublishOnly": "npm run all",
     "test": "mocha",
     "test:tz": "TZ=UTC-10 npm test && TZ=UTC+10 npm test",
