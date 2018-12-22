@@ -10,24 +10,26 @@
  * ```
  */
 
-var Hebcal = require('hebcal')
+const fs = require('fs')
+const Hebcal = require('hebcal')
 
-var out = {}
+const filename = `${__dirname}/../../src/internal/hebrew-calendar.js`
+const out = {}
 
 for (let y = 1969; y <= 2100; y++) {
-  var yd = 5730 - 1970 // difference between jewish and gregorian years
-  var iy = yd + y
+  const yd = 5730 - 1970 // difference between jewish and gregorian years
+  const iy = yd + y
 
   if (!out.year) {
     out.year = iy
   }
-  var iyy = iy - out.year
+  const iyy = iy - out.year
 
   for (let im = 1; im <= 12; im++) {
-    var m = new Hebcal.HDate(1, im, iy).greg()
+    const m = new Hebcal.HDate(1, im, iy).greg()
 
-    var my = m.getFullYear()
-    var mm = im - 1
+    const my = m.getFullYear()
+    const mm = im - 1
 
     if (!out[my]) {
       out[my] = []
@@ -41,6 +43,8 @@ for (let y = 1969; y <= 2100; y++) {
     }
   }
 }
-console.log('/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')) // eslint-disable-line
+
+const final = '/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')
+fs.writeFileSync(filename, final, 'utf8')
 
 process.exit()

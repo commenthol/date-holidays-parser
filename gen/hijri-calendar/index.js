@@ -14,24 +14,26 @@
  * > 1936 and 2080 which should be sufficient for our needs
  */
 
-var moment = require('moment-hijri')
+const fs = require('fs')
+const moment = require('moment-hijri')
 
-var out = {}
+const filename = `${__dirname}/../../src/internal/hijri-calendar.js`
+const out = {}
 
 // only years 1936 ... 2080 are supported by moment-hijri
 for (let y = 1969; y <= 2080; y++) {
-  var iy = y - 580
+  const iy = y - 580
 
   if (!out.year) {
     out.year = iy
   }
-  var iyy = iy - out.year
+  const iyy = iy - out.year
 
   for (let im = 1; im <= 12; im++) {
-    var m = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
+    const m = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
 
-    var my = m.year()
-    var mm = m.iMonth()
+    const my = m.year()
+    const mm = m.iMonth()
 
     if (!out[my]) {
       out[my] = []
@@ -44,4 +46,6 @@ for (let y = 1969; y <= 2080; y++) {
     }
   }
 }
-console.log('/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')) // eslint-disable-line
+
+const final = '/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')
+fs.writeFileSync(filename, final, 'utf8')
