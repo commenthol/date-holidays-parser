@@ -130,7 +130,6 @@ const grammar = (function () {
   return raw
   /* eslint-enable */
 })()
-// console.log(grammar)
 
 class Parser {
   constructor (fns) {
@@ -205,12 +204,10 @@ class Parser {
       }
       this._space(o)
       if (last === o.str) {
-        // console.error('bad rule: ' + o.str + ' >> ' + o.rule)
         this.error++
         break
       }
       last = o.str
-      // console.log('>', o.str, '#')
     }
   }
 

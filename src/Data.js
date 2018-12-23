@@ -27,25 +27,27 @@ class Data {
   getCountries (lang) {
     const o = {}
     const countries = _.get(this.data, 'holidays', {})
-    Object.keys(countries).forEach((k) => {
-      o[k] = this._name(countries, k, lang)
+    Object.keys(countries).forEach((country) => {
+      o[country] = this._name(countries, country, lang)
     })
     return o
   }
 
   /**
    * get all states for a given country from the data
-   * @param {String} country
+   * @param {String|Object} country
    * @param {String} [lang] - Iso-639 shortcode
    * @return {Object} shortcode-name value pairs. E.g. `{ b: 'Burgenland', ... }`
    */
   getStates (country, lang) {
-    country = country.toUpperCase()
-    const o = {}
-    const states = _.get(this.data, ['holidays', country, 'states']) || _.get(this.data, ['holidays', country, 'regions'])
+    const opts = Object.assign({}, Data.splitName(country))
+    const states = _.get(this.data, ['holidays', opts.country, 'states']) ||
+      _.get(this.data, ['holidays', opts.country, 'regions'])
     if (states) {
-      Object.keys(states).forEach((k) => {
-        o[k] = this._name(states, k, lang)
+      const o = {}
+      Object.keys(states).forEach((state) => {
+        opts.state = state
+        o[state] = this._name(states, state, lang, opts)
       })
       return o
     }
@@ -59,18 +61,14 @@ class Data {
    * @return {Object} shortcode-name value pairs.
    */
   getRegions (country, state, lang) {
-    let tmp = Data.splitName(country, state)
-    if (tmp) {
-      state = tmp.state
-      country = tmp.country
-    }
-    country = country.toUpperCase()
-    const o = {}
-    const regions = _.get(this.data, ['holidays', country, 'states', state, 'regions'])
+    const opts = Object.assign({}, Data.splitName(country, state))
+    const regions = _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions'])
 
     if (regions) {
-      Object.keys(regions).forEach((k) => {
-        o[k] = this._name(regions, k, lang)
+      const o = {}
+      Object.keys(regions).forEach((region) => {
+        opts.region = region
+        o[region] = this._name(regions, region, lang, opts)
       })
       return o
     }
@@ -79,24 +77,20 @@ class Data {
   /**
    * @private
    */
-  _name (obj, key, lang) {
-    lang = lang || (obj[key].langs && obj[key].langs[0])
-    let name
-    let tmp = obj[key].names
-    if (tmp) {
-      if (!(lang && (name = tmp[lang]))) {
-        name = tmp[Object.keys(tmp)[0]]
-      }
-    }
-    return name || obj[key].name || key
+  _name (obj, key, lang, opts) {
+    const names = obj[key].names
+    const _lang = lang || this.getLanguages(opts)[0] || Object.keys(names)[0]
+    const mlang = Data.majorLang(_lang)
+    const name = obj[key].name || names[_lang] || names[mlang] || names[Object.keys(names)[0]]
+    return name
   }
 
   /**
    * get languages for selected country, state, region
    * @return {Array} containing ISO 639-1 language shortcodes
    */
-  getLanguages () {
-    return this._getValue('langs')
+  getLanguages (opts) {
+    return this._getValue('langs', opts) || []
   }
 
   /**
@@ -205,10 +199,12 @@ class Data {
    * @param {String} key - key to look at
    * @return {Object} return object
    */
-  _getValue (key) {
+  _getValue (key, opts = this.opts) {
+    debugger
     return (
-      _.get(this.data, ['holidays', this.opts.country, 'states', this.opts.state, key]) ||
-      _.get(this.data, ['holidays', this.opts.country, key])
+      _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions', opts.regions, key]) ||
+      _.get(this.data, ['holidays', opts.country, 'states', opts.state, key]) ||
+      _.get(this.data, ['holidays', opts.country, key])
     )
   }
 }
@@ -226,12 +222,28 @@ Data.splitName = function (country, state, region) {
   if (!country) {
     return
   } else if (typeof country === 'object' && country.country) {
-    return country
+    return toUpperCase(country)
   }
   const o = {}
   const a = country.split(/[.-]/)
-  o.country = a.shift().toUpperCase()
-  o.state = (a.shift() || state || '').toUpperCase()
-  o.region = (a.shift() || region || '').toUpperCase()
-  return o
+  o.country = a.shift()
+  o.state = a.shift() || state
+  o.region = a.shift() || region
+  return toUpperCase(o)
+}
+
+Data.majorLang = function (lang) {
+  return (lang || '').split(/-/)[0]
+}
+
+/**
+ * @private
+ */
+function toUpperCase (obj) {
+  ;['country', 'state', 'region'].forEach(key => {
+    if (typeof obj[key] === 'string') {
+      obj[key] = obj[key].toUpperCase()
+    }
+  })
+  return obj
 }

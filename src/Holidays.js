@@ -71,7 +71,7 @@ Holidays.prototype = {
     if (opts.languages) {
       this.setLanguages(opts.languages)
     } else {
-      this.setLanguages(this.__data.getLanguages())
+      this.setLanguages(this.__data.getLanguages(this.__conf))
     }
 
     const holidays = this.__data.getRules()
@@ -323,8 +323,8 @@ Holidays.prototype = {
     const tmp = {}
     this.__languages = [].concat(
       language,
-      'en',
-      (this.__conf ? this.__data.getLanguages() : [])
+      (this.__conf ? this.__data.getLanguages(this.__conf) : []),
+      'en'
     ).filter(function (l) { // filter out duplicates
       if (!l || tmp[l]) {
         return false
