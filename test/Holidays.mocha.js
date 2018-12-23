@@ -282,9 +282,9 @@ describe('#Holidays', function () {
 
   describe('can get list of holidays', function () {
     const expDE2015En = {
-      'New Year\'s Day': 'thu 2015-01-01 00:00',
-      'Women\'s Carnival Day': 'thu 2015-02-12 00:00',
-      'Valentine\'s Day': 'sat 2015-02-14 00:00',
+      "New Year's Day": 'thu 2015-01-01 00:00',
+      "Women's Carnival Day": 'thu 2015-02-12 00:00',
+      "Valentine's Day": 'sat 2015-02-14 00:00',
       'Shrove Monday': 'mon 2015-02-16 00:00',
       'Shrove Tuesday': 'tue 2015-02-17 14:00',
       'Ash Wednesday': 'wed 2015-02-18 00:00',
@@ -293,23 +293,26 @@ describe('#Holidays', function () {
       'Easter Sunday': 'sun 2015-04-05 00:00',
       'Easter Monday': 'mon 2015-04-06 00:00',
       'Labour Day': 'fri 2015-05-01 00:00',
-      'Mother\'s Day': 'sun 2015-05-10 00:00',
+      "Mother's Day": 'sun 2015-05-10 00:00',
       'Ascension Day': 'thu 2015-05-14 00:00',
-      'Pentecost': 'sun 2015-05-24 00:00',
+      Pentecost: 'sun 2015-05-24 00:00',
       'Whit Monday': 'mon 2015-05-25 00:00',
       'National Holiday': 'sat 2015-10-03 00:00',
-      'All Saints\' Day': 'sun 2015-11-01 00:00',
-      'All Souls\' Day': 'mon 2015-11-02 00:00',
+      "All Saints' Day": 'sun 2015-11-01 00:00',
+      "All Souls' Day": 'mon 2015-11-02 00:00',
       'Saint Martin': 'wed 2015-11-11 00:00',
-      'Day of Prayer and Repentance': 'wed 2015-11-18 00:00',
       'Memorial Day': 'sun 2015-11-15 00:00',
-      'Totensonntag': 'sun 2015-11-22 00:00',
+      'Day of Prayer and Repentance': 'wed 2015-11-18 00:00',
+      Totensonntag: 'sun 2015-11-22 00:00',
+      '1. Advent': 'sun 2015-11-29 00:00',
+      '2. Advent': 'sun 2015-12-06 00:00',
+      '3. Advent': 'sun 2015-12-13 00:00',
+      '4. Advent': 'sun 2015-12-20 00:00',
       'Christmas Eve': 'thu 2015-12-24 14:00',
       'Christmas Day': 'fri 2015-12-25 00:00',
       'Boxing Day': 'sat 2015-12-26 00:00',
-      'New Year\'s Eve': 'thu 2015-12-31 14:00'
+      "New Year's Eve": 'thu 2015-12-31 14:00'
     }
-
     it('for current year', function () {
       const hd = new Holidays(fixtures.holidays, 'at')
       const res = hd.getHolidays()[0]
@@ -356,32 +359,36 @@ describe('#Holidays', function () {
       const res = hd.getHolidays(2015)
       const tmp = {}
       const exp = {
-        'Neujahr': 'thu 2015-01-01 00:00',
-        'Valentinstag': 'sat 2015-02-14 00:00',
-        'Weiberfastnacht': 'thu 2015-02-12 00:00',
-        'Rosenmontag': 'mon 2015-02-16 00:00',
-        'Faschingsdienstag': 'tue 2015-02-17 14:00',
-        'Aschermittwoch': 'wed 2015-02-18 00:00',
+        Neujahr: 'thu 2015-01-01 00:00',
+        Weiberfastnacht: 'thu 2015-02-12 00:00',
+        Valentinstag: 'sat 2015-02-14 00:00',
+        Rosenmontag: 'mon 2015-02-16 00:00',
+        Faschingsdienstag: 'tue 2015-02-17 14:00',
+        Aschermittwoch: 'wed 2015-02-18 00:00',
         'Gründonnerstag': 'thu 2015-04-02 00:00',
-        'Karfreitag': 'fri 2015-04-03 00:00',
-        'Ostersonntag': 'sun 2015-04-05 00:00',
-        'Ostermontag': 'mon 2015-04-06 00:00',
-        'Maifeiertag': 'fri 2015-05-01 00:00',
+        Karfreitag: 'fri 2015-04-03 00:00',
+        Ostersonntag: 'sun 2015-04-05 00:00',
+        Ostermontag: 'mon 2015-04-06 00:00',
+        Maifeiertag: 'fri 2015-05-01 00:00',
+        Muttertag: 'sun 2015-05-10 00:00',
         'Christi Himmelfahrt': 'thu 2015-05-14 00:00',
-        'Pfingstsonntag': 'sun 2015-05-24 00:00',
-        'Pfingstmontag': 'mon 2015-05-25 00:00',
+        Pfingstsonntag: 'sun 2015-05-24 00:00',
+        Pfingstmontag: 'mon 2015-05-25 00:00',
         'Tag der Deutschen Einheit': 'sat 2015-10-03 00:00',
-        'Allerheiligen': 'sun 2015-11-01 00:00',
-        'Allerseelen': 'mon 2015-11-02 00:00',
+        Allerheiligen: 'sun 2015-11-01 00:00',
+        Allerseelen: 'mon 2015-11-02 00:00',
         'Sankt Martin (Faschingsbeginn)': 'wed 2015-11-11 00:00',
+        Volkstrauertag: 'sun 2015-11-15 00:00',
         'Buß- und Bettag': 'wed 2015-11-18 00:00',
-        'Volkstrauertag': 'sun 2015-11-15 00:00',
-        'Totensonntag': 'sun 2015-11-22 00:00',
+        Totensonntag: 'sun 2015-11-22 00:00',
+        '1. Advent': 'sun 2015-11-29 00:00',
+        '2. Advent': 'sun 2015-12-06 00:00',
+        '3. Advent': 'sun 2015-12-13 00:00',
+        '4. Advent': 'sun 2015-12-20 00:00',
         'Heiliger Abend': 'thu 2015-12-24 14:00',
         '1. Weihnachtstag': 'fri 2015-12-25 00:00',
         '2. Weihnachtstag': 'sat 2015-12-26 00:00',
-        'Silvester': 'thu 2015-12-31 14:00',
-        'Muttertag': 'sun 2015-05-10 00:00'
+        Silvester: 'thu 2015-12-31 14:00'
       }
 
       res.forEach(function (p) {
