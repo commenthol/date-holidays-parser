@@ -200,7 +200,6 @@ class Data {
    * @return {Object} return object
    */
   _getValue (key, opts = this.opts) {
-    debugger
     return (
       _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions', opts.regions, key]) ||
       _.get(this.data, ['holidays', opts.country, 'states', opts.state, key]) ||
