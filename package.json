@@ -104,7 +104,7 @@
     "serialize-to-js": "^1.2.1"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "maintainers": [
     "commenthol <commenthol@gmail.com>"
