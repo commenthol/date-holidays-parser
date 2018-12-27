@@ -28,7 +28,7 @@ class Data {
     const o = {}
     const countries = _.get(this.data, 'holidays', {})
     Object.keys(countries).forEach((country) => {
-      o[country] = this._name(countries, country, lang)
+      o[country] = this._name(countries, country, lang, { country })
     })
     return o
   }

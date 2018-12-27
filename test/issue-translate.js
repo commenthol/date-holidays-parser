@@ -64,4 +64,10 @@ describe('#issue-translate', function () {
     assert.ok(res.includes('Dreikönigstag'))
     assert.ok(res.includes('Stephanstag'))
   })
+
+  it('should get country name by spoken language', function () {
+    const hd = new Holidays(fixtures.holidays)
+    const res = hd.getCountries()
+    assert.strictEqual(res.AE, 'دولة الإمارات العربية المتحدة')
+  })
 })
