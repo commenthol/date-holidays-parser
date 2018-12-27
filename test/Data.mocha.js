@@ -177,8 +177,7 @@ describe('#Data', function () {
   })
 
   describe('can get list of holidays by region', function () {
-    var exp = {
-      '01-01': [ 'public', 'Neujahr' ],
+    var exp = { '01-01': [ 'public', 'Neujahr' ],
       '02-14': [ 'observance', 'Valentinstag' ],
       'easter -52': [ 'observance', 'Weiberfastnacht' ],
       'easter -48': [ 'observance', 'Rosenmontag' ],
@@ -186,7 +185,7 @@ describe('#Data', function () {
       'easter -46': [ 'observance', 'Aschermittwoch' ],
       'easter -3': [ 'observance', 'Gründonnerstag' ],
       'easter -2': [ 'public', 'Karfreitag' ],
-      'easter': [ 'observance', 'Ostersonntag' ],
+      easter: [ 'observance', 'Ostersonntag' ],
       'easter 1': [ 'public', 'Ostermontag' ],
       '05-01': [ 'public', 'Maifeiertag' ],
       '2nd sunday in May': [ 'observance', 'Muttertag' ],
@@ -198,18 +197,22 @@ describe('#Data', function () {
       '11-02': [ 'observance', 'Allerseelen' ],
       '11-11': [ 'observance', 'Sankt Martin (Faschingsbeginn)' ],
       'wednesday before 11-23': [ 'school', 'Buß- und Bettag' ],
+      '6th sunday before 12-25': [ 'observance', 'Volkstrauertag' ],
+      '5th sunday before 12-25': [ 'observance', 'Totensonntag' ],
+      '4th sunday before 12-25': [ 'observance', '1. Advent' ],
+      '3th sunday before 12-25': [ 'observance', '2. Advent' ],
+      '2nd sunday before 12-25': [ 'observance', '3. Advent' ],
+      '1st sunday before 12-25': [ 'observance', '4. Advent' ],
       '12-24 14:00 if sunday then 00:00': [ 'bank', 'Heiliger Abend' ],
       '12-25': [ 'public', '1. Weihnachtstag' ],
       '12-26': [ 'public', '2. Weihnachtstag' ],
       '12-31 14:00 if sunday then 00:00': [ 'bank', 'Silvester' ],
+      '2017-10-31': [ 'public', 'Reformationstag' ],
       '01-06': [ 'public', 'Heilige Drei Könige' ],
       '02-02': [ 'observance', 'Lichtmess' ],
       'easter 60': [ 'public', 'Fronleichnam' ],
       '08-15': [ 'public', 'Mariä Himmelfahrt' ],
-      '08-08': [ 'public', 'Augsburger Friedensfest' ],
-      '6th sunday before 12-25': [ 'observance', 'Volkstrauertag' ],
-      '5th sunday before 12-25': [ 'observance', 'Totensonntag' ],
-      '2017-10-31': [ 'public', 'Reformationstag' ]
+      '08-08': [ 'public', 'Augsburger Friedensfest' ]
     }
 
     it('for DE BY A', function () {
