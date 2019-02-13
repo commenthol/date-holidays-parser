@@ -212,7 +212,9 @@ class Parser {
   }
 
   _shorten (o, cap0) {
-    o.str = o.str.substr(cap0.length, o.str.length)
+    if(typeof o.str === 'string') {
+      o.str = o.str.substr(cap0.length, o.str.length)
+    }
   }
 
   _date (o) {
