@@ -476,6 +476,15 @@ describe('#Holidays', function () {
       const res = Array.from(new Set(hd.getHolidays(2018).map(i => i.type)))
       assert.deepStrictEqual(res, ['public', 'observance'])
     })
+
+    it('should set holidays country with object', function () {
+      const hd = new Holidays(fixtures.holidays,
+        { country: 'au', state: 'nsw' }
+      )
+      const res = hd.getHolidays(2018)
+      assert.ok(res.length)
+      assert.ok(res[1].name === 'Australia Day')
+    })
   })
 
   describe('can check', function () {

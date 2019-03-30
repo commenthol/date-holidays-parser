@@ -432,9 +432,8 @@ function getArgs (country, state, region, opts) {
   } else if (typeof state === 'object') {
     opts = state
     state = null
-  } else if (typeof country === 'object') {
+  } else if (typeof country === 'object' && !country.country) {
     opts = country
-    country = null
   }
   opts = opts || {}
   return [country, state, region, opts]
