@@ -44,30 +44,8 @@ class CalEvent {
    * @return {this} for chaining
    */
   filter (year, active) {
-    function isActive (date) {
-      if (!active) {
-        if (date.year === year) {
-          return true
-        } else {
-          return false
-        }
-      }
-      const _date = date.toDate()
-      for (let a of active) {
-        const { from, to } = a
-        if (
-          date.year === year &&
-          ((from && to && from <= _date && to > _date) ||
-          (from && !to && from <= _date) ||
-          (!from && to && to > _date))
-        ) {
-          return true
-        }
-      }
-    }
-
     this.dates = this.dates.filter((date) => {
-      if (!date._filter && isActive(date)) {
+      if (!date._filter && isActive(date, year, active)) {
         return date
       }
     })
@@ -99,3 +77,25 @@ class CalEvent {
   }
 }
 module.exports = CalEvent
+
+function isActive (date, year, active) {
+  if (!active) {
+    if (date.year === year) {
+      return true
+    } else {
+      return false
+    }
+  }
+  const _date = date.toDate()
+  for (let a of active) {
+    const { from, to } = a
+    if (
+      date.year === year &&
+      ((from && to && from <= _date && to > _date) ||
+      (from && !to && from <= _date) ||
+      (!from && to && to > _date))
+    ) {
+      return true
+    }
+  }
+}
