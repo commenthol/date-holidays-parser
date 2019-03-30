@@ -218,17 +218,17 @@ module.exports = Data
  * @return {Object}
  */
 Data.splitName = function (country, state, region) {
-  if (!country) {
-    return
-  } else if (typeof country === 'object' && country.country) {
+  if (typeof country === 'object' && country.country) {
     return toUpperCase(country)
+  } else if (typeof country === 'string') {
+    const a = country.split(/[.-]/)
+    const o = {
+      country: a.shift(),
+      state: a.shift() || state,
+      region: a.shift() || region
+    }
+    return toUpperCase(o)
   }
-  const o = {}
-  const a = country.split(/[.-]/)
-  o.country = a.shift()
-  o.state = a.shift() || state
-  o.region = a.shift() || region
-  return toUpperCase(o)
 }
 
 Data.majorLang = function (lang) {
