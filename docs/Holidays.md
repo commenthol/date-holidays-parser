@@ -48,11 +48,11 @@ set (custom) holiday
 
 ### Holidays.getHolidays(year, language) 
 
-get all holidays for `year` with names using prefered `language`
+get all holidays for `year` with names using preferred `language`
 
 **Parameters**
 
-**year**: `String | Date`, if omitted current year is choosen
+**year**: `String | Date`, if omitted current year is chosen
 
 **language**: `String`, ISO 639-1 code for language
 
