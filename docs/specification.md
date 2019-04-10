@@ -56,7 +56,7 @@ The basic structure looks as follows:
 names:
   <identifier>:
     <lang_1>: {String} # name in language 1
-    <lang_2>: {String} # name in langzage 2
+    <lang_2>: {String} # name in language 2
 ```
 
 - The `<identifier>` can be referenced using `_name:`.
@@ -396,7 +396,7 @@ E.g. "Christmas" becomes "Christmas (substitute day)"
 **Examples**:
 
 - `substitute 03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday
-- `substitute 04-13 if friday then previous monday` if Apri 13th is on a Friday then holiday falls to previous Monday
+- `substitute 04-13 if friday then previous monday` if April 13th is on a Friday then holiday falls to previous Monday
 
 ### Observe the holiday as well as on a substitute day, if date falls on a certain weekday
 
