@@ -222,7 +222,7 @@ class Parser {
     if ((cap = grammar.date.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'gregorian',
         year: toNumber(cap.shift()),
         month: toNumber(cap.shift()),
@@ -238,7 +238,7 @@ class Parser {
     if ((cap = grammar.julian.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'julian',
         year: toNumber(cap.shift()),
         month: toNumber(cap.shift()),
@@ -254,7 +254,7 @@ class Parser {
     if ((cap = grammar.easter.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'easter',
         type: cap.shift(),
         offset: toNumber(cap.shift()) || 0
@@ -269,7 +269,7 @@ class Parser {
     if ((cap = grammar.equinox.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'equinox',
         season: cap.shift(),
         timezone: cap.shift() || 'GMT'
@@ -284,7 +284,7 @@ class Parser {
     if ((cap = grammar.hebrew.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'hebrew',
         day: toNumber(cap.shift()),
         month: grammar.hebrewMonths[cap.shift()],
@@ -300,7 +300,7 @@ class Parser {
     if ((cap = grammar.islamic.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'islamic',
         day: toNumber(cap.shift()),
         month: grammar.islamicMonths[cap.shift()],
@@ -316,7 +316,7 @@ class Parser {
     if ((cap = grammar.chineseSolar.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: cap.shift(),
         cycle: toNumber(cap.shift()),
         year: toNumber(cap.shift()),
@@ -334,7 +334,7 @@ class Parser {
     if ((cap = grammar.chineseLunar.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: cap.shift(),
         cycle: toNumber(cap.shift()),
         year: toNumber(cap.shift()),
@@ -353,7 +353,7 @@ class Parser {
     if ((cap = grammar.bengaliRevised.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: cap.shift(),
         year: toNumber(cap.shift()),
         month: toNumber(cap.shift()),
@@ -369,7 +369,7 @@ class Parser {
     if ((cap = grammar.dateMonth.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         fn: 'gregorian',
         day: 1,
         month: grammar.months[cap.shift()],
@@ -401,7 +401,7 @@ class Parser {
     if ((cap = grammar.modifier.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         modifier: cap.shift()
       }
       this.tokens.push(res)
@@ -414,7 +414,7 @@ class Parser {
     if ((cap = grammar.time.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'time',
         hour: toNumber(cap.shift()) || 0,
         minute: toNumber(cap.shift()) || 0
@@ -430,12 +430,12 @@ class Parser {
     if ((cap = grammar.duration.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let tmp = {
+      const tmp = {
         days: toNumber(cap.shift()) || 0,
         hours: toNumber(cap.shift()) || 0,
         minutes: toNumber(cap.shift()) || 0
       }
-      let res = {
+      const res = {
         rule: 'duration',
         // duration is calculated in hours
         duration: (tmp.days * 24) + tmp.hours + (tmp.minutes / 60)
@@ -450,7 +450,7 @@ class Parser {
     if ((cap = grammar.rule_date_if_then.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'dateIfThen',
         if: (cap.shift()).split(/(?:,\s?)/),
         direction: cap.shift(),
@@ -473,7 +473,7 @@ class Parser {
     if ((cap = grammar.rule_weekday.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'weekday',
         not: !!cap.shift(),
         if: (cap.shift()).split(/(?:,\s?)/)
@@ -488,7 +488,7 @@ class Parser {
     if ((cap = grammar.rule_day_dir_date.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'dateDir',
         count: toNumber(cap.shift()) || 1,
         weekday: cap.shift(),
@@ -507,7 +507,7 @@ class Parser {
     if ((cap = grammar.rule_year.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'year',
         cardinality: cap.shift(),
         every: toNumber(cap.shift()),
@@ -523,7 +523,7 @@ class Parser {
     if ((cap = grammar.rule_bridge.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
-      let res = {
+      const res = {
         rule: 'bridge',
         type: cap.shift()
       }

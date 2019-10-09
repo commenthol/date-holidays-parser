@@ -160,15 +160,21 @@ describe('#CalEvent', function () {
 
     var res = date.inYear(2015).get()
     var exp = [
-      { date: '2015-12-02 00:00:00',
+      {
+        date: '2015-12-02 00:00:00',
         start: 'wed 2015-12-02 00:00',
-        end: 'thu 2015-12-03 00:00' },
-      { date: '2016-12-02 00:00:00',
+        end: 'thu 2015-12-03 00:00'
+      },
+      {
+        date: '2016-12-02 00:00:00',
         start: 'fri 2016-12-02 00:00',
-        end: 'sat 2016-12-03 00:00' },
-      { date: '2015-12-03 00:00:00',
+        end: 'sat 2016-12-03 00:00'
+      },
+      {
+        date: '2015-12-03 00:00:00',
         start: 'thu 2015-12-03 00:00',
-        end: 'fri 2015-12-04 00:00' }
+        end: 'fri 2015-12-04 00:00'
+      }
     ]
     // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
@@ -354,9 +360,9 @@ describe('#Hebrew', function () {
     })
     var res = date.inYear(2015).get()
     var exp = [{
-      'date': '2015-01-09 00:00:00 -0600',
-      'start': 'thu 2015-01-08 18:00',
-      'end': 'fri 2015-01-09 18:00'
+      date: '2015-01-09 00:00:00 -0600',
+      start: 'thu 2015-01-08 18:00',
+      end: 'fri 2015-01-09 18:00'
     }, {
       date: '2015-12-30 00:00:00 -0600',
       start: 'tue 2015-12-29 18:00',

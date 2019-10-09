@@ -87,7 +87,7 @@ function isActive (date, year, active) {
     }
   }
   const _date = date.toDate()
-  for (let a of active) {
+  for (const a of active) {
     const { from, to } = a
     if (
       date.year === year &&

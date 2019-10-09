@@ -28,7 +28,7 @@ class Chinese extends CalEvent {
     let d
     let jde
     let date
-    let opts = this.opts
+    const opts = this.opts
     if (opts.solarterm) {
       jde = this.cal.solarTerm(opts.solarterm, year)
       date = this.cal.fromJDE(jde).toGregorian()

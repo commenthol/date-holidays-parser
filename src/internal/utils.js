@@ -84,7 +84,7 @@ exports.toDate = function toDate (str, isUTC) {
   const m = /^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?.*$/.exec((str || '').toString())
   if (m) {
     m.shift()
-    let [year, month, day] = m.map((num) => parseInt(num || 1, 10))
+    const [year, month, day] = m.map((num) => parseInt(num || 1, 10))
     if (isUTC) {
       return new Date(Date.UTC(year, month - 1, day))
     } else {

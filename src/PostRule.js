@@ -23,7 +23,7 @@ class PostRule {
   }
 
   getEvent (year) {
-    let active = this.ruleSet && this.ruleSet.active
+    const active = this.ruleSet && this.ruleSet.active
     this.disable(year)
     const ev = this.events[0]
     ev.filter(year, active)
@@ -48,14 +48,14 @@ class PostRule {
     const type = rule.type || 'public'
 
     // get all holidays of the given year
-    for (let ruleStr in this.holidays) {
-      let dateFn = this.holidays[ruleStr].fn
+    for (const ruleStr in this.holidays) {
+      const dateFn = this.holidays[ruleStr].fn
       if (dateFn && dateFn.ruleStr !== this.ruleStr) {
-        let tmpEv = dateFn.inYear(year)
-        let tmpEvType = _get(tmpEv, 'opts.type') || 'public'
+        const tmpEv = dateFn.inYear(year)
+        const tmpEvType = _get(tmpEv, 'opts.type') || 'public'
         for (let i = 1; i < this.events.length; i++) {
           if (found[i]) continue
-          let isEqualDate = tmpEv.event.isEqualDate(this.events[i])
+          const isEqualDate = tmpEv.event.isEqualDate(this.events[i])
           if (isEqualDate && tmpEvType === type) {
             found[i] = true
           }
@@ -86,7 +86,7 @@ class PostRule {
   _findEventInYear (year, arr) {
     arr = arr || []
     const parser = new Parser()
-    for (let i in arr) {
+    for (const i in arr) {
       const p = parser.parse(arr[i])
       if (p && p[0] && p[0].year && p[0].year === year) {
         return new CalEvent(p[0]).inYear(p[0].year)

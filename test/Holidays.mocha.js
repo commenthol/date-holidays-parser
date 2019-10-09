@@ -131,7 +131,7 @@ describe('#Holidays', function () {
     it('for languages with no country set', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.getLanguages()
-      const exp = [ 'en' ]
+      const exp = ['en']
       assert.deepStrictEqual(res, exp)
     })
 
@@ -153,7 +153,7 @@ describe('#Holidays', function () {
     it('for dayoff with no country set', function () {
       const hd = new Holidays(fixtures.holidays)
       const res = hd.getDayOff()
-      assert.strictEqual(res, void 0)
+      assert.strictEqual(res, undefined)
     })
 
     it('for all countries', function () {
@@ -365,7 +365,7 @@ describe('#Holidays', function () {
         Rosenmontag: 'mon 2015-02-16 00:00',
         Faschingsdienstag: 'tue 2015-02-17 14:00',
         Aschermittwoch: 'wed 2015-02-18 00:00',
-        'Gründonnerstag': 'thu 2015-04-02 00:00',
+        Gründonnerstag: 'thu 2015-04-02 00:00',
         Karfreitag: 'fri 2015-04-03 00:00',
         Ostersonntag: 'sun 2015-04-05 00:00',
         Ostermontag: 'mon 2015-04-06 00:00',
@@ -603,21 +603,27 @@ describe('#Holidays', function () {
     it('can get list of holidays', function () {
       const hd = new Holidays(fixtures.custom, 'custom')
       const exp = [
-        { date: '2017-01-01 00:00:00',
+        {
+          date: '2017-01-01 00:00:00',
           start: localDate('2017-01-01 00:00'),
           end: localDate('2017-01-02 00:00'),
           name: 'New Year',
-          type: 'public' },
-        { date: '2017-05-01 00:00:00',
+          type: 'public'
+        },
+        {
+          date: '2017-05-01 00:00:00',
           start: localDate('2017-05-01 00:00'),
           end: localDate('2017-05-06 00:00'),
           name: 'Laybour Day',
-          type: 'public' },
-        { date: '2017-12-25 00:00:00',
+          type: 'public'
+        },
+        {
+          date: '2017-12-25 00:00:00',
           start: localDate('2017-12-25 00:00'),
           end: localDate('2017-12-26 00:00:00'),
           name: 'Christmas',
-          type: 'public' }
+          type: 'public'
+        }
       ]
       const list = hd.getHolidays(2017)
       assert.deepStrictEqual(list, exp)

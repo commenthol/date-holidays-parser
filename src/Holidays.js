@@ -116,8 +116,8 @@ Holidays.prototype = {
         throw TypeError('.active is not of type Array: ' + rule)
       }
       opts.active = opts.active.map((a) => {
-        let from = toDate(a.from)
-        let to = toDate(a.to)
+        const from = toDate(a.from)
+        const to = toDate(a.to)
         if (!(from || to)) {
           throw TypeError('.active needs .from or .to property: ' + rule)
         }
@@ -318,7 +318,7 @@ Holidays.prototype = {
    */
   setLanguages (language) {
     if (typeof language === 'string') {
-      language = [ language ]
+      language = [language]
     }
     const tmp = {}
     this.__languages = [].concat(
@@ -377,7 +377,7 @@ Holidays.prototype = {
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
       langs = langs || this.getLanguages()
-      for (let i in langs) {
+      for (const i in langs) {
         const name = o.name[langs[i]]
         if (name) {
           o.name = name
@@ -385,7 +385,7 @@ Holidays.prototype = {
         }
       }
       if (o.substitute) {
-        for (let i in langs) {
+        for (const i in langs) {
           const subst = this.__data.getSubstitueNames()
           const name = subst[langs[i]]
           if (name) {

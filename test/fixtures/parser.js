@@ -351,18 +351,18 @@ module.exports = {
   ],
   'bengali-revised 1425-1-1': [
     {
-      'fn': 'bengali-revised',
-      'day': 1,
-      'month': 1,
-      'year': 1425
+      fn: 'bengali-revised',
+      day: 1,
+      month: 1,
+      year: 1425
     }
   ],
   'bengali-revised 1-1': [
     {
-      'fn': 'bengali-revised',
-      'day': 1,
-      'month': 1,
-      'year': undefined
+      fn: 'bengali-revised',
+      day: 1,
+      month: 1,
+      year: undefined
     }
   ],
   '1 day before vietnamese 01-0-01': [
@@ -1167,32 +1167,32 @@ module.exports = {
   ],
   '09-22 on sunday, saturday': [
     {
-      'day': 22,
-      'fn': 'gregorian',
-      'month': 9,
-      'year': undefined
+      day: 22,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
     }, {
-      'if': [
+      if: [
         'sunday',
         'saturday'
       ],
-      'not': false,
-      'rule': 'weekday'
+      not: false,
+      rule: 'weekday'
     }
   ],
   '12-26 not on friday, monday': [
     {
-      'day': 26,
-      'fn': 'gregorian',
-      'month': 12,
-      'year': undefined
+      day: 26,
+      fn: 'gregorian',
+      month: 12,
+      year: undefined
     }, {
-      'if': [
+      if: [
         'friday',
         'monday'
       ],
-      'not': true,
-      'rule': 'weekday'
+      not: true,
+      rule: 'weekday'
     }
   ]
 }

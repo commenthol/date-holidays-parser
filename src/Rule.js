@@ -116,7 +116,7 @@ class Rule {
         }
         date._filter = false
         let offset = 0
-        let then = DAYS[rule.then]
+        const then = DAYS[rule.then]
         if (rule.then && then !== 'undefined') {
           if (rule.direction === 'previous') {
             offset = -1 * ((7 + weekday - then) % 7)
@@ -206,7 +206,7 @@ class Rule {
           return date
         }
       } else if (rule.every !== undefined && rule.since !== undefined) {
-        let tmp = (date.year - rule.since) % rule.every
+        const tmp = (date.year - rule.since) % rule.every
         if (tmp === 0) {
           return date
         }
