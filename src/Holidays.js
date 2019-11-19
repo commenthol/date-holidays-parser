@@ -5,6 +5,7 @@
 
 'use strict'
 
+const CalDate = require('caldate')
 const _ = {
   merge: require('lodash.merge'),
   omit: require('lodash.omit'),
@@ -212,7 +213,9 @@ Holidays.prototype = {
    */
   isHoliday (date) {
     date = date || new Date()
-    const year = toYear(date)
+    const d = new CalDate()
+    d.fromTimezone(date, this.__timezone)
+    const year = d.year
     const rules = Object.keys(this.holidays)
     for (const i in rules) {
       const hd = [].concat(this._dateByRule(year, rules[i]))
