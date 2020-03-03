@@ -169,7 +169,7 @@ Holidays.prototype = {
     Object.keys(this.holidays).forEach((rule) => {
       if (this.holidays[rule].fn) {
         this._dateByRule(year, rule).forEach((o) => {
-          arr.push(this._translate(o, langs))
+          arr.push({ ...this._translate(o, langs), rule: rule })
         })
       }
     })
