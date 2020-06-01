@@ -278,7 +278,7 @@ Where:
 **Examples**:
 
 - `bengali-revised 12-1` is the 1st day in the 12th month
-- `bengali-revised 1425-1-1` is the 1st day in the first month of 1425 - equals 2018-04-14 in gregorian date
+- `bengali-revised 1425-1-1` is the 1st day in the first month of 1425 - equals 2018-04-14 in Gregorian date
 
 #### Equinox, Solstice
 
@@ -381,22 +381,26 @@ Rule: `<weekday> (after|before) <count> <weekday> (after|before) MM-DD`
 
 Rule: `MM-DD if <weekday> then (next|previous) <weekday>`
 
+Holiday is moved if the rule matches, otherwise it stays on the date given.
+
 **Examples**:
 
-- `03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday
-- `04-13 if friday then previous monday` if April 13th is on a Friday then holiday falls to previous Monday
+- `03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday, otherwise it is March 2nd
+- `04-13 if friday then previous monday` if April 13th is on a Friday then holiday falls to previous Monday, on all other weekdays it is observed on April 13th.
 
 ### Substitute a holiday if date falls on a certain weekday
 
-Rule: `substitute MM-DD if <weekday> then (next|previous) <weekday>`
+Rule: `substitutes MM-DD if <weekday> then (next|previous) <weekday>`
 
 If `substitute: true` is given then the translated string from `names.yaml/names/substitutes` will be appended to the name.
 E.g. "Christmas" becomes "Christmas (substitute day)"
 
+Holiday is active if the rule matches for the moved date.
+
 **Examples**:
 
-- `substitute 03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday
-- `substitute 04-13 if friday then previous monday` if April 13th is on a Friday then holiday falls to previous Monday
+- `substitutes 03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday, for all other weekdays no holiday is observed. 
+- `substitutes 04-13 if friday then previous monday` if Apri 13th is on a Friday then holiday falls to previous Monday
 
 ### Observe the holiday as well as on a substitute day, if date falls on a certain weekday
 
@@ -409,8 +413,8 @@ E.g. "Christmas" becomes "Christmas (substitute day)"
 
 **Examples**:
 
-- `03-02 and if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday
-- `04-13 and if friday then previous monday` if April 13th is on a Friday then holiday falls to previous Monday
+- `03-02 and if sunday then next monday` if March 2nd is on a Sunday then and additional holiday will be observed on next Monday as well.
+- `04-13 and if friday then previous monday` if April 13th is on a Friday then and additional holiday falls to previous Monday
 
 ### Enable Date only for odd/ even numbered years
 
