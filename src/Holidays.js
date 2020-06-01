@@ -15,7 +15,8 @@ const { toYear, toDate } = require('./internal/utils')
 const Data = require('./Data')
 const DateFn = require('./DateFn')
 
-const TYPES = ['public', 'bank', 'school', 'optional', 'observance']
+// priority in ascending order (low ... high)
+const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
 
 /**
  * @class
@@ -160,40 +161,35 @@ Holidays.prototype = {
   getHolidays (year, language) {
     year = toYear(year)
 
-    let arr = []
     const langs = this.getLanguages()
     if (language) {
       langs.unshift(language)
     }
 
-    Object.keys(this.holidays).forEach((rule) => {
-      if (this.holidays[rule].fn) {
-        this._dateByRule(year, rule).forEach((o) => {
-          arr.push({ ...this._translate(o, langs), rule })
-        })
-      }
-    })
+    const startSorter = (a, b) => (+a.start) - (+b.start)
+    const typeIndex = (a) => TYPES.indexOf(a.type)
+    const typeSorter = (a, b) => typeIndex(b) - typeIndex(a)
 
-    // sort by date
-    arr = arr
-      .sort(function (a, b) {
-        return (+a.start) - (+b.start)
-      })
-      .map(function (a, i) {
-        const b = arr[i + 1]
-        if (b && (a.name === b.name) && (+a.start) === (+b.start)) {
-          for (const type of TYPES) {
-            if (type === a.type || type === b.type) {
-              a.filter = true
-              b.type = type
-              break
-            }
-          }
+    const filterMap = {}
+
+    const arr = Object.keys(this.holidays)
+      .reduce((arr, rule) => {
+        if (this.holidays[rule].fn) {
+          this._dateByRule(year, rule).forEach((o) => {
+            arr.push({ ...this._translate(o, langs), rule })
+          })
         }
-        return a
-      })
-      .filter(function (a) {
-        if (!a.filter) return a
+        return arr
+      }, [])
+      // sort by date and type to filter by duplicate
+      .sort((a, b) => startSorter(a, b) || typeSorter(a, b))
+      .filter(item => {
+        const hash = item.name + (+item.start)
+        if (!filterMap[hash]) {
+          filterMap[hash] = true
+          return true
+        }
+        return false
       })
 
     return arr
@@ -366,7 +362,6 @@ Holidays.prototype = {
         }
         return odate
       })
-
     return dates
   },
 
