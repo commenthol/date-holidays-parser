@@ -608,21 +608,24 @@ describe('#Holidays', function () {
           start: localDate('2017-01-01 00:00'),
           end: localDate('2017-01-02 00:00'),
           name: 'New Year',
-          type: 'public'
+          type: 'public',
+          rule: '01-01'
         },
         {
           date: '2017-05-01 00:00:00',
           start: localDate('2017-05-01 00:00'),
           end: localDate('2017-05-06 00:00'),
           name: 'Laybour Day',
-          type: 'public'
+          type: 'public',
+          rule: '05-01 P5D'
         },
         {
           date: '2017-12-25 00:00:00',
           start: localDate('2017-12-25 00:00'),
           end: localDate('2017-12-26 00:00:00'),
           name: 'Christmas',
-          type: 'public'
+          type: 'public',
+          rule: '12-25'
         }
       ]
       const list = hd.getHolidays(2017)
