@@ -97,19 +97,31 @@ describe('#issue-ruletypes', function () {
     ])
   })
 
-  it('should find correct rule for substitutes', function () {
+  it('should find correct rule for substitutes (JP Spring Equinox)', function () {
     const hd = new Holidays(fixture, 'JP', { languages: 'en' })
-    const res = hd.getHolidays(2020)
+    const res = hd.getHolidays(2020).filter(day => day.name === 'Spring Equinox Day')
 
-    const springEquinox = res.filter(day => day.name === 'Spring Equinox Day')
-
-    assert.deepStrictEqual(springEquinox, [{
+    assert.deepStrictEqual(res, [{
       date: '2020-03-20 00:00:00',
       start: new Date('2020-03-19T15:00:00.000Z'),
       end: new Date('2020-03-20T15:00:00.000Z'),
       name: 'Spring Equinox Day',
       type: 'public',
       rule: 'march equinox in +09:00'
+    }])
+  })
+
+  it('should sort rule by length (DE-TH Reformation Day)', function () {
+    const hd = new Holidays(fixture, 'DE', 'TH', { languages: 'en' })
+    const res = hd.getHolidays(2017).filter(day => day.name === 'Reformation Day')
+
+    assert.deepStrictEqual(res, [{
+      date: '2017-10-31 00:00:00',
+      start: new Date('2017-10-30T23:00:00.000Z'),
+      end: new Date('2017-10-31T23:00:00.000Z'),
+      name: 'Reformation Day',
+      type: 'public',
+      rule: '10-31'
     }])
   })
 })

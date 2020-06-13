@@ -169,8 +169,9 @@ Holidays.prototype = {
     const startSorter = (a, b) => (+a.start) - (+b.start)
     const typeIndex = (a) => TYPES.indexOf(a.type)
     const typeSorter = (a, b) => typeIndex(b) - typeIndex(a)
-    const ruleIndex = (a) => /substitutes|and if /.test(a.rule) ? 1 : -1
-    const ruleSorter = (a, b) => ruleIndex(a) - ruleIndex(b)
+    const ruleIndex = (a) => /substitutes|and if /.test(a.rule) ? 1 : 0
+    const ruleLength = (a) => String(a.rule || '').length
+    const ruleSorter = (a, b) => ruleIndex(a) - ruleIndex(b) || ruleLength(a) - ruleLength(b)
 
     const filterMap = {}
 
