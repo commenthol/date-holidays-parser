@@ -42,7 +42,7 @@ describe('#Holidays', function () {
       const exp = {
         BB: 'Brandenburg',
         BE: 'Berlin',
-        BW: 'Baden Würtemberg',
+        BW: 'Baden-Württemberg',
         BY: 'Bayern',
         HB: 'Hansestadt Bremen',
         HE: 'Hessen',

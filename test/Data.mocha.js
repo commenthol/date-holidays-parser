@@ -186,7 +186,7 @@ describe('#Data', function () {
       '02-14': ['observance', 'Valentinstag'],
       'easter -52': ['observance', 'Weiberfastnacht'],
       'easter -48': ['observance', 'Rosenmontag'],
-      'easter -47 14:00': ['bank', 'Faschingsdienstag'],
+      'easter -47 14:00': ['observance', 'Faschingsdienstag'],
       'easter -46': ['observance', 'Aschermittwoch'],
       'easter -3': ['observance', 'Gründonnerstag'],
       'easter -2': ['public', 'Karfreitag'],
