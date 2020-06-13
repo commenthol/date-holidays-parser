@@ -169,6 +169,8 @@ Holidays.prototype = {
     const startSorter = (a, b) => (+a.start) - (+b.start)
     const typeIndex = (a) => TYPES.indexOf(a.type)
     const typeSorter = (a, b) => typeIndex(b) - typeIndex(a)
+    const ruleIndex = (a) => /substitutes|and if /.test(a.rule) ? 1 : -1
+    const ruleSorter = (a, b) => ruleIndex(a) - ruleIndex(b)
 
     const filterMap = {}
 
@@ -182,7 +184,7 @@ Holidays.prototype = {
         return arr
       }, [])
       // sort by date and type to filter by duplicate
-      .sort((a, b) => startSorter(a, b) || typeSorter(a, b))
+      .sort((a, b) => startSorter(a, b) || typeSorter(a, b) || ruleSorter(a, b))
       .filter(item => {
         const hash = item.name + (+item.start)
         if (!filterMap[hash]) {

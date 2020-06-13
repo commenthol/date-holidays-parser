@@ -4,8 +4,9 @@
 
 const assert = require('assert')
 const Holidays = require('../src')
+const fixture = require('./fixtures/holidays.json')
 
-const fixture = {
+const fixtureIE = {
   holidays: {
     IE: {
       names: {
@@ -38,7 +39,7 @@ const fixture = {
 
 describe('#issue-ruletypes', function () {
   it('should return simple rule if Friday', function () {
-    const hd = new Holidays(fixture, 'IE')
+    const hd = new Holidays(fixtureIE, 'IE')
     const res = hd.getHolidays(2017)
     assert.deepStrictEqual(res, [{ // Friday
       date: '2017-03-17 00:00:00',
@@ -51,7 +52,7 @@ describe('#issue-ruletypes', function () {
   })
 
   it('should return both rules if Saturday', function () {
-    const hd = new Holidays(fixture, 'IE')
+    const hd = new Holidays(fixtureIE, 'IE')
     const res = hd.getHolidays(2018)
     assert.deepStrictEqual(res, [
       {
@@ -74,7 +75,7 @@ describe('#issue-ruletypes', function () {
   })
 
   it('should return both rules if Sunday', function () {
-    const hd = new Holidays(fixture, 'IE')
+    const hd = new Holidays(fixtureIE, 'IE')
     const res = hd.getHolidays(2019)
     assert.deepStrictEqual(res, [
       {
@@ -94,5 +95,21 @@ describe('#issue-ruletypes', function () {
         type: 'bank'
       }
     ])
+  })
+
+  it('should find correct rule for substitutes', function () {
+    const hd = new Holidays(fixture, 'JP', { languages: 'en' })
+    const res = hd.getHolidays(2020)
+
+    const springEquinox = res.filter(day => day.name === 'Spring Equinox Day')
+
+    assert.deepStrictEqual(springEquinox, [{
+      date: '2020-03-20 00:00:00',
+      start: new Date('2020-03-19T15:00:00.000Z'),
+      end: new Date('2020-03-20T15:00:00.000Z'),
+      name: 'Spring Equinox Day',
+      type: 'public',
+      rule: 'march equinox in +09:00'
+    }])
   })
 })
