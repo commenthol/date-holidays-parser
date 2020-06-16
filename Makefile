@@ -6,7 +6,7 @@ all: lint lib docs
 lib: src/*
 	npm run transpile
 
-test: v4. v6. v8. v9.
+test: v10. v12. v14.
 
 v%:
 	n $@ && npm test
