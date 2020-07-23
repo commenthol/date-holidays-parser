@@ -197,7 +197,7 @@ Holidays.prototype = {
   /**
    * check whether `date` is a holiday or not
    * @param {Date} [date]
-   * @return {Object} holiday:
+   * @return {Array<Holiday>|false} holiday:
    * ```
    * {String} date - ISO Date String of (start)-date in local format
    * {Date} start - start date of holiday
@@ -212,15 +212,16 @@ Holidays.prototype = {
     d.fromTimezone(date, this.__timezone)
     const year = d.year
     const rules = Object.keys(this.holidays)
+    const days = []
     for (const i in rules) {
       const hd = [].concat(this._dateByRule(year, rules[i]))
       for (const j in hd) {
         if (hd[j] && date >= hd[j].start && date < hd[j].end) {
-          return this._translate(hd[j])
+          days.push(this._translate(hd[j]))
         }
       }
     }
-    return false
+    return days.length ? days : false
   },
 
   /**

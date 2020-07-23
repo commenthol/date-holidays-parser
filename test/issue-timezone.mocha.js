@@ -48,7 +48,7 @@ describe('#issue-timezone', function () {
   it('should return New Year for 2017 in Australia/Sydney', function () {
     const hd = new Holidays(fixture, 'AU')
     const date = new Date('2016-12-31T13:00:00.000Z')
-    const res = hd.isHoliday(date)
+    const res = hd.isHoliday(date)[0]
     assert.deepStrictEqual(res, {
       date: '2017-01-01 00:00:00',
       start: new Date('2016-12-31T13:00:00.000Z'),
@@ -61,7 +61,7 @@ describe('#issue-timezone', function () {
   it('should return New Years Eve for 2016 in Australia/Sydney', function () {
     const hd = new Holidays(fixture, 'AU')
     const date = new Date('2016-12-31T12:59:59Z')
-    const res = hd.isHoliday(date)
+    const res = hd.isHoliday(date)[0]
     assert.deepStrictEqual(res, {
       date: '2016-12-31 00:00:00',
       start: new Date('2016-12-30T13:00:00.000Z'),
