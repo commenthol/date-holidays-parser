@@ -1,7 +1,7 @@
 npmbin := $(shell npm bin)
 
 all: lint lib docs
-	npm test
+	npm ci
 
 lib: src/*
 	npm run transpile
