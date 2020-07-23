@@ -1,6 +1,6 @@
 # Specification for `holidays.yaml`
 
-Version: 1.4.0
+Version: 1.4.1
 
 This document describes the data contained within the files `holidays.yaml` and
 `names.yaml`.
@@ -399,7 +399,7 @@ Holiday is active if the rule matches for the moved date.
 
 **Examples**:
 
-- `substitutes 03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday, for all other weekdays no holiday is observed. 
+- `substitutes 03-02 if sunday then next monday` if March 2nd is on a Sunday then holiday will be on next Monday, for all other weekdays no holiday is observed.
 - `substitutes 04-13 if friday then previous monday` if Apri 13th is on a Friday then holiday falls to previous Monday
 
 ### Observe the holiday as well as on a substitute day, if date falls on a certain weekday
