@@ -1,6 +1,6 @@
 'use strict'
 
-const _get = require('lodash.get')
+const _get = require('./utils').get
 const CalEvent = require('./CalEvent')
 const Parser = require('./Parser')
 
