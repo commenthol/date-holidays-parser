@@ -1,9 +1,6 @@
 'use strict'
 
-const _ = {
-  get: require('lodash.get'),
-  merge: require('lodash.merge')
-}
+const _ = require('./utils')
 
 /**
  * Handler for holiday data provided in the Json file

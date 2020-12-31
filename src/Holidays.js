@@ -6,11 +6,7 @@
 'use strict'
 
 const CalDate = require('caldate')
-const _ = {
-  merge: require('lodash.merge'),
-  omit: require('lodash.omit'),
-  set: require('lodash.set')
-}
+const _ = require('./utils')
 const { toYear, toDate } = require('./internal/utils')
 const Data = require('./Data')
 const DateFn = require('./DateFn')
