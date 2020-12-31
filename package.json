@@ -17,6 +17,9 @@
   },
   "license": "ISC",
   "author": "commenthol <commenthol@gmail.com>",
+  "maintainers": [
+    "commenthol <commenthol@gmail.com>"
+  ],
   "contributors": [],
   "main": "lib",
   "directories": {
@@ -28,6 +31,7 @@
     "all": "npm-run-all clean lint build build:es5 test",
     "build": "babel -d lib src",
     "build:es5": "BABEL_ENV=es5 babel -d es src",
+    "changelog": "node scripts/gitlog.js",
     "clean": "rimraf lib es coverage .nyc_output",
     "clean:all": "npm-run-all clean:node_modules clean",
     "clean:node_modules": "rimraf node_modules",
@@ -108,8 +112,5 @@
   },
   "engines": {
     "node": ">=6.0.0"
-  },
-  "maintainers": [
-    "commenthol <commenthol@gmail.com>"
-  ]
+  }
 }
