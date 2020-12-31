@@ -7,7 +7,7 @@
  * }
  */
 exports.DAYS = (function () {
-  var o = {}
+  const o = {}
   'sunday|monday|tuesday|wednesday|thursday|friday|saturday'
     .split('|')
     .forEach((name, idx) => {
@@ -21,7 +21,7 @@ function objectToString (o) {
   return Object.prototype.toString.call(o)
 }
 
-var isObject = exports.isObject = function isObject (arg) {
+const isObject = exports.isObject = function isObject (arg) {
   return typeof arg === 'object' && arg !== null
 }
 
@@ -47,8 +47,8 @@ exports.pad0 = function pad0 (number, len) {
  * @param {String} str
  * @return {Number} converted number or undefined
  */
-var toNumber = exports.toNumber = function toNumber (str) {
-  var num = parseInt(str, 10)
+const toNumber = exports.toNumber = function toNumber (str) {
+  const num = parseInt(str, 10)
   if (!isNaN(num)) {
     return num
   }

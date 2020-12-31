@@ -1,7 +1,7 @@
 /* global describe, it */
 
-var assert = require('assert')
-var utils = require('../src/internal/utils')
+const assert = require('assert')
+const utils = require('../src/internal/utils')
 
 describe('toDate', function () {
   it('should convert 2017 to 2017-01-01 to local date', function () {

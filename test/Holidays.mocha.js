@@ -138,8 +138,8 @@ describe('#Holidays', function () {
     it('for languages after init', function () {
       const hd = new Holidays(fixtures.holidays)
       hd.init('BE')
-      var res = hd.getLanguages()
-      var exp = ['fr', 'nl', 'de', 'en']
+      const res = hd.getLanguages()
+      const exp = ['fr', 'nl', 'de', 'en']
       assert.deepStrictEqual(res, exp)
     })
 

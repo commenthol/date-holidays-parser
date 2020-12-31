@@ -5,10 +5,11 @@
 const { promisify } = require('util')
 const { exec } = require('child_process')
 const fs = require('fs')
+const path = require('path')
 const { version } = require('../package.json')
 
 const BASE = 'https://github.com/commenthol/date-holidays-parser'
-const CHANGELOG = `${__dirname}/../CHANGELOG.md`
+const CHANGELOG = path.resolve(__dirname, '../CHANGELOG.md')
 
 const MAJOR = 0
 const MINOR = 1

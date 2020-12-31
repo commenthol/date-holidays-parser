@@ -11,9 +11,10 @@
  */
 
 const fs = require('fs')
+const path = require('path')
 const Hebcal = require('hebcal')
 
-const filename = `${__dirname}/../../src/internal/hebrew-calendar.js`
+const filename = path.resolve(__dirname, 'src/internal/hebrew-calendar.js')
 const out = {}
 
 for (let y = 1969; y <= 2100; y++) {

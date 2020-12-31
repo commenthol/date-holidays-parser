@@ -15,9 +15,10 @@
  */
 
 const fs = require('fs')
+const path = require('path')
 const moment = require('moment-hijri')
 
-const filename = `${__dirname}/../../src/internal/hijri-calendar.js`
+const filename = path.resolve(__dirname, 'src/internal/hijri-calendar.js')
 const out = {}
 
 // only years 1936 ... 2080 are supported by moment-hijri

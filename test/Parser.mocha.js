@@ -7,18 +7,18 @@ const serializeToModule = require('serialize-to-js').serializeToModule
 
 const exp = require('./fixtures/parser.js')
 
-var p = new Parser()
-var parser = p.parse.bind(p)
+const p = new Parser()
+const parser = p.parse.bind(p)
 
 if (~process.argv.indexOf('--writetests')) {
   (function () {
-    var store = {}
-    var filename = path.resolve(__dirname, 'fixtures', 'parser.js')
-    for (var name in exp) {
-      var res = parser(name)
+    const store = {}
+    const filename = path.resolve(__dirname, 'fixtures', 'parser.js')
+    for (const name in exp) {
+      const res = parser(name)
       store[name] = res
     }
-    var js = serializeToModule(store, { beautify: true, comment: 'eslint-disable' })
+    const js = serializeToModule(store, { beautify: true, comment: 'eslint-disable' })
     require('fs').writeFileSync(filename, js, 'utf8')
     console.log(filename, 'written') // eslint-disable-line
   })()
@@ -26,13 +26,13 @@ if (~process.argv.indexOf('--writetests')) {
 
 function test (name) {
   it(name, function () {
-    var res = parser(name)
+    const res = parser(name)
     assert.deepStrictEqual(res, exp[name])
   })
 }
 
 describe('#parser', function () {
-  for (var name in exp) {
+  for (const name in exp) {
     test(name)
   }
 })
