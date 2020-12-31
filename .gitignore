@@ -11,5 +11,4 @@ es/
 .nyc_output
 yarn.lock
 .DS_Store
-*.sh
 .idea/
