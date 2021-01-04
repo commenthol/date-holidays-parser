@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.6.0](https://github.com/commenthol/date-holidays-parser/compare/1.5.0...1.6.0) (2021-01-04)
+
+- fix: Fix collision in PostRule with Array prototype overrides [7f69163](https://github.com/commenthol/date-holidays-parser/commit/7f6916332a427bed1f4b4c78da703158453d8e11)
+- feat: replace lodash function to reduce bundle size [516966a](https://github.com/commenthol/date-holidays-parser/commit/516966ad052cb7ab1fbb2b32a9392aa1974d02a3)
+
 ## [1.5.0](https://github.com/commenthol/date-holidays-parser/compare/1.4.3...1.5.0)
 
 - fix: sort by rule length [45f4bcf](https://github.com/commenthol/date-holidays-parser/commit/45f4bcfb837ae72f2ab6867d4ca4aa22821a070b)
