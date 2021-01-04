@@ -86,8 +86,8 @@ class PostRule {
   _findEventInYear (year, arr) {
     arr = arr || []
     const parser = new Parser()
-    for (const i in arr) {
-      const p = parser.parse(arr[i])
+    for (const item of arr) {
+      const p = parser.parse(item)
       if (p && p[0] && p[0].year && p[0].year === year) {
         return new CalEvent(p[0]).inYear(p[0].year)
       }
