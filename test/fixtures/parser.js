@@ -744,7 +744,7 @@ module.exports = {
       direction: 'after'
     }
   ],
-  '2nd sunday before 11-01': [
+  '2nd Sunday before 11-01': [
     {
       fn: 'gregorian',
       year: undefined,
@@ -775,7 +775,7 @@ module.exports = {
       direction: 'before'
     }
   ],
-  'tuesday before 2nd tuesday after 11-01': [
+  'Tuesday before 2nd tuesday after 11-01': [
     {
       fn: 'gregorian',
       year: undefined,
@@ -855,6 +855,19 @@ module.exports = {
       then: 'monday'
     }
   ],
+  '01-01 if Monday then next Monday': [
+    {
+      fn: 'gregorian',
+      year: undefined,
+      month: 1,
+      day: 1
+    }, {
+      rule: 'dateIfThen',
+      if: ['monday'],
+      direction: 'next',
+      then: 'monday'
+    }
+  ],
   '01-01 if sunday then previous monday': [
     {
       fn: 'gregorian',
@@ -868,7 +881,7 @@ module.exports = {
       then: 'monday'
     }
   ],
-  '01-01 if sunday then next sunday': [
+  '01-01 if Sunday then next Sunday': [
     {
       fn: 'gregorian',
       year: undefined,
@@ -909,6 +922,21 @@ module.exports = {
       then: 'monday'
     }
   ],
+  '01-01 and if Monday then next Monday': [
+    {
+      fn: 'gregorian',
+      year: undefined,
+      month: 1,
+      day: 1
+    }, {
+      modifier: 'and'
+    }, {
+      rule: 'dateIfThen',
+      if: ['monday'],
+      direction: 'next',
+      then: 'monday'
+    }
+  ],
   'substitutes 01-01 if sunday then next tuesday': [
     {
       fn: 'gregorian',
@@ -924,7 +952,37 @@ module.exports = {
       then: 'tuesday'
     }
   ],
+  'substitutes 01-01 if Sunday then next Tuesday': [
+    {
+      fn: 'gregorian',
+      year: undefined,
+      month: 1,
+      day: 1
+    }, {
+      modifier: 'substitutes'
+    }, {
+      rule: 'dateIfThen',
+      if: ['sunday'],
+      direction: 'next',
+      then: 'tuesday'
+    }
+  ],
   'substitutes 1 Shawwal if wednesday,saturday,sunday then next monday': [
+    {
+      fn: 'islamic',
+      day: 1,
+      month: 10,
+      year: undefined
+    }, {
+      modifier: 'substitutes'
+    }, {
+      rule: 'dateIfThen',
+      if: ['wednesday', 'saturday', 'sunday'],
+      direction: 'next',
+      then: 'monday'
+    }
+  ],
+  'substitutes 1 Shawwal if Wednesday,Saturday,Sunday then next Monday': [
     {
       fn: 'islamic',
       day: 1,
@@ -1070,7 +1128,7 @@ module.exports = {
       since: undefined
     }
   ],
-  'tuesday after 1st monday after 11-01 in odd years': [
+  'Tuesday after 1st monday after 11-01 in odd years': [
     {
       fn: 'gregorian',
       year: undefined,
@@ -1166,6 +1224,21 @@ module.exports = {
     }
   ],
   '09-22 on sunday, saturday': [
+    {
+      day: 22,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    }, {
+      if: [
+        'sunday',
+        'saturday'
+      ],
+      not: false,
+      rule: 'weekday'
+    }
+  ],
+  '09-22 on Sunday, Saturday': [
     {
       day: 22,
       fn: 'gregorian',

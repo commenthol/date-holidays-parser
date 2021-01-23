@@ -6,6 +6,10 @@
 
 const toNumber = require('./internal/utils').toNumber
 
+const WEEKDAYS = 'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.split('|')
+
+const lowerCaseWeekday = (weekday) => WEEKDAYS.includes(weekday) ? weekday.toLowerCase() : weekday
+
 /**
  * regular expressions to parse holiday statements
  */
@@ -29,7 +33,7 @@ const grammar = (function () {
 
   // raw rules
   const raw = {
-    _weekdays: 'sunday|monday|tuesday|wednesday|thursday|friday|saturday|day',
+    _weekdays: '[Ss]unday|[Mm]onday|[Tt]uesday|[Ww]ednesday|[Tt]hursday|[Ff]riday|[Ss]aturday|day',
     _months: 'January|February|March|April|May|June|July|August|September|October|November|December',
     _islamicMonths: 'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
     _hebrewMonths: 'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|Adar',
@@ -452,9 +456,9 @@ class Parser {
       cap.shift()
       const res = {
         rule: 'dateIfThen',
-        if: (cap.shift()).split(/(?:,\s?)/),
+        if: (cap.shift()).split(/(?:,\s?)/).map(lowerCaseWeekday),
         direction: cap.shift(),
-        then: cap.shift()
+        then: lowerCaseWeekday(cap.shift())
       }
       // create a sub-parser to only check for time, duration
       const p = new Parser(['_ruleTime', '_ruleDuration'])
@@ -476,7 +480,7 @@ class Parser {
       const res = {
         rule: 'weekday',
         not: !!cap.shift(),
-        if: (cap.shift()).split(/(?:,\s?)/)
+        if: (cap.shift()).split(/(?:,\s?)/).map(lowerCaseWeekday)
       }
       this.tokens.push(res)
       return true
@@ -491,7 +495,7 @@ class Parser {
       const res = {
         rule: 'dateDir',
         count: toNumber(cap.shift()) || 1,
-        weekday: cap.shift(),
+        weekday: lowerCaseWeekday(cap.shift()),
         direction: cap.shift()
       }
       if (res.direction === 'in') {
