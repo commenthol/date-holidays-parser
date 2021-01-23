@@ -422,7 +422,7 @@ module.exports = {
       timezone: 'Asia\u002FTokyo'
     }
   ],
-  'march equinox in +09:00': [
+  'March equinox in +09:00': [
     {
       fn: 'equinox',
       season: 'march',
@@ -477,7 +477,7 @@ module.exports = {
       weekday: 'day'
     }
   ],
-  '3rd monday before december solstice': [
+  '3rd monday before December solstice': [
     {
       fn: 'equinox',
       season: 'december',

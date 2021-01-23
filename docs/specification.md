@@ -1,6 +1,6 @@
 # Specification for `holidays.yaml`
 
-Version: 1.4.1
+Version: 2.0.0
 
 This document describes the data contained within the files `holidays.yaml` and
 `names.yaml`.
