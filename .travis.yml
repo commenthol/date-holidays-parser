@@ -2,7 +2,6 @@ sudo: false
 language: node_js
 
 node_js:
-  - 10
   - 12
   - 14
   - node
@@ -14,4 +13,4 @@ before_script:
   - npm run build
 
 script:
-  - npm ci
+  - npm  run ci
