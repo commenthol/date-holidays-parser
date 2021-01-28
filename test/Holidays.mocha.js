@@ -191,13 +191,13 @@ describe('#Holidays', function () {
       let res = hd.setHoliday('06-22')
       assert.ok(res)
       res = hd.isHoliday(localDate('2011-06-22 00:00'))
-      const exp = {
+      const exp = [{
         date: '2011-06-22 00:00:00',
         start: localDate('2011-06-22 00:00'),
         end: localDate('2011-06-23 00:00'),
         name: '06-22',
         type: 'public'
-      }
+      }]
       assert.ok(res)
       assert.deepStrictEqual(res, exp)
     })
@@ -207,13 +207,13 @@ describe('#Holidays', function () {
       let res = hd.setHoliday('06-22', 'someones birthday')
       assert.ok(res)
       res = hd.isHoliday(localDate('2011-06-22 00:00'))
-      const exp = {
+      const exp = [{
         date: '2011-06-22 00:00:00',
         start: localDate('2011-06-22 00:00'),
         end: localDate('2011-06-23 00:00'),
         name: 'someones birthday',
         type: 'public'
-      }
+      }]
       assert.ok(res)
       assert.deepStrictEqual(res, exp)
     })
@@ -497,7 +497,7 @@ describe('#Holidays', function () {
 
     it('if 2015-01-01 is a holiday in Spain and return `Año Nuevo`', function () {
       const hd = new Holidays(fixtures.holidays, 'es')
-      const res = hd.isHoliday(new Date('2015-01-01T12:00'))
+      const res = hd.isHoliday(new Date('2015-01-01T12:00'))[0]
       assert.strictEqual(res.name, 'Año Nuevo')
     })
 
@@ -511,7 +511,7 @@ describe('#Holidays', function () {
     it('if 2015-12-26 is substitute holiday in UK', function () {
       const hd = new Holidays(fixtures.holidays, 'gb')
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
-      const res = hd.isHoliday(new Date('2015-12-28'))
+      const res = hd.isHoliday(new Date('2015-12-28'))[0]
       assert.ok(res)
       assert.strictEqual(res.substitute, true)
       assert.strictEqual(res.name, 'Boxing Day (substitute day)')
@@ -548,7 +548,7 @@ describe('#Holidays', function () {
     it('if Festa Nazionale 2011 was a holiday in Italy', function () {
       const hd = new Holidays(fixtures.holidays, 'it')
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
-      const res = hd.isHoliday(localDate('2011-03-17 00:00'))
+      const res = hd.isHoliday(localDate('2011-03-17 00:00'))[0]
       assert.ok(res)
       assert.strictEqual(res.name, 'Festa Nazionale 2011')
     })
@@ -577,7 +577,7 @@ describe('#Holidays', function () {
         type: 'public'
       })
       const d = localDate('2015-12-05 00:00')
-      const res = hd.isHoliday(d)
+      const res = hd.isHoliday(d)[0]
       assert.strictEqual(toIso(res.start), 'sat 2015-12-05 00:00')
       assert.strictEqual(toIso(res.end), 'sun 2015-12-06 00:00')
     })
@@ -593,7 +593,7 @@ describe('#Holidays', function () {
         type: 'public'
       })
       const d = localDate('2016-12-05 00:00')
-      const res = hd.isHoliday(d)
+      const res = hd.isHoliday(d)[0]
       assert.strictEqual(toIso(res.start), 'mon 2016-12-05 00:00')
       assert.strictEqual(toIso(res.end), 'tue 2016-12-06 00:00')
     })
