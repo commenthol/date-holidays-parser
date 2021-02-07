@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1](https://github.com/commenthol/date-holidays-parser/compare/2.0.0...2.0.1) (2021-02-07)
+
+- fix: Month spelling for equinox, solstice [c8c0c58](https://github.com/commenthol/date-holidays-parser/commit/c8c0c5895e644d3d2e15d34200e66eb4a9e81fcb)
+- docs: fix weekday spelling [9acf59a](https://github.com/commenthol/date-holidays-parser/commit/9acf59ae53b58454ad170dc540165239e54fb11f)
+- fix: Allow correct spelled weekdays [28a1635](https://github.com/commenthol/date-holidays-parser/commit/28a16353cf97b901c02f45498336df0f03a6b369)
+
 ## [1.6.0](https://github.com/commenthol/date-holidays-parser/compare/1.5.0...1.6.0) (2021-01-04)
 
 - fix: Fix collision in PostRule with Array prototype overrides [7f69163](https://github.com/commenthol/date-holidays-parser/commit/7f6916332a427bed1f4b4c78da703158453d8e11)
