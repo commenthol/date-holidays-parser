@@ -811,6 +811,31 @@ module.exports = {
       direction: 'after'
     }
   ],
+  'Monday after 2nd Saturday in September 13:00': [
+    {
+      day: 1,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      count: 2,
+      direction: 'after',
+      rule: 'dateDir',
+      weekday: 'saturday'
+    },
+    {
+      count: 1,
+      direction: 'after',
+      rule: 'dateDir',
+      weekday: 'monday'
+    },
+    {
+      hour: 13,
+      minute: 0,
+      rule: 'time'
+    }
+  ],
   '2nd sunday after 05-01 if equal easter 49 then 3rd sunday after 05-01': [
     {
       fn: 'gregorian',
