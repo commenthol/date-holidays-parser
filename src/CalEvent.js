@@ -10,6 +10,7 @@ class CalEvent {
     this.opts = opts
     this.offset = opts.offset
     this.dates = []
+    this.active = undefined // active props from prior to rule
     if (isDate(opts)) {
       this.opts = new CalDate(opts)
     }
@@ -43,7 +44,7 @@ class CalEvent {
    * @param {Object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
    * @return {this} for chaining
    */
-  filter (year, active) {
+  filter (year, active = this.active) {
     this.dates = this.dates.filter((date) => {
       if (!date._filter && isActive(date, year, active)) {
         return date
@@ -51,6 +52,22 @@ class CalEvent {
     })
 
     return this
+  }
+
+  setActive (active) {
+    const { from, to } = active
+    let pushIt = true
+    this.active = this.active || []
+    if (to && !from) {
+      const last = this.active[this.active.length - 1]
+      if (last && last.from && !last.to) {
+        last.to = to
+        pushIt = false
+      }
+    }
+    if (pushIt) {
+      this.active.push(active)
+    }
   }
 
   push (calEvent) {

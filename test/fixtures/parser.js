@@ -1267,5 +1267,81 @@ module.exports = {
       not: true,
       rule: 'weekday'
     }
+  ],
+  '09-21 prior to 2020': [
+    {
+      day: 21,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      rule: 'activeTo',
+      year: 2020,
+      month: 1,
+      day: 1
+    }
+  ],
+  '09-21 prior to 2020-11': [
+    {
+      day: 21,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      rule: 'activeTo',
+      year: 2020,
+      month: 11,
+      day: 1
+    }
+  ],
+  '09-21 prior to 2020-03-02': [
+    {
+      day: 21,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      rule: 'activeTo',
+      year: 2020,
+      month: 3,
+      day: 2
+    }
+  ],
+  '09-21 since 2012 and prior to 2020-03-02': [
+    {
+      day: 21,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      rule: 'activeFrom',
+      year: 2012,
+      month: 1,
+      day: 1
+    },
+    {
+      rule: 'activeTo',
+      year: 2020,
+      month: 3,
+      day: 2
+    }
+  ],
+  '09-21 since 2012': [
+    {
+      day: 21,
+      fn: 'gregorian',
+      month: 9,
+      year: undefined
+    },
+    {
+      rule: 'activeFrom',
+      year: 2012,
+      month: 1,
+      day: 1
+    }
   ]
 }

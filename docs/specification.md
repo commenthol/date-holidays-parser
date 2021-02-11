@@ -40,7 +40,7 @@ This document describes the data contained within the files `holidays.yaml` and
   * [Disabling a rule](#disabling-a-rule)
   * [Moving a date](#moving-a-date)
   * [Disabling a rule in states/ regions](#disabling-a-rule-in-states-regions)
-  * [Renaming holidays](#renaming-holidays)
+  * [Renaming or discontinuing holidays](#renaming-or-discontinuing-holidays)
 * [Generation of `holidays.json`](#generation-of-holidaysjson)
 
 <!-- toc! -->
@@ -570,7 +570,53 @@ holidays:
           04-01: false # disables rule
 ```
 
-### Renaming holidays
+### Renaming or discontinuing holidays
+
+Rule: `<rule> prior to YYYY(-MM-DD)?`
+
+Rule: `<rule> since YYYY(-MM-DD)?`
+
+Rule: `<rule> since YYYY(-MM-DD)? and prior to YYYY(-MM-DD)?`
+
+Where:
+- `<rule>` is a valid holiday rule
+
+**Examples**:
+
+In this example `Fool's Day` was renamed to `1st of April` in year 1900.
+
+```yaml
+days:
+  04-01:
+    name:
+      en: Fool's Day
+```
+
+becomes
+
+```yaml
+days:
+  04-01 prior to 1900:
+    name:
+      en: Fool's Day
+  04-01 since 1900:
+    name:
+      en: 1st of April
+```
+
+In case that 1st of April was discontinued as holiday in 1920:
+
+```yaml
+days:
+  04-01 prior to 1900:
+    name:
+      en: Fool's Day
+  04-01 since 1900 and prior to 1920:
+    name:
+      en: 1st of April
+```
+
+Other option:
 
 In cases where holiday names get replaced the same rule may be required more than once.
 Here add ` #<0-9>` to that rule and enclose it in quotes.

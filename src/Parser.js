@@ -64,6 +64,8 @@ const grammar = (function () {
     rule_day_dir_date: /^(?:_counts )?_days _direction/,
     rule_bridge: /^is (?:([^ ]+) )?holiday/,
     rule_same_day: /^#\d+/,
+    rule_active_from: /^since (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)(?: and|)/,
+    rule_active_to: /^prior to (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)/,
 
     rule_type_if_then: /if ((?:(?:_weekdays)(?:,\s?)?)*) then/,
     rule_type_dir: /_days _direction$/,
@@ -157,7 +159,9 @@ class Parser {
       '_ruleTime',
       '_ruleDuration',
       '_ruleModifier',
-      '_ruleSameDay'
+      '_ruleSameDay',
+      '_ruleActiveFrom',
+      '_ruleActiveTo'
     ]
     this.tokens = []
   }
@@ -530,6 +534,38 @@ class Parser {
       const res = {
         rule: 'bridge',
         type: cap.shift()
+      }
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _ruleActiveFrom (o) {
+    let cap
+    if ((cap = grammar.rule_active_from.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      const res = {
+        rule: 'activeFrom',
+        year: toNumber(cap.shift()),
+        month: toNumber(cap.shift()) || 1,
+        day: toNumber(cap.shift()) || 1
+      }
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _ruleActiveTo (o) {
+    let cap
+    if ((cap = grammar.rule_active_to.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      const res = {
+        rule: 'activeTo',
+        year: toNumber(cap.shift()),
+        month: toNumber(cap.shift()) || 1,
+        day: toNumber(cap.shift()) || 1
       }
       this.tokens.push(res)
       return true
