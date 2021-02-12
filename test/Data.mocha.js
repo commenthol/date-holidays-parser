@@ -1,13 +1,7 @@
-/* global describe, it */
+import assert from 'assert'
+import Data from '../src/Data.js'
 
-'use strict'
-
-const assert = require('assert')
-const Data = require('../src/Data')
-const fixtures = {
-  holidays: require('./fixtures/holidays.json'),
-  refs: require('./fixtures/refs.json')
-}
+import fixtures from './fixtures/index.cjs'
 
 describe('#Data', function () {
   describe('without providing data', function () {

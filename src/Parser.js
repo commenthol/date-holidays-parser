@@ -2,9 +2,8 @@
    no-spaced-func: 0,
    no-unexpected-multiline: 0
  */
-'use strict'
 
-const toNumber = require('./internal/utils').toNumber
+import { toNumber } from './internal/utils.js'
 
 const WEEKDAYS = 'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.split('|')
 
@@ -138,7 +137,7 @@ const grammar = (function () {
   /* eslint-enable */
 })()
 
-class Parser {
+export default class Parser {
   constructor (fns) {
     this.fns = fns || [
       '_julian',
@@ -572,4 +571,3 @@ class Parser {
     }
   }
 }
-module.exports = Parser

@@ -1,10 +1,9 @@
-'use strict'
 
-const _get = require('./utils').get
-const CalEvent = require('./CalEvent')
-const Parser = require('./Parser')
+import { get as _get } from './utils.js'
+import CalEvent from './CalEvent.js'
+import Parser from './Parser.js'
 
-class PostRule {
+export default class PostRule {
   /**
    * @param {String} ruleStr
    * @param {Object} opts
@@ -94,4 +93,3 @@ class PostRule {
     }
   }
 }
-module.exports = PostRule

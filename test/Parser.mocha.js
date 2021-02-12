@@ -1,11 +1,13 @@
 /* global describe, it */
 
-const path = require('path')
-const assert = require('assert')
-const Parser = require('../src/Parser')
-const serializeToModule = require('serialize-to-js').serializeToModule
+import path from 'path'
+import assert from 'assert'
+import Parser from '../src/Parser.js'
+import pkgSerializeToModule from 'serialize-to-module'
 
-const exp = require('./fixtures/parser.js')
+import exp from './fixtures/parser.cjs'
+
+const { serializeToModule } = pkgSerializeToModule
 
 const p = new Parser()
 const parser = p.parse.bind(p)
@@ -13,7 +15,7 @@ const parser = p.parse.bind(p)
 if (~process.argv.indexOf('--writetests')) {
   (function () {
     const store = {}
-    const filename = path.resolve(__dirname, 'fixtures', 'parser.js')
+    const filename = path.resolve(__dirname, 'fixtures', 'parser.cjs')
     for (const name in exp) {
       const res = parser(name)
       store[name] = res

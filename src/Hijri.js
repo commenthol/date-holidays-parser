@@ -1,9 +1,7 @@
-'use strict'
+import CalEventMap from './CalEventMap.js'
+import { calendar } from './internal/hijri-calendar.js'
 
-const CalEventMap = require('./CalEventMap')
-const calendar = require('./internal/hijri-calendar')
-
-class Hijri extends CalEventMap {
+export default class Hijri extends CalEventMap {
   constructor (opts) {
     super(opts)
     this.calendar = calendar
@@ -22,4 +20,3 @@ class Hijri extends CalEventMap {
     return arr
   }
 }
-module.exports = Hijri

@@ -3,10 +3,13 @@
  * sample script to show usage of module
  */
 
-'use strict'
+import Holidays from '../src/index.js'
 
-if (require.main === module) {
-  const Holidays = require('..')
+import url from 'url'
+
+const __filename = url.fileURLToPath(import.meta.url)
+
+if (process.argv[1] === __filename) {
   let hd = new Holidays()
 
   // get supported countries

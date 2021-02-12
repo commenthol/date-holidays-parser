@@ -2,14 +2,14 @@
  * lodash compatible methods
  */
 
-const deepmerge = require('deepmerge').all
+import deepmerge from 'deepmerge'
 
 /**
  * get value at `keys` from `object`
  * @example
  * get({a: {b: {c: 2}}}, ['a', 'b', 'c']) //> 2
  */
-const get = (obj, keys = [], def) => {
+export const get = (obj, keys = [], def) => {
   let o = obj
   if (typeof keys === 'string') keys = keys.split('.')
   for (const key of keys) {
@@ -23,7 +23,7 @@ const get = (obj, keys = [], def) => {
  * @example
  * set({a: {b: {c: 2}}}, ['a', 'b', 'c'], 3)
  */
-const set = (obj, keys = [], value) => {
+export const set = (obj, keys = [], value) => {
   let key
   let ref
   let o = obj
@@ -39,16 +39,16 @@ const set = (obj, keys = [], value) => {
 /**
  * omit `object` properties `props`
  */
-const omit = (object, props = []) => Object.keys(object)
+export const omit = (object, props = []) => Object.keys(object)
   .filter(p => !~props.indexOf(p))
   .reduce((o, p) => {
     p in object && (o[p] = object[p])
     return o
   }, {})
 
-const merge = (...args) => deepmerge(args)
+export const merge = (...args) => deepmerge.all(args)
 
-module.exports = {
+export default {
   get,
   set,
   omit,

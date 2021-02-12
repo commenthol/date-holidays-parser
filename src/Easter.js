@@ -1,10 +1,8 @@
-'use strict'
+import easter from 'date-easter'
+import CalDate from 'caldate'
+import CalEvent from './CalEvent.js'
 
-const easter = require('date-easter')
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
-
-class Easter extends CalEvent {
+export default class Easter extends CalEvent {
   /**
    * @param {object} [opts]
    * @param {string} opts.type - type of eastern (easter|orthodox)
@@ -26,4 +24,3 @@ class Easter extends CalEvent {
     return this
   }
 }
-module.exports = Easter

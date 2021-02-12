@@ -1,10 +1,8 @@
-'use strict'
+import CalBengali from 'date-bengali-revised'
+import CalDate from 'caldate'
+import CalEvent from './CalEvent.js'
 
-const CalBengali = require('date-bengali-revised').default
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
-
-class BengaliRevised extends CalEvent {
+export default class BengaliRevised extends CalEvent {
   /**
    * @param {object} [opts]
    */
@@ -21,4 +19,3 @@ class BengaliRevised extends CalEvent {
     return this
   }
 }
-module.exports = BengaliRevised

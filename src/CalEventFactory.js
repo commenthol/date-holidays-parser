@@ -1,31 +1,29 @@
 /* eslint spaced-comment:0 */
 
-'use strict'
-
-const CalEvent = require('./CalEvent')
-const Easter = require('./Easter')
+import CalEvent from './CalEvent.js'
+import Easter from './Easter.js'
 
 // --- pre-processor instructions for prepin ---
 // #ifndef nojulian
-const Julian = require('./Julian')
+import Julian from './Julian.js'
 // #endif
 // #ifndef nohebrew
-const Hebrew = require('./Hebrew')
+import Hebrew from './Hebrew.js'
 // #endif
 // #ifndef noislamic
-const Hijri = require('./Hijri')
+import Hijri from './Hijri.js'
 // #endif
 // #ifndef noequinox
-const Equinox = require('./Equinox')
+import Equinox from './Equinox.js'
 // #endif
 // #ifndef nochinese
-const Chinese = require('./Chinese')
+import Chinese from './Chinese.js'
 // #endif
 // #ifndef nobengali
-const BengaliRevised = require('./BengaliRevised')
+import BengaliRevised from './BengaliRevised.js'
 // #endif
 
-class CalEventFactory {
+export default class CalEventFactory {
   constructor (opts) {
     switch (opts.fn) {
       case 'easter':
@@ -61,4 +59,3 @@ class CalEventFactory {
     }
   }
 }
-module.exports = CalEventFactory

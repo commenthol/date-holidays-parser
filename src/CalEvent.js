@@ -1,9 +1,9 @@
 'use strict'
 
-const { isDate } = require('./internal/utils')
-const CalDate = require('caldate')
+import { isDate } from './internal/utils.js'
+import CalDate from 'caldate'
 
-class CalEvent {
+export default class CalEvent {
   constructor (opts) {
     opts = opts || {}
     this.substitute = opts.substitute
@@ -93,7 +93,6 @@ class CalEvent {
     if (this.substitute || date.substitute) obj.substitute = true
   }
 }
-module.exports = CalEvent
 
 function isActive (date, year, active) {
   if (!active) {

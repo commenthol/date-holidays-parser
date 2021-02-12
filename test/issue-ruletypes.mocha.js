@@ -1,11 +1,9 @@
-/* global describe, it */
+import assert from 'assert'
+import Holidays from '../src/index.js'
 
-'use strict'
+import fixtures from './fixtures/index.cjs'
 
-const assert = require('assert')
-const Holidays = require('../src')
-const fixture = require('./fixtures/holidays.json')
-
+const fixture = fixtures.holidays
 const fixtureIE = {
   holidays: {
     IE: {

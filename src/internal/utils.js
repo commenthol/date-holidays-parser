@@ -1,12 +1,10 @@
-'use strict'
-
 /**
  * {
  *   0: 'sunday', ...
  *   sunday: 0, ...
  * }
  */
-exports.DAYS = (function () {
+export const DAYS = (function () {
   const o = {}
   'sunday|monday|tuesday|wednesday|thursday|friday|saturday'
     .split('|')
@@ -21,11 +19,11 @@ function objectToString (o) {
   return Object.prototype.toString.call(o)
 }
 
-const isObject = exports.isObject = function isObject (arg) {
+export function isObject (arg) {
   return typeof arg === 'object' && arg !== null
 }
 
-exports.isDate = function isDate (d) {
+export function isDate (d) {
   return isObject(d) && objectToString(d) === '[object Date]'
 }
 
@@ -35,7 +33,7 @@ exports.isDate = function isDate (d) {
  * @param {number} [len] - length
  * @return {string} padded string
  */
-exports.pad0 = function pad0 (number, len) {
+export function pad0 (number, len) {
   len = len || 2
   number = Array(len).join('0') + number.toString()
   return number.substr(number.length - len, len)
@@ -47,7 +45,7 @@ exports.pad0 = function pad0 (number, len) {
  * @param {String} str
  * @return {Number} converted number or undefined
  */
-const toNumber = exports.toNumber = function toNumber (str) {
+export function toNumber (str) {
   const num = parseInt(str, 10)
   if (!isNaN(num)) {
     return num
@@ -60,7 +58,7 @@ const toNumber = exports.toNumber = function toNumber (str) {
  * @param {Number|Date|String} year
  * @return {Number} year
  */
-exports.toYear = function toYear (year) {
+export function toYear (year) {
   if (!year) {
     year = new Date().getFullYear()
   } else if (year instanceof Date) {
@@ -80,7 +78,7 @@ exports.toYear = function toYear (year) {
  * @param {Boolean} isUTC - return date in UTC
  * @return {Date}
  */
-exports.toDate = function toDate (str, isUTC) {
+export function toDate (str, isUTC) {
   const m = /^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?.*$/.exec((str || '').toString())
   if (m) {
     m.shift()

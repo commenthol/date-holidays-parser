@@ -1,10 +1,8 @@
-'use strict'
+import julian from 'astronomia/lib/julian.js'
+import CalDate from 'caldate'
+import CalEvent from './CalEvent.js'
 
-const julian = require('astronomia/lib/julian')
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
-
-class Julian extends CalEvent {
+export default class Julian extends CalEvent {
   inYear (year) {
     if (this.opts.year && this.opts.year !== year) {
       return this
@@ -15,4 +13,3 @@ class Julian extends CalEvent {
     return this
   }
 }
-module.exports = Julian

@@ -45,7 +45,7 @@ for (let y = 1969; y <= 2100; y++) {
   }
 }
 
-const final = '/*eslint-disable*/\nmodule.exports=' + JSON.stringify(out).replace(/"/g, '')
+const final = '/*eslint-disable*/\nexport const calendar =' + JSON.stringify(out).replace(/"/g, '')
 fs.writeFileSync(filename, final, 'utf8')
 
 process.exit()

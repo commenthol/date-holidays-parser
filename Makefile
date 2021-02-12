@@ -6,10 +6,13 @@ all: lint lib docs
 lib: src/*
 	npm run transpile
 
-test: v10. v12. v14.
+test: v12. v14. v15.
 
 v%:
-	n $@ && npm test
+	n $@; \
+	npm run clean:all; \
+	npm i && \
+	npm run ci
 
 docs: README.md
 	markedpp --githubid -i README.md -o README.md

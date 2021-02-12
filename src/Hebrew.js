@@ -1,9 +1,7 @@
-'use strict'
+import CalEventMap from './CalEventMap.js'
+import { calendar } from './internal/hebrew-calendar.js'
 
-const CalEventMap = require('./CalEventMap')
-const calendar = require('./internal/hebrew-calendar')
-
-class Hebrew extends CalEventMap {
+export default class Hebrew extends CalEventMap {
   constructor (opts) {
     super(opts)
     this.calendar = calendar
@@ -22,4 +20,3 @@ class Hebrew extends CalEventMap {
     return arr
   }
 }
-module.exports = Hebrew

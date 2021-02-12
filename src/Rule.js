@@ -2,12 +2,10 @@
  * handle rule per event
  */
 
-'use strict'
+import CalDate from 'caldate'
+import { DAYS } from './internal/utils.js'
 
-const CalDate = require('caldate')
-const DAYS = require('./internal/utils').DAYS
-
-class Rule {
+export default class Rule {
   /**
   * @param {CalEvent} [calEvent]
    * @param {array} [holidays]
@@ -233,4 +231,3 @@ class Rule {
     return false
   }
 }
-module.exports = Rule
