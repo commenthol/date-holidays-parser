@@ -184,6 +184,14 @@ class Rule {
     return true // needs postprocessing
   }
 
+  activeFrom (rule) {
+    this.calEvent.setActive({ from: new CalDate(rule).toDate() })
+  }
+
+  activeTo (rule) {
+    this.calEvent.setActive({ to: new CalDate(rule).toDate() })
+  }
+
   /**
    * @param {object} rule
    * {

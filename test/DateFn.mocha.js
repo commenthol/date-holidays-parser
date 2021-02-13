@@ -1061,4 +1061,88 @@ describe('#DateFn', function () {
       assert.deepStrictEqual(fixResult(res), exp)
     })
   })
+
+  describe('since / prior to rules', function () {
+    it('11-01 prior to 2015', function () {
+      const rule = '11-01 prior to 2015'
+      const holidays = {
+        [rule]: {
+          name: '<2015'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const exp = [{
+        date: '2014-11-01 00:00:00',
+        start: 'sat 2014-11-01 00:00',
+        end: 'sun 2014-11-02 00:00'
+      }]
+      const res = holidays[rule].fn.inYear(2014).get()
+      assert.deepStrictEqual(fixResult(res), exp)
+
+      const exp2 = []
+      const res2 = holidays[rule].fn.inYear(2015).get()
+      assert.deepStrictEqual(fixResult(res2), exp2)
+    })
+    it('since year', function () {
+      const holidays = {
+        '11-01 prior to 2010': {
+          name: '>2010'
+        },
+        '11-01 since 2010': {
+          name: '>=2010'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const exp = [
+        [{
+          date: '2005-11-01 00:00:00',
+          start: 'tue 2005-11-01 00:00',
+          end: 'wed 2005-11-02 00:00'
+        }],
+        []
+      ]
+      const res = Object.keys(holidays).map(rule => holidays[rule].fn.inYear(2005).get())
+      assert.deepStrictEqual(res.map(fixResult), exp)
+
+      const exp2 = [
+        [],
+        [{
+          date: '2010-11-01 00:00:00',
+          start: 'mon 2010-11-01 00:00',
+          end: 'tue 2010-11-02 00:00'
+        }]
+      ]
+      const res2 = Object.keys(holidays).map(rule => holidays[rule].fn.inYear(2010).get())
+      assert.deepStrictEqual(res2.map(fixResult), exp2)
+    })
+    it('since year and prior to year in 2005', function () {
+      const holidays = {
+        '11-01 prior to 2010': {
+          name: '<2010'
+        },
+        '11-01 since 2010 and prior to 2015': {
+          name: '<2015'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const exp = [
+        [
+          {
+            date: '2005-11-01 00:00:00',
+            end: 'wed 2005-11-02 00:00',
+            start: 'tue 2005-11-01 00:00'
+          }
+        ],
+        []
+      ]
+      const res = Object.keys(holidays).map(rule => holidays[rule].fn.inYear(2005).get())
+      assert.deepStrictEqual(res.map(fixResult), exp)
+    })
+  })
 })
