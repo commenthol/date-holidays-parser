@@ -50,7 +50,7 @@ const grammar = (function () {
 
     julian: /^julian date/,
     easter: /^(easter|orthodox)(?: _count_days)?/,
-    equinox: /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)?(?:_timezone)?/,
+    equinox: /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)(?:_timezone)?/,
     hebrew: /^0?(\d{1,2}) (_hebrewMonths)(?: 0*(\d{1,}))?/,
     islamic: /^0?(\d{1,2}) (_islamicMonths)(?: 0*(\d{1,}))?/,
     chineseLunar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
