@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.0](https://github.com/commenthol/date-holidays-parser/compare/2.0.1...2.1.0) (2021-02-13)
+
+- fix: parsing rule for solstice, equinox [c569bb1](https://github.com/commenthol/date-holidays-parser/commit/c569bb1d270dce0721484e7c4a0100307adbcd7b)
+- feat: new rule since and prior to [2056356](https://github.com/commenthol/date-holidays-parser/commit/2056356427e749745a64a51a76cd30e04bae7080)
+
 ## [2.0.1](https://github.com/commenthol/date-holidays-parser/compare/2.0.0...2.0.1) (2021-02-07)
 
 - fix: Month spelling for equinox, solstice [c8c0c58](https://github.com/commenthol/date-holidays-parser/commit/c8c0c5895e644d3d2e15d34200e66eb4a9e81fcb)
