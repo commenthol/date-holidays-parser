@@ -213,9 +213,9 @@ Holidays.prototype = {
     const year = d.year
     const rules = Object.keys(this.holidays)
     const days = []
-    for (const i in rules) {
+    for (const i of rules) {
       const hd = [].concat(this._dateByRule(year, rules[i]))
-      for (const j in hd) {
+      for (const j of hd) {
         if (hd[j] && date >= hd[j].start && date < hd[j].end) {
           days.push(this._translate(hd[j]))
         }
@@ -375,7 +375,7 @@ Holidays.prototype = {
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
       langs = langs || this.getLanguages()
-      for (const i in langs) {
+      for (const i of langs) {
         const name = o.name[langs[i]]
         if (name) {
           o.name = name
@@ -383,7 +383,7 @@ Holidays.prototype = {
         }
       }
       if (o.substitute) {
-        for (const i in langs) {
+        for (const i of langs) {
           const subst = this.__data.getSubstitueNames()
           const name = subst[langs[i]]
           if (name) {
