@@ -207,11 +207,11 @@ export class Holidays {
     const year = d.year
     const rules = Object.keys(this.holidays)
     const days = []
-    for (const i in rules) {
-      const hd = [].concat(this._dateByRule(year, rules[i]))
-      for (const j in hd) {
-        if (hd[j] && date >= hd[j].start && date < hd[j].end) {
-          days.push(this._translate(hd[j]))
+    for (const rule of rules) {
+      const hd = [].concat(this._dateByRule(year, rule))
+      for (const hdrule of hd) {
+        if (hdrule && date >= hdrule.start && date < hdrule.end) {
+          days.push(this._translate(hdrule))
         }
       }
     }
@@ -369,17 +369,17 @@ export class Holidays {
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
       langs = langs || this.getLanguages()
-      for (const i in langs) {
-        const name = o.name[langs[i]]
+      for (const lang of langs) {
+        const name = o.name[lang]
         if (name) {
           o.name = name
           break
         }
       }
       if (o.substitute) {
-        for (const i in langs) {
+        for (const lang of langs) {
           const subst = this.__data.getSubstitueNames()
-          const name = subst[langs[i]]
+          const name = subst[lang]
           if (name) {
             o.name += ' (' + name + ')'
             break
