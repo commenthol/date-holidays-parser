@@ -1,10 +1,12 @@
-'use strict'
+import {
+  CalendarChinese,
+  CalendarKorean,
+  CalendarVietnamese
+} from 'date-chinese'
+import CalEvent from './CalEvent.js'
+import CalDate from 'caldate'
 
-const CalChinese = require('date-chinese')
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
-
-class Chinese extends CalEvent {
+export default class Chinese extends CalEvent {
   /**
    * @param {object} [opts]
    */
@@ -13,13 +15,13 @@ class Chinese extends CalEvent {
     super(opts)
     switch (opts.fn) {
       case 'chinese':
-        this.cal = new CalChinese.CalendarChinese()
+        this.cal = new CalendarChinese()
         break
       case 'korean':
-        this.cal = new CalChinese.CalendarKorean()
+        this.cal = new CalendarKorean()
         break
       case 'vietnamese':
-        this.cal = new CalChinese.CalendarVietnamese()
+        this.cal = new CalendarVietnamese()
         break
     }
   }
@@ -44,4 +46,3 @@ class Chinese extends CalEvent {
     return this
   }
 }
-module.exports = Chinese

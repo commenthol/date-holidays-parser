@@ -1,18 +1,10 @@
-/* global describe, it */
+// import 'core-js/es6/index.js' // for IE11
 
-'use strict'
+import assert from 'assert'
+import Holidays from '../src/index.js'
+import { toIso, localDate, moveToTimezone } from './helpers.js'
 
-require('core-js/es6') // for IE11
-
-const assert = require('assert')
-const Holidays = require('../src')
-const { toIso, localDate, moveToTimezone } = require('./helpers')
-
-const fixtures = {
-  holidays: require('./fixtures/holidays.json'),
-  custom: require('./fixtures/custom.json'),
-  refs: require('./fixtures/refs.json')
-}
+import fixtures from './fixtures/index.cjs'
 
 describe('#Holidays', function () {
   describe('creation', function () {
@@ -37,7 +29,7 @@ describe('#Holidays', function () {
     })
 
     it('for states of a country', function () {
-      const hd = Holidays(fixtures.holidays)
+      const hd = new Holidays(fixtures.holidays)
       const res = hd.getStates('de')
       const exp = {
         BB: 'Brandenburg',
@@ -61,7 +53,7 @@ describe('#Holidays', function () {
     })
 
     it('for states of a country in french', function () {
-      const hd = Holidays(fixtures.holidays)
+      const hd = new Holidays(fixtures.holidays)
       const res = hd.getStates('ch', 'fr')
       assert.strictEqual(res.ZH, 'Canton de Zurich')
     })

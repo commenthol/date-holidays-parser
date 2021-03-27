@@ -1,13 +1,11 @@
-'use strict'
-
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+import CalEvent from './CalEvent.js'
+import CalDate from 'caldate'
 
 /**
  * Mapper class for mapped calenders like hijri and hebrew
  * `this.calender` needs to be set in child classes
  */
-class CalEventMap extends CalEvent {
+export default class CalEventMap extends CalEvent {
   constructor (opts) {
     super(opts)
     this.calendar = {}
@@ -43,4 +41,3 @@ class CalEventMap extends CalEvent {
     return this
   }
 }
-module.exports = CalEventMap

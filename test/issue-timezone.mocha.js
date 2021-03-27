@@ -1,9 +1,5 @@
-/* global describe, it */
-
-'use strict'
-
-const assert = require('assert')
-const Holidays = require('../src')
+import assert from 'assert'
+import Holidays from '../src/index.js'
 
 const fixture = {
   holidays: {

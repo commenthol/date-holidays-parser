@@ -1,10 +1,11 @@
 /* global describe, it */
 
-const assert = require('assert')
-const fixResult = require('./helpers').fixResult
-const Rule = require('../src/Rule')
-const testcases = require('./fixtures/parser')
-const CalEventFactory = require('../src/CalEventFactory')
+import assert from 'assert'
+import { fixResult } from './helpers.js'
+import Rule from '../src/Rule.js'
+import CalEventFactory from '../src/CalEventFactory.js'
+
+import testcases from './fixtures/parser.cjs'
 
 describe('#Rule', function () {
   it('can resolve rule dateIfThen', function () {

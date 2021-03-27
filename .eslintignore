@@ -1,6 +1,4 @@
 node_modules/
 coverage/
-attic/
 lib/
 tmp/
-es/

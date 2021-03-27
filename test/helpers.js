@@ -1,9 +1,7 @@
-'use strict'
+import moment from 'moment-timezone'
+import { pad0 } from '../src/internal/utils.js'
 
-const moment = require('moment-timezone')
-const pad0 = require('../src/internal/utils').pad0
-
-const toIso = exports.toIso = function toIso (date) {
+export function toIso (date) {
   const days = 'sun,mon,tue,wed,thu,fri,sat'.split(',')
 
   const y = pad0(date.getFullYear(), 4)
@@ -16,7 +14,7 @@ const toIso = exports.toIso = function toIso (date) {
   return t + ' ' + y + '-' + m + '-' + d + ' ' + H + ':' + M
 }
 
-exports.fixResult = function fixResult (arr) {
+export function fixResult (arr) {
   return arr.map((item) => {
     return Object.assign({}, item, {
       start: toIso(item.start),
@@ -36,14 +34,14 @@ function toString (date) {
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 }
 
-exports.moveToTimezone = function (date, timezone) {
+export function moveToTimezone (date, timezone) {
   if (!timezone) {
     return date
   }
   return new Date(moment.tz(toString(date), timezone).format())
 }
 
-function localDate (str) {
+export function localDate (str) {
   let m = /^(\d+)-(\d+)-(\d+) (\d+):(\d+):?(\d+)?$/.exec(str)
   if (m) {
     m.shift()
@@ -52,8 +50,6 @@ function localDate (str) {
     return d
   }
 }
-
-exports.localDate = localDate
 
 // console.log(localDate('2017-09-09 01:02'))
 // console.log(localDate('2017-09-09 01:02:03'))

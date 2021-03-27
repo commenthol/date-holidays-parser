@@ -1,16 +1,12 @@
-/* global describe, it */
+import assert from 'assert'
+import { fixResult } from './helpers.js'
 
-'use strict'
-
-const assert = require('assert')
-const fixResult = require('./helpers').fixResult
-
-const CalEventFactory = require('../src/CalEventFactory')
-const CalEvent = require('../src/CalEvent')
-const Equinox = require('../src/Equinox')
-const Easter = require('../src/Easter')
-const Hebrew = require('../src/Hebrew')
-const Hijri = require('../src/Hijri')
+import CalEventFactory from '../src/CalEventFactory.js'
+import CalEvent from '../src/CalEvent.js'
+import Equinox from '../src/Equinox.js'
+import Easter from '../src/Easter.js'
+import Hebrew from '../src/Hebrew.js'
+import Hijri from '../src/Hijri.js'
 
 describe('#CalEventFactory', function () {
   it('12-03', function () {

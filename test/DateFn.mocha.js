@@ -1,11 +1,6 @@
-/* global describe, it */
-
-'use strict'
-
-// const _ = require('lodash')
-const assert = require('assert')
-const DateFn = require('../src/DateFn')
-const fixResult = require('./helpers').fixResult
+import assert from 'assert'
+import DateFn from '../src/DateFn.js'
+import { fixResult } from './helpers.js'
 
 describe('#DateFn', function () {
   describe('Fixed Date', function () {

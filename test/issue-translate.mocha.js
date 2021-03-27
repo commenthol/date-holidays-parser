@@ -1,13 +1,7 @@
-/* global describe, it */
+import assert from 'assert'
+import Holidays from '../src/index.js'
 
-'use strict'
-
-const assert = require('assert')
-const Holidays = require('../src')
-
-const fixtures = {
-  holidays: require('./fixtures/holidays.json')
-}
+import fixtures from './fixtures/index.cjs'
 
 describe('#issue-translate', function () {
   it('should translate swiss state names by spoken lang', function () {

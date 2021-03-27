@@ -1,6 +1,4 @@
-'use strict'
-
-const _ = require('./utils')
+import _ from './utils.js'
 
 /**
  * Handler for holiday data provided in the Json file
@@ -10,7 +8,7 @@ const _ = require('./utils')
  * @param {String} [state]
  * @param {String} [region]
  */
-class Data {
+export default class Data {
   constructor (data, country, state, region) {
     this.opts = Data.splitName(country, state, region) || {}
     this.data = data || {}
@@ -204,7 +202,6 @@ class Data {
     )
   }
 }
-module.exports = Data
 
 // static functions
 /**

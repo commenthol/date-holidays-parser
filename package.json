@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "2.1.0",
+  "version": "3.0.0-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -21,98 +21,68 @@
     "commenthol <commenthol@gmail.com>"
   ],
   "contributors": [],
-  "main": "lib",
-  "typings": "types",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./lib/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "typings": "./types",
   "directories": {
     "lib": "lib",
     "doc": "docs",
     "test": "test"
   },
   "scripts": {
-    "all": "npm-run-all clean lint build build:es5 ci",
-    "build": "babel -d lib src",
-    "build:es5": "BABEL_ENV=es5 babel -d es src",
-    "changelog": "node scripts/gitlog.js",
+    "all": "npm-run-all clean lint build test",
+    "build": "rollup -c",
+    "ci": "npm-run-all build test:*",
     "clean": "rimraf lib es coverage .nyc_output",
-    "clean:all": "npm-run-all clean:node_modules clean",
+    "clean:all": "npm-run-all clean clean:node_modules",
     "clean:node_modules": "rimraf node_modules",
-    "coverage": "nyc -r text -r html npm test",
+    "coverage": "c8 -r text -r html npm test",
     "doc": "jsdox -o docs src/Holidays.js",
-    "lint": "eslint --fix '**/*.js'",
+    "lint": "eslint \"**/*.js\" \"**/*.cjs\"",
     "prepublishOnly": "npm run all",
-    "test": "mocha",
-    "ci": "npm-run-all test:*",
+    "test": "npm-run-all test:*",
+    "test:ci": "mocha",
     "test:ts": "dtslint types",
-    "test:tz": "TZ=UTC-10 npm test && TZ=UTC+10 npm test",
+    "test:tz": "TZ=UTC-10 mocha && TZ=UTC+10 mocha",
     "zuul": "zuul test/Holidays.test.js"
   },
-  "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "@babel/preset-env"
-        ]
-      },
-      "es5": {
-        "presets": [
-          [
-            "@babel/preset-env",
-            {
-              "targets": {
-                "node": "current",
-                "browsers": [
-                  "last 2 versions",
-                  "ie >= 11"
-                ]
-              },
-              "modules": false,
-              "loose": true
-            }
-          ]
-        ]
-      }
-    }
+  "mocha": {
+    "checkLeaks": true,
+    "colors": true
   },
   "dependencies": {
-    "astronomia": "^2.2.0",
-    "caldate": "^1.1.0",
-    "date-bengali-revised": "^1.0.2",
-    "date-chinese": "^1.0.7",
-    "date-easter": "^0.2.5",
+    "astronomia": "^3.0.0",
+    "caldate": "^2.0.0",
+    "date-bengali-revised": "^2.0.0",
+    "date-chinese": "^2.0.0",
+    "date-easter": "^1.0.0",
     "deepmerge": "^4.2.2",
-    "moment-timezone": "^0.5.32"
+    "moment-timezone": "^0.5.33"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
-    "@babel/plugin-proposal-export-namespace-from": "^7.12.1",
-    "@babel/plugin-proposal-function-sent": "^7.12.1",
-    "@babel/plugin-proposal-json-strings": "^7.12.1",
-    "@babel/plugin-proposal-numeric-separator": "^7.12.7",
-    "@babel/plugin-proposal-throw-expressions": "^7.12.1",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-syntax-import-meta": "^7.10.4",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/register": "^7.12.10",
-    "core-js": "^2.6.12",
-    "dtslint": "^3.6.12",
-    "eslint": "^7.16.0",
+    "c8": "^7.6.0",
+    "dtslint": "^4.0.8",
+    "eslint": "^7.23.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-promise": "^4.3.1",
     "hashtree": "^0.7.0",
-    "mocha": "^8.2.1",
+    "mocha": "^8.3.2",
     "npm-run-all": "^4.1.5",
-    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
-    "serialize-to-js": "^3.1.1",
-    "typescript": "^3.9.7"
+    "rollup": "^2.43.0",
+    "serialize-to-module": "^1.1.0",
+    "typescript": "^4.2.3"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=12.0.0"
   }
 }

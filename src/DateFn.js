@@ -1,14 +1,14 @@
 'use strict'
 
-const Parser = require('./Parser')
-const Rule = require('./Rule')
-const PostRule = require('./PostRule')
-const CalEventFactory = require('./CalEventFactory')
+import Parser from './Parser.js'
+import Rule from './Rule.js'
+import PostRule from './PostRule.js'
+import CalEventFactory from './CalEventFactory.js'
 
 /**
  * handles one rule
  */
-class DateFn {
+export default class DateFn {
   /**
    * @param {string} rule - unparsed rule
    * @param {array} holidays - all holidays rules (required for bridge day calculations)
@@ -51,4 +51,3 @@ class DateFn {
     return this.event.get(timezone)
   }
 }
-module.exports = DateFn

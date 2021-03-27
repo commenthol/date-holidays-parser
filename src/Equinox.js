@@ -1,15 +1,15 @@
-'use strict'
+import solstice from 'astronomia/solstice'
+import julian from 'astronomia/julian'
+import planetpos from 'astronomia/planetposition'
+import vsopEarth from 'astronomia/data/vsop87Bearth'
 
-const solstice = require('astronomia/lib/solstice')
-const julian = require('astronomia/lib/julian')
-const planetpos = require('astronomia/lib/planetposition')
-const earth = new planetpos.Planet(require('astronomia/data/vsop87Bearth'))
+import moment from 'moment-timezone'
+import CalDate from 'caldate'
+import CalEvent from './CalEvent.js'
 
-const moment = require('moment-timezone')
-const CalEvent = require('./CalEvent')
-const CalDate = require('caldate')
+const earth = new planetpos.Planet(vsopEarth)
 
-class Equinox extends CalEvent {
+export default class Equinox extends CalEvent {
   /**
    * @param {object} [opts]
    * @param {string} opts.season - type of season (spring|summer|autumn|winter)
@@ -63,4 +63,3 @@ class Equinox extends CalEvent {
     return this
   }
 }
-module.exports = Equinox

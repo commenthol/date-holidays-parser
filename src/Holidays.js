@@ -3,13 +3,11 @@
  * @license ISC
  */
 
-'use strict'
-
-const CalDate = require('caldate')
-const _ = require('./utils')
-const { toYear, toDate } = require('./internal/utils')
-const Data = require('./Data')
-const DateFn = require('./DateFn')
+import CalDate from 'caldate'
+import _ from './utils.js'
+import { toYear, toDate } from './internal/utils.js'
+import Data from './Data.js'
+import DateFn from './DateFn.js'
 
 // priority in ascending order (low ... high)
 const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
@@ -31,19 +29,15 @@ const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
  * new Holiday(data, { country: 'us', state: 'la', region: 'no'})
  * ```
  */
-function Holidays (data, country, state, region, opts) {
-  if (!(this instanceof Holidays)) {
-    return new Holidays(data, country, state, region, opts)
+export class Holidays {
+  constructor (data, country, state, region, opts) {
+    if (!data) {
+      throw new TypeError('need holiday data')
+    }
+    this._data = data
+    this.init(country, state, region, opts)
   }
-  if (!data) {
-    throw new TypeError('need holiday data')
-  }
-  this._data = data
-  this.init(country, state, region, opts)
-}
-module.exports = Holidays
 
-Holidays.prototype = {
   /**
    * initialize holidays for a country/state/region
    * @param {String|Object} country - if object use `{ country: {String}, state: {String}, region: {String} }`
@@ -80,7 +74,7 @@ Holidays.prototype = {
       })
       return true
     }
-  },
+  }
 
   /**
    * set (custom) holiday
@@ -139,7 +133,7 @@ Holidays.prototype = {
       console.log('could not parse rule: ' + rule) // eslint-disable-line
     }
     return false
-  },
+  }
 
   /**
    * get all holidays for `year` with names using prefered `language`
@@ -192,7 +186,7 @@ Holidays.prototype = {
       })
 
     return arr
-  },
+  }
 
   /**
    * check whether `date` is a holiday or not
@@ -213,16 +207,16 @@ Holidays.prototype = {
     const year = d.year
     const rules = Object.keys(this.holidays)
     const days = []
-    for (const i in rules) {
-      const hd = [].concat(this._dateByRule(year, rules[i]))
-      for (const j in hd) {
-        if (hd[j] && date >= hd[j].start && date < hd[j].end) {
-          days.push(this._translate(hd[j]))
+    for (const rule of rules) {
+      const hd = [].concat(this._dateByRule(year, rule))
+      for (const hdrule of hd) {
+        if (hdrule && date >= hdrule.start && date < hdrule.end) {
+          days.push(this._translate(hdrule))
         }
       }
     }
     return days.length ? days : false
-  },
+  }
 
   /**
    * Query for available Countries, States, Regions
@@ -240,7 +234,7 @@ Holidays.prototype = {
     } else {
       return this.getRegions(o.country, o.state, lang)
     }
-  },
+  }
 
   /**
    * get supported countries
@@ -253,7 +247,7 @@ Holidays.prototype = {
    */
   getCountries (lang) {
     return this.__data.getCountries(lang)
-  },
+  }
 
   /**
    * get supported states for a given country
@@ -267,7 +261,7 @@ Holidays.prototype = {
    */
   getStates (country, lang) {
     return this.__data.getStates(country, lang)
-  },
+  }
 
   /**
    * get supported regions for a given country, state
@@ -281,7 +275,7 @@ Holidays.prototype = {
    */
   getRegions (country, state, lang) {
     return this.__data.getRegions(country, state, lang)
-  },
+  }
 
   /**
    * get timezones for country, state, region
@@ -291,7 +285,7 @@ Holidays.prototype = {
     if (this.__data) {
       return this.__data.getTimezones()
     }
-  },
+  }
 
   /**
    * sets timezone
@@ -300,7 +294,7 @@ Holidays.prototype = {
    */
   setTimezone (timezone) {
     this.__timezone = timezone
-  },
+  }
 
   /**
    * get languages for selected country, state, region
@@ -308,7 +302,7 @@ Holidays.prototype = {
    */
   getLanguages () {
     return this.__languages
-  },
+  }
 
   /**
    * set language(s) for holiday names
@@ -331,7 +325,7 @@ Holidays.prototype = {
       tmp[l] = 1
       return true
     })
-  },
+  }
 
   /**
    * get default day off as weekday
@@ -341,7 +335,7 @@ Holidays.prototype = {
     if (this.__conf) {
       return this.__data.getDayOff()
     }
-  },
+  }
 
   /**
    * @private
@@ -363,7 +357,7 @@ Holidays.prototype = {
         return odate
       })
     return dates
-  },
+  }
 
   /**
    * translate holiday object `o` to a language
@@ -375,17 +369,17 @@ Holidays.prototype = {
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
       langs = langs || this.getLanguages()
-      for (const i in langs) {
-        const name = o.name[langs[i]]
+      for (const lang of langs) {
+        const name = o.name[lang]
         if (name) {
           o.name = name
           break
         }
       }
       if (o.substitute) {
-        for (const i in langs) {
+        for (const lang of langs) {
           const subst = this.__data.getSubstitueNames()
-          const name = subst[langs[i]]
+          const name = subst[lang]
           if (name) {
             o.name += ' (' + name + ')'
             break
@@ -394,7 +388,7 @@ Holidays.prototype = {
       }
     }
     return o
-  },
+  }
 
   /**
    * set holiday types
@@ -410,7 +404,7 @@ Holidays.prototype = {
       }
       return types
     }, {})
-  },
+  }
 
   /**
    * check for supported holiday type
