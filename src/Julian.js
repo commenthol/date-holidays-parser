@@ -1,4 +1,4 @@
-import julian from 'astronomia/lib/julian.js'
+import julian from 'astronomia/julian'
 import CalDate from 'caldate'
 import CalEvent from './CalEvent.js'
 

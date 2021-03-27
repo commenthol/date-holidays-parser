@@ -1,7 +1,7 @@
-import solstice from 'astronomia/lib/solstice.js'
-import julian from 'astronomia/lib/julian.js'
-import planetpos from 'astronomia/lib/planetposition.js'
-import vsopEarth from 'astronomia/data/vsop87Bearth.js'
+import solstice from 'astronomia/solstice'
+import julian from 'astronomia/julian'
+import planetpos from 'astronomia/planetposition'
+import vsopEarth from 'astronomia/data/vsop87Bearth'
 
 import moment from 'moment-timezone'
 import CalDate from 'caldate'
