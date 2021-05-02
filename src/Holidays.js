@@ -8,6 +8,7 @@ import _ from './utils.js'
 import { toYear, toDate } from './internal/utils.js'
 import Data from './Data.js'
 import DateFn from './DateFn.js'
+import { HolidayRule } from './HolidayRule.js'
 
 // priority in ascending order (low ... high)
 const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
@@ -46,16 +47,16 @@ export class Holidays {
    * @param {Object} [opts] - options
    * @param {Array|String} [opts.languages] - set language(s) with ISO 639-1 shortcodes
    * @param {String} [opts.timezone] - set timezone
-   * @param {Array} [opts.types] - holiday types to consider
+   * @param {Array} [opts.types] - holiday types to consider; priority is in ascending order (low ... high)
    */
   init (...args) {
     const [country, state, region, opts] = getArgs(...args)
 
     // reset settings
     this.__conf = null
+    this.__types = opts.types?.length ? opts.types : TYPES
     this.holidays = {}
     this.setLanguages()
-    this._setTypes(opts.types)
 
     this.__conf = Data.splitName(country, state, region)
     this.__data = new Data(opts.data || this._data, this.__conf)
@@ -78,12 +79,12 @@ export class Holidays {
 
   /**
    * set (custom) holiday
+   * @throws {TypeError}
    * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
    * @param {Object|String} [opts] - holiday options, if String then opts is used as name
    * @param {Object} opts.name - translated holiday names e.g. `{ en: 'name', es: 'nombre', ... }`
    * @param {String} opts.type - holiday type `public|bank|school|observance`
-   * @throws {TypeError}
-   * @return {Boolean} if holiday could be set returns `true`
+   * @returns {Boolean} `true` if holiday could be set
    */
   setHoliday (rule, opts) {
     // remove days
@@ -118,7 +119,7 @@ export class Holidays {
     }
 
     // check for supported type
-    if (!this._hasType(opts.type)) {
+    if (!this.__types.includes(opts.type)) {
       return false
     }
 
@@ -139,7 +140,7 @@ export class Holidays {
    * get all holidays for `year` with names using prefered `language`
    * @param {String|Date} [year] - if omitted current year is choosen
    * @param {String} [language] - ISO 639-1 code for language
-   * @return {Array} of found holidays in given year sorted by Date:
+   * @returns {Holiday[]} of found holidays in given year sorted by Date:
    * ```
    * {String} date - ISO Date String of (start)-date in local format
    * {Date} start - start date of holiday
@@ -157,7 +158,7 @@ export class Holidays {
     }
 
     const startSorter = (a, b) => (+a.start) - (+b.start)
-    const typeIndex = (a) => TYPES.indexOf(a.type)
+    const typeIndex = (a) => this.__types.indexOf(a.type)
     const typeSorter = (a, b) => typeIndex(b) - typeIndex(a)
     const ruleIndex = (a) => /substitutes|and if /.test(a.rule) ? 1 : 0
     const ruleLength = (a) => String(a.rule || '').length
@@ -191,7 +192,7 @@ export class Holidays {
   /**
    * check whether `date` is a holiday or not
    * @param {Date|String} [date]
-   * @return {Array<Holiday>|false} holiday:
+   * @returns {Holiday[]|false} holiday:
    * ```
    * {String} date - ISO Date String of (start)-date in local format
    * {Date} start - start date of holiday
@@ -219,11 +220,51 @@ export class Holidays {
   }
 
   /**
+   * set or update rule
+   * @param {HolidayRule|object} holidayRule
+   * @returns {boolean} `true` if holiday could be set returns `true`
+   */
+  setRule (holidayRule) {
+    const { rule, ...opts } = holidayRule
+    return this.setHoliday(rule, opts)
+  }
+
+  /**
+   * unset rule
+   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+   * @returns {boolean} `true` if holiday could be set returns `true`
+   */
+  unsetRule (rule) {
+    return this.setHoliday(rule, false)
+  }
+
+  /**
+   * get available rules for selected country, (state, region)
+   * @returns {HolidayRule[]}
+   */
+  getRules () {
+    return Object.entries(this.holidays).map(([ruleStr, obj]) => {
+      return new HolidayRule({ ...obj, rule: ruleStr })
+    })
+  }
+
+  /**
+   * get rule for selected country, (state, region)
+   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+   * @returns {HolidayRule|undefined}
+   */
+  getRule (rule) {
+    if (this.holidays[rule]) {
+      return new HolidayRule({ ...this.holidays[rule], rule: rule })
+    }
+  }
+
+  /**
    * Query for available Countries, States, Regions
    * @param {String} [country]
    * @param {String} [state]
    * @param {String} [lang] - ISO-639 language shortcode
-   * @return {Object} shortcode, name pairs of supported countries, states, regions
+   * @returns {Object} shortcode, name pairs of supported countries, states, regions
    */
   query (country, state, lang) {
     const o = Data.splitName(country, state)
@@ -239,7 +280,7 @@ export class Holidays {
   /**
    * get supported countries
    * @param {String} [lang] - ISO-639 language shortcode
-   * @return {Object} shortcode, name pairs of supported countries
+   * @returns {Object} shortcode, name pairs of supported countries
    * ```js
    * { AD: 'Andorra',
    *   US: 'United States' }
@@ -253,7 +294,7 @@ export class Holidays {
    * get supported states for a given country
    * @param {String} country - shortcode of country
    * @param {String} [lang] - ISO-639 language shortcode
-   * @return {Object} shortcode, name pairs of supported states, regions
+   * @returns {Object} shortcode, name pairs of supported states, regions
    * ```js
    * { al: 'Alabama', ...
    *   wy: 'Wyoming' }
@@ -268,23 +309,13 @@ export class Holidays {
    * @param {String} country - shortcode of country
    * @param {String} state - shortcode of state
    * @param {String} [lang] - ISO-639 language shortcode
-   * @return {Object} shortcode, name pairs of supported regions
+   * @returns {Object} shortcode, name pairs of supported regions
    * ```js
    * { no: 'New Orleans' }
    * ```
    */
   getRegions (country, state, lang) {
     return this.__data.getRegions(country, state, lang)
-  }
-
-  /**
-   * get timezones for country, state, region
-   * @return {Array} of {String}s containing the timezones
-   */
-  getTimezones () {
-    if (this.__data) {
-      return this.__data.getTimezones()
-    }
   }
 
   /**
@@ -297,17 +328,19 @@ export class Holidays {
   }
 
   /**
-   * get languages for selected country, state, region
-   * @return {Array} containing ISO 639-1 language shortcodes
+   * get timezones for country, state, region
+   * @returns {Array} of {String}s containing the timezones
    */
-  getLanguages () {
-    return this.__languages
+  getTimezones () {
+    if (this.__data) {
+      return this.__data.getTimezones()
+    }
   }
 
   /**
    * set language(s) for holiday names
    * @param {Array|String} language
-   * @return {Array} set languages
+   * @returns {Array} set languages
    */
   setLanguages (language) {
     if (typeof language === 'string') {
@@ -328,8 +361,16 @@ export class Holidays {
   }
 
   /**
+   * get languages for selected country, state, region
+   * @returns {Array} containing ISO 639-1 language shortcodes
+   */
+  getLanguages () {
+    return this.__languages
+  }
+
+  /**
    * get default day off as weekday
-   * @return {String} weekday of day off
+   * @returns {String} weekday of day off
    */
   getDayOff () {
     if (this.__conf) {
@@ -364,7 +405,7 @@ export class Holidays {
    * @private
    * @param {Object} o
    * @param {Array} langs - languages for translation
-   * @return {Object} translated holiday object
+   * @returns {Object} translated holiday object
    */
   _translate (o, langs) {
     if (o && typeof o.name === 'object') {
@@ -388,32 +429,6 @@ export class Holidays {
       }
     }
     return o
-  }
-
-  /**
-   * set holiday types
-   * @private
-   * @param {Array} [t] - holiday types
-   * @return {Object} new array of types
-   */
-  _setTypes (t) {
-    t = t || TYPES
-    this.__types = TYPES.reduce((types, type) => {
-      if (t.indexOf(type) !== -1) {
-        types[type] = 1
-      }
-      return types
-    }, {})
-  }
-
-  /**
-   * check for supported holiday type
-   * @private
-   * @param {String} type
-   * @return {Boolean}
-   */
-  _hasType (type) {
-    return !!this.__types[type]
   }
 }
 

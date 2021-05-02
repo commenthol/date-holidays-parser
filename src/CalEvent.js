@@ -40,6 +40,27 @@ export default class CalEvent {
   }
 
   /**
+   * Filter out disabled dates
+   * @param {number} year
+   * @param {number} month
+   * @returns {this}
+   */
+  filterDisabled (year, month) {
+    if (!year) {
+      return this
+    }
+
+    this.dates = this.dates.filter((date) => {
+      const disable = month
+        ? date.year === year && date.month === month
+        : date.year === year
+      return !disable
+    })
+
+    return this
+  }
+
+  /**
    * @param {Number} year - year to filter
    * @param {Object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
    * @return {this} for chaining
@@ -68,6 +89,8 @@ export default class CalEvent {
     if (pushIt) {
       this.active.push(active)
     }
+
+    return this
   }
 
   push (calEvent) {
@@ -96,11 +119,7 @@ export default class CalEvent {
 
 function isActive (date, year, active) {
   if (!active) {
-    if (date.year === year) {
-      return true
-    } else {
-      return false
-    }
+    return date.year === year
   }
   const _date = date.toDate()
   for (const a of active) {
@@ -108,8 +127,8 @@ function isActive (date, year, active) {
     if (
       date.year === year &&
       ((from && to && from <= _date && to > _date) ||
-      (from && !to && from <= _date) ||
-      (!from && to && to > _date))
+        (from && !to && from <= _date) ||
+        (!from && to && to > _date))
     ) {
       return true
     }
