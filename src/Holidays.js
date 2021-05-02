@@ -190,7 +190,7 @@ export class Holidays {
 
   /**
    * check whether `date` is a holiday or not
-   * @param {Date} [date]
+   * @param {Date|String} [date]
    * @return {Array<Holiday>|false} holiday:
    * ```
    * {String} date - ISO Date String of (start)-date in local format
@@ -201,7 +201,7 @@ export class Holidays {
    * ```
    */
   isHoliday (date) {
-    date = date || new Date()
+    date = date ? new Date(date) : new Date()
     const d = new CalDate()
     d.fromTimezone(date, this.__timezone)
     const year = d.year
