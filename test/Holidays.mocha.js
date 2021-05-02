@@ -667,7 +667,7 @@ describe('#Holidays', function () {
 
       assert.deepStrictEqual(rule, exp)
       assert.deepStrictEqual(hd.isHoliday('2020-11-26T05:00:00Z'), false)
-      assert.strictEqual(hd.isHoliday('2021-11-25T05:00:00Z')?.[0]?.name, 'Thanksgiving Day')
+      assert.strictEqual(hd.isHoliday('2021-11-25T05:00:00Z')[0].name, 'Thanksgiving Day')
     })
   })
 })

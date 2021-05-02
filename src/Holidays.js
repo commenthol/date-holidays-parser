@@ -54,7 +54,7 @@ export class Holidays {
 
     // reset settings
     this.__conf = null
-    this.__types = opts.types?.length ? opts.types : TYPES
+    this.__types = opts.types && opts.types.length ? opts.types : TYPES
     this.holidays = {}
     this.setLanguages()
 

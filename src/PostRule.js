@@ -71,7 +71,7 @@ export default class PostRule {
 
   disable (year) {
     const { disable, enable } = this.opts || {}
-    if (!disable?.length) return
+    if (!disable || !disable.length) return
 
     const ev = this.events[0]
 
