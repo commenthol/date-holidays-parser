@@ -25,7 +25,7 @@ export default class PostRule {
     const active = this.ruleSet && this.ruleSet.active
     this.disable(year)
     const ev = this.events[0]
-    ev.filter(year, active)
+    ev.filterActive(year, active)
     return ev
   }
 

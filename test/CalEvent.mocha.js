@@ -183,7 +183,7 @@ describe('#CalEvent', function () {
         const exp = test.exp
         it('in year ' + year, function () {
           const date = new CalEvent(event)
-          date.inYear(year).filter(year, active)
+          date.inYear(year).filterActive(year, active)
           const res = date.get()
           assert.strictEqual(res.length, exp.length)
           if (exp.length) {

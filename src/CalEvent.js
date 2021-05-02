@@ -44,7 +44,7 @@ export default class CalEvent {
    * @param {Object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
    * @return {this} for chaining
    */
-  filter (year, active = this.active) {
+  filterActive (year, active = this.active) {
     this.dates = this.dates.filter((date) => {
       if (!date._filter && isActive(date, year, active)) {
         return date
