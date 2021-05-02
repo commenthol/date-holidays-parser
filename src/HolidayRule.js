@@ -2,7 +2,7 @@ import { toNumber } from './internal/utils.js'
 
 /**
  * Holiday Rule
- * Apart from `rule` and `name` other optionals
+ * Apart from `rule` and `name` other options may be set
  * @constructor
  * @param {object} ruleObj
  * @param {string} ruleObj.rule - the rule string
