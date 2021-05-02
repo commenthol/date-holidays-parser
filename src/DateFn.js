@@ -21,9 +21,15 @@ export default class DateFn {
     this.holidays = holidays
     this.opts = holidays ? holidays[ruleStr] : {}
     this.event = undefined
+    this.cache = new Map()
   }
 
   inYear (year) {
+    if (this.cache.has(year)) {
+      this.event = this.cache.get(year)
+      return this
+    }
+
     let ruleFn // current rule
     const postProc = new PostRule(this.ruleStr, this.opts, this.holidays)
 
@@ -43,7 +49,10 @@ export default class DateFn {
       }
     })
 
-    this.event = postProc.getEvent(year)
+    const event = postProc.getEvent(year)
+    this.cache.set(year, event)
+
+    this.event = event
     return this
   }
 
