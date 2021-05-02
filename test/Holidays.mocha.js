@@ -590,9 +590,8 @@ describe('#Holidays', function () {
       assert.strictEqual(toIso(res.end), 'tue 2016-12-06 00:00')
     })
   })
-
   describe('custom data', function () {
-    it('can get list of holidays', function () {
+    it('can get list of holidays together with custom attributes', function () {
       const hd = new Holidays(fixtures.custom, 'custom')
       const exp = [
         {
@@ -601,7 +600,8 @@ describe('#Holidays', function () {
           end: localDate('2017-01-02 00:00'),
           name: 'New Year',
           type: 'public',
-          rule: '01-01'
+          rule: '01-01',
+          payroll: 2
         },
         {
           date: '2017-05-01 00:00:00',
@@ -609,7 +609,8 @@ describe('#Holidays', function () {
           end: localDate('2017-05-06 00:00'),
           name: 'Laybour Day',
           type: 'public',
-          rule: '05-01 P5D'
+          rule: '05-01 P5D',
+          payroll: 1.5
         },
         {
           date: '2017-12-25 00:00:00',
