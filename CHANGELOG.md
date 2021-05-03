@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.1.0](https://github.com/commenthol/date-holidays-parser/compare/3.0.1...3.1.0) (2021-05-03)
+
+- chore: changelog [69bc4c2](https://github.com/commenthol/date-holidays-parser/commit/69bc4c22f51c5217f527afd6b6707aee0000088a)
+- fix: remove optional chaining operator to work with node@12 [ecb84ce](https://github.com/commenthol/date-holidays-parser/commit/ecb84ce2625dc800536621e2d4f08e9cb4fd3bd6)
+- feat: DateFn cache results [a74c02d](https://github.com/commenthol/date-holidays-parser/commit/a74c02d989b6978713185e9cd741b0adc0a2b8be)
+- test: custom attributes [2e9b2a7](https://github.com/commenthol/date-holidays-parser/commit/2e9b2a7872c164f6295ce1576f41710cf054d532)
+- fix: typings [114416b](https://github.com/commenthol/date-holidays-parser/commit/114416b6b4fec801dfee679ec70d9de6814454a6)
+- feat: methods to get, set, unset holiday rules [7775351](https://github.com/commenthol/date-holidays-parser/commit/7775351f0e057537daff44535c7060b611b40397)
+- refactor: calevent.filterActive [b49d26b](https://github.com/commenthol/date-holidays-parser/commit/b49d26bff4fc9b3a2fd9bc266aa018a688b3e260)
+- fix: isHoliday(date) may be a string type [7db3d6b](https://github.com/commenthol/date-holidays-parser/commit/7db3d6b670c81192ae5f1599bf94faac31366dec)
+
+## [3.0.2](https://github.com/commenthol/date-holidays-parser/compare/3.0.0...3.0.1) (2021-05-02)
+
+- fix: rollup for prepin [e9c01d2](https://github.com/commenthol/date-holidays-parser/commit/e9c01d2adbf562813e8cd82beb9cb74eddfe683f)
+
+## [3.0.0](https://github.com/commenthol/date-holidays-parser/compare/2.1.0...3.0.0) (2021-03-27)
+
+- chore: reduce package size [b4ffaac](https://github.com/commenthol/date-holidays-parser/commit/b4ffaac0b718a76b195a07a86bac12fbfdf10df3)
+- fix: for in loops on arrays [228c3d2](https://github.com/commenthol/date-holidays-parser/commit/228c3d2e997ed2e11d842adbe4e1d1b09fa55100)
+- fix: import astronomia [a323252](https://github.com/commenthol/date-holidays-parser/commit/a3232524e39e43bdabaf86c0b2d2e9fa321336e2)
+- break: esm module [615f225](https://github.com/commenthol/date-holidays-parser/commit/615f225037940d092cab1d07c845fff720618cb0)
+
 ## [2.1.0](https://github.com/commenthol/date-holidays-parser/compare/2.0.1...2.1.0) (2021-02-13)
 
 - fix: parsing rule for solstice, equinox [c569bb1](https://github.com/commenthol/date-holidays-parser/commit/c569bb1d270dce0721484e7c4a0100307adbcd7b)
