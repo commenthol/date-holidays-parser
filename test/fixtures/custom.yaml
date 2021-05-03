@@ -11,9 +11,11 @@ holidays:
       01-01:
         name:
           en: New Year
+        payroll: 2
       05-01 P5D:
         name:
           en: Laybour Day
+        payroll: 1.5
       12-25:
         name:
           en: Christmas

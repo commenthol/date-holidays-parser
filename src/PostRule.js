@@ -1,7 +1,6 @@
 
-import { get as _get } from './utils.js'
+import { get as _get, toNumber } from './utils.js'
 import CalEvent from './CalEvent.js'
-import Parser from './Parser.js'
 
 export default class PostRule {
   /**
@@ -25,7 +24,7 @@ export default class PostRule {
     const active = this.ruleSet && this.ruleSet.active
     this.disable(year)
     const ev = this.events[0]
-    ev.filter(year, active)
+    ev.filterActive(year, active)
     return ev
   }
 
@@ -71,25 +70,45 @@ export default class PostRule {
   }
 
   disable (year) {
+    const { disable, enable } = this.opts || {}
+    if (!disable || !disable.length) return
+
     const ev = this.events[0]
-    let tmpEv = this._findEventInYear(year, this.opts.disable)
+
+    // check if exact event was disabled or moved
+    let tmpEv = _findEventInYear(year, disable)
     if (tmpEv) {
       if (tmpEv.isEqualDate(ev)) {
         ev.reset()
-        tmpEv = this._findEventInYear(year, this.opts.enable)
+        tmpEv = _findEventInYear(year, enable)
         if (tmpEv) this.events[0] = tmpEv
       }
+      return
     }
-  }
 
-  _findEventInYear (year, arr) {
-    arr = arr || []
-    const parser = new Parser()
-    for (const item of arr) {
-      const p = parser.parse(item)
-      if (p && p[0] && p[0].year && p[0].year === year) {
-        return new CalEvent(p[0]).inYear(p[0].year)
-      }
+    // simply check if the event can be disabled for year-(month)
+    const [_year, _month] = _findDisabled(year, disable)
+    ev.filterDisabled(_year, _month)
+  }
+}
+
+const isoDate = (isoDateStr) => String(isoDateStr).split('-').map(v => toNumber(v))
+
+function _findEventInYear (_year, arr = []) {
+  for (const item of arr) {
+    const [year, month, day] = isoDate(item)
+    if (year === _year && month && day) {
+      return new CalEvent({ year, month, day }).inYear(year)
     }
   }
+}
+
+function _findDisabled (_year, arr = []) {
+  for (const isoDateStr of arr) {
+    const [year, month] = isoDate(isoDateStr)
+    if (_year === year) {
+      return [year, month]
+    }
+  }
+  return []
 }

@@ -48,6 +48,11 @@ export const omit = (object, props = []) => Object.keys(object)
 
 export const merge = (...args) => deepmerge.all(args)
 
+export const toNumber = (num, def) => {
+  const _num = Number(num)
+  return isNaN(_num) ? def : _num
+}
+
 export default {
   get,
   set,

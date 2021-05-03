@@ -1,7 +1,7 @@
 // import 'core-js/es6/index.js' // for IE11
 
 import assert from 'assert'
-import Holidays from '../src/index.js'
+import Holidays, { HolidayRule } from '../src/index.js'
 import { toIso, localDate, moveToTimezone } from './helpers.js'
 
 import fixtures from './fixtures/index.cjs'
@@ -590,9 +590,8 @@ describe('#Holidays', function () {
       assert.strictEqual(toIso(res.end), 'tue 2016-12-06 00:00')
     })
   })
-
   describe('custom data', function () {
-    it('can get list of holidays', function () {
+    it('can get list of holidays together with custom attributes', function () {
       const hd = new Holidays(fixtures.custom, 'custom')
       const exp = [
         {
@@ -601,7 +600,8 @@ describe('#Holidays', function () {
           end: localDate('2017-01-02 00:00'),
           name: 'New Year',
           type: 'public',
-          rule: '01-01'
+          rule: '01-01',
+          payroll: 2
         },
         {
           date: '2017-05-01 00:00:00',
@@ -609,7 +609,8 @@ describe('#Holidays', function () {
           end: localDate('2017-05-06 00:00'),
           name: 'Laybour Day',
           type: 'public',
-          rule: '05-01 P5D'
+          rule: '05-01 P5D',
+          payroll: 1.5
         },
         {
           date: '2017-12-25 00:00:00',
@@ -622,6 +623,51 @@ describe('#Holidays', function () {
       ]
       const list = hd.getHolidays(2017)
       assert.deepStrictEqual(list, exp)
+    })
+  })
+
+  describe('get, set rule', function () {
+    it('gets holiday rules', function () {
+      const hd = new Holidays(fixtures.holidays, { country: 'US' })
+      const rulesList = hd.getRules()
+      const exp = new HolidayRule({
+        rule: '4th thursday in November',
+        name: { en: 'Thanksgiving Day' },
+        type: 'public'
+      })
+      // console.log(rulesList.map((rule, i) => ({i, rule})))
+      assert.deepStrictEqual(rulesList[17], exp)
+    })
+
+    it('get holiday rule for "4th thursday in November"', function () {
+      const hd = new Holidays(fixtures.holidays, { country: 'US' })
+      const rule = hd.getRule('4th thursday in November')
+      const exp = new HolidayRule({
+        rule: '4th thursday in November',
+        name: { en: 'Thanksgiving Day' },
+        type: 'public'
+      })
+      assert.deepStrictEqual(rule, exp)
+    })
+
+    it('disable holiday rule for "4th thursday in November" for 2020', function () {
+      const hd = new Holidays(fixtures.holidays, { country: 'US' })
+      const rule = hd.getRule('4th thursday in November')
+      rule.disableIn(2020)
+      hd.setRule(rule)
+
+      const exp = new HolidayRule({
+        rule: '4th thursday in November',
+        name: { en: 'Thanksgiving Day' },
+        type: 'public',
+        disable: [
+          '2020'
+        ]
+      })
+
+      assert.deepStrictEqual(rule, exp)
+      assert.deepStrictEqual(hd.isHoliday('2020-11-26T05:00:00Z'), false)
+      assert.strictEqual(hd.isHoliday('2021-11-25T05:00:00Z')[0].name, 'Thanksgiving Day')
     })
   })
 })

@@ -7,6 +7,7 @@ import Equinox from '../src/Equinox.js'
 import Easter from '../src/Easter.js'
 import Hebrew from '../src/Hebrew.js'
 import Hijri from '../src/Hijri.js'
+import CalDate from 'caldate'
 
 describe('#CalEventFactory', function () {
   it('12-03', function () {
@@ -176,6 +177,52 @@ describe('#CalEvent', function () {
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
+  it('can reset events', function () {
+    const ev = new CalEvent({ month: 12, day: 2 })
+      .inYear(2015)
+      .inYear(2016)
+
+    assert.strictEqual(ev.dates.length, 2)
+    ev.reset()
+    assert.strictEqual(ev.dates.length, 0)
+  })
+
+  it('filter active dates for 2015 without active range', function () {
+    const ev = new CalEvent({ month: 12, day: 2 })
+      .inYear(2014)
+      .inYear(2015)
+      .filterActive(2015)
+    assert.deepStrictEqual(ev.dates, [new CalDate({ year: 2015, month: 12, day: 2 })])
+  })
+
+  it('filter active dates for 2014', function () {
+    const ev = new CalEvent({ month: 12, day: 2 })
+      .inYear(2014)
+      .inYear(2015)
+      .setActive({ from: new Date('2015-01-01'), to: new Date('2015-12-31') })
+      .filterActive(2014)
+    console.log(ev)
+    assert.deepStrictEqual(ev.dates, [])
+  })
+
+  it('filter active dates for 2015', function () {
+    const ev = new CalEvent({ month: 12, day: 2 })
+      .inYear(2014)
+      .inYear(2015)
+      .setActive({ from: new Date('2015-01-01'), to: new Date('2015-12-31') })
+      .filterActive(2015)
+    assert.deepStrictEqual(ev.dates, [new CalDate({ year: 2015, month: 12, day: 2 })])
+  })
+
+  it('shall combine active range', function () {
+    const ev = new CalEvent({ month: 12, day: 2 })
+      .setActive({ from: new Date('2014-01-01') })
+      .setActive({ to: new Date('2014-12-31') })
+    assert.deepStrictEqual(ev.active, [
+      { from: new Date('2014-01-01'), to: new Date('2014-12-31') }
+    ])
+  })
+
   describe('filter', function () {
     function activeFiterTest (event, active, tests) {
       tests.forEach((test) => {
@@ -183,7 +230,7 @@ describe('#CalEvent', function () {
         const exp = test.exp
         it('in year ' + year, function () {
           const date = new CalEvent(event)
-          date.inYear(year).filter(year, active)
+          date.inYear(year).filterActive(year, active)
           const res = date.get()
           assert.strictEqual(res.length, exp.length)
           if (exp.length) {
