@@ -1,13 +1,11 @@
-import solstice from 'astronomia/solstice'
-import julian from 'astronomia/julian'
-import planetpos from 'astronomia/planetposition'
+import { solstice, julian, planetposition } from 'astronomia'
 import vsopEarth from 'astronomia/data/vsop87Bearth'
 
 import moment from 'moment-timezone'
 import CalDate from 'caldate'
 import CalEvent from './CalEvent.js'
 
-const earth = new planetpos.Planet(vsopEarth)
+const earth = new planetposition.Planet(vsopEarth)
 
 export default class Equinox extends CalEvent {
   /**
