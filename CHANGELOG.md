@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.2.0](https://github.com/commenthol/date-holidays-parser/compare/3.1.0...3.2.0) (2021-05-22)
+
+- fix: esm astronomia imports [e2bde32](https://github.com/commenthol/date-holidays-parser/commit/e2bde327b626a02b836268fed8c73a66aa10b208)
+- fix: ts export namespace [f4f7be2](https://github.com/commenthol/date-holidays-parser/commit/f4f7be2c8999d458577bce7babcdd404163d2ee8)  
+  to use ts types in your typescript projects use
+
+  ```ts
+  import Holidays, { HolidaysTypes } from 'date-holidays-parser'
+  ```
+
+- fix: package.json module for angular [8b02806](https://github.com/commenthol/date-holidays-parser/commit/8b0280657cc98bbfb6266e0f9c089d35b4f199a4)
+
 ## [3.1.0](https://github.com/commenthol/date-holidays-parser/compare/3.0.1...3.1.0) (2021-05-03)
 
 - chore: changelog [69bc4c2](https://github.com/commenthol/date-holidays-parser/commit/69bc4c22f51c5217f527afd6b6707aee0000088a)
