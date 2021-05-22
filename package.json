@@ -59,20 +59,20 @@
     "colors": true
   },
   "dependencies": {
-    "astronomia": "^4.0.0-0",
-    "caldate": "^2.0.0",
-    "date-bengali-revised": "^2.0.0",
-    "date-chinese": "^2.0.0",
-    "date-easter": "^1.0.0",
+    "astronomia": "^4.0.0",
+    "caldate": "^2.0.1",
+    "date-bengali-revised": "^2.0.1",
+    "date-chinese": "^2.1.0",
+    "date-easter": "^1.0.1",
     "deepmerge": "^4.2.2",
     "moment-timezone": "^0.5.33"
   },
   "devDependencies": {
     "c8": "^7.7.2",
     "dtslint": "^4.0.9",
-    "eslint": "^7.26.0",
+    "eslint": "^7.27.0",
     "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "hashtree": "^0.7.0",
