@@ -201,7 +201,7 @@ describe('#CalEvent', function () {
       .inYear(2015)
       .setActive({ from: new Date('2015-01-01'), to: new Date('2015-12-31') })
       .filterActive(2014)
-    console.log(ev)
+    // console.log(ev)
     assert.deepStrictEqual(ev.dates, [])
   })
 
