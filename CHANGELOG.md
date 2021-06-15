@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.2.1](https://github.com/commenthol/date-holidays-parser/compare/3.2.0...3.2.1) (2021-06-15)
+
+- fix: clone dates before timezone shift [cf53ed2](https://github.com/commenthol/date-holidays-parser/commit/cf53ed2469fcc0462edb111a50fa6791735855e8)
+- fix: remove use strict [a3fb423](https://github.com/commenthol/date-holidays-parser/commit/a3fb4230252453a9f75efbfb66ebcc2d582c7006)
+
 ## [3.2.0](https://github.com/commenthol/date-holidays-parser/compare/3.1.0...3.2.0) (2021-05-22)
 
 - fix: esm astronomia imports [e2bde32](https://github.com/commenthol/date-holidays-parser/commit/e2bde327b626a02b836268fed8c73a66aa10b208)
