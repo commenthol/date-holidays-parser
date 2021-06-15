@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * provides a mapping of hebrew calendar dates per gregorian year.
  * ```js

@@ -1,5 +1,3 @@
-'use strict'
-
 import { isDate } from './internal/utils.js'
 import CalDate from 'caldate'
 

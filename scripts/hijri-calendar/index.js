@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * provides a mapping of islamic calendar dates per gregorian year
  * the islamic calender year being shorter than the gregorian year the
