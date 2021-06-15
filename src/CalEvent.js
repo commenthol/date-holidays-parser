@@ -1,5 +1,3 @@
-'use strict'
-
 import { isDate } from './internal/utils.js'
 import CalDate from 'caldate'
 
@@ -101,10 +99,11 @@ export default class CalEvent {
 
   get (timezone) {
     const arr = this.dates.map((date) => {
+      const cdate = new CalDate(date)
       const o = {
-        date: date.toString(),
-        start: date.toTimezone(timezone),
-        end: date.toEndDate().toTimezone(timezone)
+        date: cdate.toString(),
+        start: cdate.toTimezone(timezone),
+        end: cdate.toEndDate().toTimezone(timezone)
       }
       this._addSubstitute(date, o)
       return o

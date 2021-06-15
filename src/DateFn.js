@@ -1,5 +1,3 @@
-'use strict'
-
 import Parser from './Parser.js'
 import Rule from './Rule.js'
 import PostRule from './PostRule.js'
