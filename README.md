@@ -3,7 +3,7 @@
 > parser for world-wide holidays
 
 [![NPM version](https://badge.fury.io/js/date-holidays-parser.svg)](https://www.npmjs.com/package/date-holidays-parser/)
-[![Build Status](https://secure.travis-ci.org/commenthol/date-holidays-parser.svg?branch=master)](https://travis-ci.org/commenthol/date-holidays-parser)
+[![Build Status](https://api.travis-ci.com/commenthol/date-holidays-parser.svg?branch=master)](https://travis-ci.com/commenthol/date-holidays-parser)
 
 This module provides a parser for [date-holidays][] which does calculation of
 holidays dates for various countries, states and regions by type while
