@@ -40,6 +40,7 @@
   "scripts": {
     "all": "npm-run-all clean lint build test",
     "build": "rollup -c && cp scripts/rollup-fix/* lib",
+    "postbuild": "node scripts/postbuild.cjs",
     "ci": "npm-run-all build test:*",
     "clean": "rimraf lib es coverage .nyc_output",
     "clean:all": "npm-run-all clean clean:node_modules",
@@ -62,26 +63,26 @@
     "astronomia": "^4.0.0",
     "caldate": "^2.0.1",
     "date-bengali-revised": "^2.0.1",
-    "date-chinese": "^2.1.0",
+    "date-chinese": "^2.1.1",
     "date-easter": "^1.0.1",
     "deepmerge": "^4.2.2",
     "moment-timezone": "^0.5.33"
   },
   "devDependencies": {
-    "c8": "^7.7.3",
-    "dtslint": "^4.1.0",
-    "eslint": "^7.28.0",
+    "c8": "^7.8.0",
+    "dtslint": "^4.1.3",
+    "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^5.1.0",
     "hashtree": "^0.7.0",
-    "mocha": "^9.0.0",
+    "mocha": "^9.0.3",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.51.2",
+    "rollup": "^2.56.0",
     "serialize-to-module": "^1.1.0",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.5"
   },
   "engines": {
     "node": ">=12.0.0"
