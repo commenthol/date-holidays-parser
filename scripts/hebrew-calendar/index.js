@@ -35,7 +35,7 @@ for (let y = 1969; y <= 2100; y++) {
     }
 
     if (out[my][mm]) {
-      // ~ console.log('//', my, mm, m.getMonth(), m.getDate())
+      // console.log('//', my, mm, m.getMonth(), m.getDate())
       out[my][mm] = out[my][mm].concat([m.getMonth(), m.getDate(), iyy])
     } else {
       out[my][mm] = [m.getMonth(), m.getDate(), iyy]

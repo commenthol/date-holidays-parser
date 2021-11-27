@@ -154,6 +154,11 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+      it('No Tevet 1 in gregorian year 2024', function () {
+        const fn = new DateFn('1 Tevet')
+        const res = fn.inYear(2024).get()
+        assert.deepStrictEqual(res, [])
+      })
     })
 
     describe('equinox', function () {

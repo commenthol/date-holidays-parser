@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js > ../../src/internal/hijri-calendar.js"
+    "start": "node index.js",
+    "beautify": "js-beautify -s 2 -o ../../src/internal/hijri-calendar.js ../../src/internal/hijri-calendar.js"
   },
   "author": "",
   "license": "ISC",

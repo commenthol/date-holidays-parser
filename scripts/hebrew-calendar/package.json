@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js > ../../src/internal/hebrew-calendar.js"
+    "start": "node index.js",
+    "beautify": "js-beautify -s 2 -o ../../src/internal/hebrew-calendar.js ../../src/internal/hebrew-calendar.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "hebcal": "^2.2.0"
+    "hebcal": "^2.3.2"
   }
 }
