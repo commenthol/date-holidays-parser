@@ -285,6 +285,22 @@ module.exports = {
       year: undefined
     }
   ],
+  '13 Adar': [
+    {
+      fn: 'hebrew',
+      day: 13,
+      month: 12,
+      year: undefined
+    }
+  ],
+  '13 AdarII': [
+    {
+      fn: 'hebrew',
+      day: 13,
+      month: 13,
+      year: undefined
+    }
+  ],
   'chinese 01-0-01': [
     {
       fn: 'chinese',
