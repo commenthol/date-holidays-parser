@@ -19,9 +19,11 @@ const moment = require('moment-hijri')
 const filename = path.resolve(__dirname, '../../src/internal/hijri-calendar.js')
 const out = {}
 
+const YEAR0 = 580
+
 // only years 1936 ... 2080 are supported by moment-hijri
 for (let y = 1969; y <= 2080; y++) {
-  const iy = y - 580
+  const iy = y - YEAR0
 
   if (!out.year) {
     out.year = iy
@@ -29,19 +31,21 @@ for (let y = 1969; y <= 2080; y++) {
   const iyy = iy - out.year
 
   for (let im = 1; im <= 12; im++) {
-    const m = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
+    const g = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
 
-    const my = m.year()
-    const mm = m.iMonth()
+    const gy = g.year()
+    const gm = g.iMonth()
 
-    if (!out[my]) {
-      out[my] = []
+    if (!out[gy]) {
+      out[gy] = []
     }
 
-    if (out[my][mm]) {
-      out[my][mm] = out[my][mm].concat([m.month(), m.date(), iyy])
+    const monthDateDiffYear = [g.month(), g.date(), iyy]
+
+    if (out[gy][gm]) {
+      out[gy][gm] = out[gy][gm].concat(monthDateDiffYear)
     } else {
-      out[my][mm] = [m.month(), m.date(), iyy]
+      out[gy][gm] = monthDateDiffYear
     }
   }
 }

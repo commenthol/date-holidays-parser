@@ -19,7 +19,10 @@ export default class CalEventMap extends CalEvent {
     for (let y = year - 1; y <= year + 1; y++) {
       // resolve date in `calendar` as gregorian date
       const firstDays = this.calendar[y][this.opts.month - 1]
-      // firstDays `[M, D, diffYear]`
+      // firstDays `[M, D, diffYear, ...] | null`
+      if (!firstDays) {
+        continue
+      }
       for (let i = 0; i < firstDays.length; i += 3) {
         if (this.opts.year) {
           const calYear = this.calendar.year + firstDays[i + 2]

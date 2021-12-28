@@ -1,15 +1,18 @@
 {
   "name": "hebrew-calender",
   "version": "1.0.0",
+  "private": true,
   "description": "",
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js > ../../src/internal/hebrew-calendar.js"
+    "beautify": "js-beautify -s 2 -o ../../src/internal/hebrew-calendar.js ../../src/internal/hebrew-calendar.js",
+    "lint": "eslint --fix --ext js .",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "hebcal": "^2.2.0"
+    "hebcal": "^2.3.2"
   }
 }

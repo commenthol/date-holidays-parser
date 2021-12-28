@@ -35,7 +35,7 @@ const grammar = (function () {
     _weekdays: '[Ss]unday|[Mm]onday|[Tt]uesday|[Ww]ednesday|[Tt]hursday|[Ff]riday|[Ss]aturday|day',
     _months: 'January|February|March|April|May|June|July|August|September|October|November|December',
     _islamicMonths: 'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
-    _hebrewMonths: 'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|Adar',
+    _hebrewMonths: 'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|AdarII|Adar',
     _days: /(_weekdays)s?/,
     _direction: /(before|after|next|previous|in)/,
     _counts: /(\d+)(?:st|nd|rd|th)?/,
@@ -132,6 +132,9 @@ const grammar = (function () {
   raw._hebrewMonths.split('|').forEach(function (m) {
     raw.hebrewMonths[m] = i++
   })
+  // parser regex needs larger string before shorter AdarII and Adar pos needs correction
+  raw.hebrewMonths.Adar = 12
+  raw.hebrewMonths.AdarII = 13
 
   return raw
   /* eslint-enable */
@@ -288,6 +291,7 @@ export default class Parser {
 
   _hebrew (o) {
     let cap
+
     if ((cap = grammar.hebrew.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()

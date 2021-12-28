@@ -24,7 +24,7 @@ describe('#issue-hijra', function () {
     assert.ok(hd.getHolidays().length > 0)
 
     for (let i = 0; i < 200; i++) {
-      assert.ok(!!hd.isHoliday(new Date('2021-07-20T00:00:00Z')), i)
+      assert.ok(!!hd.isHoliday(new Date('2021-07-20 00:00:00')), i)
     }
   })
 
@@ -32,7 +32,7 @@ describe('#issue-hijra', function () {
     assert.ok(hd.getHolidays().length > 0)
 
     for (let i = 0; i < 200; i++) {
-      assert.ok(!!hd.isHoliday(new Date('2021-09-07T00:00:00Z')), i)
+      assert.ok(!!hd.isHoliday(new Date('2021-09-07 00:00:00')), i)
     }
   })
 })

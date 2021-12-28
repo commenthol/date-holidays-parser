@@ -495,15 +495,15 @@ describe('#Holidays', function () {
 
     it('if 2015-01-01 is holiday in Iceland', function () {
       const hd = new Holidays(fixtures.holidays, 'is')
-      hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
+      hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/London`
       const res = hd.isHoliday(new Date('2015-01-01'))
       assert.ok(res)
     })
 
     it('if 2015-12-26 is substitute holiday in UK', function () {
       const hd = new Holidays(fixtures.holidays, 'gb')
-      hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
-      const res = hd.isHoliday(new Date('2015-12-28'))[0]
+      hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/London`
+      const res = hd.isHoliday(new Date('2015-12-28 00:00'))[0] // ! use local date
       assert.ok(res)
       assert.strictEqual(res.substitute, true)
       assert.strictEqual(res.name, 'Boxing Day (substitute day)')
@@ -590,6 +590,7 @@ describe('#Holidays', function () {
       assert.strictEqual(toIso(res.end), 'tue 2016-12-06 00:00')
     })
   })
+
   describe('custom data', function () {
     it('can get list of holidays together with custom attributes', function () {
       const hd = new Holidays(fixtures.custom, 'custom')

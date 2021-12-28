@@ -13,32 +13,38 @@ const path = require('path')
 const Hebcal = require('hebcal')
 
 const filename = path.resolve(__dirname, '../../src/internal/hebrew-calendar.js')
-const out = {}
+const out = { months: 13 }
 
+const YEAR0 = 5730 - 1970 // difference between jewish and gregorian years
+
+// loop over gregorian years
 for (let y = 1969; y <= 2100; y++) {
-  const yd = 5730 - 1970 // difference between jewish and gregorian years
-  const iy = yd + y
+  const iy = YEAR0 + y
 
   if (!out.year) {
     out.year = iy
   }
   const iyy = iy - out.year
 
-  for (let im = 1; im <= 12; im++) {
-    const m = new Hebcal.HDate(1, im, iy).greg()
+  // loop over hebrew months; there mighth be an Adar2 month therefore loop to 13
+  for (let im = 1; im <= 13; im++) {
+    const g = new Hebcal.HDate(1, im, iy).greg()
 
-    const my = m.getFullYear()
-    const mm = im - 1
+    const gy = g.getFullYear()
+    const gm = im - 1
 
-    if (!out[my]) {
-      out[my] = []
+    // console.log(g, gy, gm, [g.getMonth(), g.getDate(), iyy])
+
+    if (!out[gy]) {
+      out[gy] = []
     }
 
-    if (out[my][mm]) {
-      // ~ console.log('//', my, mm, m.getMonth(), m.getDate())
-      out[my][mm] = out[my][mm].concat([m.getMonth(), m.getDate(), iyy])
+    const monthDateDiffYear = [g.getMonth(), g.getDate(), iyy]
+
+    if (out[gy][gm]) {
+      out[gy][gm] = out[gy][gm].concat(monthDateDiffYear)
     } else {
-      out[my][mm] = [m.getMonth(), m.getDate(), iyy]
+      out[gy][gm] = monthDateDiffYear
     }
   }
 }
