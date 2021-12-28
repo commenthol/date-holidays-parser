@@ -1,15 +1,17 @@
 {
   "name": "hijri-calendar",
   "version": "1.0.0",
+  "private": true,
   "description": "",
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "beautify": "js-beautify -s 2 -o ../../src/internal/hijri-calendar.js ../../src/internal/hijri-calendar.js",
+    "lint": "eslint --fix --ext js .",
     "start": "node index.js",
-    "beautify": "js-beautify -s 2 -o ../../src/internal/hijri-calendar.js ../../src/internal/hijri-calendar.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "moment-hijri": "^2.1.2"
   }
