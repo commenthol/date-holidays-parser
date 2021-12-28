@@ -159,6 +159,25 @@ describe('#DateFn', function () {
         const res = fn.inYear(2024).get()
         assert.deepStrictEqual(res, [])
       })
+      it('6 Adar 5779', function () {
+        const fn = new DateFn('6 Adar 5779')
+        const res = fn.inYear(2019).get()
+        const exp = [{
+          date: '2019-02-11 00:00:00 -0600',
+          start: 'sun 2019-02-10 18:00',
+          end: 'mon 2019-02-11 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+      it('Purim in year 2014', function () {
+        const fn = new DateFn('14 AdarII')
+        const res = fn.inYear(2014).get()
+        assert.deepStrictEqual(fixResult(res), [{
+          date: '2014-03-16 00:00:00 -0600',
+          start: 'sat 2014-03-15 18:00',
+          end: 'sun 2014-03-16 18:00'
+        }])
+      })
     })
 
     describe('equinox', function () {
