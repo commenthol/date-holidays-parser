@@ -1,18 +1,19 @@
 npmbin := $(shell npm bin)
 
 all: lint lib docs
-	npm ci
+	npm run ci
 
 lib: src/*
-	npm run transpile
+	npm run build
 
-test: v12. v14. v15.
+test: v14 v16 v17
 
 v%:
 	n $@; \
-	npm run clean:all; \
-	npm i && \
 	npm run ci
+	#npm run clean:all; \
+	#npm i && \
+	#npm run ci
 
 docs: README.md
 	markedpp --githubid -i README.md -o README.md
