@@ -240,7 +240,7 @@ See [LICENSE][] for more information.
 
 [LICENSE]: ./LICENSE
 [holidays.yaml specification]: https://github.com/commenthol/date-holidays/docs/specification.md
-[Holidays API]: https://github.com/commenthol/date-holidays-parser/docs/Holidays.md
+[Holidays API]: https://github.com/commenthol/date-holidays-parser/blob/master/docs/Holidays.md
 [date-holidays]: https://github.com/commenthol/date-holidays
 [date-holidays-ical]: https://github.com/commenthol/date-holidays-ical
 [ISC License]: http://opensource.org/licenses/ISC
