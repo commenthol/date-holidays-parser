@@ -9,13 +9,13 @@
 ## Class: Holidays
 
 
-### Holidays.init(country, state, region, opts) 
+### Holidays.init(country, state, region, opts)
 
 initialize holidays for a country/state/region
 
 **Parameters**
 
-**country**: `String | Object`, if object use `{ country: {String}, state: {String}, region: {String} }`
+**country**: `String | Object`, if object, use `{ country: {String}, state: {String}, region: {String} }`
 
 **state**: `String`, specifies state
 
@@ -30,15 +30,15 @@ initialize holidays for a country/state/region
  - **opts.types**: `Array`, holiday types to consider; priority is in ascending order (low ... high)
 
 
-### Holidays.setHoliday(rule, opts) 
+### Holidays.setHoliday(rule, opts)
 
 set (custom) holiday
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
-**opts**: `Object | String`, holiday options, if String then opts is used as name
+**opts**: `Object | String`, holiday options (if String, then opts is used as name)
 
  - **opts.name**: `Object`, translated holiday names e.g. `{ en: 'name', es: 'nombre', ... }`
 
@@ -46,13 +46,13 @@ set (custom) holiday
 
 **Returns**: `Boolean`, `true` if holiday could be set
 
-### Holidays.getHolidays(year, language) 
+### Holidays.getHolidays(year, language)
 
-get all holidays for `year` with names using prefered `language`
+get all holidays for `year` with names using preferred `language`
 
 **Parameters**
 
-**year**: `String | Date`, if omitted current year is choosen
+**year**: `String | Date`, if omitted, the current year is chosen
 
 **language**: `String`, ISO 639-1 code for language
 
@@ -65,7 +65,7 @@ get all holidays for `year` with names using prefered `language`
 {String} type - type of holiday `public|bank|school|observance`
 ```
 
-### Holidays.isHoliday(date) 
+### Holidays.isHoliday(date)
 
 check whether `date` is a holiday or not
 
@@ -82,7 +82,7 @@ check whether `date` is a holiday or not
 {String} type - type of holiday `public|bank|school|observance`
 ```
 
-### Holidays.setRule(holidayRule) 
+### Holidays.setRule(holidayRule)
 
 set or update rule
 
@@ -90,35 +90,35 @@ set or update rule
 
 **holidayRule**: `HolidayRule | object`, set or update rule
 
-**Returns**: `boolean`, `true` if holiday could be set returns `true`
+**Returns**: `boolean`, `true` if holiday could be set, returns `true`
 
-### Holidays.unsetRule(rule) 
+### Holidays.unsetRule(rule)
 
 unset rule
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
-**Returns**: `boolean`, `true` if holiday could be set returns `true`
+**Returns**: `boolean`, `true` if holiday could be set, returns `true`
 
-### Holidays.getRules() 
+### Holidays.getRules()
 
 get available rules for selected country, (state, region)
 
 **Returns**: `Array.&lt;HolidayRule&gt;`
 
-### Holidays.getRule(rule) 
+### Holidays.getRule(rule)
 
 get rule for selected country, (state, region)
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
 **Returns**: `HolidayRule | undefined`
 
-### Holidays.query(country, state, lang) 
+### Holidays.query(country, state, lang)
 
 Query for available Countries, States, Regions
 
@@ -132,7 +132,7 @@ Query for available Countries, States, Regions
 
 **Returns**: `Object`, shortcode, name pairs of supported countries, states, regions
 
-### Holidays.getCountries(lang) 
+### Holidays.getCountries(lang)
 
 get supported countries
 
@@ -146,7 +146,7 @@ get supported countries
   US: 'United States' }
 ```
 
-### Holidays.getStates(country, lang) 
+### Holidays.getStates(country, lang)
 
 get supported states for a given country
 
@@ -162,7 +162,7 @@ get supported states for a given country
   wy: 'Wyoming' }
 ```
 
-### Holidays.getRegions(country, state, lang) 
+### Holidays.getRegions(country, state, lang)
 
 get supported regions for a given country, state
 
@@ -179,23 +179,23 @@ get supported regions for a given country, state
 { no: 'New Orleans' }
 ```
 
-### Holidays.setTimezone(timezone) 
+### Holidays.setTimezone(timezone)
 
 sets timezone
 
 **Parameters**
 
 **timezone**: `String`, see `moment-timezone`
-if `timezone` is `undefined` then all dates are considered local dates
+if `timezone` is `undefined`, then all dates are considered local dates
 
 
-### Holidays.getTimezones() 
+### Holidays.getTimezones()
 
 get timezones for country, state, region
 
 **Returns**: `Array`, of {String}s containing the timezones
 
-### Holidays.setLanguages(language) 
+### Holidays.setLanguages(language)
 
 set language(s) for holiday names
 
@@ -205,13 +205,13 @@ set language(s) for holiday names
 
 **Returns**: `Array`, set languages
 
-### Holidays.getLanguages() 
+### Holidays.getLanguages()
 
 get languages for selected country, state, region
 
 **Returns**: `Array`, containing ISO 639-1 language shortcodes
 
-### Holidays.getDayOff() 
+### Holidays.getDayOff()
 
 get default day off as weekday
 
