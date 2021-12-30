@@ -14,6 +14,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('03-12T16', function () {
       const fn = new DateFn('03-12T16')
       const res = fn.inYear(2016).get()
@@ -24,6 +25,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('2015-10-09', function () {
       const fn = new DateFn('2015-10-09')
       const res = fn.inYear(2015).get()
@@ -34,11 +36,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('2015-10-09 for 2016', function () {
       const fn = new DateFn('2015-10-09')
       const res = fn.inYear(2016).get()
       assert.ok(!res.length)
     })
+
     it('julian 12-25', function () {
       const fn = new DateFn('julian 12-25')
       const res = fn.inYear(2016).get()
@@ -49,6 +53,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('julian 2016-12-25 in 2017', function () {
       const fn = new DateFn('julian 2016-12-25')
       const res = fn.inYear(2017).get()
@@ -59,6 +64,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('julian 2016-12-25 in 2018', function () {
       const fn = new DateFn('julian 2016-12-25')
       const res = fn.inYear(2018).get()
@@ -78,6 +84,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('50 days after Orthodox Easter', function () {
         const fn = new DateFn('orthodox 50')
         const res = fn.inYear(2015).get()
@@ -102,6 +109,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('13 Rabi al-thani', function () {
         const fn = new DateFn('13 Rabi al-thani')
         const res = fn.inYear(2017).get()
@@ -130,6 +138,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('15 Nisan 5776', function () {
         const fn = new DateFn('15 Nisan')
         const res = fn.inYear(2016).get()
@@ -140,6 +149,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('18 Tevet 5775/ 5776', function () {
         const fn = new DateFn('18 Tevet')
         const res = fn.inYear(2015).get()
@@ -154,11 +164,71 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('No Tevet 1 in gregorian year 2024', function () {
         const fn = new DateFn('1 Tevet')
         const res = fn.inYear(2024).get()
         assert.deepStrictEqual(res, [])
       })
+
+      it('No Tevet 19 in gregorian year 2024', function () {
+        const fn = new DateFn('19 Tevet')
+        const res = fn.inYear(2024).get()
+        assert.deepStrictEqual(res, [])
+      })
+
+      it('Tevet 20 in gregorian year 2024', function () {
+        const fn = new DateFn('20 Tevet')
+        const res = fn.inYear(2024).get()
+        const exp = [{
+          date: '2024-01-01 00:00:00 -0600',
+          end: 'mon 2024-01-01 18:00',
+          start: 'sun 2023-12-31 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('twice Tevet 1 in gregorian year 2025', function () {
+        const fn = new DateFn('1 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-01 00:00:00 -0600',
+          end: 'wed 2025-01-01 18:00',
+          start: 'tue 2024-12-31 18:00'
+        }, {
+          date: '2025-12-21 00:00:00 -0600',
+          end: 'sun 2025-12-21 18:00',
+          start: 'sat 2025-12-20 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('twice Tevet 11 in gregorian year 2025', function () {
+        const fn = new DateFn('11 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-11 00:00:00 -0600',
+          end: 'sat 2025-01-11 18:00',
+          start: 'fri 2025-01-10 18:00'
+        }, {
+          date: '2025-12-31 00:00:00 -0600',
+          end: 'wed 2025-12-31 18:00',
+          start: 'tue 2025-12-30 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('only once Tevet 12 in gregorian year 2025', function () {
+        const fn = new DateFn('12 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-12 00:00:00 -0600',
+          end: 'sun 2025-01-12 18:00',
+          start: 'sat 2025-01-11 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
       it('6 Adar 5779', function () {
         const fn = new DateFn('6 Adar 5779')
         const res = fn.inYear(2019).get()
@@ -169,6 +239,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('Purim in year 2014', function () {
         const fn = new DateFn('14 AdarII')
         const res = fn.inYear(2014).get()
@@ -191,6 +262,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('march equinox in Asia/Tokyo', function () {
         const fn = new DateFn('march equinox in Asia/Tokyo')
         const res = fn.inYear(2015).get()
@@ -201,6 +273,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('3 days after september equinox', function () {
         const fn = new DateFn('3 days after september equinox')
         const res = fn.inYear(2015).get()
@@ -211,6 +284,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('1 day before june solstice', function () {
         const fn = new DateFn('1 day before june solstice')
         const res = fn.inYear(2015).get()
@@ -221,6 +295,7 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
       it('3rd monday before december solstice', function () {
         const fn = new DateFn('3rd monday before december solstice')
         const res = fn.inYear(2015).get()
@@ -315,6 +390,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('easter -3 16:00', function () {
       const fn = new DateFn('easter -3 16:00')
       const res = fn.inYear(2015).get()
@@ -338,6 +414,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('09-04 08:00 PT321H', function () {
       const fn = new DateFn('09-04 08:00 PT321H')
       const res = fn.inYear(2015).get()
@@ -348,6 +425,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('easter -3 14:00 PT4H', function () {
       const fn = new DateFn('easter -3 14:00 PT4H')
       const res = fn.inYear(2015).get()
@@ -358,6 +436,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('easter -3 14:00 P3D', function () {
       const fn = new DateFn('easter -3 14:00 P3D')
       const res = fn.inYear(2015).get()
@@ -381,6 +460,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('05-01 14:00 if sunday then 00:00 in 2016', function () {
       const fn = new DateFn('05-01 14:00 if sunday then 00:00')
       const res = fn.inYear(2016).get()
@@ -391,6 +471,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-31 14:00 if sunday then 00:00 in 2015', function () {
       const fn = new DateFn('12-31 14:00 if sunday then 00:00')
       const res = fn.inYear(2015).get()
@@ -401,6 +482,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-31 14:00 if sunday then 00:00 in 2017', function () {
       const fn = new DateFn('12-31 14:00 if sunday then 00:00')
       const res = fn.inYear(2017).get()
@@ -411,6 +493,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if sunday then next monday 14:12 if friday then 15:23 in 2017', function () {
       const fn = new DateFn('01-01 if sunday then next monday 14:12 if friday then 15:23')
       const res = fn.inYear(2017).get()
@@ -421,6 +504,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if sunday then next monday 14:12 if friday then 15:23 in 2016', function () {
       const fn = new DateFn('01-01 if sunday then next monday 14:12 if friday then 15:23')
       const res = fn.inYear(2016).get()
@@ -444,6 +528,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('2nd sunday before 11-01', function () {
       const fn = new DateFn('2nd sunday before 11-01')
       const res = fn.inYear(2015).get()
@@ -454,6 +539,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('2nd sunday after 11-01', function () {
       const fn = new DateFn('2nd sunday after 11-01')
       const res = fn.inYear(2015).get()
@@ -464,6 +550,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('tuesday before 4th thursday after 11-01', function () {
       const fn = new DateFn('tuesday before 4th thursday after 11-01')
       const res = fn.inYear(2015).get()
@@ -474,6 +561,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('tuesday before 2nd tuesday after 11-01', function () {
       const fn = new DateFn('tuesday before 2nd tuesday after 11-01')
       const res = fn.inYear(2015).get()
@@ -484,6 +572,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('sunday after 4th thursday after 11-01', function () {
       const fn = new DateFn('sunday after 4th thursday after 11-01')
       const res = fn.inYear(2015).get()
@@ -507,6 +596,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if monday then next monday for 2015', function () {
       const fn = new DateFn('01-01 if monday then next monday')
       const res = fn.inYear(2015).get()
@@ -517,12 +607,14 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if friday then previous monday', function () { // FIXME reprocess with 2015
       const fn = new DateFn('01-01 if friday then previous monday')
       const res = fn.inYear(2016).get() // FIXME date is not catched in 2015
       const exp = []
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if sunday then previous monday for 2016', function () {
       const fn = new DateFn('01-01 if sunday then previous monday')
       const res = fn.inYear(2016).get()
@@ -537,6 +629,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('01-01 if sunday then next sunday', function () {
       const fn = new DateFn('01-01 if sunday then next sunday')
       const res = fn.inYear(2017).get()
@@ -547,6 +640,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('03-06 if sunday then previous sunday', function () {
       const fn = new DateFn('03-06 if sunday then previous sunday')
       const res = fn.inYear(2016).get()
@@ -557,6 +651,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('substitutes 01-01 if sunday then next tuesday in 2017', function () {
       const fn = new DateFn('substitutes 01-01 if sunday then next tuesday')
       const res = fn.inYear(2017).get()
@@ -568,6 +663,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('substitutes 05-03 if sunday then next wednesday in 2015', function () {
       const holidays = {
         'substitutes 05-03 if sunday then next wednesday': {
@@ -592,6 +688,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2016).get()
       assert.ok(!res.length)
     })
+
     it('substitutes 1 Shawwal if wednesday,saturday,sunday then next monday in 2016', function () {
       const fn = new DateFn('substitutes 1 Shawwal if wednesday,saturday,sunday then next monday')
       const res = fn.inYear(2016).get()
@@ -603,11 +700,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('substitutes 1 Shawwal if wednesday,saturday,sunday then next monday in 2018', function () {
       const fn = new DateFn('substitutes 1 Shawwal if wednesday,saturday,sunday then next monday')
       const res = fn.inYear(2018).get()
       assert.ok(!res.length)
     })
+
     it('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday 2015', function () {
       const fn = new DateFn('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday')
       const res = fn.inYear(2015).get()
@@ -618,6 +717,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday 2016', function () {
       const fn = new DateFn('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday')
       const res = fn.inYear(2016).get()
@@ -628,6 +728,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday 2017', function () {
       const fn = new DateFn('10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday')
       const res = fn.inYear(2017).get()
@@ -638,6 +739,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('substitutes 04-02 if tuesday then previous monday if thursday then next friday 2015', function () {
       const fn = new DateFn('substitutes 04-02 if tuesday then previous monday if thursday then next friday')
       const res = fn.inYear(2015).get()
@@ -649,6 +751,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('substitutes 04-02 if tuesday then previous monday if thursday then next friday 2016', function () {
       const fn = new DateFn('substitutes 04-02 if tuesday then previous monday if thursday then next friday')
       const res = fn.inYear(2016).get()
@@ -685,6 +788,7 @@ describe('#DateFn', function () {
       // log(fixResult(res))
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('4 Shawwal and if saturday then next monday for 2016', function () {
       const fn = new DateFn('4 Shawwal and if saturday then next monday')
       const res = fn.inYear(2016).get()
@@ -701,6 +805,7 @@ describe('#DateFn', function () {
       // log(fixResult(res))
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('4 Shawwal and if saturday then next monday for 2017', function () {
       const fn = new DateFn('4 Shawwal and if saturday then next monday')
       const res = fn.inYear(2017).get()
@@ -712,6 +817,7 @@ describe('#DateFn', function () {
       // log(fixResult(res))
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('02-06 and if saturday then previous friday if sunday then next monday in 2016', function () {
       const fn = new DateFn('02-06 14:00 and if saturday then previous friday 16:45 if sunday then next monday PT12H')
       const res = fn.inYear(2016).get()
@@ -727,6 +833,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('02-07 and if saturday then previous friday 16:45 if sunday then next monday 12:21 in 2016', function () {
       const fn = new DateFn('02-07 and if saturday then previous friday 16:45 if sunday then next monday PT12H')
       const res = fn.inYear(2016).get()
@@ -755,11 +862,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 in even years for 2015', function () {
       const fn = new DateFn('11-01 in even years')
       const res = fn.inYear(2015).get()
       assert.ok(res.length === 0)
     })
+
     it('11-01 in odd years', function () {
       const fn = new DateFn('11-01 in odd years')
       const res = fn.inYear(2015).get()
@@ -770,11 +879,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 in odd years for 2014', function () {
       const fn = new DateFn('11-01 in odd years')
       const res = fn.inYear(2014).get()
       assert.ok(res.length === 0)
     })
+
     it('11-01 in leap years for 2000', function () {
       const fn = new DateFn('11-01 in leap years')
       const res = fn.inYear(2000).get()
@@ -785,6 +896,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 in leap years for 2012', function () {
       const fn = new DateFn('11-01 in leap years')
       const res = fn.inYear(2012).get()
@@ -795,11 +907,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 in leap years for 2014', function () {
       const fn = new DateFn('11-01 in leap years')
       const res = fn.inYear(2014).get()
       assert.ok(res.length === 0)
     })
+
     it('11-01 in non-leap years for 2011', function () {
       const fn = new DateFn('11-01 in non-leap years')
       const res = fn.inYear(2011).get()
@@ -810,11 +924,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 in non-leap years for 2012', function () {
       const fn = new DateFn('11-01 in non-leap years')
       const res = fn.inYear(2012).get()
       assert.ok(res.length === 0)
     })
+
     it('tuesday after 1st monday after 11-01 in even years', function () {
       const fn = new DateFn('tuesday after 1st monday after 11-01 in even years')
       const res = fn.inYear(2014).get()
@@ -825,11 +941,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('tuesday after 1st monday after 11-01 in even years for 2015', function () {
       const fn = new DateFn('tuesday after 1st monday after 11-01 in even years')
       const res = fn.inYear(2015).get()
       assert.ok(res.length === 0)
     })
+
     it('tuesday after 1st monday after 11-01 in odd years', function () {
       const fn = new DateFn('tuesday after 1st monday after 11-01 in odd years')
       const res = fn.inYear(2015).get()
@@ -840,11 +958,13 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('tuesday after 1st monday after 11-01 in odd years for 2014', function () {
       const fn = new DateFn('tuesday after 1st monday after 11-01 in odd years')
       const res = fn.inYear(2014).get()
       assert.ok(res.length === 0)
     })
+
     it('12-01 every 6 years since 1934', function () {
       const fn = new DateFn('12-01 every 6 years since 1934')
       const res = fn.inYear(2012).get()
@@ -855,6 +975,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-01 every 6 years since 1934 for 2011', function () {
       const fn = new DateFn('12-01 every 6 years since 1934')
       const res = fn.inYear(2011).get()
@@ -873,18 +994,21 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('09-22 on sunday, saturday for 2015', function () {
       const fn = new DateFn('09-22 on sunday, saturday')
       const res = fn.inYear(2015).get()
       const exp = []
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-26 not on friday, monday for 2014', function () {
       const fn = new DateFn('12-26 not on friday, monday')
       const res = fn.inYear(2014).get() // is friday
       const exp = []
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-26 not on friday, monday for 2015', function () {
       const fn = new DateFn('12-26 not on friday, monday')
       const res = fn.inYear(2015).get()
@@ -895,6 +1019,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('12-26 not on friday, monday for 2016', function () {
       const fn = new DateFn('12-26 not on friday, monday')
       const res = fn.inYear(2016).get() // is monday
@@ -928,6 +1053,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('09-22 if 09-21 and 09-23 is public holiday where 09-23 is not a holiday', function () {
       const holidays = {
         '09-21': {
@@ -947,6 +1073,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2015).get()
       assert.ok(!res.length)
     })
+
     it('09-22 if 09-21 and 09-23 is public holiday where 09-23 is of type observance', function () {
       const holidays = {
         '09-21': {
@@ -966,6 +1093,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2015).get()
       assert.ok(!res.length)
     })
+
     it('09-22 if 09-21 is holiday', function () {
       const holidays = {
         '09-21': {
@@ -987,6 +1115,7 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('09-22 if 09-21 is holiday (bad case)', function () {
       const holidays = {
         '09-20': {
@@ -1023,6 +1152,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2015).get()
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 disabled in 2016', function () {
       const holidays = {
         '11-01': {
@@ -1041,6 +1171,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2016).get()
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('11-01 disabled in 2015 but moved to different date', function () {
       const holidays = {
         '11-01': {
@@ -1060,6 +1191,7 @@ describe('#DateFn', function () {
       const res = fn.inYear(2015).get()
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
     it('4th monday after 11-01', function () {
       const holidays = {
         '4th monday after 11-01': {
@@ -1104,6 +1236,7 @@ describe('#DateFn', function () {
       const res2 = holidays[rule].fn.inYear(2015).get()
       assert.deepStrictEqual(fixResult(res2), exp2)
     })
+
     it('since year', function () {
       const holidays = {
         '11-01 prior to 2010': {
@@ -1138,6 +1271,7 @@ describe('#DateFn', function () {
       const res2 = Object.keys(holidays).map(rule => holidays[rule].fn.inYear(2010).get())
       assert.deepStrictEqual(res2.map(fixResult), exp2)
     })
+
     it('since year and prior to year in 2005', function () {
       const holidays = {
         '11-01 prior to 2010': {
