@@ -27,7 +27,7 @@ export default class CalEventMap extends CalEvent {
         if (this.opts.year) {
           const calYear = this.calendar.year + firstDays[i + 2]
           if (this.opts.year !== calYear) {
-            break
+            continue
           }
         }
         const d = (new CalDate({

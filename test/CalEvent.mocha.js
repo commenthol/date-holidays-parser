@@ -87,6 +87,55 @@ describe('#CalEventFactory', function () {
     // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
+
+  it('5 Jumada al-awwal 1440', function () {
+    const date = new CalEventFactory({
+      fn: 'islamic',
+      day: 5,
+      month: 5,
+      year: 1440
+    })
+    const res = date.inYear(2019).get()
+    const exp = [{
+      date: '2019-01-11 00:00:00 -0600',
+      end: 'fri 2019-01-11 18:00',
+      start: 'thu 2019-01-10 18:00'
+    }]
+    assert.deepStrictEqual(fixResult(res), exp)
+  })
+
+  it('5 Jumada al-awwal 1441', function () {
+    const date = new CalEventFactory({
+      fn: 'islamic',
+      day: 5,
+      month: 5,
+      year: 1441
+    })
+    const res = date.inYear(2019).get()
+    const exp = [{
+      date: '2019-12-31 00:00:00 -0600',
+      end: 'tue 2019-12-31 18:00',
+      start: 'mon 2019-12-30 18:00'
+    }]
+    assert.deepStrictEqual(fixResult(res), exp)
+  })
+
+  it('1 Muharram 1443', function () {
+    const date = new CalEventFactory({
+      fn: 'islamic',
+      day: 1,
+      month: 1,
+      year: 1443
+    })
+    const res = date.inYear(2021).get()
+    const exp = [{
+      date: '2021-08-09 00:00:00 -0600',
+      start: 'sun 2021-08-08 18:00',
+      end: 'mon 2021-08-09 18:00'
+    }]
+    // console.log(fixResult(res))
+    assert.deepStrictEqual(fixResult(res), exp)
+  })
 })
 
 describe('#CalEvent', function () {

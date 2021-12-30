@@ -124,6 +124,28 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
+      it('29 Dhu al-Hijjah 1442', function () {
+        const fn = new DateFn('29 Dhu al-Hijjah 1442')
+        const res = fn.inYear(2021).get()
+        const exp = [{
+          date: '2021-08-08 00:00:00 -0600',
+          start: 'sat 2021-08-07 18:00',
+          end: 'sun 2021-08-08 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('1 Muharram 1443', function () {
+        const fn = new DateFn('1 Muharram 1443')
+        const res = fn.inYear(2021).get()
+        const exp = [{
+          date: '2021-08-09 00:00:00 -0600',
+          start: 'sun 2021-08-08 18:00',
+          end: 'mon 2021-08-09 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
     })
 
     describe('hebrew calendar', function () {
