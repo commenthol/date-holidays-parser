@@ -171,6 +171,23 @@ describe('#DateFn', function () {
         assert.deepStrictEqual(res, [])
       })
 
+      it('No Tevet 19 in gregorian year 2024', function () {
+        const fn = new DateFn('19 Tevet')
+        const res = fn.inYear(2024).get()
+        assert.deepStrictEqual(res, [])
+      })
+
+      it('Tevet 20 in gregorian year 2024', function () {
+        const fn = new DateFn('20 Tevet')
+        const res = fn.inYear(2024).get()
+        const exp = [{
+          date: '2024-01-01 00:00:00 -0600',
+          end: 'mon 2024-01-01 18:00',
+          start: 'sun 2023-12-31 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
       it('6 Adar 5779', function () {
         const fn = new DateFn('6 Adar 5779')
         const res = fn.inYear(2019).get()
