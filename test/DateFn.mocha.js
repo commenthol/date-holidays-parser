@@ -188,6 +188,47 @@ describe('#DateFn', function () {
         assert.deepStrictEqual(fixResult(res), exp)
       })
 
+      it('twice Tevet 1 in gregorian year 2025', function () {
+        const fn = new DateFn('1 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-01 00:00:00 -0600',
+          end: 'wed 2025-01-01 18:00',
+          start: 'tue 2024-12-31 18:00'
+        }, {
+          date: '2025-12-21 00:00:00 -0600',
+          end: 'sun 2025-12-21 18:00',
+          start: 'sat 2025-12-20 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('twice Tevet 11 in gregorian year 2025', function () {
+        const fn = new DateFn('11 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-11 00:00:00 -0600',
+          end: 'sat 2025-01-11 18:00',
+          start: 'fri 2025-01-10 18:00'
+        }, {
+          date: '2025-12-31 00:00:00 -0600',
+          end: 'wed 2025-12-31 18:00',
+          start: 'tue 2025-12-30 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('only once Tevet 12 in gregorian year 2025', function () {
+        const fn = new DateFn('12 Tevet')
+        const res = fn.inYear(2025).get()
+        const exp = [{
+          date: '2025-01-12 00:00:00 -0600',
+          end: 'sun 2025-01-12 18:00',
+          start: 'sat 2025-01-11 18:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
       it('6 Adar 5779', function () {
         const fn = new DateFn('6 Adar 5779')
         const res = fn.inYear(2019).get()
