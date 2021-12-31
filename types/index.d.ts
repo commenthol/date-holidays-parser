@@ -94,16 +94,16 @@ declare module 'date-holidays-parser' {
     /**
      * set (custom) holiday
      * @throws {TypeError}
-     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
-     * @param [opts] - holiday options, if String then opts is used as name
+     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
+     * @param [opts] - holiday options (if String, then opts is used as name)
      * @param opts.name - translated holiday names e.g. `{ en: 'name', es: 'nombre', ... }`
      * @param opts.type - holiday type `public|bank|school|observance`
-     * @returns `true` if holiday could be set returns `true`
+     * @returns `true` if holiday could be set, returns `true`
      */
     setHoliday(rule: string, opts: HolidaysTypes.HolidayOptions | string): boolean;
     /**
-     * get all holidays for `year` with names using prefered `language`
-     * @param [year] - if omitted current year is choosen
+     * get all holidays for `year` with names using preferred `language`
+     * @param [year] - if omitted, then current year is chosen
      * @param [language] - ISO 639-1 code for language
      * @returns of found holidays in given year sorted by Date:
      */
@@ -116,13 +116,13 @@ declare module 'date-holidays-parser' {
 
     /**
      * set or update rule
-     * @returns `true` if holiday could be set returns `true`
+     * @returns `true` if holiday could be set, returns `true`
      */
     setRule(holidayRule: HolidayRule|object): boolean;
     /**
      * unset rule
-     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
-     * @returns `true` if holiday could be set returns `true`
+     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
+     * @returns `true` if holiday could be set, returns `true`
      */
     unsetRule(rule: string): boolean;
     /**
@@ -131,7 +131,7 @@ declare module 'date-holidays-parser' {
     getRules(): HolidayRule[];
     /**
      * get rule for selected country, (state, region)
-     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+     * @param rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
      */
     getRule(rule: string): HolidayRule;
 
@@ -179,7 +179,7 @@ declare module 'date-holidays-parser' {
     /**
      * sets timezone
      * @param timezone - see `moment-timezone`
-     * if `timezone` is `undefined` then all dates are considered local dates
+     * if `timezone` is `undefined`, then all dates are considered local dates
      */
     setTimezone(timezone: string): void;
     /**
