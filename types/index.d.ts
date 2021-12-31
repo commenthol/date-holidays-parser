@@ -103,7 +103,7 @@ declare module 'date-holidays-parser' {
     setHoliday(rule: string, opts: HolidaysTypes.HolidayOptions | string): boolean;
     /**
      * get all holidays for `year` with names using preferred `language`
-     * @param [year] - if omitted, then current year is chosen
+     * @param [year] - if omitted, then the current year is chosen
      * @param [language] - ISO 639-1 code for language
      * @returns of found holidays in given year sorted by Date:
      */
