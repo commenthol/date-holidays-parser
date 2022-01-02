@@ -22,6 +22,10 @@ export default class DateFn {
     this.cache = new Map()
   }
 
+  /**
+   * @param {number} year
+   * @returns {this}
+   */
   inYear (year) {
     if (this.cache.has(year)) {
       this.event = this.cache.get(year)
@@ -32,9 +36,8 @@ export default class DateFn {
     const postProc = new PostRule(this.ruleStr, this.opts, this.holidays)
 
     this.rules.forEach((rule) => {
-      let calEvent
       if (rule.fn) {
-        calEvent = new CalEventFactory(rule)
+        const calEvent = new CalEventFactory(rule)
           .inYear(year - 1) // run over neighboring dates to catch overlaps
           .inYear(year)
           .inYear(year + 1)
