@@ -1159,6 +1159,131 @@ describe('#DateFn', function () {
     })
   })
 
+  describe('Already a Holiday', function () {
+    it('Thursday after 04-02 if is holiday then next Thursday', function () {
+      const ruleStr = 'Thursday after 04-02 if is holiday then next Thursday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-04': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-04-11 00:00:00',
+        start: 'thu 2019-04-11 00:00',
+        end: 'fri 2019-04-12 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+
+      const res2018 = fn.inYear(2018).get()
+      const exp2018 = [{
+        date: '2018-04-05 00:00:00',
+        start: 'thu 2018-04-05 00:00',
+        end: 'fri 2018-04-06 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res2018), exp2018)
+    })
+
+    it('Thursday after 04-02 if is holiday then 3rd next Thursday', function () {
+      const ruleStr = 'Thursday after 04-02 if is holiday then 3rd next Thursday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-04': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-04-25 00:00:00',
+        start: 'thu 2019-04-25 00:00',
+        end: 'fri 2019-04-26 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
+
+    it('Thursday after 04-02 if is holiday then previous Thursday', function () {
+      const ruleStr = 'Thursday after 04-02 if is holiday then previous Thursday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-04': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-03-28 00:00:00',
+        start: 'thu 2019-03-28 00:00',
+        end: 'fri 2019-03-29 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
+
+    it('Thursday after 04-02 if is holiday then 3rd previous Thursday', function () {
+      const ruleStr = 'Thursday after 04-02 if is holiday then 3rd previous Thursday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-04': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-03-14 00:00:00',
+        start: 'thu 2019-03-14 00:00',
+        end: 'fri 2019-03-15 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
+
+    it('03-07 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022', function () {
+      const ruleStr = '03-07 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '03-07': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2022).get()
+      const exp = [{
+        date: '2022-03-15 00:00:00',
+        start: 'tue 2022-03-15 00:00',
+        end: 'wed 2022-03-16 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
+  })
+
   describe('disable-enable rules', function () {
     it('11-01 disabled in 2015', function () {
       const holidays = {

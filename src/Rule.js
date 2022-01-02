@@ -68,14 +68,20 @@ export default class Rule {
       const weekday = date.getDay()
       const ruleWeekday = DAYS[rule.weekday]
 
+      const isDirBefore = ['before', 'previous'].includes(rule.direction)
+      // correct count if weekday is same for next direction
+      if (rule.direction === 'next' && weekday === ruleWeekday) {
+        count += 1
+      }
+
       if (rule.weekday === 'day') {
-        if (rule.direction === 'before') {
+        if (isDirBefore) {
           offset = (count + 1) * -1
         } else {
           offset = count + 1
         }
       } else {
-        if (rule.direction === 'before') {
+        if (isDirBefore) {
           if (weekday === ruleWeekday) {
             count++
           }
@@ -179,6 +185,10 @@ export default class Rule {
   }
 
   bridge () {
+    return true // needs postprocessing
+  }
+
+  ruleIfHoliday () {
     return true // needs postprocessing
   }
 

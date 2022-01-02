@@ -99,7 +99,7 @@ describe('#Rule', function () {
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
-  it('can resolve rule dateBridge', function () {
+  it('can resolve rule bridge', function () {
     const tc = testcases['09-22 if 09-21 is holiday']
     const calEvent = new CalEventFactory(tc[0]).inYear(2015)
     const ruleFn = new Rule()
@@ -108,6 +108,23 @@ describe('#Rule', function () {
       date: '2015-09-22 00:00:00',
       start: 'tue 2015-09-22 00:00',
       end: 'wed 2015-09-23 00:00'
+    }]
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
+  })
+
+  it('can resolve if Holiday rule', function () {
+    const ruleStr = 'Thursday after 04-02 if is holiday then next Thursday'
+    const tc = testcases[ruleStr]
+
+    const calEvent = new CalEventFactory(tc[0]).inYear(2019)
+    const ruleFn = new Rule(calEvent)
+    ruleFn.resolve(tc[1])
+    ruleFn.resolve(tc[2])
+
+    const exp = [{
+      date: '2019-04-04 00:00:00',
+      start: 'thu 2019-04-04 00:00',
+      end: 'fri 2019-04-05 00:00'
     }]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })

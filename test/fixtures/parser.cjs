@@ -1264,6 +1264,60 @@ module.exports = {
       type: undefined
     }
   ],
+  'Thursday after 04-02 if is holiday then next Thursday': [
+    {
+      day: 2,
+      fn: 'gregorian',
+      month: 4,
+      year: undefined
+    },
+    {
+      rule: 'dateDir',
+      count: 1,
+      direction: 'after',
+      weekday: 'thursday'
+    },
+    {
+      rule: 'ruleIfHoliday',
+      type: undefined,
+      count: 1,
+      direction: 'next',
+      weekday: 'thursday'
+    }
+  ],
+  '03-01 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022': [
+    {
+      day: 1,
+      fn: 'gregorian',
+      month: 3,
+      year: undefined
+    },
+    {
+      modifier: 'and'
+    },
+    {
+      direction: 'next',
+      if: [
+        'saturday',
+        'sunday'
+      ],
+      rule: 'dateIfThen',
+      then: 'monday'
+    },
+    {
+      rule: 'ruleIfHoliday',
+      type: undefined,
+      count: 2,
+      direction: 'next',
+      weekday: 'tuesday'
+    },
+    {
+      day: 1,
+      month: 1,
+      rule: 'activeFrom',
+      year: 2022
+    }
+  ],
   '09-22 on sunday, saturday': [
     {
       day: 22,
