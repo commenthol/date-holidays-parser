@@ -16,7 +16,7 @@ const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
 /**
  * @class
  * @param {Object} data - holiday data object - see data/holidays.json
- * @param {String|Object} country - if object use `{ country: {String}, state: {String}, region: {String} }`
+ * @param {String|Object} country - if object, use `{ country: {String}, state: {String}, region: {String} }`
  * @param {String} [state] - specifies state
  * @param {String} [region] - specifies region
  * @param {Object} [opts] - options
@@ -41,7 +41,7 @@ export class Holidays {
 
   /**
    * initialize holidays for a country/state/region
-   * @param {String|Object} country - if object use `{ country: {String}, state: {String}, region: {String} }`
+   * @param {String|Object} country - if object, use `{ country: {String}, state: {String}, region: {String} }`
    * @param {String} [state] - specifies state
    * @param {String} [region] - specifies region
    * @param {Object} [opts] - options
@@ -80,8 +80,8 @@ export class Holidays {
   /**
    * set (custom) holiday
    * @throws {TypeError}
-   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
-   * @param {Object|String} [opts] - holiday options, if String then opts is used as name
+   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
+   * @param {Object|String} [opts] - holiday options (if String, then opts is used as name)
    * @param {Object} opts.name - translated holiday names e.g. `{ en: 'name', es: 'nombre', ... }`
    * @param {String} opts.type - holiday type `public|bank|school|observance`
    * @returns {Boolean} `true` if holiday could be set
@@ -137,8 +137,8 @@ export class Holidays {
   }
 
   /**
-   * get all holidays for `year` with names using prefered `language`
-   * @param {String|Date} [year] - if omitted current year is choosen
+   * get all holidays for `year` with names using preferred `language`
+   * @param {String|Date} [year] - if omitted, the current year is chosen
    * @param {String} [language] - ISO 639-1 code for language
    * @returns {Holiday[]} of found holidays in given year sorted by Date:
    * ```
@@ -222,7 +222,7 @@ export class Holidays {
   /**
    * set or update rule
    * @param {HolidayRule|object} holidayRule
-   * @returns {boolean} `true` if holiday could be set returns `true`
+   * @returns {boolean} `true` if holiday could be set, returns `true`
    */
   setRule (holidayRule) {
     const { rule, ...opts } = holidayRule
@@ -231,8 +231,8 @@ export class Holidays {
 
   /**
    * unset rule
-   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
-   * @returns {boolean} `true` if holiday could be set returns `true`
+   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
+   * @returns {boolean} `true` if holiday could be set, returns `true`
    */
   unsetRule (rule) {
     return this.setHoliday(rule, false)
@@ -250,7 +250,7 @@ export class Holidays {
 
   /**
    * get rule for selected country, (state, region)
-   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+   * @param {String} rule - rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
    * @returns {HolidayRule|undefined}
    */
   getRule (rule) {
@@ -321,7 +321,7 @@ export class Holidays {
   /**
    * sets timezone
    * @param {String} timezone - see `moment-timezone`
-   * if `timezone` is `undefined` then all dates are considered local dates
+   * if `timezone` is `undefined`, then all dates are considered local dates
    */
   setTimezone (timezone) {
     this.__timezone = timezone

@@ -9,13 +9,25 @@
 ## Class: Holidays
 
 
+
+## Class: Holidays
+
+
+
+## Class: Holidays
+
+
+
+## Class: Holidays
+
+
 ### Holidays.init(country, state, region, opts) 
 
 initialize holidays for a country/state/region
 
 **Parameters**
 
-**country**: `String | Object`, if object use `{ country: {String}, state: {String}, region: {String} }`
+**country**: `String | Object`, if object, use `{ country: {String}, state: {String}, region: {String} }`
 
 **state**: `String`, specifies state
 
@@ -36,9 +48,9 @@ set (custom) holiday
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
-**opts**: `Object | String`, holiday options, if String then opts is used as name
+**opts**: `Object | String`, holiday options (if String, then opts is used as name)
 
  - **opts.name**: `Object`, translated holiday names e.g. `{ en: 'name', es: 'nombre', ... }`
 
@@ -48,11 +60,11 @@ set (custom) holiday
 
 ### Holidays.getHolidays(year, language) 
 
-get all holidays for `year` with names using prefered `language`
+get all holidays for `year` with names using preferred `language`
 
 **Parameters**
 
-**year**: `String | Date`, if omitted current year is choosen
+**year**: `String | Date`, if omitted, the current year is chosen
 
 **language**: `String`, ISO 639-1 code for language
 
@@ -90,7 +102,7 @@ set or update rule
 
 **holidayRule**: `HolidayRule | object`, set or update rule
 
-**Returns**: `boolean`, `true` if holiday could be set returns `true`
+**Returns**: `boolean`, `true` if holiday could be set, returns `true`
 
 ### Holidays.unsetRule(rule) 
 
@@ -98,9 +110,9 @@ unset rule
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
-**Returns**: `boolean`, `true` if holiday could be set returns `true`
+**Returns**: `boolean`, `true` if holiday could be set, returns `true`
 
 ### Holidays.getRules() 
 
@@ -114,7 +126,7 @@ get rule for selected country, (state, region)
 
 **Parameters**
 
-**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31th Dec
+**rule**: `String`, rule for holiday (check supported grammar) or date in ISO Format, e.g. 12-31 for 31st Dec
 
 **Returns**: `HolidayRule | undefined`
 
@@ -186,7 +198,7 @@ sets timezone
 **Parameters**
 
 **timezone**: `String`, see `moment-timezone`
-if `timezone` is `undefined` then all dates are considered local dates
+if `timezone` is `undefined`, then all dates are considered local dates
 
 
 ### Holidays.getTimezones() 
