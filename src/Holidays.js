@@ -131,7 +131,7 @@ export class Holidays {
       return true
     } else {
       // throw Error('could not parse rule: ' + rule) // NEXT
-      console.log('could not parse rule: ' + rule) // eslint-disable-line
+      console.error('could not parse rule: ' + rule) // eslint-disable-line
     }
     return false
   }
