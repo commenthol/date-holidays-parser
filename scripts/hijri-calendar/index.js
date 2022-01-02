@@ -9,43 +9,45 @@
  * { year: {number}, <year>: [[M,D,iY], ... [M,D,iY,M,D,iY]], <year + 1>: {} ... }
  * ```
  * > Note: The library moment-hijri currently only provides dates between
- * > 1936 and 2080 which should be sufficient for our needs
+ * > 1356/1/1 (1937-03-14) and 1500/12/30 (2077-11-16) which should be
+ * > sufficient for our needs
  */
 
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment-hijri')
 
+// 1 Muharram 1389 is at 1969-03-19 in gregorian year
+const START_YEAR = 1389
+
 const filename = path.resolve(__dirname, '../../src/internal/hijri-calendar.js')
-const out = {}
+const newYear = year => moment(`${year}-01-01 00:00:00`)
 
-const YEAR0 = 580
+const out = {
+  year: START_YEAR
+}
 
-// only years 1936 ... 2080 are supported by moment-hijri
-for (let y = 1969; y <= 2080; y++) {
-  const iy = y - YEAR0
+const endYear = newYear(2077).iYear()
 
-  if (!out.year) {
-    out.year = iy
-  }
-  const iyy = iy - out.year
-
+for (let iy = START_YEAR; iy <= endYear; iy++) {
   for (let im = 1; im <= 12; im++) {
-    const g = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
+    const m = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
 
-    const gy = g.year()
-    const gm = g.iMonth()
+    const iyy = iy - out.year
+
+    const gy = m.year()
+    const iim = m.iMonth()
 
     if (!out[gy]) {
       out[gy] = []
     }
 
-    const monthDateDiffYear = [g.month(), g.date(), iyy]
+    const monthDateDiffYear = [m.month(), m.date(), iyy]
 
-    if (out[gy][gm]) {
-      out[gy][gm] = out[gy][gm].concat(monthDateDiffYear)
+    if (out[gy][iim]) {
+      out[gy][iim] = out[gy][iim].concat(monthDateDiffYear)
     } else {
-      out[gy][gm] = monthDateDiffYear
+      out[gy][iim] = monthDateDiffYear
     }
   }
 }
