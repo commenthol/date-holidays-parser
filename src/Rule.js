@@ -3,7 +3,7 @@
  */
 
 import CalDate from 'caldate'
-import { DAYS } from './internal/utils.js'
+import { DAYS, isNil } from './internal/utils.js'
 
 export default class Rule {
   /**
@@ -58,10 +58,19 @@ export default class Rule {
    *   rule: "dateDir",
    *   count: 1,
    *   weekday: "tuesday",
-   *   direction: "after"
+   *   direction: "after",
+   *   omit: ['sunday']
    * }
    */
   dateDir (rule) {
+    const omitWeekdays = ([].concat(rule.omit)).map(weekday => DAYS[weekday]).filter(v => !isNil(v))
+
+    const isOmitDay = (offset, weekday) => {
+      let wd = offset + weekday
+      while (wd < 0) { wd += 70 }
+      return omitWeekdays.includes(wd % 7)
+    }
+
     this.calEvent.dates.forEach((date) => {
       let offset
       let count = rule.count - 1
@@ -75,10 +84,17 @@ export default class Rule {
       }
 
       if (rule.weekday === 'day') {
+        let i = 0
         if (isDirBefore) {
           offset = (count + 1) * -1
+          while (i++ < 7 && isOmitDay(offset, weekday)) {
+            offset -= 1
+          }
         } else {
           offset = count + 1
+          while (i++ < 7 && isOmitDay(offset, weekday)) {
+            offset += 1
+          }
         }
       } else {
         if (isDirBefore) {

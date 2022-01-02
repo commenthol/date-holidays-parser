@@ -605,6 +605,17 @@ describe('#DateFn', function () {
       }]
       assert.deepStrictEqual(fixResult(res), exp)
     })
+
+    it('1 day before 11-23', function () {
+      const fn = new DateFn('1 day before 11-23')
+      const res = fn.inYear(2015).get()
+      const exp = [{
+        date: '2015-11-22 00:00:00',
+        start: 'sun 2015-11-22 00:00',
+        end: 'mon 2015-11-23 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+    })
   })
 
   describe('Change to different weekday if date falls on a certain weekday', function () {
@@ -1258,6 +1269,68 @@ describe('#DateFn', function () {
         end: 'fri 2019-03-15 00:00'
       }]
       assert.deepStrictEqual(fixResult(res), exp)
+    })
+
+    it('04-03 if is holiday then 3rd next day omit Saturday, Sunday', function () {
+      const ruleStr = '04-03 if is holiday then 3rd next day omit Saturday, Sunday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-03': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-04-08 00:00:00',
+        start: 'mon 2019-04-08 00:00',
+        end: 'tue 2019-04-09 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+
+      const res2020 = fn.inYear(2020).get()
+      const exp2020 = [{
+        date: '2020-04-06 00:00:00',
+        start: 'mon 2020-04-06 00:00',
+        end: 'tue 2020-04-07 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res2020), exp2020)
+    })
+
+    it('04-03 if is holiday then 3rd previous day omit Saturday, Sunday', function () {
+      const ruleStr = '04-03 if is holiday then 3rd previous day omit Saturday, Sunday'
+      const holidays = {
+        [ruleStr]: {
+          type: 'public'
+        },
+        '04-03': {
+          type: 'public'
+        }
+      }
+      Object.keys(holidays).forEach((rule) => {
+        holidays[rule].fn = new DateFn(rule, holidays)
+      })
+      const fn = new DateFn(ruleStr, holidays)
+      const res = fn.inYear(2019).get()
+      const exp = [{
+        date: '2019-03-29 00:00:00',
+        start: 'fri 2019-03-29 00:00',
+        end: 'sat 2019-03-30 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res), exp)
+
+      const res2020 = fn.inYear(2020).get()
+      const exp2020 = [{
+        date: '2020-03-31 00:00:00',
+        start: 'tue 2020-03-31 00:00',
+        end: 'wed 2020-04-01 00:00'
+      }]
+      assert.deepStrictEqual(fixResult(res2020), exp2020)
     })
 
     it('03-07 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022', function () {

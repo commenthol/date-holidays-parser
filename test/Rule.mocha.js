@@ -73,6 +73,38 @@ describe('#Rule', function () {
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
+  it('can resolve rule dateDir using day count before omitting saturday', function () {
+    const tc = [
+      { fn: 'gregorian', year: undefined, month: 11, day: 23 },
+      { rule: 'dateDir', count: 4, weekday: 'day', direction: 'before', omit: ['saturday'] }
+    ]
+    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const ruleFn = new Rule()
+    ruleFn.setEvent(calEvent).resolve(tc[1])
+    const exp = [{
+      date: '2016-11-18 00:00:00',
+      start: 'fri 2016-11-18 00:00',
+      end: 'sat 2016-11-19 00:00'
+    }]
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
+  })
+
+  it('can resolve rule dateDir using day count after omitting saturday, sunday', function () {
+    const tc = [
+      { fn: 'gregorian', year: undefined, month: 11, day: 23 },
+      { rule: 'dateDir', count: 4, weekday: 'day', direction: 'after', omit: ['saturday', 'sunday'] }
+    ]
+    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const ruleFn = new Rule()
+    ruleFn.setEvent(calEvent).resolve(tc[1])
+    const exp = [{
+      date: '2016-11-28 00:00:00',
+      start: 'mon 2016-11-28 00:00',
+      end: 'tue 2016-11-29 00:00'
+    }]
+    assert.deepStrictEqual(fixResult(calEvent.get()), exp)
+  })
+
   it('can resolve rule dateDir using day count after', function () {
     const tc = testcases['4 days after 11-27']
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)

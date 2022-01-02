@@ -9,6 +9,10 @@ const WEEKDAYS = 'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.spli
 
 const lowerCaseWeekday = (weekday) => WEEKDAYS.includes(weekday) ? weekday.toLowerCase() : weekday
 
+const lowerCaseWeekdayWithoutDay = weekday => (weekday === 'day')
+  ? undefined
+  : lowerCaseWeekday(weekday)
+
 /**
  * regular expressions to parse holiday statements
  */
@@ -63,7 +67,7 @@ const grammar = (function () {
     rule_date_if_then: /^if ((?:(?:_weekdays)(?:,\s?)?)*) then (?:_direction _days)?/,
     rule_day_dir_date: /^(?:_counts )?_days _direction/,
     rule_bridge: /^is (?:_type )?holiday/,
-    rule_if_holiday: /^if is (?:_type )?holiday then (?:_counts )?(?:_direction _days)?/,
+    rule_if_holiday: /^if is (?:_type )?holiday then (?:_counts )?(?:_direction _days)?(?: omit ((?:(?:_weekdays)(?:,\s?)?)*))?/,
     rule_same_day: /^#\d+/,
     rule_active_from: /^since (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)(?: and|)/,
     rule_active_to: /^prior to (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)/,
@@ -115,6 +119,7 @@ const grammar = (function () {
   (/_counts/g, raw._counts)
   (/_direction/g, raw._direction)
   (/_days/g, raw._days)
+  (/_weekdays/g, raw._weekdays)
   ()
   raw.rule_day_dir_date = replace(raw.rule_day_dir_date, '')
   (/_counts/, raw._counts)
@@ -553,7 +558,8 @@ export default class Parser {
         type: cap.shift(),
         count: toNumber(cap.shift()) || 1,
         direction: cap.shift(),
-        weekday: lowerCaseWeekday(cap.shift())
+        weekday: lowerCaseWeekday(cap.shift()),
+        omit: (cap.shift() || '').split(/(?:,\s?)/).map(lowerCaseWeekdayWithoutDay).filter(Boolean)
       }
       this.tokens.push(res)
       return true

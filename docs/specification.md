@@ -525,17 +525,22 @@ Where:
 
 ### Change to different weekday if date already falls on a holiday 
 
-Rule: `<rule> if is holiday then (<count>)? (next|previous) <weekday>`
+Rule: `<rule> if is (<type>)? holiday then (<count>)? (next|previous) <weekday>`
+
+Rule: `<rule> if is (<type>)? holiday then (<count>)? (next|previous) day (omit <weekdays>)?`
 
 Where:
 - `<rule>` any rule
+- `<type>` public, bank, school, observance, optional (defaults to public if omitted)
 - `<count>` 1...31, 1st, 2nd, 3rd
-- `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Day
+- `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+- `<weekdays>` Comma separated list of `<weekday>`
 
 **Examples**:
 
-- `Thursday after 04-02 if is holiday then next Thursday`
+- `Thursday after 04-02 if is observance holiday then next Thursday`
 - `03-01 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022`
+- `05-01 if is public holiday then 2nd next day omit Saturday, Sunday`
 
 ### Enabling a rule since or in certain years
 

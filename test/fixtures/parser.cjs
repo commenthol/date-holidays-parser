@@ -1282,7 +1282,8 @@ module.exports = {
       type: undefined,
       count: 1,
       direction: 'next',
-      weekday: 'thursday'
+      weekday: 'thursday',
+      omit: []
     }
   ],
   '03-01 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022': [
@@ -1309,13 +1310,51 @@ module.exports = {
       type: undefined,
       count: 2,
       direction: 'next',
-      weekday: 'tuesday'
+      weekday: 'tuesday',
+      omit: []
     },
     {
       day: 1,
       month: 1,
       rule: 'activeFrom',
       year: 2022
+    }
+  ],
+  '05-01 if is holiday then next day omit Sunday': [
+    {
+      day: 1,
+      fn: 'gregorian',
+      month: 5,
+      year: undefined
+    },
+    {
+      rule: 'ruleIfHoliday',
+      type: undefined,
+      count: 1,
+      direction: 'next',
+      weekday: 'day',
+      omit: [
+        'sunday'
+      ]
+    }
+  ],
+  '05-01 if is holiday then next day omit Sunday, Saturday': [
+    {
+      day: 1,
+      fn: 'gregorian',
+      month: 5,
+      year: undefined
+    },
+    {
+      rule: 'ruleIfHoliday',
+      type: undefined,
+      weekday: 'day',
+      count: 1,
+      direction: 'next',
+      omit: [
+        'sunday',
+        'saturday'
+      ]
     }
   ],
   '09-22 on sunday, saturday': [
