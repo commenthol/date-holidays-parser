@@ -22,7 +22,6 @@ describe('#CalEventFactory', function () {
       start: 'thu 2015-12-03 00:00',
       end: 'fri 2015-12-04 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -37,7 +36,6 @@ describe('#CalEventFactory', function () {
       start: 'fri 2015-03-20 00:00',
       end: 'sat 2015-03-21 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -52,7 +50,6 @@ describe('#CalEventFactory', function () {
       start: 'thu 2015-04-02 00:00',
       end: 'fri 2015-04-03 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -68,7 +65,6 @@ describe('#CalEventFactory', function () {
       start: 'fri 2015-04-03 18:00',
       end: 'sat 2015-04-04 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -84,7 +80,6 @@ describe('#CalEventFactory', function () {
       start: 'sat 2015-07-18 18:00',
       end: 'sun 2015-07-19 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -133,7 +128,6 @@ describe('#CalEventFactory', function () {
       start: 'sun 2021-08-08 18:00',
       end: 'mon 2021-08-09 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -147,7 +141,6 @@ describe('#CalEvent', function () {
       start: 'thu 2015-12-03 00:00',
       end: 'fri 2015-12-04 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -159,7 +152,6 @@ describe('#CalEvent', function () {
       start: 'thu 2015-12-03 00:00',
       end: 'fri 2015-12-04 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -171,7 +163,6 @@ describe('#CalEvent', function () {
       start: 'thu 2015-12-03 00:00',
       end: 'fri 2015-12-04 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -179,7 +170,6 @@ describe('#CalEvent', function () {
     const date = new CalEvent({ year: 2015, month: 12, day: 3 })
     const res = date.inYear(2016).get()
     const exp = []
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -222,7 +212,6 @@ describe('#CalEvent', function () {
         end: 'fri 2015-12-04 00:00'
       }
     ]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -346,7 +335,6 @@ describe('#Easter', function () {
       start: 'thu 2015-04-02 00:00',
       end: 'fri 2015-04-03 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -358,7 +346,6 @@ describe('#Easter', function () {
       start: 'mon 2015-06-01 00:00',
       end: 'tue 2015-06-02 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -372,7 +359,6 @@ describe('#Equinox', function () {
       start: 'fri 2015-03-20 00:00',
       end: 'sat 2015-03-21 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -384,7 +370,6 @@ describe('#Equinox', function () {
       start: 'sat 2015-03-21 00:00',
       end: 'sun 2015-03-22 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -396,7 +381,6 @@ describe('#Equinox', function () {
       start: 'fri 2015-03-20 00:00',
       end: 'sat 2015-03-21 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -408,7 +392,6 @@ describe('#Equinox', function () {
       start: 'sat 2015-09-26 00:00',
       end: 'sun 2015-09-27 00:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -426,7 +409,6 @@ describe('#Hebrew', function () {
       start: 'fri 2015-04-03 18:00',
       end: 'sat 2015-04-04 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -441,7 +423,6 @@ describe('#Hebrew', function () {
       start: 'fri 2016-04-22 18:00',
       end: 'sat 2016-04-23 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -460,7 +441,6 @@ describe('#Hebrew', function () {
       start: 'tue 2015-12-29 18:00',
       end: 'wed 2015-12-30 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -471,7 +451,6 @@ describe('#Hebrew', function () {
     })
     const res = date.inYear(2016).get()
     const exp = []
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -489,7 +468,6 @@ describe('#Hijri', function () {
       start: 'sat 2015-07-18 18:00',
       end: 'sun 2015-07-19 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -509,7 +487,6 @@ describe('#Hijri', function () {
       start: 'sun 2016-12-25 18:00',
       end: 'mon 2016-12-26 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -525,7 +502,6 @@ describe('#Hijri', function () {
       start: 'sun 2016-12-25 18:00',
       end: 'mon 2016-12-26 18:00'
     }]
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -536,7 +512,6 @@ describe('#Hijri', function () {
     })
     const res = date.inYear(1800).get()
     const exp = []
-    // console.log(fixResult(res))
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
