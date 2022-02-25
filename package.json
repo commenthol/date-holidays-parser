@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "3.2.4",
+  "version": "3.3.0-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -47,7 +47,7 @@
     "clean:node_modules": "rimraf node_modules",
     "coverage": "c8 -r text -r html npm test",
     "doc": "jsdox -o docs src/Holidays.js",
-    "lint": "eslint \"**/*.js\" \"**/*.cjs\"",
+    "lint": "eslint --fix --ext .js,.cjs .",
     "prepublishOnly": "npm run all",
     "test": "npm-run-all test:*",
     "test:ci": "mocha",

@@ -27,6 +27,8 @@ export function isDate (d) {
   return isObject(d) && objectToString(d) === '[object Date]'
 }
 
+export const isNil = (v) => v === null || v === undefined
+
 /**
  * pad number with `0`
  * @param {number} number

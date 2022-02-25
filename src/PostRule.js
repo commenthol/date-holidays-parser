@@ -1,5 +1,6 @@
 
 import { get as _get, toNumber } from './utils.js'
+import Rule from './Rule.js'
 import CalEvent from './CalEvent.js'
 
 export default class PostRule {
@@ -20,6 +21,10 @@ export default class PostRule {
     this.events.push(calEvent)
   }
 
+  /**
+   * @param {number} year
+   * @returns {CalEvent}
+   */
   getEvent (year) {
     const active = this.ruleSet && this.ruleSet.active
     this.disable(year)
@@ -30,6 +35,7 @@ export default class PostRule {
 
   /**
    * @param {Array} rule
+   * @param {number} year
    */
   resolve (rule, year) {
     if (rule.rule && typeof this[rule.rule] === 'function') {
@@ -38,7 +44,8 @@ export default class PostRule {
   }
 
   /**
-   * @param {CalEvent} [calEvent]
+   * @param {Array} rule
+   * @param {number} year
    */
   bridge (rule, year) {
     const found = new Array(this.events.length).fill(false)
@@ -69,6 +76,29 @@ export default class PostRule {
     }
   }
 
+  ruleIfHoliday (rule, year) {
+    const type = rule.type || 'public'
+
+    // get all holidays of the given year
+    for (const ruleStr in this.holidays) {
+      const dateFn = this.holidays[ruleStr].fn
+      if (dateFn && dateFn.ruleStr !== this.ruleStr) {
+        const tmpEv = dateFn.inYear(year)
+        const tmpEvType = _get(tmpEv, 'opts.type') || 'public'
+        for (let i = 0; i < this.events.length; i++) {
+          const isEqualDate = tmpEv.event.isEqualDate(this.events[i])
+          if (isEqualDate && tmpEvType === type) {
+            new Rule(this.events[i]).resolve({ ...rule, rule: 'dateDir' })
+            return
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @param {number} year
+   */
   disable (year) {
     const { disable, enable } = this.opts || {}
     if (!disable || !disable.length) return

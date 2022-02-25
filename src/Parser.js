@@ -9,6 +9,10 @@ const WEEKDAYS = 'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.spli
 
 const lowerCaseWeekday = (weekday) => WEEKDAYS.includes(weekday) ? weekday.toLowerCase() : weekday
 
+const lowerCaseWeekdayWithoutDay = weekday => (weekday === 'day')
+  ? undefined
+  : lowerCaseWeekday(weekday)
+
 /**
  * regular expressions to parse holiday statements
  */
@@ -41,6 +45,7 @@ const grammar = (function () {
     _counts: /(\d+)(?:st|nd|rd|th)?/,
     _count_days: /([-+]?\d{1,2}) ?(?:days?|d)?/,
     _timezone: / in ([^\s]*|[+-]\d{2}:\d{2})/,
+    _type: /(public|bank|school|observance|optional)/,
 
     dateMonth: /^(_months)/,
     date: /^(?:0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
@@ -61,14 +66,15 @@ const grammar = (function () {
     rule_weekday: /(not )?on ((?:(?:_weekdays)(?:,\s?)?)*)/,
     rule_date_if_then: /^if ((?:(?:_weekdays)(?:,\s?)?)*) then (?:_direction _days)?/,
     rule_day_dir_date: /^(?:_counts )?_days _direction/,
-    rule_bridge: /^is (?:([^ ]+) )?holiday/,
+    rule_bridge: /^is (?:_type )?holiday/,
+    rule_if_holiday: /^if is (?:_type )?holiday then (?:_counts )?(?:_direction _days)?(?: omit ((?:(?:_weekdays)(?:,\s?)?)*))?/,
     rule_same_day: /^#\d+/,
     rule_active_from: /^since (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)(?: and|)/,
     rule_active_to: /^prior to (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)/,
 
-    rule_type_if_then: /if ((?:(?:_weekdays)(?:,\s?)?)*) then/,
-    rule_type_dir: /_days _direction$/,
-    rule_type_bridge: / if .* is .* holiday$/,
+    // rule_type_if_then: /if ((?:(?:_weekdays)(?:,\s?)?)*) then/,
+    // rule_type_dir: /_days _direction$/,
+    // rule_type_bridge: / if .* is .* holiday$/,
 
     space: /^\s+/
   }
@@ -105,15 +111,25 @@ const grammar = (function () {
   (/_weekdays/g, raw._weekdays)
   (/_days/g, raw._days)
   ()
+  raw.rule_bridge = replace(raw.rule_bridge, '')
+  (/_type/g, raw._type)
+  ()
+  raw.rule_if_holiday = replace(raw.rule_if_holiday, '')
+  (/_type/g, raw._type)
+  (/_counts/g, raw._counts)
+  (/_direction/g, raw._direction)
+  (/_days/g, raw._days)
+  (/_weekdays/g, raw._weekdays)
+  ()
   raw.rule_day_dir_date = replace(raw.rule_day_dir_date, '')
   (/_counts/, raw._counts)
   (/_days/g, raw._days)
   (/_direction/g, raw._direction)
   ()
-  raw.rule_type_if_then = replace(raw.rule_type_if_then, '')
-  (/_direction/g, raw._direction)
-  (/_days/g, raw._days)
-  ()
+  // raw.rule_type_if_then = replace(raw.rule_type_if_then, '')
+  // (/_direction/g, raw._direction)
+  // (/_days/g, raw._days)
+  // ()
 
   let i = 1
   raw.months = {}
@@ -140,6 +156,8 @@ const grammar = (function () {
   /* eslint-enable */
 })()
 
+// console.log(grammar)
+
 export default class Parser {
   constructor (fns) {
     this.fns = fns || [
@@ -157,6 +175,7 @@ export default class Parser {
       '_ruleWeekday',
       '_ruleYear',
       '_ruleDateDir',
+      '_ruleIfHoliday',
       '_ruleBridge',
       '_ruleTime',
       '_ruleDuration',
@@ -523,6 +542,24 @@ export default class Parser {
         cardinality: cap.shift(),
         every: toNumber(cap.shift()),
         since: toNumber(cap.shift())
+      }
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _ruleIfHoliday (o) {
+    let cap
+    if ((cap = grammar.rule_if_holiday.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      const res = {
+        rule: 'ruleIfHoliday',
+        type: cap.shift(),
+        count: toNumber(cap.shift()) || 1,
+        direction: cap.shift(),
+        weekday: lowerCaseWeekday(cap.shift()),
+        omit: (cap.shift() || '').split(/(?:,\s?)/).map(lowerCaseWeekdayWithoutDay).filter(Boolean)
       }
       this.tokens.push(res)
       return true
