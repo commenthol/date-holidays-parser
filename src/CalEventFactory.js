@@ -13,6 +13,9 @@ import Hebrew from './Hebrew.js'
 // #ifndef noislamic
 import Hijri from './Hijri.js'
 // #endif
+// #ifndef nojalaali
+import Jalaali from './Jalaali.js'
+// #endif
 // #ifndef noequinox
 import Equinox from './Equinox.js'
 // #endif
@@ -39,6 +42,10 @@ export default class CalEventFactory {
       // #ifndef noislamic
       case 'islamic':
         return new Hijri(opts)
+      // #endif
+      // #ifndef nojalaali
+      case 'jalaali':
+        return new Jalaali(opts)
       // #endif
       // #ifndef noequinox
       case 'equinox':
