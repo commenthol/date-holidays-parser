@@ -7,6 +7,9 @@ const Easter = require('./Easter.cjs')
 // #ifndef nojulian
 const Julian = require('./Julian.cjs')
 // #endif
+// #ifndef nojalaali
+const Jalaali = require('./Jalaali.cjs')
+// #endif
 // #ifndef nohebrew
 const Hebrew = require('./Hebrew.cjs')
 // #endif
@@ -41,6 +44,10 @@ class CalEventFactory {
       // #ifndef noislamic
       case 'islamic':
         return new Hijri(opts)
+      // #endif
+      // #ifndef nojalaali
+      case 'jalaali':
+        return new Jalaali(opts)
       // #endif
       // #ifndef noequinox
       case 'equinox':
