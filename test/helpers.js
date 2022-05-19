@@ -1,4 +1,4 @@
-import moment from 'moment-timezone'
+import { DateTime } from 'luxon'
 import { pad0 } from '../src/internal/utils.js'
 
 export function toIso (date) {
@@ -34,11 +34,13 @@ function toString (date) {
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 }
 
-export function moveToTimezone (date, timezone) {
+export function moveToTimezone(date, timezone) {
   if (!timezone) {
-    return date
+      return date
   }
-  return new Date(moment.tz(toString(date), timezone).format())
+  return DateTime.fromJSDate(date)
+      .setZone(timezone, { keepCalendarTime: true })
+      .toJSDate()
 }
 
 export function localDate (str) {

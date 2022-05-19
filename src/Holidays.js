@@ -320,7 +320,7 @@ export class Holidays {
 
   /**
    * sets timezone
-   * @param {String} timezone - see `moment-timezone`
+   * @param {String} timezone - see `luxon zone`
    * if `timezone` is `undefined`, then all dates are considered local dates
    */
   setTimezone (timezone) {

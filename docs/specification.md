@@ -109,7 +109,7 @@ For country codes / divisions / subdivisions - ISO 3166-2: <br>
 <http://www.unicode.org/cldr/charts/30/supplemental/territory_subdivisions.html>
 
 For timezones: <br>
-<https://github.com/moment/moment-timezone/blob/develop/data/meta/latest.json>
+<https://github.com/moment/luxon/blob/master/docs/zones.md>
 
 For language codes ISO 639-1: <br>
 <http://www.unicode.org/cldr/charts/30/supplemental/language_territory_information.html>
@@ -152,7 +152,7 @@ To specify the rules to calculate the holidays per country, state, region is as 
 
 - `<county/state/region>` is the shortcode to identify country, state or region
 - `<lang_?>` represents the ISO 639-1 language code for the assigned language.
-- `<timezone_?>` is a string representing the timezone. See file `data/meta/latest.json` of [moment-timezone][]
+- `<timezone_?>` is a string representing the timezone
 - `<rule_?>` is the rule for that holiday
 
 ## Citations, Sources, and Attribution
@@ -698,15 +698,6 @@ npm run yaml
 
 This concatenates the two files `holidays.yaml` and `names.yaml` and generates the JSON file.
 
-# References
-
-<!-- !ref -->
-
-* [moment-timezone][moment-timezone]
-
-<!-- ref! -->
-
-[moment-timezone]: https://github.com/moment/moment-timezone
 
 ----
 End of file
