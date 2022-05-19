@@ -197,7 +197,7 @@ sets timezone
 
 **Parameters**
 
-**timezone**: `String`, see `moment-timezone`
+**timezone**: `String`, see `luxon zone`
 if `timezone` is `undefined`, then all dates are considered local dates
 
 

@@ -178,7 +178,7 @@ declare module 'date-holidays-parser' {
 
     /**
      * sets timezone
-     * @param timezone - see `moment-timezone`
+     * @param timezone - see `luxon zone`
      * if `timezone` is `undefined`, then all dates are considered local dates
      */
     setTimezone(timezone: string): void;
