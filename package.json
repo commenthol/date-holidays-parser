@@ -41,7 +41,7 @@
     "all": "npm-run-all clean lint build test",
     "build": "rollup -c && cp scripts/rollup-fix/* lib",
     "postbuild": "node scripts/postbuild.cjs",
-    "ci": "npm-run-all build test:*",
+    "ci": "npm-run-all build test",
     "clean": "rimraf lib es coverage .nyc_output",
     "clean:all": "npm-run-all clean clean:node_modules",
     "clean:node_modules": "rimraf node_modules",

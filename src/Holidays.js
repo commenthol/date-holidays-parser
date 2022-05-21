@@ -255,7 +255,7 @@ export class Holidays {
    */
   getRule (rule) {
     if (this.holidays[rule]) {
-      return new HolidayRule({ ...this.holidays[rule], rule: rule })
+      return new HolidayRule({ ...this.holidays[rule], rule })
     }
   }
 

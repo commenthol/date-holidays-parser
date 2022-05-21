@@ -51,7 +51,7 @@ export default class Equinox extends CalEvent {
     }
 
     const floorDate = {
-      year: year,
+      year,
       month: date.month() + 1,
       day: date.date()
     }
