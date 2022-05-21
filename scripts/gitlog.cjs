@@ -89,10 +89,13 @@ const gitLog = async (from, to = 'HEAD') => {
 ;(async () => {
   let semrel = PATCH
 
+  const from = process.argv[2]
+  const to = process.argv[3]
+  console.log(from, to)
   const tagVersions = await gitTagVersions()
-  const lastVersion = tagVersions[0] && tagVersions[0].join('.')
+  const lastVersion = from || (tagVersions[0] && `v${tagVersions[0].join('.')}`)
 
-  const gitlog = await gitLog('v' + lastVersion)
+  const gitlog = await gitLog(lastVersion, to)
   const lines = gitlog
     .filter(line => !/Merge pull request|chore.*(bump|contributors)/.test(line.subject))
     .map(line => {
