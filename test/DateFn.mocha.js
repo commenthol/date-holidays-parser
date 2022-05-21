@@ -148,6 +148,31 @@ describe('#DateFn', function () {
       })
     })
 
+    describe('jalaali dates', function () {
+      // jalaali calendar
+      it('1 Farvardin', function () {
+        const fn = new DateFn('1 Farvardin')
+        const res = fn.inYear(2022).get()
+        const exp = [{
+          date: '2022-03-21 00:00:00',
+          end: 'tue 2022-03-22 00:00',
+          start: 'mon 2022-03-21 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('29 Esfand 1400', function () {
+        const fn = new DateFn('29 Esfand 1400')
+        const res = fn.inYear(2022).get()
+        const exp = [{
+          date: '2022-03-20 00:00:00',
+          end: 'mon 2022-03-21 00:00',
+          start: 'sun 2022-03-20 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+    })
+
     describe('hebrew calendar', function () {
       // hebrew calendar
       it('15 Nisan 5775', function () {

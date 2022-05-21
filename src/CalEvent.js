@@ -2,6 +2,15 @@ import { isDate } from './internal/utils.js'
 import CalDate from 'caldate'
 
 export default class CalEvent {
+  /**
+   * @param {object|Date} opts
+   * @param {string} opts.fn function type
+   * @param {number} [opts.day]
+   * @param {number} [opts.month]
+   * @param {number} [opts.year]
+   * @param {number} [opts.offset]
+   * @param {boolean} [opts.substitute]
+   */
   constructor (opts) {
     opts = opts || {}
     this.substitute = opts.substitute
@@ -14,6 +23,10 @@ export default class CalEvent {
     }
   }
 
+  /**
+   * @param {number} year
+   * @returns {this}
+   */
   inYear (year) {
     const d = (new CalDate(this.opts)).setOffset(this.offset)
     if (!(d.year && d.year !== year)) {
@@ -27,6 +40,10 @@ export default class CalEvent {
     this.dates = []
   }
 
+  /**
+   * @param {CalEvent} calEvent
+   * @returns {boolean}
+   */
   isEqualDate (calEvent) {
     let res = false
     for (const thisDate of this.dates) {
@@ -59,8 +76,8 @@ export default class CalEvent {
   }
 
   /**
-   * @param {Number} year - year to filter
-   * @param {Object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
+   * @param {number} year - year to filter
+   * @param {object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
    * @return {this} for chaining
    */
   filterActive (year, active = this.active) {
@@ -73,6 +90,12 @@ export default class CalEvent {
     return this
   }
 
+  /**
+   * @param {object} active
+   * @param {Date} [active.from ]
+   * @param {Date} [active.to]
+   * @returns
+   */
   setActive (active) {
     const { from, to } = active
     let pushIt = true
@@ -91,12 +114,19 @@ export default class CalEvent {
     return this
   }
 
+  /**
+   * @param {CalEvent} calEvent
+   */
   push (calEvent) {
     if (calEvent && Array.isArray(calEvent.dates)) {
       this.dates = this.dates.concat(calEvent.dates)
     }
   }
 
+  /**
+   * @param {string} timezone
+   * @returns
+   */
   get (timezone) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)

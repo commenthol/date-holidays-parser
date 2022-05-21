@@ -301,6 +301,30 @@ module.exports = {
       year: undefined
     }
   ],
+  '1 Farvardin': [
+    {
+      day: 1,
+      fn: 'jalaali',
+      month: 1,
+      year: undefined
+    }
+  ],
+  '31 Shahrivar 1401': [
+    {
+      day: 31,
+      fn: 'jalaali',
+      month: 6,
+      year: 1401
+    }
+  ],
+  '29 Esfand 1401': [
+    {
+      day: 29,
+      fn: 'jalaali',
+      month: 12,
+      year: 1401
+    }
+  ],
   'chinese 01-0-01': [
     {
       fn: 'chinese',

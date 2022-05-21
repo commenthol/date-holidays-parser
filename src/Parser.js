@@ -40,6 +40,7 @@ const grammar = (function () {
     _months: 'January|February|March|April|May|June|July|August|September|October|November|December',
     _islamicMonths: 'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
     _hebrewMonths: 'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|AdarII|Adar',
+    _jalaaliMonths: 'Farvardin|Ordibehesht|Khordad|Tir|Mordad|Shahrivar|Mehr|Aban|Azar|Dey|Bahman|Esfand',
     _days: /(_weekdays)s?/,
     _direction: /(before|after|next|previous|in)/,
     _counts: /(\d+)(?:st|nd|rd|th)?/,
@@ -57,6 +58,7 @@ const grammar = (function () {
     equinox: /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)(?:_timezone)?/,
     hebrew: /^0?(\d{1,2}) (_hebrewMonths)(?: 0*(\d{1,}))?/,
     islamic: /^0?(\d{1,2}) (_islamicMonths)(?: 0*(\d{1,}))?/,
+    jalaali: /^0?(\d{1,2}) (_jalaaliMonths)(?: 0*(\d{1,}))?/,
     chineseLunar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
     chineseSolar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-(\d{1,2}) solarterm/,
     bengaliRevised: /^(bengali-revised) (?:-?0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
@@ -98,6 +100,9 @@ const grammar = (function () {
   ()
   raw.islamic = replace(raw.islamic, '')
   (/_islamicMonths/, raw._islamicMonths)
+  ()
+  raw.jalaali = replace(raw.jalaali, '')
+  (/_jalaaliMonths/, raw._jalaaliMonths)
   ()
   raw.dateMonth = replace(raw.dateMonth)
   (/_months/, raw._months)
@@ -152,6 +157,12 @@ const grammar = (function () {
   raw.hebrewMonths.Adar = 12
   raw.hebrewMonths.AdarII = 13
 
+  i = 1
+  raw.jalaaliMonths = {}
+  raw._jalaaliMonths.split('|').forEach(function (m) {
+    raw.jalaaliMonths[m] = i++
+  })
+
   return raw
   /* eslint-enable */
 })()
@@ -166,6 +177,7 @@ export default class Parser {
       '_easter',
       '_islamic',
       '_hebrew',
+      '_jalaali',
       '_equinox',
       '_chineseSolar',
       '_chineseLunar',
@@ -334,6 +346,22 @@ export default class Parser {
         fn: 'islamic',
         day: toNumber(cap.shift()),
         month: grammar.islamicMonths[cap.shift()],
+        year: toNumber(cap.shift())
+      }
+      this.tokens.push(res)
+      return true
+    }
+  }
+
+  _jalaali (o) {
+    let cap
+    if ((cap = grammar.jalaali.exec(o.str))) {
+      this._shorten(o, cap[0])
+      cap.shift()
+      const res = {
+        fn: 'jalaali',
+        day: toNumber(cap.shift()),
+        month: grammar.jalaaliMonths[cap.shift()],
         year: toNumber(cap.shift())
       }
       this.tokens.push(res)
