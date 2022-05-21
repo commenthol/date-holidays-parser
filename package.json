@@ -60,30 +60,30 @@
     "colors": true
   },
   "dependencies": {
-    "astronomia": "^4.0.1",
-    "caldate": "^2.0.2",
-    "date-bengali-revised": "^2.0.1",
-    "date-chinese": "^2.1.3",
-    "date-easter": "^1.0.1",
+    "astronomia": "^4.1.0",
+    "caldate": "^2.0.3",
+    "date-bengali-revised": "^2.0.2",
+    "date-chinese": "^2.1.4",
+    "date-easter": "^1.0.2",
     "deepmerge": "^4.2.2",
-    "jalaali-js": "^1.2.4",
+    "jalaali-js": "^1.2.6",
     "moment-timezone": "^0.5.34"
   },
   "devDependencies": {
-    "c8": "^7.11.2",
+    "c8": "^7.11.3",
     "dtslint": "^4.2.1",
-    "eslint": "^8.14.0",
+    "eslint": "^8.16.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.1.0",
+    "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-promise": "^6.0.0",
     "hashtree": "^0.7.0",
-    "mocha": "^9.2.2",
+    "mocha": "^10.0.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.70.2",
+    "rollup": "^2.74.1",
     "serialize-to-module": "^1.1.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.4"
   },
   "engines": {
     "node": ">=12.0.0"
