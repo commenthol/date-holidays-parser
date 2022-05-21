@@ -1,5 +1,44 @@
 # Changelog
 
+## [3.4.0](https://github.com/commenthol/date-holidays-parser/compare/v3.3.0...3.4.0) (2022-05-21)
+
+- docs: add persian calendar [e9c793d](https://github.com/commenthol/date-holidays-parser/commit/e9c793d360fce6eb20d5edb62637067b0bbbb536)
+- feat: support for jalaali calendar [1bb11b7](https://github.com/commenthol/date-holidays-parser/commit/1bb11b732ebb05ed1a23f541e235af053e094f47)
+
+## [3.3.0](https://github.com/commenthol/date-holidays-parser/compare/v3.2.4...3.3.0) (2022-02-25)
+
+- chore: use github actions [c0175ef](https://github.com/commenthol/date-holidays-parser/commit/c0175ef7677973ff3e01dc2c65a8a7a81f00380b)
+- feat: rule dateDir omit weekdays [98d526a](https://github.com/commenthol/date-holidays-parser/commit/98d526a0bb00a6c7abd3c66a91f5b3a41fac1221)
+- feat: rule if holiday [93edc4d](https://github.com/commenthol/date-holidays-parser/commit/93edc4d46a78adc2387414353172009ba114c278)
+- refactor: use console.error instead of log [7ca3f8e](https://github.com/commenthol/date-holidays-parser/commit/7ca3f8e9f6800ba20fdefd81513a2bbab5a73cf3)
+- refactor: change let to const [3a05ff5](https://github.com/commenthol/date-holidays-parser/commit/3a05ff50d0af1f179c1cc27f171ede2a4a74928a)
+- test: removing comments with console.log [785f1c0](https://github.com/commenthol/date-holidays-parser/commit/785f1c02135ad485ba9737592f3e89b211406fce)
+- "the current year" [0eabcc6](https://github.com/commenthol/date-holidays-parser/commit/0eabcc66eaa3cc4c353bf00f16180c51074c653e)
+- fix typos in docs [e3bd683](https://github.com/commenthol/date-holidays-parser/commit/e3bd68364f3ef7ef28716c08b6e30d842c4e3259)
+- fix(CalEventMap): 2nd date in calendar can't be reached [5fd6102](https://github.com/commenthol/date-holidays-parser/commit/5fd6102bdb7bc9366b4a015c48cefab390014f4a)
+- Tevet once/twice edge case tests [1b1270f](https://github.com/commenthol/date-holidays-parser/commit/1b1270f72c4651a28b6271b68f796f9a4795f049)
+- Tevet edge case tests [ccb49c0](https://github.com/commenthol/date-holidays-parser/commit/ccb49c08be6fe642e6d1bd1f5c3784ac11070eb6)
+- empty lines between tests [28dfc44](https://github.com/commenthol/date-holidays-parser/commit/28dfc4437d4e0743df11e2f6ba7fc5af81ebad76)
+
+## [3.2.4](https://github.com/commenthol/date-holidays-parser/compare/v3.2.3...3.2.4) (2021-12-28)
+
+- docs: update API documentation [16f0058](https://github.com/commenthol/date-holidays-parser/commit/16f00584ff1b7b566cb6ba9ecb1cf32bbcf533ed)
+- test: use local dates for TZ tests [de4c653](https://github.com/commenthol/date-holidays-parser/commit/de4c653fc2be281566daa4cdf34954a1c5064fa7)
+- chore: refactor hijri calendar script [247c1fe](https://github.com/commenthol/date-holidays-parser/commit/247c1fee70975b3c171d10dacc147923b640848f)
+- test: hebrew calendar Adar date tests [ca00b2d](https://github.com/commenthol/date-holidays-parser/commit/ca00b2d42650d4e16c1fc41e05be8cb6c06d9747)
+- fix: hebrew month AdarII [a02fee7](https://github.com/commenthol/date-holidays-parser/commit/a02fee7f7934ba5108156c9458bc8f2395187e6e)
+- fix: Some hebrew dates don't show up in a gregorian year [c478182](https://github.com/commenthol/date-holidays-parser/commit/c4781824a50bcbcd3da1bf0b5ede267551d8b7bd)
+
+## [3.2.3](https://github.com/commenthol/date-holidays-parser/compare/v3.2.2...3.2.3) (2021-11-16)
+
+- updated README.md: set valid url for Holidays API [b73dda1](https://github.com/commenthol/date-holidays-parser/commit/b73dda1f78ea451aa490f0781207930653180763)
+
+## [3.2.2](https://github.com/commenthol/date-holidays-parser/compare/v3.2.1...3.2.2) (2021-08-08)
+
+- chore: fix problematic astronomia export [a441627](https://github.com/commenthol/date-holidays-parser/commit/a441627f85a4df2396c4c5c2782d5e6e2ffc118e)
+- chore: update travis badge [907c81f](https://github.com/commenthol/date-holidays-parser/commit/907c81f7844e3c17eddc13aa932dba5996f7ab3f)
+
+
 ## [3.2.1](https://github.com/commenthol/date-holidays-parser/compare/3.2.0...3.2.1) (2021-06-15)
 
 - fix: clone dates before timezone shift [cf53ed2](https://github.com/commenthol/date-holidays-parser/commit/cf53ed2469fcc0462edb111a50fa6791735855e8)
