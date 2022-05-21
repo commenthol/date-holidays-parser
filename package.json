@@ -60,7 +60,7 @@
     "colors": true
   },
   "dependencies": {
-    "astronomia": "^4.1.0",
+    "astronomia": "^4.1.1",
     "caldate": "^2.0.3",
     "date-bengali-revised": "^2.0.2",
     "date-chinese": "^2.1.4",
