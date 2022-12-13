@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.4.3](https://github.com/commenthol/date-holidays-parser/compare/v3.4.2...3.4.3) (2022-12-13)
+
+- fix: cjs bundling with rollup [44ef857](https://github.com/commenthol/date-holidays-parser/commit/44ef857054af30c89da89f26fa21c08f8140a7c0) 
+  Revert back to rollup@2
+
+## [3.4.2](https://github.com/commenthol/date-holidays-parser/compare/v3.4.1...3.4.2) (2022-11-20)
+
+- chore: bump dependencies [ea6e424](https://github.com/commenthol/date-holidays-parser/commit/ea6e424e588315dc10520976b06da133f1598a4e) 
+  Use rollup@3 for bundling
+
 ## [3.4.0](https://github.com/commenthol/date-holidays-parser/compare/v3.3.0...3.4.0) (2022-05-21)
 
 - docs: add persian calendar [e9c793d](https://github.com/commenthol/date-holidays-parser/commit/e9c793d360fce6eb20d5edb62637067b0bbbb536)
