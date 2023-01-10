@@ -6,10 +6,8 @@ const formatters = {}
 * @purpose   : Converts Islamic (Hijri) Date to other Calendars' Dates.
 *              Handles all 5 Islamic Calendar Types.
 *              Uses the 'JS Calendar Conversion by Target Approximation' Method.
-*
-* @version   : 1.00
-* @author    : Mohsen Alyafei
-* @date      : 21 Feb 2022
+* @warning     Uses Intl.DateTimeFormat which is not supported on android. Most polyfills only work with gregorian calendars, in which case this script will not work.
+* @author    : Mohsen Alyafei (Feb 2022)
 * @licence   : MIT
 * @param {number} year Hijri year
 * @param {number} month hijri month (1 to 12) note: months is standard 1 based
@@ -18,6 +16,7 @@ const formatters = {}
 * @returns   : Return the JavaScript Date object corresponding to the given parameters
 */
 module.exports = function hijriToJSDate (year, month, day, fromCalendar) {
+  'use strict'
   fromCalendar = 'en-u-ca-' + (fromCalendar || 'islamic-umalqura')
   const dFormat = formatters[fromCalendar] || (formatters[fromCalendar] = new Intl.DateTimeFormat(fromCalendar, { dateStyle: 'short', timeZone: 'UTC' }))
   let gD = new Date(Date.UTC(2000, 0, 1))
@@ -25,11 +24,11 @@ module.exports = function hijriToJSDate (year, month, day, fromCalendar) {
         ~~(227022 + (year + (month - 1) / 12 + day / 354) * 354.367)))
   const gY = gD.getUTCFullYear() - 2000
   gD = new Date(Date.UTC(gY, gD.getUTCMonth(), gD.getUTCDate()))
-  let [iM, iD, iY] = dFormat.format(gD).split('/').map(n => parseInt(n, 10))
+  let [iM, iD, iY] = dFormat.format(gD).split('/').map(parseInt) // note radix is 10 automatically when in strict mode
   gD = new Date(gD.setUTCDate(gD.getUTCDate() +
         ~~(year * 354 + month * 29.53 + day - (iY * 354 + iM * 29.53 + iD * 1) - 2)))
   for (let i = 0; i < 4; ++i) {
-    [iM, iD, iY] = dFormat.format(gD).split('/').map(n => parseInt(n, 10))
+    [iM, iD, iY] = dFormat.format(gD).split('/').map(parseInt)
     if (iD === day && iM === month && iY === year) return gD
     gD.setUTCDate(gD.getUTCDate() + 1)
   }
