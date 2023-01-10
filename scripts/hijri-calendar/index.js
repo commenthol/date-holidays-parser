@@ -21,7 +21,7 @@ const START_YEAR = 1389
 const filename = path.resolve(__dirname, '../../src/internal/hijri-calendar.js')
 const newYear = year => new Date(`${year}-01-01 00:00:00Z`)
 
-const out = new Map()
+const out = new Map([['year', START_YEAR]])
 const calendar = 'islamic-umalqura'
 const dFormat = new Intl.DateTimeFormat('en-u-ca-' + calendar, { dateStyle: 'short', timeZone: 'UTC' })
 const endYear = parseInt(dFormat.format(newYear(2077)).split('/')[2])
