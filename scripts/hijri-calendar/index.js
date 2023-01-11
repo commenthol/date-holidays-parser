@@ -1,4 +1,5 @@
 /**
+ * Follw https://github.com/tc39/proposal-temporal/issues/1450 for when this is superseded
  * provides a mapping of islamic calendar dates per gregorian year
  * the islamic calender year being shorter than the gregorian year the
  * start of an islamic month may show up twice with a gregorian date
@@ -8,49 +9,44 @@
  * // month `M` and date `D` and the islamic year `iY`
  * { year: {number}, <year>: [[M,D,iY], ... [M,D,iY,M,D,iY]], <year + 1>: {} ... }
  * ```
- * > Note: The library moment-hijri currently only provides dates between
- * > 1356/1/1 (1937-03-14) and 1500/12/30 (2077-11-16) which should be
- * > sufficient for our needs
  */
-
+const hijriToJSDate = require('./hijri-to-js-date')
 const fs = require('fs')
 const path = require('path')
-const moment = require('moment-hijri')
 
 // 1 Muharram 1389 is at 1969-03-19 in gregorian year
+// to double check start dates for each month of 1389, go to https://hijri.habibur.com/1389/
 const START_YEAR = 1389
 
 const filename = path.resolve(__dirname, '../../src/internal/hijri-calendar.js')
-const newYear = year => moment(`${year}-01-01 00:00:00`)
+const newYear = year => new Date(`${year}-01-01 00:00:00Z`)
 
-const out = {
-  year: START_YEAR
-}
-
-const endYear = newYear(2077).iYear()
+const out = new Map([['year', START_YEAR]])
+const calendar = 'islamic-umalqura'
+const dFormat = new Intl.DateTimeFormat('en-u-ca-' + calendar, { dateStyle: 'short', timeZone: 'UTC' })
+const endYear = parseInt(dFormat.format(newYear(2077)).split('/')[2])
 
 for (let iy = START_YEAR; iy <= endYear; iy++) {
   for (let im = 1; im <= 12; im++) {
-    const m = moment(iy + '/' + im + '/1', 'iYYYY/iM/iD')
+    const d = hijriToJSDate(iy, im, 1, calendar)
+    const iyy = iy - START_YEAR
 
-    const iyy = iy - out.year
+    const gy = d.getUTCFullYear()
+    const iim = im - 1
 
-    const gy = m.year()
-    const iim = m.iMonth()
-
-    if (!out[gy]) {
-      out[gy] = []
+    if (!out.has(gy)) {
+      out.set(gy, [])
     }
 
-    const monthDateDiffYear = [m.month(), m.date(), iyy]
+    const monthDateDiffYear = [d.getUTCMonth(), d.getUTCDate(), iyy]
 
-    if (out[gy][iim]) {
-      out[gy][iim] = out[gy][iim].concat(monthDateDiffYear)
+    if (out.get(gy)[iim]) {
+      out.get(gy)[iim] = out.get(gy)[iim].concat(monthDateDiffYear)
     } else {
-      out[gy][iim] = monthDateDiffYear
+      out.get(gy)[iim] = monthDateDiffYear
     }
   }
 }
 
-const final = '/*eslint-disable*/\nexport const calendar =' + JSON.stringify(out).replace(/"/g, '')
+const final = '/*eslint-disable*/\nexport const calendar =' + JSON.stringify(Object.fromEntries(out.entries())).replace(/"/g, '')
 fs.writeFileSync(filename, final, 'utf8')

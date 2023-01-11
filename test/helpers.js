@@ -1,4 +1,4 @@
-import moment from 'moment-timezone'
+import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc'
 import { pad0 } from '../src/internal/utils.js'
 
 export function toIso (date) {
@@ -38,7 +38,7 @@ export function moveToTimezone (date, timezone) {
   if (!timezone) {
     return date
   }
-  return new Date(moment.tz(toString(date), timezone).format())
+  return zonedTimeToUtc(toString(date), timezone)
 }
 
 export function localDate (str) {

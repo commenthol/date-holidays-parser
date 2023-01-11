@@ -13,6 +13,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "moment-hijri": "^2.1.2"
   }
 }

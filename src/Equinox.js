@@ -1,7 +1,6 @@
 import { solstice, julian, planetposition } from 'astronomia'
 import { vsop87Bearth } from './vsop87Bearth.js'
-
-import moment from 'moment-timezone'
+import utcToZonedTime from 'date-fns-tz/utcToZonedTime'
 import CalDate from 'caldate'
 import CalEvent from './CalEvent.js'
 
@@ -43,17 +42,12 @@ export default class Equinox extends CalEvent {
     }
 
     const str = new julian.Calendar().fromJDE(jde).toDate().toISOString()
-    let date
-    if (/^[+-]\d{2}:\d{2}?$/.test(this._timezone)) { // for '+08:00' formats
-      date = moment(str).utcOffset(this._timezone)
-    } else { // for 'Asia/Shanghai' formats
-      date = moment(str).tz(this._timezone) // move to timezone
-    }
+    const date = utcToZonedTime(str, this._timezone)
 
     const floorDate = {
       year,
-      month: date.month() + 1,
-      day: date.date()
+      month: date.getMonth() + 1,
+      day: date.getDate()
     }
 
     const d = new CalDate(floorDate).setOffset(this.offset)
