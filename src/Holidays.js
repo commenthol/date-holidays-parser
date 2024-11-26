@@ -385,6 +385,9 @@ export class Holidays {
    */
   _dateByRule (year, rule) {
     const _rule = this.holidays[rule]
+    if (!_rule?.fn?.inYear) {
+      return []
+    }
     const dates = _rule.fn.inYear(year)
       .get(this.__timezone)
       .map((date) => {
