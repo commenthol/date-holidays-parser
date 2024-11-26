@@ -38,7 +38,7 @@
     "test": "test"
   },
   "scripts": {
-    "all": "npm-run-all clean lint build test",
+    "all": "npm-run-all clean lint build postbuild test",
     "build": "rollup -c && cp scripts/rollup-fix/* lib",
     "postbuild": "node scripts/postbuild.cjs",
     "ci": "npm-run-all build test",
