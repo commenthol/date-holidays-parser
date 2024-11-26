@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.4.5](https://github.com/commenthol/date-holidays-parser/compare/v3.4.4...3.4.5) (2024-11-26)
+
+- chore: test with node@22 deprecate node@16 [e99dcb9](https://github.com/commenthol/date-holidays-parser/commit/e99dcb9dc88ead8410903fb0376d879df631a4ed)
+- fix: issue date-holidays#484 after unset rule isHoliday throws [4b11197](https://github.com/commenthol/date-holidays-parser/commit/4b11197787f9eb05f08fdf989bd3fbc48be4f025)
+
 ## [3.4.3](https://github.com/commenthol/date-holidays-parser/compare/v3.4.2...3.4.3) (2022-12-13)
 
 - fix: cjs bundling with rollup [44ef857](https://github.com/commenthol/date-holidays-parser/commit/44ef857054af30c89da89f26fa21c08f8140a7c0) 
