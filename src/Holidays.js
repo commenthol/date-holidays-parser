@@ -385,7 +385,7 @@ export class Holidays {
    */
   _dateByRule (year, rule) {
     const _rule = this.holidays[rule]
-    if (!_rule?.fn?.inYear) {
+    if (!_rule || !_rule.fn || !_rule.fn.inYear) {
       return []
     }
     const dates = _rule.fn.inYear(year)
