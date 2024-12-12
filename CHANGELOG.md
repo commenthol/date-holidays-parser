@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.4.6](https://github.com/commenthol/date-holidays-parser/compare/v3.4.5...3.4.6) (2024-12-12)
+
+- chore: reliably run postbuild script [5d2ae8d](https://github.com/commenthol/date-holidays-parser/commit/5d2ae8d62dfd3421dfa7615a36761fcff3e5b826)
+- fix(#62): es2015 issue remove optional chaining operator [126f2ff](https://github.com/commenthol/date-holidays-parser/commit/126f2ffe354f52dc85bb3d3e9079bc19f5f022b2)
+
 ## [3.4.5](https://github.com/commenthol/date-holidays-parser/compare/v3.4.4...3.4.5) (2024-11-26)
 
 - chore: test with node@22 deprecate node@16 [e99dcb9](https://github.com/commenthol/date-holidays-parser/commit/e99dcb9dc88ead8410903fb0376d879df631a4ed)
