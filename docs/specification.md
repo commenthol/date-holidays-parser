@@ -24,6 +24,7 @@ This document describes the data contained within the files `holidays.yaml` and
     * [Dates in Chinese calendar (lunar)](#dates-in-chinese-calendar-lunar)
     * [Dates in Chinese calendar (solar)](#dates-in-chinese-calendar-solar)
     * [Dates in Bengali Revised calendar](#dates-in-bengali-revised-calendar)
+    * [Dates in Tibetan calendar](#dates-in-tibetan-calendar)
     * [Dates in Persian calendar](#dates-in-persian-calendar)
     * [Equinox, Solstice](#equinox-solstice)
   * [Different start-time for Fixed Date other than midnight](#different-start-time-for-fixed-date-other-than-midnight)
@@ -271,7 +272,7 @@ Where:
 
 #### Dates in Chinese calendar (lunar)
 
-Dates in the chines calendar can be attributed using the following rule:
+Dates in the chinese calendar can be attributed using the following rule:
 
 Rule: `chinese <cycle>-<year>-<month>-<leapmonth>-<day>`
 
@@ -315,6 +316,25 @@ Where:
 
 - `bengali-revised 12-1` is the 1st day in the 12th month
 - `bengali-revised 1425-1-1` is the 1st day in the first month of 1425 - equals 2018-04-14 in Gregorian date
+
+#### Dates in Tibetan calendar
+
+Dates in the tibetan lunar calendar can be attributed using the following rule:
+
+Rule: `(tibetan|mongolian|bhutanese) <cycle>-<year>-<month>-<leapmonth>-<day>-<leapday>`
+
+Where:
+- `<cycle>` (optional) Tibetan cycle - current is 17
+- `<year>` (optional) year in Tibetan cycle (1 ... 60)
+- `<month>` (mandatory) lunar month
+- `<leapmonth>` (mandatory) `0|1` - `1` means month is leap month
+- `<day>` (mandatory) day of lunar month
+- `<leapday>` (optional) `0|1` - `1` means day is leap day
+
+**Examples**:
+
+- `tibetan 01-0-01` is 1st day in the 1st lunar month
+- `tibetan 17-33-01-1-06-1` is 6th leap day in the 1st leap lunar month in year 33 of 17th cycle
 
 #### Dates in Persian calendar
 

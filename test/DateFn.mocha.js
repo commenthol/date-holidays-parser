@@ -412,17 +412,78 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
+
+      it('bengali-revised 12-1', function () {
+        const fn = new DateFn('bengali-revised 12-1')
+        const res = fn.inYear(2015).get()
+        const exp = [{
+          date: '2015-03-15 00:00:00',
+          start: 'sun 2015-03-15 00:00',
+          end: 'mon 2015-03-16 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
     })
 
-    it('bengali-revised 12-1', function () {
-      const fn = new DateFn('bengali-revised 12-1')
-      const res = fn.inYear(2015).get()
-      const exp = [{
-        date: '2015-03-15 00:00:00',
-        start: 'sun 2015-03-15 00:00',
-        end: 'mon 2015-03-16 00:00'
-      }]
-      assert.deepStrictEqual(fixResult(res), exp)
+    describe('tibetan', function () {
+      it('tibetan 1-0-1', function () {
+        const fn = new DateFn('tibetan 1-0-1')
+        const res = fn.inYear(2003).get()
+        const exp = [{
+          date: '2003-03-03 00:00:00',
+          start: 'mon 2003-03-03 00:00',
+          end: 'tue 2003-03-04 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('mongolian 1-0-1', function () {
+        const fn = new DateFn('mongolian 1-0-1')
+        const res = fn.inYear(2003).get()
+        const exp = [{
+          date: '2003-02-02 00:00:00',
+          start: 'sun 2003-02-02 00:00',
+          end: 'mon 2003-02-03 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('bhutanese 1-0-1', function () {
+        const fn = new DateFn('bhutanese 1-0-1')
+        const res = fn.inYear(2003).get()
+        const exp = [{
+          date: '2003-03-04 00:00:00',
+          start: 'tue 2003-03-04 00:00',
+          end: 'wed 2003-03-05 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('tibetan 12-0-17-1', function () {
+        const fn = new DateFn('tibetan 12-0-17-1')
+        const res = fn.inYear(2013).get()
+        const exp = [{
+          date: '2013-01-28 00:00:00',
+          start: 'mon 2013-01-28 00:00',
+          end: 'tue 2013-01-29 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+      it('twice tibetan 11-0-15 in gregorian year 2012', function () {
+        const fn = new DateFn('tibetan 11-0-15')
+        const res = fn.inYear(2012).get()
+        const exp = [{
+          date: '2012-01-09 00:00:00',
+          start: 'mon 2012-01-09 00:00',
+          end: 'tue 2012-01-10 00:00'
+        }, {
+          date: '2012-12-28 00:00:00',
+          start: 'fri 2012-12-28 00:00',
+          end: 'sat 2012-12-29 00:00'
+        }]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
     })
   })
 

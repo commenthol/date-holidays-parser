@@ -23,6 +23,7 @@ The features are:
   not be correct as they are subject to the sighting of the moon)
 - support for hebrew calendar from 1970 to 2100
 - support for chinese calendar
+- support for tibetan calendar
 
 Happy holidays!
 
