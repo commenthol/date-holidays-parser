@@ -65,7 +65,7 @@ declare module 'date-holidays-parser' {
       type: HolidayType;
       /** the holiday rule - use for references */
       rule: string;
-      /** holiday is a substritute day */
+      /** holiday is a substitute day */
       substitute?: boolean;
     }
   }

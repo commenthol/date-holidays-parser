@@ -1,4 +1,5 @@
-import Holidays from 'date-holidays-parser';
+import Holidays, { type HolidaysTypes } from 'date-holidays-parser';
+import { expect } from 'tstyche';
 
 const data = {
   holidays: {
@@ -18,7 +19,7 @@ const data = {
         },
         '05-01 P5D': {
           name: {
-            en: 'Laybour Day'
+            en: 'Labour Day'
           },
           payroll: 1.5
         },
@@ -33,8 +34,9 @@ const data = {
 };
 
 const hd = new Holidays(data);
-hd.init('US');
 
-hd.isHoliday(new Date('2019-01-01')); // $ExpectType false | Holiday[]
-hd.isHoliday(new Date('2019-02-01')); // $ExpectType false | Holiday[]
-hd.getHolidays(); // $ExpectType Holiday[]
+expect(hd.init('US')).type.toBe<void>();
+
+expect(hd.isHoliday(new Date('2019-01-01'))).type.toBe<HolidaysTypes.Holiday[] | false>();
+expect(hd.isHoliday(new Date('2019-02-01'))).type.toBe<HolidaysTypes.Holiday[] | false>();
+expect(hd.getHolidays()).type.toBe<HolidaysTypes.Holiday[]>();
