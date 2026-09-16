@@ -196,7 +196,7 @@ export default class Data {
    */
   _getValue (key, opts = this.opts) {
     return (
-      _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions', opts.regions, key]) ||
+      _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions', opts.region, key]) ||
       _.get(this.data, ['holidays', opts.country, 'states', opts.state, key]) ||
       _.get(this.data, ['holidays', opts.country, key])
     )
