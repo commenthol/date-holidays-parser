@@ -227,6 +227,26 @@ describe('#Data', function () {
       assert.deepStrictEqual(res, exp)
     })
 
+    it('for de-by-a', function () {
+      const obj = new Data(fixtures.holidays, 'de-by-a').getRules()
+      const res = getDays(obj, ['de'])
+      assert.deepStrictEqual(res, exp)
+    })
+
+    it('for a state whose code is not uppercase', function () {
+      const data = {
+        holidays: {
+          CK: {
+            days: { '01-01': { name: 'New Year' } },
+            states: { Aitutaki: { days: { '10-26': { name: 'Gospel Day' } } } }
+          }
+        }
+      }
+      const res = new Data(data, 'CK', 'Aitutaki').getRules()
+      assert.deepStrictEqual(Object.keys(res), ['01-01', '10-26'])
+      assert.deepStrictEqual(new Data(data, 'ck-aitutaki').getRules(), res)
+    })
+
     it('for {DE BY A}', function () {
       const obj = new Data(fixtures.holidays, { country: 'DE', state: 'BY', region: 'A' }).getRules()
       const res = getDays(obj, ['de'])

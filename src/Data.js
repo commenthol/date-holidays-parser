@@ -10,8 +10,8 @@ import _ from './utils.js'
  */
 export default class Data {
   constructor (data, country, state, region) {
-    this.opts = Data.splitName(country, state, region) || {}
     this.data = data || {}
+    this.opts = this._resolveCodes(Data.splitName(country, state, region)) || {}
   }
 
   /**
@@ -35,7 +35,7 @@ export default class Data {
    * @return {Object} shortcode-name value pairs. E.g. `{ b: 'Burgenland', ... }`
    */
   getStates (country, lang) {
-    const opts = Object.assign({}, Data.splitName(country))
+    const opts = this._resolveCodes(Object.assign({}, Data.splitName(country)))
     const states = _.get(this.data, ['holidays', opts.country, 'states']) ||
       _.get(this.data, ['holidays', opts.country, 'regions'])
     if (states) {
@@ -56,7 +56,7 @@ export default class Data {
    * @return {Object} shortcode-name value pairs.
    */
   getRegions (country, state, lang) {
-    const opts = Object.assign({}, Data.splitName(country, state))
+    const opts = this._resolveCodes(Object.assign({}, Data.splitName(country, state)))
     const regions = _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions'])
 
     if (regions) {
@@ -113,7 +113,7 @@ export default class Data {
    */
   getRules (country, state, region) {
     const rules = {}
-    const opts = Data.splitName(country, state, region) || this.opts
+    const opts = this._resolveCodes(Data.splitName(country, state, region)) || this.opts
 
     if (!(opts && opts.country)) {
       return rules
@@ -189,6 +189,22 @@ export default class Data {
   }
 
   /**
+   * resolve state and region codes to the keys used in the data, ignoring case
+   * @private
+   * @param {Object} [opts]
+   * @return {Object} opts with resolved codes
+   */
+  _resolveCodes (opts) {
+    if (!(opts && opts.country)) return opts
+    const country = _.get(this.data, ['holidays', opts.country])
+    if (!country) return opts
+    const states = country.states || country.regions
+    opts.state = findKey(states, opts.state)
+    opts.region = findKey(_.get(states, [opts.state, 'regions']), opts.region)
+    return opts
+  }
+
+  /**
    * get a object from the data tree
    * @private
    * @param {String} key - key to look at
@@ -233,10 +249,17 @@ Data.majorLang = function (lang) {
  * @private
  */
 function toUpperCase (obj) {
-  ;['country', 'state', 'region'].forEach(key => {
-    if (typeof obj[key] === 'string') {
-      obj[key] = obj[key].toUpperCase()
-    }
-  })
+  if (typeof obj.country === 'string') {
+    obj.country = obj.country.toUpperCase()
+  }
   return obj
+}
+
+/**
+ * @private
+ */
+function findKey (obj, code) {
+  if (!obj || typeof code !== 'string' || code in obj) return code
+  const upper = code.toUpperCase()
+  return Object.keys(obj).find(key => key.toUpperCase() === upper) || code
 }
