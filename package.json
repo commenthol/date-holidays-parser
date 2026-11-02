@@ -65,7 +65,6 @@
     "date-bengali-revised": "^2.0.2",
     "date-chinese": "^2.1.4",
     "date-easter": "^1.0.3",
-    "deepmerge": "^4.3.1",
     "jalaali-js": "^1.2.7",
     "moment-timezone": "^0.5.47"
   },

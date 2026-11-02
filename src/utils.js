@@ -2,8 +2,6 @@
  * lodash compatible methods
  */
 
-import deepmerge from 'deepmerge'
-
 /**
  * get value at `keys` from `object`
  * @example
@@ -46,7 +44,66 @@ export const omit = (object, props = []) => Object.keys(object)
     return o
   }, {})
 
-export const merge = (...args) => deepmerge.all(args)
+// deep merge adapted from deepmerge 4.3.1 (MIT, https://github.com/TehShrike/deepmerge),
+// with the same behaviour as `deepmerge.all()`, so that the dependency can be dropped
+const isMergeableObject = (value) => {
+  if (!value || typeof value !== 'object') return false
+  const tag = Object.prototype.toString.call(value)
+  return tag !== '[object RegExp]' && tag !== '[object Date]'
+}
+
+const emptyTarget = (value) => Array.isArray(value) ? [] : {}
+
+// own enumerable keys and symbols; `__proto__` is never copied
+const getKeys = (object) => Object.keys(object)
+  .concat(Object.getOwnPropertySymbols(object)
+    .filter((symbol) => Object.prototype.propertyIsEnumerable.call(object, symbol)))
+  .filter((key) => key !== '__proto__')
+
+// `in` throws on primitives; they have no properties to merge into
+const isOnObject = (object, key) => object !== null &&
+  (typeof object === 'object' || typeof object === 'function') &&
+  key in object
+
+// properties inherited by `target` (e.g. `constructor`) are not overwritten
+const isUnsafeProperty = (target, key) => isOnObject(target, key) &&
+  !(Object.prototype.hasOwnProperty.call(target, key) &&
+    Object.prototype.propertyIsEnumerable.call(target, key))
+
+const clone = (value) => isMergeableObject(value)
+  ? deepMerge(emptyTarget(value), value)
+  : value
+
+const mergeObject = (target, source) => {
+  const destination = {}
+  if (isMergeableObject(target)) {
+    getKeys(target).forEach((key) => {
+      destination[key] = clone(target[key])
+    })
+  }
+  getKeys(source).forEach((key) => {
+    if (isUnsafeProperty(target, key)) return
+    if (isOnObject(target, key) && isMergeableObject(source[key])) {
+      destination[key] = deepMerge(target[key], source[key])
+    } else {
+      destination[key] = clone(source[key])
+    }
+  })
+  return destination
+}
+
+function deepMerge (target, source) {
+  const sourceIsArray = Array.isArray(source)
+  if (sourceIsArray !== Array.isArray(target)) return clone(source)
+  if (sourceIsArray) return target.concat(source).map(clone)
+  return mergeObject(target, source)
+}
+
+/**
+ * deep merge `args` into a new object; same behaviour as `deepmerge.all(args)`
+ * (arrays are concatenated, Date and RegExp are kept by reference)
+ */
+export const merge = (...args) => args.reduce((prev, next) => deepMerge(prev, next), {})
 
 export const toNumber = (num, def) => {
   const _num = Number(num)
