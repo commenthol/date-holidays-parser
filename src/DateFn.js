@@ -20,6 +20,7 @@ export default class DateFn {
     this.opts = holidays ? holidays[ruleStr] : {}
     this.event = undefined
     this.cache = new Map()
+    this.calculating = new Set()
   }
 
   /**
@@ -32,29 +33,38 @@ export default class DateFn {
       return this
     }
 
-    let ruleFn // current rule
-    const postProc = new PostRule(this.ruleStr, this.opts, this.holidays)
+    this.calculating.add(year)
+    try {
+      let ruleFn // current rule
+      const postProc = new PostRule(this.ruleStr, this.opts, this.holidays)
 
-    this.rules.forEach((rule) => {
-      if (rule.fn) {
-        const calEvent = new CalEventFactory(rule)
-          .inYear(year - 1) // run over neighboring dates to catch overlaps
-          .inYear(year)
-          .inYear(year + 1)
-        postProc.push(calEvent)
-        ruleFn = new Rule(calEvent)
-      } else {
-        if (ruleFn.resolve(rule)) {
-          postProc.resolve(rule, year)
+      this.rules.forEach((rule) => {
+        if (rule.fn) {
+          const calEvent = new CalEventFactory(rule)
+            .inYear(year - 1) // run over neighboring dates to catch overlaps
+            .inYear(year)
+            .inYear(year + 1)
+          postProc.push(calEvent)
+          ruleFn = new Rule(calEvent)
+        } else {
+          if (ruleFn.resolve(rule)) {
+            postProc.resolve(rule, year)
+          }
         }
-      }
-    })
+      })
 
-    const event = postProc.getEvent(year)
-    this.cache.set(year, event)
+      const event = postProc.getEvent(year)
+      this.cache.set(year, event)
 
-    this.event = event
-    return this
+      this.event = event
+      return this
+    } finally {
+      this.calculating.delete(year)
+    }
+  }
+
+  isCalculating (year) {
+    return this.calculating.has(year)
   }
 
   get (timezone) {

@@ -81,7 +81,8 @@ export default class PostRule {
     // get all holidays of the given year
     for (const ruleStr in this.holidays) {
       const dateFn = this.holidays[ruleStr].fn
-      if (dateFn && dateFn.ruleStr !== this.ruleStr) {
+      // Avoid recursively resolving a conditional rule already in progress.
+      if (dateFn && dateFn.ruleStr !== this.ruleStr && !dateFn.isCalculating(year)) {
         const tmpEv = dateFn.inYear(year)
         const tmpEvType = _get(tmpEv, 'opts.type') || 'public'
         for (let i = 0; i < this.events.length; i++) {
