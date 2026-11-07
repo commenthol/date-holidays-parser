@@ -1,9 +1,7 @@
-/* global describe, it */
-
 import assert from 'assert'
 import { fixResult } from './helpers.js'
 import Rule from '../src/Rule.js'
-import CalEventFactory from '../src/CalEventFactory.js'
+import { CalEventFactory } from '../src/CalEventFactory.js'
 
 import testcases from './fixtures/parser.cjs'
 
@@ -13,11 +11,13 @@ describe('#Rule', function () {
     const ruleFn = new Rule()
     const calEvent = new CalEventFactory(tc[0]).inYear(2018)
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2018-01-08 00:00:00',
-      start: 'mon 2018-01-08 00:00',
-      end: 'tue 2018-01-09 00:00'
-    }]
+    const exp = [
+      {
+        date: '2018-01-08 00:00:00',
+        start: 'mon 2018-01-08 00:00',
+        end: 'tue 2018-01-09 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -26,11 +26,13 @@ describe('#Rule', function () {
     const ruleFn = new Rule()
     const calEvent = new CalEventFactory(tc[0]).inYear(2015)
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2015-01-01 14:00:00',
-      start: 'thu 2015-01-01 14:00',
-      end: 'fri 2015-01-02 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-01-01 14:00:00',
+        start: 'thu 2015-01-01 14:00',
+        end: 'fri 2015-01-02 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -39,11 +41,13 @@ describe('#Rule', function () {
     const ruleFn = new Rule()
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     ruleFn.setEvent(calEvent).resolve(tc[1]).resolve(tc[2])
-    const exp = [{
-      date: '2016-05-01 00:00:00',
-      start: 'sun 2016-05-01 00:00',
-      end: 'mon 2016-05-02 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-05-01 00:00:00',
+        start: 'sun 2016-05-01 00:00',
+        end: 'mon 2016-05-02 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -52,11 +56,13 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2016-11-16 00:00:00',
-      start: 'wed 2016-11-16 00:00',
-      end: 'thu 2016-11-17 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-11-16 00:00:00',
+        start: 'wed 2016-11-16 00:00',
+        end: 'thu 2016-11-17 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -65,43 +71,61 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2016-11-19 00:00:00',
-      start: 'sat 2016-11-19 00:00',
-      end: 'sun 2016-11-20 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-11-19 00:00:00',
+        start: 'sat 2016-11-19 00:00',
+        end: 'sun 2016-11-20 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateDir using day count before omitting saturday', function () {
     const tc = [
       { fn: 'gregorian', year: undefined, month: 11, day: 23 },
-      { rule: 'dateDir', count: 4, weekday: 'day', direction: 'before', omit: ['saturday'] }
+      {
+        rule: 'dateDir',
+        count: 4,
+        weekday: 'day',
+        direction: 'before',
+        omit: ['saturday']
+      }
     ]
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2016-11-18 00:00:00',
-      start: 'fri 2016-11-18 00:00',
-      end: 'sat 2016-11-19 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-11-18 00:00:00',
+        start: 'fri 2016-11-18 00:00',
+        end: 'sat 2016-11-19 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
   it('can resolve rule dateDir using day count after omitting saturday, sunday', function () {
     const tc = [
       { fn: 'gregorian', year: undefined, month: 11, day: 23 },
-      { rule: 'dateDir', count: 4, weekday: 'day', direction: 'after', omit: ['saturday', 'sunday'] }
+      {
+        rule: 'dateDir',
+        count: 4,
+        weekday: 'day',
+        direction: 'after',
+        omit: ['saturday', 'sunday']
+      }
     ]
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2016-11-28 00:00:00',
-      start: 'mon 2016-11-28 00:00',
-      end: 'tue 2016-11-29 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-11-28 00:00:00',
+        start: 'mon 2016-11-28 00:00',
+        end: 'tue 2016-11-29 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -110,11 +134,13 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2016-12-01 00:00:00',
-      start: 'thu 2016-12-01 00:00',
-      end: 'fri 2016-12-02 00:00'
-    }]
+    const exp = [
+      {
+        date: '2016-12-01 00:00:00',
+        start: 'thu 2016-12-01 00:00',
+        end: 'fri 2016-12-02 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -123,11 +149,13 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2015)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2015-11-01 00:00:00',
-      start: 'sun 2015-11-01 00:00',
-      end: 'mon 2015-11-02 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-11-01 00:00:00',
+        start: 'sun 2015-11-01 00:00',
+        end: 'mon 2015-11-02 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -136,11 +164,13 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2015)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2015-09-22 00:00:00',
-      start: 'tue 2015-09-22 00:00',
-      end: 'wed 2015-09-23 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-09-22 00:00:00',
+        start: 'tue 2015-09-22 00:00',
+        end: 'wed 2015-09-23 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -153,11 +183,13 @@ describe('#Rule', function () {
     ruleFn.resolve(tc[1])
     ruleFn.resolve(tc[2])
 
-    const exp = [{
-      date: '2019-04-04 00:00:00',
-      start: 'thu 2019-04-04 00:00',
-      end: 'fri 2019-04-05 00:00'
-    }]
+    const exp = [
+      {
+        date: '2019-04-04 00:00:00',
+        start: 'thu 2019-04-04 00:00',
+        end: 'fri 2019-04-05 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 
@@ -166,11 +198,13 @@ describe('#Rule', function () {
     const calEvent = new CalEventFactory(tc[0]).inYear(2013)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
-    const exp = [{
-      date: '2013-09-22 00:00:00',
-      start: 'sun 2013-09-22 00:00',
-      end: 'mon 2013-09-23 00:00'
-    }]
+    const exp = [
+      {
+        date: '2013-09-22 00:00:00',
+        start: 'sun 2013-09-22 00:00',
+        end: 'mon 2013-09-23 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(calEvent.get()), exp)
   })
 })

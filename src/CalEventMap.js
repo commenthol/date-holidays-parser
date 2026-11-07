@@ -6,13 +6,17 @@ import CalDate from 'caldate'
  * `this.calender` needs to be set in child classes
  */
 export default class CalEventMap extends CalEvent {
-  constructor (opts) {
+  constructor(opts) {
     super(opts)
     this.calendar = {}
   }
 
-  inYear (year) {
-    if (!(this.calendar[year] && this.calendar[year + 1] && this.calendar[year - 1])) {
+  inYear(year) {
+    if (!(
+      this.calendar[year] &&
+      this.calendar[year + 1] &&
+      this.calendar[year - 1]
+    )) {
       return this
     }
 
@@ -30,11 +34,11 @@ export default class CalEventMap extends CalEvent {
             continue
           }
         }
-        const d = (new CalDate({
+        const d = new CalDate({
           year: y,
           month: firstDays[i] + 1,
           day: firstDays[i + 1]
-        })).setOffset(this.opts.day - 1)
+        }).setOffset(this.opts.day - 1)
 
         if (d.year === year) {
           this.dates.push(d)

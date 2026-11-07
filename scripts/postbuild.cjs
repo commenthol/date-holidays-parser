@@ -1,4 +1,3 @@
-/* eslint-disable n/no-path-concat */
 const fs = require('fs')
 
 function replace () {

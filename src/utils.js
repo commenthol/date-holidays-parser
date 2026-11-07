@@ -6,6 +6,10 @@ import deepmerge from 'deepmerge'
 
 /**
  * get value at `keys` from `object`
+ * @param {any} obj
+ * @param {string|string[]} [keys]
+ * @param {any} [def]
+ * @returns {any}
  * @example
  * get({a: {b: {c: 2}}}, ['a', 'b', 'c']) //> 2
  */
@@ -13,13 +17,21 @@ export const get = (obj, keys = [], def) => {
   let o = obj
   if (typeof keys === 'string') keys = keys.split('.')
   for (const key of keys) {
-    if (o && o[key]) { o = o[key] } else { return def }
+    if (o && o[key]) {
+      o = o[key]
+    } else {
+      return def
+    }
   }
   return o
 }
 
 /**
  * set `value` at `keys` from `object`
+ * @param {any} obj
+ * @param {string[]} keys
+ * @param {any} value
+ * @returns {any}
  * @example
  * set({a: {b: {c: 2}}}, ['a', 'b', 'c'], 3)
  */
@@ -38,16 +50,29 @@ export const set = (obj, keys = [], value) => {
 
 /**
  * omit `object` properties `props`
+ * @param {object} object
+ * @param {string[]} [props]
+ * @returns {object}
  */
-export const omit = (object, props = []) => Object.keys(object)
-  .filter(p => !~props.indexOf(p))
-  .reduce((o, p) => {
-    p in object && (o[p] = object[p])
-    return o
-  }, {})
+export const omit = (object, props = []) =>
+  Object.keys(object)
+    .filter((p) => !~props.indexOf(p))
+    .reduce((o, p) => {
+      p in object && (o[p] = object[p])
+      return o
+    }, {})
 
+/**
+ * @param {...object} args
+ * @returns {object}
+ */
 export const merge = (...args) => deepmerge.all(args)
 
+/**
+ * @param {string|number} num
+ * @param {number} [def]
+ * @returns {number}
+ */
 export const toNumber = (num, def) => {
   const _num = Number(num)
   return isNaN(_num) ? def : _num

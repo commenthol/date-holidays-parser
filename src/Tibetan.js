@@ -6,11 +6,13 @@ import {
 import CalEvent from './CalEvent.js'
 import CalDate from 'caldate'
 
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+
 export default class Tibetan extends CalEvent {
   /**
-   * @param {object} [opts]
+   * @param {EventOptions} [opts]
    */
-  constructor (opts) {
+  constructor(opts) {
     opts = opts || {}
     super(opts)
     switch (opts.fn) {
@@ -26,9 +28,16 @@ export default class Tibetan extends CalEvent {
     }
   }
 
-  inYear (year) {
+  inYear(year) {
     const opts = this.opts
-    this.cal.set(opts.cycle, opts.year, opts.month, opts.leapMonth, opts.day, opts.leapDay)
+    this.cal.set(
+      opts.cycle,
+      opts.year,
+      opts.month,
+      opts.leapMonth,
+      opts.day,
+      opts.leapDay
+    )
     const date = this.cal.toGregorian(year)
     const d = new CalDate(date)
     this.dates.push(d)

@@ -1,7 +1,7 @@
 import moment from 'moment-timezone'
 import { pad0 } from '../src/internal/utils.js'
 
-export function toIso (date) {
+export function toIso(date) {
   const days = 'sun,mon,tue,wed,thu,fri,sat'.split(',')
 
   const y = pad0(date.getFullYear(), 4)
@@ -14,7 +14,7 @@ export function toIso (date) {
   return t + ' ' + y + '-' + m + '-' + d + ' ' + H + ':' + M
 }
 
-export function fixResult (arr) {
+export function fixResult(arr) {
   return arr.map((item) => {
     return Object.assign({}, item, {
       start: toIso(item.start),
@@ -23,7 +23,7 @@ export function fixResult (arr) {
   })
 }
 
-function toString (date) {
+function toString(date) {
   const year = pad0(date.getFullYear(), 4)
   const month = pad0(date.getMonth() + 1)
   const day = pad0(date.getDate())
@@ -31,17 +31,19 @@ function toString (date) {
   const minutes = pad0(date.getMinutes())
   const seconds = pad0(date.getSeconds())
 
-  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+  return (
+    year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+  )
 }
 
-export function moveToTimezone (date, timezone) {
+export function moveToTimezone(date, timezone) {
   if (!timezone) {
     return date
   }
   return new Date(moment.tz(toString(date), timezone).format())
 }
 
-export function localDate (str) {
+export function localDate(str) {
   let m = /^(\d+)-(\d+)-(\d+) (\d+):(\d+):?(\d+)?$/.exec(str)
   if (m) {
     m.shift()

@@ -3,12 +3,12 @@ import CalEventMap from './CalEventMap.js'
 import { calendar } from './internal/hijri-calendar.js'
 
 export default class Hijri extends CalEventMap {
-  constructor (opts) {
+  constructor(opts) {
     super(opts)
     this.calendar = calendar
   }
 
-  get (timezone) {
+  get(timezone) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)
       const o = {

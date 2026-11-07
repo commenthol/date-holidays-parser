@@ -5,13 +5,18 @@
 
 import { toNumber } from './internal/utils.js'
 
-const WEEKDAYS = 'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.split('|')
+/** @typedef {import('./types.js').RuleToken} RuleToken */
+/** @typedef {{ str: string, rule: string }} ParserState */
+/** @typedef {((name: string|RegExp, val: string|RegExp) => RegexBuilder) & (() => RegExp)} RegexBuilder */
 
-const lowerCaseWeekday = (weekday) => WEEKDAYS.includes(weekday) ? weekday.toLowerCase() : weekday
+const WEEKDAYS =
+  'Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday'.split('|')
 
-const lowerCaseWeekdayWithoutDay = weekday => (weekday === 'day')
-  ? undefined
-  : lowerCaseWeekday(weekday)
+const lowerCaseWeekday = (weekday) =>
+  WEEKDAYS.includes(weekday) ? weekday.toLowerCase() : weekday
+
+const lowerCaseWeekdayWithoutDay = (weekday) =>
+  weekday === 'day' ? undefined : lowerCaseWeekday(weekday)
 
 /**
  * regular expressions to parse holiday statements
@@ -20,27 +25,47 @@ const grammar = (function () {
   /**
    * combines different regexes
    * @private
-   * @return {RegExp} combined regex
+   * @param {RegExp} regex
+   * @param {string} [opt]
+   * @returns {RegexBuilder}
    */
-  function replace (regex, opt) {
-    regex = regex.source
+  function replace(regex, opt) {
+    let source = regex.source
     opt = opt || ''
-    return function self (name, val) {
-      if (!name) return new RegExp(regex, opt)
-      val = val.source || val
-      val = val.replace(/(^|[^[])\^/g, '$1')
-      regex = regex.replace(name, val)
+    /**
+     * @overload
+     * @param {string|RegExp} name
+     * @param {string|RegExp} val
+     * @returns {RegexBuilder}
+     */
+    /** @overload @returns {RegExp} */
+    /**
+     * @param {string|RegExp} [name]
+     * @param {string|RegExp} [val]
+     * @returns {RegExp|RegexBuilder}
+     */
+    function self(name, val) {
+      if (!name) return new RegExp(source, opt)
+      let value = val instanceof RegExp ? val.source : val || ''
+      value = value.replace(/(^|[^[])\^/g, '$1')
+      source = source.replace(name, value)
       return self
     }
+    return self
   }
 
   // raw rules
   const raw = {
-    _weekdays: '[Ss]unday|[Mm]onday|[Tt]uesday|[Ww]ednesday|[Tt]hursday|[Ff]riday|[Ss]aturday|day',
-    _months: 'January|February|March|April|May|June|July|August|September|October|November|December',
-    _islamicMonths: 'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
-    _hebrewMonths: 'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|AdarII|Adar',
-    _jalaaliMonths: 'Farvardin|Ordibehesht|Khordad|Tir|Mordad|Shahrivar|Mehr|Aban|Azar|Dey|Bahman|Esfand',
+    _weekdays:
+      '[Ss]unday|[Mm]onday|[Tt]uesday|[Ww]ednesday|[Tt]hursday|[Ff]riday|[Ss]aturday|day',
+    _months:
+      'January|February|March|April|May|June|July|August|September|October|November|December',
+    _islamicMonths:
+      'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
+    _hebrewMonths:
+      'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|AdarII|Adar',
+    _jalaaliMonths:
+      'Farvardin|Ordibehesht|Khordad|Tir|Mordad|Shahrivar|Mehr|Aban|Azar|Dey|Bahman|Esfand',
     _days: /(_weekdays)s?/,
     _direction: /(before|after|next|previous|in)/,
     _counts: /(\d+)(?:st|nd|rd|th)?/,
@@ -55,24 +80,33 @@ const grammar = (function () {
 
     julian: /^julian date/,
     easter: /^(easter|orthodox)(?: _count_days)?/,
-    equinox: /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)(?:_timezone)?/,
+    equinox:
+      /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)(?:_timezone)?/,
     hebrew: /^0?(\d{1,2}) (_hebrewMonths)(?: 0*(\d{1,}))?/,
     islamic: /^0?(\d{1,2}) (_islamicMonths)(?: 0*(\d{1,}))?/,
     jalaali: /^0?(\d{1,2}) (_jalaaliMonths)(?: 0*(\d{1,}))?/,
-    chineseLunar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
-    chineseSolar: /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-(\d{1,2}) solarterm/,
-    bengaliRevised: /^(bengali-revised) (?:-?0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
-    tibetanLunar: /^(tibetan|mongolian|bhutanese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})(?:-([01]))?/,
+    chineseLunar:
+      /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
+    chineseSolar:
+      /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-(\d{1,2}) solarterm/,
+    bengaliRevised:
+      /^(bengali-revised) (?:-?0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
+    tibetanLunar:
+      /^(tibetan|mongolian|bhutanese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})(?:-([01]))?/,
 
     modifier: /^(substitutes|and|if equal|then|if)\b/,
-    rule_year: /^(?:in (even|odd|leap|non-leap) years|every (\d+) years? since 0*(\d{1,4}))/,
+    rule_year:
+      /^(?:in (even|odd|leap|non-leap) years|every (\d+) years? since 0*(\d{1,4}))/,
     rule_weekday: /(not )?on ((?:(?:_weekdays)(?:,\s?)?)*)/,
-    rule_date_if_then: /^if ((?:(?:_weekdays)(?:,\s?)?)*) then (?:_direction _days)?/,
+    rule_date_if_then:
+      /^if ((?:(?:_weekdays)(?:,\s?)?)*) then (?:_direction _days)?/,
     rule_day_dir_date: /^(?:_counts )?_days _direction/,
     rule_bridge: /^is (?:_type )?holiday/,
-    rule_if_holiday: /^if is (?:_type )?holiday then (?:_counts )?(?:_direction _days)?(?: omit ((?:(?:_weekdays)(?:,\s?)?)*))?/,
+    rule_if_holiday:
+      /^if is (?:_type )?holiday then (?:_counts )?(?:_direction _days)?(?: omit ((?:(?:_weekdays)(?:,\s?)?)*))?/,
     rule_same_day: /^#\d+/,
-    rule_active_from: /^since (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)(?: and|)/,
+    rule_active_from:
+      /^since (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)(?: and|)/,
     rule_active_to: /^prior to (0*\d{1,4})(?:-0*(\d{1,2})(?:-0*(\d{1,2})|)|)/,
 
     // rule_type_if_then: /if ((?:(?:_weekdays)(?:,\s?)?)*) then/,
@@ -81,57 +115,39 @@ const grammar = (function () {
 
     space: /^\s+/
   }
-  /* eslint-disable func-call-spacing */
-  raw._days = replace(raw._days)
-  (/_weekdays/, raw._weekdays)
-  ()
-  raw.julian = replace(raw.julian, '')
-  (/date/, raw.date)
-  ()
-  raw.easter = replace(raw.easter, '')
-  (/_count_days/, raw._count_days)
-  ()
-  raw.equinox = replace(raw.equinox, '')
-  (/_count_days/g, raw._count_days)
-  (/_direction/g, raw._direction)
-  (/_timezone/g, raw._timezone)
-  ()
-  raw.hebrew = replace(raw.hebrew, '')
-  (/_hebrewMonths/, raw._hebrewMonths)
-  ()
-  raw.islamic = replace(raw.islamic, '')
-  (/_islamicMonths/, raw._islamicMonths)
-  ()
-  raw.jalaali = replace(raw.jalaali, '')
-  (/_jalaaliMonths/, raw._jalaaliMonths)
-  ()
-  raw.dateMonth = replace(raw.dateMonth)
-  (/_months/, raw._months)
-  ()
 
-  raw.rule_weekday = replace(raw.rule_weekday, '')
-  (/_weekdays/g, raw._weekdays)
-  ()
-  raw.rule_date_if_then = replace(raw.rule_date_if_then, '')
-  (/_direction/g, raw._direction)
-  (/_weekdays/g, raw._weekdays)
-  (/_days/g, raw._days)
-  ()
-  raw.rule_bridge = replace(raw.rule_bridge, '')
-  (/_type/g, raw._type)
-  ()
-  raw.rule_if_holiday = replace(raw.rule_if_holiday, '')
-  (/_type/g, raw._type)
-  (/_counts/g, raw._counts)
-  (/_direction/g, raw._direction)
-  (/_days/g, raw._days)
-  (/_weekdays/g, raw._weekdays)
-  ()
-  raw.rule_day_dir_date = replace(raw.rule_day_dir_date, '')
-  (/_counts/, raw._counts)
-  (/_days/g, raw._days)
-  (/_direction/g, raw._direction)
-  ()
+  raw._days = replace(raw._days)(/_weekdays/, raw._weekdays)()
+  raw.julian = replace(raw.julian, '')(/date/, raw.date)()
+  raw.easter = replace(raw.easter, '')(/_count_days/, raw._count_days)()
+  raw.equinox = replace(raw.equinox, '')(/_count_days/g, raw._count_days)(
+    /_direction/g,
+    raw._direction
+  )(/_timezone/g, raw._timezone)()
+  raw.hebrew = replace(raw.hebrew, '')(/_hebrewMonths/, raw._hebrewMonths)()
+  raw.islamic = replace(raw.islamic, '')(/_islamicMonths/, raw._islamicMonths)()
+  raw.jalaali = replace(raw.jalaali, '')(/_jalaaliMonths/, raw._jalaaliMonths)()
+  raw.dateMonth = replace(raw.dateMonth)(/_months/, raw._months)()
+
+  raw.rule_weekday = replace(raw.rule_weekday, '')(
+    /_weekdays/g,
+    raw._weekdays
+  )()
+  raw.rule_date_if_then = replace(raw.rule_date_if_then, '')(
+    /_direction/g,
+    raw._direction
+  )(/_weekdays/g, raw._weekdays)(/_days/g, raw._days)()
+  raw.rule_bridge = replace(raw.rule_bridge, '')(/_type/g, raw._type)()
+  raw.rule_if_holiday = replace(raw.rule_if_holiday, '')(/_type/g, raw._type)(
+    /_counts/g,
+    raw._counts
+  )(/_direction/g, raw._direction)(/_days/g, raw._days)(
+    /_weekdays/g,
+    raw._weekdays
+  )()
+  raw.rule_day_dir_date = replace(raw.rule_day_dir_date, '')(
+    /_counts/,
+    raw._counts
+  )(/_days/g, raw._days)(/_direction/g, raw._direction)()
   // raw.rule_type_if_then = replace(raw.rule_type_if_then, '')
   // (/_direction/g, raw._direction)
   // (/_days/g, raw._days)
@@ -165,13 +181,13 @@ const grammar = (function () {
   })
 
   return raw
-  /* eslint-enable */
 })()
 
 // console.log(grammar)
 
 export default class Parser {
-  constructor (fns) {
+  /** @param {string[]} [fns] */
+  constructor(fns) {
     this.fns = fns || [
       '_julian',
       '_date',
@@ -198,10 +214,12 @@ export default class Parser {
       '_ruleActiveFrom',
       '_ruleActiveTo'
     ]
+    /** @type {RuleToken[]} */
     this.tokens = []
   }
 
-  parse (rule) {
+  /** @param {string} rule @returns {RuleToken[]} */
+  parse(rule) {
     this.setup = { str: rule, rule }
     this.error = 0
     this.tokens = []
@@ -215,7 +233,7 @@ export default class Parser {
    * dateDir: [dateDir2, dateDir1, fn] --> [fn, dateDir1, dateDir2]
    * dateIfThen: [fn, dateIfThen1, dateIfThen2] --> [fn, dateIfThen1, dateIfThen2]
    */
-  _reorder () {
+  _reorder() {
     const tmp = []
     const res = []
 
@@ -241,7 +259,8 @@ export default class Parser {
     this.tokens = res
   }
 
-  _tokenize (o) {
+  /** @param {ParserState} o */
+  _tokenize(o) {
     let last
     while (o.str) {
       for (let i = 0; i < this.fns.length; i++) {
@@ -256,11 +275,12 @@ export default class Parser {
     }
   }
 
-  _shorten (o, cap0) {
+  /** @param {ParserState} o @param {string} cap0 */
+  _shorten(o, cap0) {
     o.str = o.str.substr(cap0.length, o.str.length)
   }
 
-  _date (o) {
+  _date(o) {
     let cap
     if ((cap = grammar.date.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -276,7 +296,7 @@ export default class Parser {
     }
   }
 
-  _julian (o) {
+  _julian(o) {
     let cap
     if ((cap = grammar.julian.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -292,7 +312,7 @@ export default class Parser {
     }
   }
 
-  _easter (o) {
+  _easter(o) {
     let cap
     if ((cap = grammar.easter.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -307,7 +327,7 @@ export default class Parser {
     }
   }
 
-  _equinox (o) {
+  _equinox(o) {
     let cap
     if ((cap = grammar.equinox.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -322,7 +342,7 @@ export default class Parser {
     }
   }
 
-  _hebrew (o) {
+  _hebrew(o) {
     let cap
 
     if ((cap = grammar.hebrew.exec(o.str))) {
@@ -339,7 +359,7 @@ export default class Parser {
     }
   }
 
-  _islamic (o) {
+  _islamic(o) {
     let cap
     if ((cap = grammar.islamic.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -355,7 +375,7 @@ export default class Parser {
     }
   }
 
-  _jalaali (o) {
+  _jalaali(o) {
     let cap
     if ((cap = grammar.jalaali.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -371,7 +391,7 @@ export default class Parser {
     }
   }
 
-  _chineseSolar (o) {
+  _chineseSolar(o) {
     let cap
     if ((cap = grammar.chineseSolar.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -389,7 +409,7 @@ export default class Parser {
     }
   }
 
-  _chineseLunar (o) {
+  _chineseLunar(o) {
     let cap
     if ((cap = grammar.chineseLunar.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -408,7 +428,7 @@ export default class Parser {
     }
   }
 
-  _bengaliRevised (o) {
+  _bengaliRevised(o) {
     let cap
     if ((cap = grammar.bengaliRevised.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -424,7 +444,7 @@ export default class Parser {
     }
   }
 
-  _tibetanLunar (o) {
+  _tibetanLunar(o) {
     let cap
     if ((cap = grammar.tibetanLunar.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -443,7 +463,7 @@ export default class Parser {
     }
   }
 
-  _dateMonth (o) {
+  _dateMonth(o) {
     let cap
     if ((cap = grammar.dateMonth.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -459,7 +479,7 @@ export default class Parser {
     }
   }
 
-  _space (o) {
+  _space(o) {
     let cap
     if ((cap = grammar.space.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -467,7 +487,7 @@ export default class Parser {
     }
   }
 
-  _ruleSameDay (o) {
+  _ruleSameDay(o) {
     let cap
     if ((cap = grammar.rule_same_day.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -475,7 +495,7 @@ export default class Parser {
     }
   }
 
-  _ruleModifier (o) {
+  _ruleModifier(o) {
     let cap
     if ((cap = grammar.modifier.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -488,7 +508,7 @@ export default class Parser {
     }
   }
 
-  _ruleTime (o) {
+  _ruleTime(o) {
     let cap
     if ((cap = grammar.time.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -504,7 +524,7 @@ export default class Parser {
     }
   }
 
-  _ruleDuration (o) {
+  _ruleDuration(o) {
     let cap
     if ((cap = grammar.duration.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -517,21 +537,24 @@ export default class Parser {
       const res = {
         rule: 'duration',
         // duration is calculated in hours
-        duration: (tmp.days * 24) + tmp.hours + (tmp.minutes / 60)
+        duration: tmp.days * 24 + tmp.hours + tmp.minutes / 60
       }
       this.tokens.push(res)
       return true
     }
   }
 
-  _ruleDateIfThen (o) {
+  _ruleDateIfThen(o) {
     let cap
     if ((cap = grammar.rule_date_if_then.exec(o.str))) {
       this._shorten(o, cap[0])
       cap.shift()
       const res = {
         rule: 'dateIfThen',
-        if: (cap.shift()).split(/(?:,\s?)/).map(lowerCaseWeekday),
+        if: cap
+          .shift()
+          .split(/(?:,\s?)/)
+          .map(lowerCaseWeekday),
         direction: cap.shift(),
         then: lowerCaseWeekday(cap.shift())
       }
@@ -547,7 +570,7 @@ export default class Parser {
     }
   }
 
-  _ruleWeekday (o) {
+  _ruleWeekday(o) {
     let cap
     if ((cap = grammar.rule_weekday.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -555,14 +578,17 @@ export default class Parser {
       const res = {
         rule: 'weekday',
         not: !!cap.shift(),
-        if: (cap.shift()).split(/(?:,\s?)/).map(lowerCaseWeekday)
+        if: cap
+          .shift()
+          .split(/(?:,\s?)/)
+          .map(lowerCaseWeekday)
       }
       this.tokens.push(res)
       return true
     }
   }
 
-  _ruleDateDir (o) {
+  _ruleDateDir(o) {
     let cap
     if ((cap = grammar.rule_day_dir_date.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -581,7 +607,7 @@ export default class Parser {
     }
   }
 
-  _ruleYear (o) {
+  _ruleYear(o) {
     let cap
     if ((cap = grammar.rule_year.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -597,7 +623,7 @@ export default class Parser {
     }
   }
 
-  _ruleIfHoliday (o) {
+  _ruleIfHoliday(o) {
     let cap
     if ((cap = grammar.rule_if_holiday.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -608,14 +634,17 @@ export default class Parser {
         count: toNumber(cap.shift()) || 1,
         direction: cap.shift(),
         weekday: lowerCaseWeekday(cap.shift()),
-        omit: (cap.shift() || '').split(/(?:,\s?)/).map(lowerCaseWeekdayWithoutDay).filter(Boolean)
+        omit: (cap.shift() || '')
+          .split(/(?:,\s?)/)
+          .map(lowerCaseWeekdayWithoutDay)
+          .filter(Boolean)
       }
       this.tokens.push(res)
       return true
     }
   }
 
-  _ruleBridge (o) {
+  _ruleBridge(o) {
     let cap
     if ((cap = grammar.rule_bridge.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -629,7 +658,7 @@ export default class Parser {
     }
   }
 
-  _ruleActiveFrom (o) {
+  _ruleActiveFrom(o) {
     let cap
     if ((cap = grammar.rule_active_from.exec(o.str))) {
       this._shorten(o, cap[0])
@@ -645,7 +674,7 @@ export default class Parser {
     }
   }
 
-  _ruleActiveTo (o) {
+  _ruleActiveTo(o) {
     let cap
     if ((cap = grammar.rule_active_to.exec(o.str))) {
       this._shorten(o, cap[0])

@@ -6,11 +6,13 @@ import {
 import CalEvent from './CalEvent.js'
 import CalDate from 'caldate'
 
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+
 export default class Chinese extends CalEvent {
   /**
-   * @param {object} [opts]
+   * @param {EventOptions} [opts]
    */
-  constructor (opts) {
+  constructor(opts) {
     opts = opts || {}
     super(opts)
     switch (opts.fn) {
@@ -26,7 +28,7 @@ export default class Chinese extends CalEvent {
     }
   }
 
-  inYear (year) {
+  inYear(year) {
     let d
     let jde
     let date

@@ -119,8 +119,7 @@ describe('#Data', function () {
         bs: 'zamjena dan',
         es: 'día sustituto',
         fr: 'jour substitut'
-      }
-      )
+      })
     })
   })
 
@@ -228,7 +227,11 @@ describe('#Data', function () {
     })
 
     it('for {DE BY A}', function () {
-      const obj = new Data(fixtures.holidays, { country: 'DE', state: 'BY', region: 'A' }).getRules()
+      const obj = new Data(fixtures.holidays, {
+        country: 'DE',
+        state: 'BY',
+        region: 'A'
+      }).getRules()
       const res = getDays(obj, ['de'])
       assert.deepStrictEqual(res, exp)
     })
@@ -236,16 +239,15 @@ describe('#Data', function () {
 
   it.skip('devel', function () {
     const obj = new Data(fixtures.holidays, 'gb.sc').getRules()
-    /* eslint-disable no-console */
+
     console.log(obj)
     const res = getDays(obj, ['en'])
     console.log(res)
-    /* eslint-enable */
   })
 })
 
 // reformat days
-function getDays (obj, lang) {
+function getDays(obj, lang) {
   const res = {}
   Object.keys(obj).forEach(function (p) {
     const arr = []

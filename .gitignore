@@ -1,16 +1,15 @@
-node_modules/
 coverage/
-tmp/
 lib/
+node_modules/
+tmp/
+
+.DS_Store
+.eslintcache
+.idea/
+.nyc_output
+
 *.log
 *.tgz
-.eslintcache
-.nyc_output
-yarn.lock
-.DS_Store
-.idea/
 
 pnpm-lock.yaml
-package-lock.json
 yarn.lock
-

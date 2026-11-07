@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "strict": false,
+    "target": "ESNext",
+    "types": ["node"],
+  },
+  "include": [
+    "src/**/*.js"
+  ]
+}

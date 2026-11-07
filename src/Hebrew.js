@@ -3,12 +3,12 @@ import CalEventMap from './CalEventMap.js'
 import { calendar } from './internal/hebrew-calendar.js'
 
 export default class Hebrew extends CalEventMap {
-  constructor (opts) {
+  constructor(opts) {
     super(opts)
     this.calendar = calendar
   }
 
-  get (timezone) {
+  get(timezone) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)
       const o = {

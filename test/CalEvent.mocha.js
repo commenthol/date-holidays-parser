@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { fixResult } from './helpers.js'
 
-import CalEventFactory from '../src/CalEventFactory.js'
+import { CalEventFactory } from '../src/CalEventFactory.js'
 import CalEvent from '../src/CalEvent.js'
 import Equinox from '../src/Equinox.js'
 import Easter from '../src/Easter.js'
@@ -17,11 +17,13 @@ describe('#CalEventFactory', function () {
       day: 3
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-12-03 00:00:00',
-      start: 'thu 2015-12-03 00:00',
-      end: 'fri 2015-12-04 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-12-03 00:00:00',
+        start: 'thu 2015-12-03 00:00',
+        end: 'fri 2015-12-04 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -31,11 +33,13 @@ describe('#CalEventFactory', function () {
       season: 'march'
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-03-20 00:00:00',
-      start: 'fri 2015-03-20 00:00',
-      end: 'sat 2015-03-21 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-03-20 00:00:00',
+        start: 'fri 2015-03-20 00:00',
+        end: 'sat 2015-03-21 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -45,11 +49,13 @@ describe('#CalEventFactory', function () {
       offset: -3
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-04-02 00:00:00',
-      start: 'thu 2015-04-02 00:00',
-      end: 'fri 2015-04-03 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-04-02 00:00:00',
+        start: 'thu 2015-04-02 00:00',
+        end: 'fri 2015-04-03 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -60,11 +66,13 @@ describe('#CalEventFactory', function () {
       month: 1
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-04-04 00:00:00 -0600',
-      start: 'fri 2015-04-03 18:00',
-      end: 'sat 2015-04-04 18:00'
-    }]
+    const exp = [
+      {
+        date: '2015-04-04 00:00:00 -0600',
+        start: 'fri 2015-04-03 18:00',
+        end: 'sat 2015-04-04 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -75,11 +83,13 @@ describe('#CalEventFactory', function () {
       month: 10
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-07-19 00:00:00 -0600',
-      start: 'sat 2015-07-18 18:00',
-      end: 'sun 2015-07-19 18:00'
-    }]
+    const exp = [
+      {
+        date: '2015-07-19 00:00:00 -0600',
+        start: 'sat 2015-07-18 18:00',
+        end: 'sun 2015-07-19 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -91,11 +101,13 @@ describe('#CalEventFactory', function () {
       year: 1440
     })
     const res = date.inYear(2019).get()
-    const exp = [{
-      date: '2019-01-11 00:00:00 -0600',
-      end: 'fri 2019-01-11 18:00',
-      start: 'thu 2019-01-10 18:00'
-    }]
+    const exp = [
+      {
+        date: '2019-01-11 00:00:00 -0600',
+        end: 'fri 2019-01-11 18:00',
+        start: 'thu 2019-01-10 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -107,11 +119,13 @@ describe('#CalEventFactory', function () {
       year: 1441
     })
     const res = date.inYear(2019).get()
-    const exp = [{
-      date: '2019-12-31 00:00:00 -0600',
-      end: 'tue 2019-12-31 18:00',
-      start: 'mon 2019-12-30 18:00'
-    }]
+    const exp = [
+      {
+        date: '2019-12-31 00:00:00 -0600',
+        end: 'tue 2019-12-31 18:00',
+        start: 'mon 2019-12-30 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -123,11 +137,13 @@ describe('#CalEventFactory', function () {
       year: 1443
     })
     const res = date.inYear(2021).get()
-    const exp = [{
-      date: '2021-08-09 00:00:00 -0600',
-      start: 'sun 2021-08-08 18:00',
-      end: 'mon 2021-08-09 18:00'
-    }]
+    const exp = [
+      {
+        date: '2021-08-09 00:00:00 -0600',
+        start: 'sun 2021-08-08 18:00',
+        end: 'mon 2021-08-09 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -136,33 +152,39 @@ describe('#CalEvent', function () {
   it('12-03', function () {
     const date = new CalEvent({ month: 12, day: 3 })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-12-03 00:00:00',
-      start: 'thu 2015-12-03 00:00',
-      end: 'fri 2015-12-04 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-12-03 00:00:00',
+        start: 'thu 2015-12-03 00:00',
+        end: 'fri 2015-12-04 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('2015-12-03', function () {
     const date = new CalEvent({ year: 2015, month: 12, day: 3 })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-12-03 00:00:00',
-      start: 'thu 2015-12-03 00:00',
-      end: 'fri 2015-12-04 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-12-03 00:00:00',
+        start: 'thu 2015-12-03 00:00',
+        end: 'fri 2015-12-04 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('2015-12-03 using Date', function () {
     const date = new CalEvent(new Date('2015-12-03 00:00:00'))
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-12-03 00:00:00',
-      start: 'thu 2015-12-03 00:00',
-      end: 'fri 2015-12-04 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-12-03 00:00:00',
+        start: 'thu 2015-12-03 00:00',
+        end: 'fri 2015-12-04 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -189,9 +211,7 @@ describe('#CalEvent', function () {
 
   it('can push events', function () {
     const date = new CalEvent({ month: 12, day: 3 })
-    const date2 = new CalEvent({ month: 12, day: 2 })
-      .inYear(2015)
-      .inYear(2016)
+    const date2 = new CalEvent({ month: 12, day: 2 }).inYear(2015).inYear(2016)
     date.push(date2)
 
     const res = date.inYear(2015).get()
@@ -216,9 +236,7 @@ describe('#CalEvent', function () {
   })
 
   it('can reset events', function () {
-    const ev = new CalEvent({ month: 12, day: 2 })
-      .inYear(2015)
-      .inYear(2016)
+    const ev = new CalEvent({ month: 12, day: 2 }).inYear(2015).inYear(2016)
 
     assert.strictEqual(ev.dates.length, 2)
     ev.reset()
@@ -230,7 +248,9 @@ describe('#CalEvent', function () {
       .inYear(2014)
       .inYear(2015)
       .filterActive(2015)
-    assert.deepStrictEqual(ev.dates, [new CalDate({ year: 2015, month: 12, day: 2 })])
+    assert.deepStrictEqual(ev.dates, [
+      new CalDate({ year: 2015, month: 12, day: 2 })
+    ])
   })
 
   it('filter active dates for 2014', function () {
@@ -249,7 +269,9 @@ describe('#CalEvent', function () {
       .inYear(2015)
       .setActive({ from: new Date('2015-01-01'), to: new Date('2015-12-31') })
       .filterActive(2015)
-    assert.deepStrictEqual(ev.dates, [new CalDate({ year: 2015, month: 12, day: 2 })])
+    assert.deepStrictEqual(ev.dates, [
+      new CalDate({ year: 2015, month: 12, day: 2 })
+    ])
   })
 
   it('shall combine active range', function () {
@@ -262,7 +284,7 @@ describe('#CalEvent', function () {
   })
 
   describe('filter', function () {
-    function activeFiterTest (event, active, tests) {
+    function activeFiterTest(event, active, tests) {
       tests.forEach((test) => {
         const year = test.year
         const exp = test.exp
@@ -330,22 +352,26 @@ describe('#Easter', function () {
   it('3 days before Easter', function () {
     const date = new Easter({ offset: -3 })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-04-02 00:00:00',
-      start: 'thu 2015-04-02 00:00',
-      end: 'fri 2015-04-03 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-04-02 00:00:00',
+        start: 'thu 2015-04-02 00:00',
+        end: 'fri 2015-04-03 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('50 days after Orthodox Easter', function () {
     const date = new Easter({ offset: 50, type: 'orthodox' })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-06-01 00:00:00',
-      start: 'mon 2015-06-01 00:00',
-      end: 'tue 2015-06-02 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-06-01 00:00:00',
+        start: 'mon 2015-06-01 00:00',
+        end: 'tue 2015-06-02 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -354,44 +380,52 @@ describe('#Equinox', function () {
   it('march equinox', function () {
     const date = new Equinox({ season: 'march' })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-03-20 00:00:00',
-      start: 'fri 2015-03-20 00:00',
-      end: 'sat 2015-03-21 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-03-20 00:00:00',
+        start: 'fri 2015-03-20 00:00',
+        end: 'sat 2015-03-21 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('march equinox in Asia/Tokyo', function () {
     const date = new Equinox({ season: 'march', timezone: 'Asia/Tokyo' })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-03-21 00:00:00',
-      start: 'sat 2015-03-21 00:00',
-      end: 'sun 2015-03-22 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-03-21 00:00:00',
+        start: 'sat 2015-03-21 00:00',
+        end: 'sun 2015-03-22 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('march equinox in +01:00', function () {
     const date = new Equinox({ season: 'march', timezone: '+01:00' })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-03-20 00:00:00',
-      start: 'fri 2015-03-20 00:00',
-      end: 'sat 2015-03-21 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-03-20 00:00:00',
+        start: 'fri 2015-03-20 00:00',
+        end: 'sat 2015-03-21 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
   it('3 days after september equinox', function () {
     const date = new Equinox({ season: 'september', offset: 3 })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-09-26 00:00:00',
-      start: 'sat 2015-09-26 00:00',
-      end: 'sun 2015-09-27 00:00'
-    }]
+    const exp = [
+      {
+        date: '2015-09-26 00:00:00',
+        start: 'sat 2015-09-26 00:00',
+        end: 'sun 2015-09-27 00:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 })
@@ -404,11 +438,13 @@ describe('#Hebrew', function () {
       month: 1
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-04-04 00:00:00 -0600',
-      start: 'fri 2015-04-03 18:00',
-      end: 'sat 2015-04-04 18:00'
-    }]
+    const exp = [
+      {
+        date: '2015-04-04 00:00:00 -0600',
+        start: 'fri 2015-04-03 18:00',
+        end: 'sat 2015-04-04 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -418,11 +454,13 @@ describe('#Hebrew', function () {
       month: 1
     })
     const res = date.inYear(2016).get()
-    const exp = [{
-      date: '2016-04-23 00:00:00 -0600',
-      start: 'fri 2016-04-22 18:00',
-      end: 'sat 2016-04-23 18:00'
-    }]
+    const exp = [
+      {
+        date: '2016-04-23 00:00:00 -0600',
+        start: 'fri 2016-04-22 18:00',
+        end: 'sat 2016-04-23 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -432,15 +470,18 @@ describe('#Hebrew', function () {
       month: 10
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-01-09 00:00:00 -0600',
-      start: 'thu 2015-01-08 18:00',
-      end: 'fri 2015-01-09 18:00'
-    }, {
-      date: '2015-12-30 00:00:00 -0600',
-      start: 'tue 2015-12-29 18:00',
-      end: 'wed 2015-12-30 18:00'
-    }]
+    const exp = [
+      {
+        date: '2015-01-09 00:00:00 -0600',
+        start: 'thu 2015-01-08 18:00',
+        end: 'fri 2015-01-09 18:00'
+      },
+      {
+        date: '2015-12-30 00:00:00 -0600',
+        start: 'tue 2015-12-29 18:00',
+        end: 'wed 2015-12-30 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -463,11 +504,13 @@ describe('#Hijri', function () {
       month: 10
     })
     const res = date.inYear(2015).get()
-    const exp = [{
-      date: '2015-07-19 00:00:00 -0600',
-      start: 'sat 2015-07-18 18:00',
-      end: 'sun 2015-07-19 18:00'
-    }]
+    const exp = [
+      {
+        date: '2015-07-19 00:00:00 -0600',
+        start: 'sat 2015-07-18 18:00',
+        end: 'sun 2015-07-19 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -478,15 +521,18 @@ describe('#Hijri', function () {
       month: 3
     })
     const res = date.inYear(2016).get()
-    const exp = [{
-      date: '2016-01-07 00:00:00 -0600',
-      start: 'wed 2016-01-06 18:00',
-      end: 'thu 2016-01-07 18:00'
-    }, {
-      date: '2016-12-26 00:00:00 -0600',
-      start: 'sun 2016-12-25 18:00',
-      end: 'mon 2016-12-26 18:00'
-    }]
+    const exp = [
+      {
+        date: '2016-01-07 00:00:00 -0600',
+        start: 'wed 2016-01-06 18:00',
+        end: 'thu 2016-01-07 18:00'
+      },
+      {
+        date: '2016-12-26 00:00:00 -0600',
+        start: 'sun 2016-12-25 18:00',
+        end: 'mon 2016-12-26 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 
@@ -497,11 +543,13 @@ describe('#Hijri', function () {
       year: 1438
     })
     const res = date.inYear(2016).get()
-    const exp = [{
-      date: '2016-12-26 00:00:00 -0600',
-      start: 'sun 2016-12-25 18:00',
-      end: 'mon 2016-12-26 18:00'
-    }]
+    const exp = [
+      {
+        date: '2016-12-26 00:00:00 -0600',
+        start: 'sun 2016-12-25 18:00',
+        end: 'mon 2016-12-26 18:00'
+      }
+    ]
     assert.deepStrictEqual(fixResult(res), exp)
   })
 

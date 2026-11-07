@@ -1,5 +1,3 @@
-/* global describe, it */
-
 import assert from 'assert'
 import { toDate } from '../src/internal/utils.js'
 

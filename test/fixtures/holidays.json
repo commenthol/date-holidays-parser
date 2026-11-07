@@ -9,13 +9,8 @@
         "en": "Andorra"
       },
       "dayoff": "sunday",
-      "langs": [
-        "ca",
-        "es"
-      ],
-      "zones": [
-        "Europe/Andorra"
-      ],
+      "langs": ["ca", "es"],
+      "zones": ["Europe/Andorra"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -97,12 +92,8 @@
         "en": "United Arab Emirates",
         "ar": "دولة الإمارات العربية المتحدة"
       },
-      "langs": [
-        "ar"
-      ],
-      "zones": [
-        "Asia/Dubai"
-      ],
+      "langs": ["ar"],
+      "zones": ["Asia/Dubai"],
       "dayoff": "",
       "days": {
         "01-01": {
@@ -141,17 +132,10 @@
       "names": {
         "en": "Antigua & Barbuda"
       },
-      "langs": [
-        "en"
-      ],
+      "langs": ["en"],
       "dayoff": "sunday",
-      "weekend": [
-        "saturday",
-        "sunday"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "weekend": ["saturday", "sunday"],
+      "zones": ["America/Port_of_Spain"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -222,17 +206,10 @@
       "names": {
         "en": "Anguilla"
       },
-      "langs": [
-        "en"
-      ],
+      "langs": ["en"],
       "dayoff": "sunday",
-      "weekend": [
-        "saturday",
-        "sunday"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "weekend": ["saturday", "sunday"],
+      "zones": ["America/Port_of_Spain"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -306,13 +283,8 @@
         "en": "Albania"
       },
       "dayoff": "sunday",
-      "langs": [
-        "sq",
-        "es"
-      ],
-      "zones": [
-        "Europe/Tirane"
-      ],
+      "langs": ["sq", "es"],
+      "zones": ["Europe/Tirane"],
       "days": {
         "01-01 and if sunday then next tuesday": {
           "_name": "01-01",
@@ -458,12 +430,8 @@
         "en": "Armenia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "hy"
-      ],
-      "zones": [
-        "Asia/Yerevan"
-      ],
+      "langs": ["hy"],
+      "zones": ["Asia/Yerevan"],
       "days": {
         "12-31": {
           "_name": "12-31"
@@ -577,12 +545,8 @@
         "en": "Angola"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Africa/Lagos"
-      ],
-      "langs": [
-        "pt"
-      ],
+      "zones": ["Africa/Lagos"],
+      "langs": ["pt"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -645,9 +609,7 @@
         "en": "Argentina"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
+      "langs": ["es"],
       "zones": [
         "America/Argentina/Buenos_Aires",
         "America/Argentina/Cordoba",
@@ -751,12 +713,8 @@
           }
         },
         "4th monday in November": {
-          "disable": [
-            "2015-11-23"
-          ],
-          "enable": [
-            "2015-11-27"
-          ],
+          "disable": ["2015-11-23"],
+          "enable": ["2015-11-27"],
           "name": {
             "en": "Day of National Sovereignty",
             "es": "Día de la Soberanía nacional"
@@ -801,15 +759,9 @@
         "en": "American Samoa"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Pacific/Pago_Pago"
-      ],
-      "langs": [
-        "en"
-      ],
-      "_days": [
-        "US"
-      ],
+      "zones": ["Pacific/Pago_Pago"],
+      "langs": ["en"],
+      "_days": ["US"],
       "days": {
         "3rd monday in February": {
           "name": {
@@ -853,13 +805,8 @@
         "en": "Austria"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Vienna"
-      ],
-      "langs": [
-        "de-at",
-        "de"
-      ],
+      "zones": ["Europe/Vienna"],
+      "langs": ["de-at", "de"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -1045,9 +992,7 @@
         "en": "Australia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
+      "langs": ["en"],
       "zones": [
         "Australia/Sydney",
         "Australia/Lord_Howe",
@@ -1112,9 +1057,7 @@
       "states": {
         "ACT": {
           "name": "Australian Capital Territory",
-          "zones": [
-            "Australia/Sydney"
-          ],
+          "zones": ["Australia/Sydney"],
           "days": {
             "2nd monday in March": {
               "name": {
@@ -1143,9 +1086,7 @@
         },
         "NSW": {
           "name": "New South Wales",
-          "zones": [
-            "Australia/Sydney"
-          ],
+          "zones": ["Australia/Sydney"],
           "days": {
             "1st monday in August": {
               "name": {
@@ -1157,9 +1098,7 @@
         },
         "NT": {
           "name": "Northern Territory",
-          "zones": [
-            "Australia/Darwin"
-          ],
+          "zones": ["Australia/Darwin"],
           "days": {
             "easter": false,
             "04-25": false,
@@ -1200,10 +1139,7 @@
         },
         "QLD": {
           "name": "Queensland",
-          "zones": [
-            "Australia/Brisbane",
-            "Australia/Lindeman"
-          ],
+          "zones": ["Australia/Brisbane", "Australia/Lindeman"],
           "days": {
             "04-25": false,
             "04-25 if sunday then next monday": {
@@ -1230,9 +1166,7 @@
         },
         "SA": {
           "name": "South Australia",
-          "zones": [
-            "Australia/Adelaide"
-          ],
+          "zones": ["Australia/Adelaide"],
           "days": {
             "easter": false,
             "2nd monday in March": {
@@ -1260,9 +1194,7 @@
         },
         "TAS": {
           "name": "Tasmania",
-          "zones": [
-            "Australia/Hobart"
-          ],
+          "zones": ["Australia/Hobart"],
           "days": {
             "01-01 and if saturday,sunday then next monday": false,
             "01-01 if saturday then next monday if sunday then next tuesday": {
@@ -1291,9 +1223,7 @@
         },
         "VIC": {
           "name": "Victoria",
-          "zones": [
-            "Australia/Melbourne"
-          ],
+          "zones": ["Australia/Melbourne"],
           "days": {
             "2nd monday in March": {
               "name": {
@@ -1321,10 +1251,7 @@
         },
         "WA": {
           "name": "Western Australia",
-          "zones": [
-            "Australia/Perth",
-            "Australia/Eucla"
-          ],
+          "zones": ["Australia/Perth", "Australia/Eucla"],
           "days": {
             "1st monday in March": {
               "name": {
@@ -1364,13 +1291,8 @@
         "en": "Aruba"
       },
       "dayoff": "sunday",
-      "zones": [
-        "America/Curacao"
-      ],
-      "langs": [
-        "pap",
-        "nl"
-      ],
+      "zones": ["America/Curacao"],
+      "langs": ["pap", "nl"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -1445,12 +1367,8 @@
         "en": "Åland Islands"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Helsinki"
-      ],
-      "langs": [
-        "sv"
-      ],
+      "zones": ["Europe/Helsinki"],
+      "langs": ["sv"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -1527,16 +1445,9 @@
         "en": "Azerbaijan"
       },
       "dayoff": "sunday",
-      "weekend": [
-        "saturday",
-        "sunday"
-      ],
-      "zones": [
-        "Asia/Baku"
-      ],
-      "langs": [
-        "az"
-      ],
+      "weekend": ["saturday", "sunday"],
+      "zones": ["Asia/Baku"],
+      "langs": ["az"],
       "days": {
         "01-01 and if saturday then next monday if sunday then next tuesday": {
           "substitute": true,
@@ -1654,14 +1565,8 @@
         "hr": "Bosna i Hercegovina",
         "en": "Bosnia and Herzegovina"
       },
-      "langs": [
-        "bs",
-        "sr",
-        "hr"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["bs", "sr", "hr"],
+      "zones": ["Europe/Belgrade"],
       "dayoff": "sunday",
       "days": {
         "01-01 and if sunday then next tuesday": {
@@ -1802,12 +1707,8 @@
         "en": "Barbados"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Barbados"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Barbados"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -1875,17 +1776,10 @@
         "bn": "গণপ্রজাতন্ত্রী বাংলাদেশ",
         "en": "People's Republic of Bangladesh"
       },
-      "langs": [
-        "bn"
-      ],
-      "zones": [
-        "Asia/Dhaka"
-      ],
+      "langs": ["bn"],
+      "zones": ["Asia/Dhaka"],
       "dayoff": "friday",
-      "weekend": [
-        "friday",
-        "saturday"
-      ],
+      "weekend": ["friday", "saturday"],
       "days": {
         "bengali-revised 11-9": {
           "name": {
@@ -2033,14 +1927,8 @@
         "en": "Belgium"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Brussels"
-      ],
-      "langs": [
-        "fr",
-        "nl",
-        "de"
-      ],
+      "zones": ["Europe/Brussels"],
+      "langs": ["fr", "nl", "de"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2117,10 +2005,7 @@
       "states": {
         "BRU": {
           "name": "Bruxelles",
-          "langs": [
-            "fr",
-            "nl"
-          ],
+          "langs": ["fr", "nl"],
           "days": {
             "05-08": {
               "name": {
@@ -2132,9 +2017,7 @@
         },
         "DE": {
           "name": "Deutschsprachige Gemeinschaft",
-          "langs": [
-            "de"
-          ],
+          "langs": ["de"],
           "days": {
             "11-15": {
               "name": {
@@ -2147,9 +2030,7 @@
         },
         "VLG": {
           "name": "Vlaamse Gemeenschap",
-          "langs": [
-            "nl"
-          ],
+          "langs": ["nl"],
           "days": {
             "07-11": {
               "name": {
@@ -2162,9 +2043,7 @@
         },
         "WAL": {
           "name": "Communauté française",
-          "langs": [
-            "fr"
-          ],
+          "langs": ["fr"],
           "days": {
             "09-27": {
               "name": {
@@ -2182,12 +2061,8 @@
         "fr": "Burkina Faso",
         "en": "Burkina Faso"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Abidjan"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Abidjan"],
       "dayoff": "",
       "days": {
         "01-01": {
@@ -2248,12 +2123,8 @@
         "bg": "България",
         "en": "Bulgaria"
       },
-      "langs": [
-        "bg"
-      ],
-      "zones": [
-        "Europe/Sofia"
-      ],
+      "langs": ["bg"],
+      "zones": ["Europe/Sofia"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2339,12 +2210,8 @@
         "ar": "مملكة البحرين",
         "en": "Bahrain"
       },
-      "langs": [
-        "ar"
-      ],
-      "zones": [
-        "Asia/Qatar"
-      ],
+      "langs": ["ar"],
+      "zones": ["Asia/Qatar"],
       "dayoff": "",
       "days": {
         "01-01": {
@@ -2395,13 +2262,8 @@
         "en": "Burundi"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr",
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["fr", "en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2467,12 +2329,8 @@
         "fr": "République du Bénin",
         "en": "Benin"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Lagos"],
       "dayoff": "",
       "days": {
         "01-01": {
@@ -2534,12 +2392,8 @@
         "fr": "St. Barthélemy",
         "en": "St. Barths"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "langs": ["fr"],
+      "zones": ["America/Port_of_Spain"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2634,12 +2488,8 @@
       "names": {
         "en": "Bermuda"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Atlantic/Bermuda"
-      ],
+      "langs": ["en"],
+      "zones": ["Atlantic/Bermuda"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -2717,13 +2567,8 @@
         "ms": "Negara Brunei Darussalam",
         "en": "Brunei"
       },
-      "langs": [
-        "ms",
-        "en"
-      ],
-      "zones": [
-        "Asia/Brunei"
-      ],
+      "langs": ["ms", "en"],
+      "zones": ["Asia/Brunei"],
       "dayoff": "",
       "days": {
         "01-01": {
@@ -2791,14 +2636,8 @@
         "en": "Bolivia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es",
-        "qu",
-        "ay"
-      ],
-      "zones": [
-        "America/La_Paz"
-      ],
+      "langs": ["es", "qu", "ay"],
+      "zones": ["America/La_Paz"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2862,14 +2701,8 @@
         "en": "Caribbean Netherlands"
       },
       "dayoff": "sunday",
-      "zones": [
-        "America/Curacao"
-      ],
-      "langs": [
-        "nl",
-        "en",
-        "pap"
-      ],
+      "zones": ["America/Curacao"],
+      "langs": ["nl", "en", "pap"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -2991,9 +2824,7 @@
         "en": "Brazil"
       },
       "dayoff": "sunday",
-      "langs": [
-        "pt"
-      ],
+      "langs": ["pt"],
       "zones": [
         "America/Sao_Paulo",
         "America/Noronha",
@@ -3102,9 +2933,7 @@
       "states": {
         "AC": {
           "name": "Acre",
-          "zones": [
-            "America/Rio_Branco"
-          ],
+          "zones": ["America/Rio_Branco"],
           "days": {
             "01-12": {
               "name": {
@@ -3161,9 +2990,7 @@
         },
         "AL": {
           "name": "Alagoas",
-          "zones": [
-            "America/Maceio"
-          ],
+          "zones": ["America/Maceio"],
           "days": {
             "06-24": {
               "name": {
@@ -3204,9 +3031,7 @@
         },
         "AM": {
           "name": "Amazonas",
-          "zones": [
-            "America/Manaus"
-          ],
+          "zones": ["America/Manaus"],
           "days": {
             "09-05": {
               "name": {
@@ -3232,9 +3057,7 @@
         },
         "AP": {
           "name": "Amapá",
-          "zones": [
-            "America/Belem"
-          ],
+          "zones": ["America/Belem"],
           "days": {
             "03-19": {
               "name": {
@@ -3256,9 +3079,7 @@
         },
         "BA": {
           "name": "Bahia",
-          "zones": [
-            "America/Bahia"
-          ],
+          "zones": ["America/Bahia"],
           "days": {
             "07-02": {
               "name": {
@@ -3269,9 +3090,7 @@
         },
         "CE": {
           "name": "Ceará",
-          "zones": [
-            "America/Fortaleza"
-          ],
+          "zones": ["America/Fortaleza"],
           "days": {
             "03-25": {
               "name": {
@@ -3287,9 +3106,7 @@
         },
         "DF": {
           "name": "Distrito Federal",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "04-21": {
               "name": {
@@ -3311,9 +3128,7 @@
         },
         "MA": {
           "name": "Maranhão",
-          "zones": [
-            "America/Belem"
-          ],
+          "zones": ["America/Belem"],
           "days": {
             "07-28": {
               "name": {
@@ -3329,9 +3144,7 @@
         },
         "MG": {
           "name": "Minas Gerais",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "04-21": {
               "name": {
@@ -3360,9 +3173,7 @@
         },
         "MS": {
           "name": "Mato Grosso do Sul",
-          "zones": [
-            "America/Campo_Grande"
-          ],
+          "zones": ["America/Campo_Grande"],
           "days": {
             "10-11": {
               "name": {
@@ -3378,9 +3189,7 @@
         },
         "MT": {
           "name": "Mato Grosso",
-          "zones": [
-            "America/Cuiaba"
-          ],
+          "zones": ["America/Cuiaba"],
           "days": {
             "11-20": {
               "name": {
@@ -3396,9 +3205,7 @@
         },
         "PA": {
           "name": "Pará",
-          "zones": [
-            "America/Santarem"
-          ],
+          "zones": ["America/Santarem"],
           "days": {
             "08-15": {
               "name": {
@@ -3414,9 +3221,7 @@
         },
         "PB": {
           "name": "Paraíba",
-          "zones": [
-            "America/Recife"
-          ],
+          "zones": ["America/Recife"],
           "days": {
             "07-26": {
               "name": {
@@ -3438,9 +3243,7 @@
         },
         "PE": {
           "name": "Pernambuco",
-          "zones": [
-            "America/Recife"
-          ],
+          "zones": ["America/Recife"],
           "days": {
             "1st sunday in March": {
               "name": {
@@ -3483,9 +3286,7 @@
         },
         "PI": {
           "name": "Piauí",
-          "zones": [
-            "America/Fortaleza"
-          ],
+          "zones": ["America/Fortaleza"],
           "days": {
             "10-19": {
               "name": {
@@ -3501,9 +3302,7 @@
         },
         "PR": {
           "name": "Paraná",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "12-19": {
               "name": {
@@ -3532,9 +3331,7 @@
         },
         "RJ": {
           "name": "Rio de Janeiro",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "easter -47": {
               "name": {
@@ -3577,9 +3374,7 @@
         },
         "RN": {
           "name": "Rio Grande do Norte",
-          "zones": [
-            "America/Recife"
-          ],
+          "zones": ["America/Recife"],
           "days": {
             "10-03": {
               "name": {
@@ -3595,9 +3390,7 @@
         },
         "RO": {
           "name": "Rondônia",
-          "zones": [
-            "America/Porto_Velho"
-          ],
+          "zones": ["America/Porto_Velho"],
           "days": {
             "01-04": {
               "name": {
@@ -3623,9 +3416,7 @@
         },
         "RR": {
           "name": "Roraima",
-          "zones": [
-            "America/Boa_Vista"
-          ],
+          "zones": ["America/Boa_Vista"],
           "days": {
             "10-05": {
               "name": {
@@ -3636,9 +3427,7 @@
         },
         "RS": {
           "name": "Rio Grande do Sul",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "09-20": {
               "name": {
@@ -3649,9 +3438,7 @@
         },
         "SC": {
           "name": "Santa Catarina",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "08-11": {
               "name": {
@@ -3699,9 +3486,7 @@
         },
         "SE": {
           "name": "Sergipe",
-          "zones": [
-            "America/Recife"
-          ],
+          "zones": ["America/Recife"],
           "days": {
             "07-08": {
               "name": {
@@ -3712,9 +3497,7 @@
         },
         "SP": {
           "name": "São Paulo",
-          "zones": [
-            "America/Sao_Paulo"
-          ],
+          "zones": ["America/Sao_Paulo"],
           "days": {
             "07-09": {
               "name": {
@@ -3744,9 +3527,7 @@
         },
         "TO": {
           "name": "Tocantins",
-          "zones": [
-            "America/Araguaina"
-          ],
+          "zones": ["America/Araguaina"],
           "days": {
             "10-05": {
               "name": {
@@ -3788,12 +3569,8 @@
         "en": "Bahamas"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Nassau"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Nassau"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -3859,12 +3636,8 @@
         "en": "Botswana"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01",
@@ -3972,13 +3745,8 @@
         "ru": "Республика Беларусь",
         "en": "Belarus"
       },
-      "zones": [
-        "Europe/Minsk"
-      ],
-      "langs": [
-        "be",
-        "ru"
-      ],
+      "zones": ["Europe/Minsk"],
+      "langs": ["be", "ru"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -4048,12 +3816,8 @@
         "en": "Belize"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Belize"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Belize"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -4147,11 +3911,7 @@
         "America/Whitehorse",
         "America/Dawson"
       ],
-      "langs": [
-        "en-us",
-        "en",
-        "fr"
-      ],
+      "langs": ["en-us", "en", "fr"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -4213,9 +3973,7 @@
       "states": {
         "AB": {
           "name": "Alberta",
-          "zones": [
-            "America/Edmonton"
-          ],
+          "zones": ["America/Edmonton"],
           "days": {
             "3rd monday after 02-01": {
               "name": {
@@ -4271,9 +4029,7 @@
         },
         "MB": {
           "name": "Manitoba",
-          "zones": [
-            "America/Winnipeg"
-          ],
+          "zones": ["America/Winnipeg"],
           "days": {
             "3rd monday after 02-01": {
               "name": {
@@ -4285,9 +4041,7 @@
         },
         "NB": {
           "name": "New Brunswick",
-          "zones": [
-            "America/Moncton"
-          ],
+          "zones": ["America/Moncton"],
           "days": {
             "monday after 08-01": {
               "name": {
@@ -4299,10 +4053,7 @@
         },
         "NL": {
           "name": "Newfoundland and Labrador",
-          "zones": [
-            "America/St_Johns",
-            "America/Goose_Bay"
-          ],
+          "zones": ["America/St_Johns", "America/Goose_Bay"],
           "days": {
             "03-17": {
               "name": {
@@ -4342,10 +4093,7 @@
         },
         "NS": {
           "name": "Nova Scotia",
-          "zones": [
-            "America/Halifax",
-            "America/Moncton"
-          ],
+          "zones": ["America/Halifax", "America/Moncton"],
           "days": {
             "3rd monday after 02-01": {
               "name": {
@@ -4363,10 +4111,7 @@
         },
         "NT": {
           "name": "Northwest Territories",
-          "zones": [
-            "America/Yellowknife",
-            "America/Inuvik"
-          ],
+          "zones": ["America/Yellowknife", "America/Inuvik"],
           "days": {
             "06-21": {
               "name": {
@@ -4483,10 +4228,7 @@
         },
         "YT": {
           "name": "Yukon",
-          "zones": [
-            "America/Whitehorse",
-            "America/Dawson"
-          ],
+          "zones": ["America/Whitehorse", "America/Dawson"],
           "days": {
             "easter 1": {
               "_name": "easter 1"
@@ -4505,12 +4247,8 @@
       "names": {
         "en": "Cocos (Keeling) Islands"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Indian/Cocos"
-      ],
+      "langs": ["en"],
+      "zones": ["Indian/Cocos"],
       "dayoff": "sunday",
       "days": {
         "chinese 01-0-01 and if sunday then next tuesday if saturday then next monday": {
@@ -4592,13 +4330,8 @@
         "en": "Democratic Republic of the Congo"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Maputo",
-        "Africa/Lagos"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Maputo", "Africa/Lagos"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -4666,13 +4399,8 @@
         "en": "Central African Republic"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr",
-        "sg"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "langs": ["fr", "sg"],
+      "zones": ["Africa/Lagos"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -4727,13 +4455,8 @@
         "en": "Republic of the Congo"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr",
-        "en"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "langs": ["fr", "en"],
+      "zones": ["Africa/Lagos"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -4782,15 +4505,8 @@
         "en": "Switzerland"
       },
       "dayoff": "sunday",
-      "langs": [
-        "de-ch",
-        "de",
-        "fr",
-        "it"
-      ],
-      "zones": [
-        "Europe/Zurich"
-      ],
+      "langs": ["de-ch", "de", "fr", "it"],
+      "zones": ["Europe/Zurich"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -5174,12 +4890,7 @@
             "it": "Canton Friburgo",
             "en": "Canton of Fribourg"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02": {
               "name": {
@@ -5381,12 +5092,7 @@
             "fr": "Canton des Grisons",
             "en": "Canton of Grisons"
           },
-          "langs": [
-            "de-ch",
-            "de",
-            "it",
-            "fr"
-          ],
+          "langs": ["de-ch", "de", "it", "fr"],
           "days": {
             "01-06": {
               "_name": "01-06",
@@ -5475,12 +5181,7 @@
             "fr": "Canton du Tessin",
             "en": "Canton of Ticino"
           },
-          "langs": [
-            "it",
-            "de-ch",
-            "de",
-            "fr"
-          ],
+          "langs": ["it", "de-ch", "de", "fr"],
           "days": {
             "01-02": {
               "name": {
@@ -5530,12 +5231,7 @@
             "it": "Canton Vaud",
             "en": "Canton of Vaud"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02": {
               "name": {
@@ -5560,12 +5256,7 @@
             "it": "Canton Vallese",
             "en": "Canton of Valais"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02": {
               "name": {
@@ -5623,12 +5314,7 @@
             "it": "Canton Neuchâtel",
             "en": "Canton of Neuchâtel"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02 on monday": {
               "name": {
@@ -5685,12 +5371,7 @@
             "it": "Canton Ginevra",
             "en": "Canton of Geneva"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02": {
               "name": {
@@ -5724,12 +5405,7 @@
             "it": "Canton Giura",
             "en": "Canton of Jura"
           },
-          "langs": [
-            "fr",
-            "de-ch",
-            "de",
-            "it"
-          ],
+          "langs": ["fr", "de-ch", "de", "it"],
           "days": {
             "01-02": {
               "name": {
@@ -5767,13 +5443,8 @@
         "en": "Chile"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Santiago",
-        "Pacific/Easter"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Santiago", "Pacific/Easter"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -5887,13 +5558,8 @@
         "en": "Cameroon"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr",
-        "en"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "langs": ["fr", "en"],
+      "zones": ["Africa/Lagos"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -5939,14 +5605,8 @@
         "zh": "中华人民共和国"
       },
       "dayoff": "sunday",
-      "langs": [
-        "zh",
-        "en"
-      ],
-      "zones": [
-        "Asia/Shanghai",
-        "Asia/Urumqi"
-      ],
+      "langs": ["zh", "en"],
+      "zones": ["Asia/Shanghai", "Asia/Urumqi"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -6017,12 +5677,8 @@
         "en": "Colombia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Bogota"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Bogota"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -6105,12 +5761,8 @@
         "en": "Costa Rica"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Costa_Rica"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Costa_Rica"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -6168,12 +5820,8 @@
         "en": "Cuba"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Havana"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Havana"],
       "days": {
         "01-01": {
           "name": {
@@ -6224,12 +5872,8 @@
         "pt": "República de Cabo Verde",
         "en": "Cape Verde"
       },
-      "langs": [
-        "pt"
-      ],
-      "zones": [
-        "Atlantic/Cape_Verde"
-      ],
+      "langs": ["pt"],
+      "zones": ["Atlantic/Cape_Verde"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -6315,14 +5959,8 @@
         "pap": "Kòrsou",
         "en": "Curaçao"
       },
-      "langs": [
-        "nl",
-        "pap",
-        "en"
-      ],
-      "zones": [
-        "America/Curacao"
-      ],
+      "langs": ["nl", "pap", "en"],
+      "zones": ["America/Curacao"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -6397,13 +6035,8 @@
       "names": {
         "en": "Christmas Island"
       },
-      "langs": [
-        "en",
-        "ms"
-      ],
-      "zones": [
-        "Indian/Christmas"
-      ],
+      "langs": ["en", "ms"],
+      "zones": ["Indian/Christmas"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -6462,12 +6095,8 @@
         "en": "Cyprus"
       },
       "dayoff": null,
-      "langs": [
-        "el"
-      ],
-      "zones": [
-        "Asia/Nicosia"
-      ],
+      "langs": ["el"],
+      "zones": ["Asia/Nicosia"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -6547,12 +6176,8 @@
         "cz": "Česká republika",
         "en": "Czech Republic"
       },
-      "langs": [
-        "cz"
-      ],
-      "zones": [
-        "Europe/Prague"
-      ],
+      "langs": ["cz"],
+      "zones": ["Europe/Prague"],
       "days": {
         "01-01": {
           "_name": "01-01",
@@ -6644,12 +6269,8 @@
         "en": "Germany"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Berlin"
-      ],
-      "langs": [
-        "de"
-      ],
+      "zones": ["Europe/Berlin"],
+      "langs": ["de"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7121,12 +6742,8 @@
         "da": "Danmark",
         "en": "Denmark"
       },
-      "langs": [
-        "da"
-      ],
-      "zones": [
-        "Europe/Copenhagen"
-      ],
+      "langs": ["da"],
+      "zones": ["Europe/Copenhagen"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7196,12 +6813,8 @@
       "names": {
         "en": "Dominica"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Port_of_Spain"],
       "dayoff": "sunday",
       "days": {
         "01-01 and if sunday then next monday": {
@@ -7269,12 +6882,8 @@
         "en": "Dominican Republic"
       },
       "dayoff": "sunday",
-      "zones": [
-        "America/Santo_Domingo"
-      ],
-      "langs": [
-        "es"
-      ],
+      "zones": ["America/Santo_Domingo"],
+      "langs": ["es"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7332,13 +6941,8 @@
         "en": "Ecuador"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Guayaquil",
-        "Pacific/Galapagos"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Guayaquil", "Pacific/Galapagos"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7440,12 +7044,8 @@
         "en": "Estonia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "et"
-      ],
-      "zones": [
-        "Europe/Tallinn"
-      ],
+      "langs": ["et"],
+      "zones": ["Europe/Tallinn"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7572,14 +7172,8 @@
         "es": "España",
         "en": "Spain"
       },
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "Europe/Madrid",
-        "Africa/Ceuta",
-        "Atlantic/Canary"
-      ],
+      "langs": ["es"],
+      "zones": ["Europe/Madrid", "Africa/Ceuta", "Atlantic/Canary"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7742,13 +7336,8 @@
         "en": "Ethiopia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "am",
-        "en"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["am", "en"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-06 in non-leap years": {
           "_name": "12-25"
@@ -7821,12 +7410,8 @@
         "en": "Finland"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fi"
-      ],
-      "zones": [
-        "Europe/Helsinki"
-      ],
+      "langs": ["fi"],
+      "zones": ["Europe/Helsinki"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -7899,13 +7484,8 @@
         "da": "Færøerne",
         "en": "Faroe Islands"
       },
-      "langs": [
-        "fo",
-        "da"
-      ],
-      "zones": [
-        "Atlantic/Faroe"
-      ],
+      "langs": ["fo", "da"],
+      "zones": ["Atlantic/Faroe"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -7985,12 +7565,8 @@
         "en": "France"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Paris"
-      ],
-      "langs": [
-        "fr"
-      ],
+      "zones": ["Europe/Paris"],
+      "langs": ["fr"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8075,37 +7651,27 @@
         },
         "YT": {
           "name": "Département et région d'outre-mer Mayotte",
-          "zones": [
-            "Africa/Nairobi"
-          ],
+          "zones": ["Africa/Nairobi"],
           "_days": "YT"
         },
         "MQ": {
           "name": "Département et région d'outre-mer Martinique",
-          "zones": [
-            "America/Martinique"
-          ],
+          "zones": ["America/Martinique"],
           "_days": "MQ"
         },
         "GP": {
           "name": "Département et région d'outre-mer Guadeloupe",
-          "zones": [
-            "America/Port_of_Spain"
-          ],
+          "zones": ["America/Port_of_Spain"],
           "_days": "GP"
         },
         "GF": {
           "name": "Département et région d'outre-mer Guyane",
-          "zones": [
-            "America/Cayenne"
-          ],
+          "zones": ["America/Cayenne"],
           "_days": "GF"
         },
         "RE": {
           "name": "Département et région d'outre-mer La Réunion",
-          "zones": [
-            "Indian/Reunion"
-          ],
+          "zones": ["Indian/Reunion"],
           "_days": "RE"
         }
       }
@@ -8116,12 +7682,8 @@
         "en": "Gabon"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Lagos"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8166,12 +7728,8 @@
         "en": "United Kingdom"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/London"
-      ],
-      "langs": [
-        "en"
-      ],
+      "zones": ["Europe/London"],
+      "langs": ["en"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8201,9 +7759,7 @@
           "name": {
             "en": "Early May bank holiday"
           },
-          "disable": [
-            "2020-05-04"
-          ]
+          "disable": ["2020-05-04"]
         },
         "2020-05-08": {
           "name": {
@@ -8246,9 +7802,7 @@
       "states": {
         "ALD": {
           "name": "Alderney",
-          "zones": [
-            "Europe/Guernsey"
-          ],
+          "zones": ["Europe/Guernsey"],
           "days": {
             "12-15": {
               "name": {
@@ -8269,9 +7823,7 @@
         },
         "NIR": {
           "name": "Northern Ireland",
-          "zones": [
-            "Europe/Belfast"
-          ],
+          "zones": ["Europe/Belfast"],
           "days": {
             "03-17": {
               "name": {
@@ -8377,12 +7929,8 @@
         "en": "Grenada"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Port_of_Spain"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8470,12 +8018,8 @@
         "fr": "Guyane",
         "en": "French Guiana"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "America/Cayenne"
-      ],
+      "langs": ["fr"],
+      "zones": ["America/Cayenne"],
       "dayoff": "sunday",
       "_days": "FR",
       "days": {
@@ -8489,15 +8033,9 @@
         "en": "Guernsey"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Guernsey"
-      ],
-      "langs": [
-        "en"
-      ],
-      "_days": [
-        "GB"
-      ],
+      "zones": ["Europe/Guernsey"],
+      "langs": ["en"],
+      "_days": ["GB"],
       "days": {
         "05-09": {
           "name": {
@@ -8510,12 +8048,8 @@
       "names": {
         "en": "Gibraltar"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Europe/Gibraltar"
-      ],
+      "langs": ["en"],
+      "zones": ["Europe/Gibraltar"],
       "dayoff": "sunday",
       "_days": "GB",
       "days": {
@@ -8532,12 +8066,8 @@
           "name": {
             "en": "Workers Memorial Day"
           },
-          "disable": [
-            "2015-04-28"
-          ],
-          "enable": [
-            "2015-04-27"
-          ]
+          "disable": ["2015-04-28"],
+          "enable": ["2015-04-27"]
         },
         "05-01 if sunday, saturday then next monday": {
           "substitute": true,
@@ -8590,10 +8120,7 @@
         "da": "Grønland",
         "en": "Greenland"
       },
-      "langs": [
-        "kl",
-        "da"
-      ],
+      "langs": ["kl", "da"],
       "zones": [
         "America/Godthab",
         "America/Danmarkshavn",
@@ -8659,12 +8186,8 @@
         "fr": "Guadeloupe",
         "en": "Guadeloupe"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "America/Port_of_Spain"
-      ],
+      "langs": ["fr"],
+      "zones": ["America/Port_of_Spain"],
       "dayoff": "sunday",
       "_days": "FR",
       "days": {
@@ -8684,18 +8207,9 @@
         "en": "Republic of Equatorial Guinea"
       },
       "dayoff": "sunday",
-      "weekend": [
-        "saturday",
-        "sunday"
-      ],
-      "langs": [
-        "es",
-        "fr",
-        "pt"
-      ],
-      "zones": [
-        "Africa/Lagos"
-      ],
+      "weekend": ["saturday", "sunday"],
+      "langs": ["es", "fr", "pt"],
+      "zones": ["Africa/Lagos"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -8749,12 +8263,8 @@
         "en": "Greece"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Athens"
-      ],
-      "langs": [
-        "el"
-      ],
+      "zones": ["Europe/Athens"],
+      "langs": ["el"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8816,12 +8326,8 @@
         "en": "Guatemala"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Guatemala"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Guatemala"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8873,16 +8379,9 @@
         "en": "Guam"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en-us",
-        "en"
-      ],
-      "zones": [
-        "Pacific/Guam"
-      ],
-      "_days": [
-        "US"
-      ],
+      "langs": ["en-us", "en"],
+      "zones": ["Pacific/Guam"],
+      "_days": ["US"],
       "days": {
         "3rd monday in February": false,
         "1st monday in March": {
@@ -8918,12 +8417,8 @@
         "lng": -58.1553
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Guyana"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Guyana"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -8972,16 +8467,8 @@
             "en": "Youman Nabi"
           },
           "note": "tentative",
-          "disable": [
-            "2016-12-11",
-            "2015-12-23",
-            "2013-01-24"
-          ],
-          "enable": [
-            "2016-12-12",
-            "2015-12-24",
-            "2013-01-23"
-          ]
+          "disable": ["2016-12-11", "2015-12-23", "2013-01-24"],
+          "enable": ["2016-12-12", "2015-12-24", "2013-01-23"]
         },
         "10 Dhu al-Hijjah": {
           "_name": "10 Dhu al-Hijjah",
@@ -8989,12 +8476,8 @@
             "en": "Eid Ul Adha"
           },
           "note": "tentative",
-          "disable": [
-            "2015-09-23"
-          ],
-          "enable": [
-            "2015-09-24"
-          ]
+          "disable": ["2015-09-23"],
+          "enable": ["2015-09-24"]
         },
         "2017-03-12": {
           "name": {
@@ -9029,12 +8512,8 @@
         "en": "Honduras"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Tegucigalpa"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Tegucigalpa"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9117,12 +8596,8 @@
         "hr": "Hrvatska",
         "en": "Croatia"
       },
-      "langs": [
-        "hr"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["hr"],
+      "zones": ["Europe/Belgrade"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9215,12 +8690,8 @@
         "en": "Haiti"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "America/Port-au-Prince"
-      ],
+      "langs": ["fr"],
+      "zones": ["America/Port-au-Prince"],
       "days": {
         "01-01": {
           "_name": "Independence Day"
@@ -9314,12 +8785,8 @@
         "en": "Hungary"
       },
       "dayoff": "sunday",
-      "langs": [
-        "hu"
-      ],
-      "zones": [
-        "Europe/Budapest"
-      ],
+      "langs": ["hu"],
+      "zones": ["Europe/Budapest"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9441,12 +8908,8 @@
         "en": "Ireland"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Dublin"
-      ],
-      "langs": [
-        "en"
-      ],
+      "zones": ["Europe/Dublin"],
+      "langs": ["en"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9527,15 +8990,9 @@
       "names": {
         "en": "Isle of Man"
       },
-      "zones": [
-        "Europe/Isle_of_Man"
-      ],
-      "langs": [
-        "en"
-      ],
-      "_days": [
-        "GB"
-      ],
+      "zones": ["Europe/Isle_of_Man"],
+      "langs": ["en"],
+      "_days": ["GB"],
       "days": {
         "2nd friday in June": {
           "name": {
@@ -9555,12 +9012,8 @@
         "en": "Iceland"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Atlantic/Reykjavik"
-      ],
-      "langs": [
-        "is"
-      ],
+      "zones": ["Atlantic/Reykjavik"],
+      "langs": ["is"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9696,12 +9149,8 @@
         "en": "Italia"
       },
       "dayoff": "sunday",
-      "zones": [
-        "Europe/Rome"
-      ],
-      "langs": [
-        "it"
-      ],
+      "zones": ["Europe/Rome"],
+      "langs": ["it"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -9771,15 +9220,9 @@
       "names": {
         "en": "Jersey"
       },
-      "zones": [
-        "Europe/Jersey"
-      ],
-      "langs": [
-        "en"
-      ],
-      "_days": [
-        "GB"
-      ],
+      "zones": ["Europe/Jersey"],
+      "langs": ["en"],
+      "_days": ["GB"],
       "days": {
         "05-09": {
           "name": {
@@ -9793,12 +9236,8 @@
         "en": "Jamaica"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "America/Jamaica"
-      ],
+      "langs": ["en"],
+      "zones": ["America/Jamaica"],
       "days": {
         "01-01 and if sunday then next monday": {
           "_name": "01-01",
@@ -9850,12 +9289,8 @@
         "en": "Japan"
       },
       "dayoff": "sunday",
-      "langs": [
-        "jp"
-      ],
-      "zones": [
-        "Asia/Tokyo"
-      ],
+      "langs": ["jp"],
+      "zones": ["Asia/Tokyo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10127,12 +9562,8 @@
             "en": "Marine Day",
             "jp": "海の日"
           },
-          "disable": [
-            "2020-07-20"
-          ],
-          "enable": [
-            "2020-07-23"
-          ],
+          "disable": ["2020-07-20"],
+          "enable": ["2020-07-23"],
           "active": [
             {
               "from": "2003-01-01T00:00:00.000Z"
@@ -10145,12 +9576,8 @@
             "en": "Mountain Day",
             "jp": "山の日"
           },
-          "disable": [
-            "2020-08-11"
-          ],
-          "enable": [
-            "2020-08-10"
-          ],
+          "disable": ["2020-08-11"],
+          "enable": ["2020-08-10"],
           "active": [
             {
               "from": "2016-01-01T00:00:00.000Z"
@@ -10264,12 +9691,8 @@
             "en": "Sports Day",
             "jp": "スポーツの日"
           },
-          "disable": [
-            "2020-10-12"
-          ],
-          "enable": [
-            "2020-07-24"
-          ],
+          "disable": ["2020-10-12"],
+          "enable": ["2020-07-24"],
           "active": [
             {
               "from": "2020-01-01T00:00:00.000Z"
@@ -10364,13 +9787,8 @@
         "en": "Kenya"
       },
       "dayoff": "sunday",
-      "langs": [
-        "sw",
-        "en"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["sw", "en"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -10439,12 +9857,8 @@
         "en": "South Korea"
       },
       "dayoff": "sunday",
-      "langs": [
-        "ko"
-      ],
-      "zones": [
-        "Asia/Seoul"
-      ],
+      "langs": ["ko"],
+      "zones": ["Asia/Seoul"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10518,12 +9932,8 @@
         "en": "Lichtenstein"
       },
       "dayoff": "sunday",
-      "langs": [
-        "de"
-      ],
-      "zones": [
-        "Europe/Zurich"
-      ],
+      "langs": ["de"],
+      "zones": ["Europe/Zurich"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10635,13 +10045,8 @@
         "st": "\\'Muso oa Lesotho",
         "en": "Lesotho"
       },
-      "langs": [
-        "st",
-        "en"
-      ],
-      "zones": [
-        "Africa/Johannesburg"
-      ],
+      "langs": ["st", "en"],
+      "zones": ["Africa/Johannesburg"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -10694,12 +10099,8 @@
         "en": "Lithuania"
       },
       "dayoff": "sunday",
-      "langs": [
-        "lt"
-      ],
-      "zones": [
-        "Europe/Vilnius"
-      ],
+      "langs": ["lt"],
+      "zones": ["Europe/Vilnius"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10764,12 +10165,8 @@
         "fr": "Luxembourg",
         "en": "Luxembourg"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Europe/Luxembourg"
-      ],
+      "langs": ["fr"],
+      "zones": ["Europe/Luxembourg"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10827,12 +10224,8 @@
         "en": "Latvia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "lv"
-      ],
-      "zones": [
-        "Europe/Riga"
-      ],
+      "langs": ["lv"],
+      "zones": ["Europe/Riga"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10899,12 +10292,8 @@
         "en": "Monaco"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Europe/Monaco"
-      ],
+      "langs": ["fr"],
+      "zones": ["Europe/Monaco"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -10970,12 +10359,8 @@
         "ro": "Republica Moldova",
         "en": "Moldova"
       },
-      "langs": [
-        "ro"
-      ],
-      "zones": [
-        "Europe/Chisinau"
-      ],
+      "langs": ["ro"],
+      "zones": ["Europe/Chisinau"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -11073,15 +10458,8 @@
         "en": "Montenegro"
       },
       "dayoff": "sunday",
-      "langs": [
-        "hr",
-        "sr",
-        "bs",
-        "sq"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["hr", "sr", "bs", "sq"],
+      "zones": ["Europe/Belgrade"],
       "days": {
         "05-21 and if sunday then next tuesday": {
           "substitute": true,
@@ -11216,14 +10594,8 @@
         "en": "Madagascar"
       },
       "dayoff": "sunday",
-      "langs": [
-        "mg",
-        "fr",
-        "en"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["mg", "fr", "en"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -11277,12 +10649,8 @@
         "mk": "Република Македонија",
         "en": "Macedonia"
       },
-      "langs": [
-        "mk"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["mk"],
+      "zones": ["Europe/Belgrade"],
       "dayoff": "sunday",
       "days": {
         "01-01 and if sunday then next monday": {
@@ -11459,12 +10827,8 @@
         "fr": "Martinique",
         "en": "Martinique"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "America/Martinique"
-      ],
+      "langs": ["fr"],
+      "zones": ["America/Martinique"],
       "dayoff": "sunday",
       "_days": "FR",
       "days": {
@@ -11482,12 +10846,8 @@
         "en": "Malta"
       },
       "dayoff": "sunday",
-      "langs": [
-        "mt"
-      ],
-      "zones": [
-        "Europe/Malta"
-      ],
+      "langs": ["mt"],
+      "zones": ["Europe/Malta"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -11553,12 +10913,8 @@
         "en": "Malawi"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01 and if saturday,sunday then next monday": {
           "substitute": true,
@@ -11621,9 +10977,7 @@
         "en": "Mexico"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
+      "langs": ["es"],
       "zones": [
         "America/Mexico_City",
         "America/Cancun",
@@ -11718,12 +11072,8 @@
         "en": "Mozambique"
       },
       "dayoff": "sunday",
-      "langs": [
-        "pt"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["pt"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01",
@@ -11819,12 +11169,8 @@
         "en": "Namibia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Windhoek"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Windhoek"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -11912,12 +11258,8 @@
         "en": "Nicaragua"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Managua"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Managua"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12001,12 +11343,8 @@
         "en": "Netherlands"
       },
       "dayoff": "sunday",
-      "langs": [
-        "nl"
-      ],
-      "zones": [
-        "Europe/Amsterdam"
-      ],
+      "langs": ["nl"],
+      "zones": ["Europe/Amsterdam"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12096,12 +11434,8 @@
         "en": "Norway"
       },
       "dayoff": "sunday",
-      "langs": [
-        "no"
-      ],
-      "zones": [
-        "Europe/Oslo"
-      ],
+      "langs": ["no"],
+      "zones": ["Europe/Oslo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12218,13 +11552,8 @@
         "en": "New Zealand"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Pacific/Auckland",
-        "Pacific/Chatham"
-      ],
+      "langs": ["en"],
+      "zones": ["Pacific/Auckland", "Pacific/Chatham"],
       "days": {
         "01-01 and if saturday then next monday if sunday then next tuesday": {
           "substitute": true,
@@ -12418,12 +11747,8 @@
         "en": "Panama"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Panama"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Panama"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -12488,13 +11813,8 @@
         "en": "Peru"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es",
-        "qu"
-      ],
-      "zones": [
-        "America/Lima"
-      ],
+      "langs": ["es", "qu"],
+      "zones": ["America/Lima"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12562,13 +11882,8 @@
       "names": {
         "en": "Philippines"
       },
-      "langs": [
-        "en",
-        "fil"
-      ],
-      "zones": [
-        "Asia/Manila"
-      ],
+      "langs": ["en", "fil"],
+      "zones": ["Asia/Manila"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -12655,9 +11970,7 @@
               "from": "1961-01-01T00:00:00.000Z"
             }
           ],
-          "disable": [
-            "2011-06-19"
-          ]
+          "disable": ["2011-06-19"]
         },
         "2011-06-19": {
           "name": {
@@ -12759,12 +12072,8 @@
         "en": "Poland"
       },
       "dayoff": "sunday",
-      "langs": [
-        "pl"
-      ],
-      "zones": [
-        "Europe/Warsaw"
-      ],
+      "langs": ["pl"],
+      "zones": ["Europe/Warsaw"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12823,14 +12132,8 @@
         "en": "Portugal"
       },
       "dayoff": "sunday",
-      "langs": [
-        "pt"
-      ],
-      "zones": [
-        "Europe/Lisbon",
-        "Atlantic/Madeira",
-        "Atlantic/Azores"
-      ],
+      "langs": ["pt"],
+      "zones": ["Europe/Lisbon", "Atlantic/Madeira", "Atlantic/Azores"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -12905,23 +12208,15 @@
         "en": "Paraguay"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Asuncion"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Asuncion"],
       "days": {
         "01-01": {
           "_name": "01-01"
         },
         "03-01": {
-          "disable": [
-            "2017-03-01"
-          ],
-          "enable": [
-            "2017-02-27"
-          ],
+          "disable": ["2017-03-01"],
+          "enable": ["2017-02-27"],
           "name": {
             "en": "Heroes' Day",
             "es": "Dia de los héroes"
@@ -12958,20 +12253,12 @@
         },
         "08-15": {
           "_name": "08-15",
-          "disable": [
-            "2017-08-15"
-          ],
-          "enable": [
-            "2017-08-14"
-          ]
+          "disable": ["2017-08-15"],
+          "enable": ["2017-08-14"]
         },
         "09-29": {
-          "disable": [
-            "2017-09-29"
-          ],
-          "enable": [
-            "2017-10-02"
-          ],
+          "disable": ["2017-09-29"],
+          "enable": ["2017-10-02"],
           "name": {
             "en": "Boqueron Battle Victory Day",
             "es": "Victoria de Boquerón"
@@ -12998,12 +12285,8 @@
         "fr": "Réunion",
         "en": "Réunion"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Indian/Reunion"
-      ],
+      "langs": ["fr"],
+      "zones": ["Indian/Reunion"],
       "dayoff": "",
       "_days": "FR",
       "days": {
@@ -13018,12 +12301,8 @@
         "en": "Romania"
       },
       "dayoff": "sunday",
-      "langs": [
-        "ro"
-      ],
-      "zones": [
-        "Europe/Bucharest"
-      ],
+      "langs": ["ro"],
+      "zones": ["Europe/Bucharest"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -13118,12 +12397,8 @@
         "sr": "Република Србија",
         "en": "Serbia"
       },
-      "langs": [
-        "sr"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["sr"],
+      "zones": ["Europe/Belgrade"],
       "dayoff": "sunday",
       "days": {
         "01-01 if sunday then next tuesday": {
@@ -13246,9 +12521,7 @@
         "en": "Russia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "ru"
-      ],
+      "langs": ["ru"],
       "zones": [
         "Europe/Moscow",
         "Europe/Kaliningrad",
@@ -13339,13 +12612,8 @@
         "en": "Rwanda"
       },
       "dayoff": "sunday",
-      "langs": [
-        "rw",
-        "fr"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["rw", "fr"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -13409,12 +12677,8 @@
         "en": "Sweden"
       },
       "dayoff": "sunday",
-      "langs": [
-        "sv"
-      ],
-      "zones": [
-        "Europe/Stockholm"
-      ],
+      "langs": ["sv"],
+      "zones": ["Europe/Stockholm"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -13532,12 +12796,8 @@
       "names": {
         "en": "Singapore"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Asia/Singapore"
-      ],
+      "langs": ["en"],
+      "zones": ["Asia/Singapore"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -13704,12 +12964,8 @@
       "names": {
         "en": "St. Helena"
       },
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Abidjan"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Abidjan"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -13843,12 +13099,8 @@
         "sl": "Republika Slovenija",
         "en": "Slovenia"
       },
-      "langs": [
-        "sl"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["sl"],
+      "zones": ["Europe/Belgrade"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -14065,12 +13317,8 @@
       "names": {
         "en": "Svalbard & Jan Mayen"
       },
-      "langs": [
-        "no"
-      ],
-      "zones": [
-        "Europe/Oslo"
-      ],
+      "langs": ["no"],
+      "zones": ["Europe/Oslo"],
       "dayoff": "sunday",
       "_days": "NO"
     },
@@ -14079,12 +13327,8 @@
         "sk": "Slovenská republika",
         "en": "Slovakia"
       },
-      "langs": [
-        "sk"
-      ],
-      "zones": [
-        "Europe/Prague"
-      ],
+      "langs": ["sk"],
+      "zones": ["Europe/Prague"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -14165,12 +13409,8 @@
         "it": "San Marino",
         "en": "San Marino"
       },
-      "langs": [
-        "it"
-      ],
-      "zones": [
-        "Europe/Rome"
-      ],
+      "langs": ["it"],
+      "zones": ["Europe/Rome"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -14271,14 +13511,8 @@
       },
       "dayoff": null,
       "null": null,
-      "langs": [
-        "so",
-        "ar",
-        "en"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["so", "ar", "en"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14330,35 +13564,19 @@
         },
         "SA": {
           "name": "Sanaag",
-          "_days": [
-            "SO",
-            "states",
-            "AW"
-          ]
+          "_days": ["SO", "states", "AW"]
         },
         "SO": {
           "name": "Sool",
-          "_days": [
-            "SO",
-            "states",
-            "AW"
-          ]
+          "_days": ["SO", "states", "AW"]
         },
         "TO": {
           "name": "Togdheer",
-          "_days": [
-            "SO",
-            "states",
-            "AW"
-          ]
+          "_days": ["SO", "states", "AW"]
         },
         "WO": {
           "name": "Woqooyi Galbeed",
-          "_days": [
-            "SO",
-            "states",
-            "AW"
-          ]
+          "_days": ["SO", "states", "AW"]
         }
       }
     },
@@ -14367,12 +13585,8 @@
         "en": "South Sudan"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14427,12 +13641,8 @@
         "en": "El Salvador"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/El_Salvador"
-      ],
+      "langs": ["es"],
+      "zones": ["America/El_Salvador"],
       "days": {
         "01-01": {
           "_name": "01-01",
@@ -14527,12 +13737,8 @@
         "fr": "République togolaise"
       },
       "dayoff": "sunday",
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Abidjan"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Abidjan"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14586,13 +13792,8 @@
         "to": "Puleʻanga Fakatuʻi ʻo Tonga",
         "en": "Tonga"
       },
-      "langs": [
-        "to",
-        "en"
-      ],
-      "zones": [
-        "Pacific/Tongatapu"
-      ],
+      "langs": ["to", "en"],
+      "zones": ["Pacific/Tongatapu"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -14649,12 +13850,8 @@
         "en": "Turkey"
       },
       "dayoff": "saturday",
-      "langs": [
-        "tr"
-      ],
-      "zones": [
-        "Europe/Istanbul"
-      ],
+      "langs": ["tr"],
+      "zones": ["Europe/Istanbul"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14709,12 +13906,8 @@
         "en": "Tanzania"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14790,14 +13983,8 @@
         "uk": "Україна",
         "en": "Ukraine"
       },
-      "langs": [
-        "uk"
-      ],
-      "zones": [
-        "Europe/Kiev",
-        "Europe/Uzhgorod",
-        "Europe/Zaporozhye"
-      ],
+      "langs": ["uk"],
+      "zones": ["Europe/Kiev", "Europe/Uzhgorod", "Europe/Zaporozhye"],
       "dayoff": "sunday",
       "days": {
         "01-01 and if saturday, sunday then next tuesday": {
@@ -14869,13 +14056,8 @@
         "en": "Uganda"
       },
       "dayoff": "sundays",
-      "langs": [
-        "en",
-        "sw"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["en", "sw"],
+      "zones": ["Africa/Nairobi"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -14972,10 +14154,7 @@
         "America/Adak",
         "Pacific/Honolulu"
       ],
-      "langs": [
-        "en-us",
-        "en"
-      ],
+      "langs": ["en-us", "en"],
       "days": {
         "01-01 and if sunday then next monday if saturday then previous friday": {
           "substitute": true,
@@ -15088,9 +14267,7 @@
       "states": {
         "AL": {
           "name": "Alabama",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15164,10 +14341,7 @@
         },
         "AZ": {
           "name": "Arizona",
-          "zones": [
-            "America/Phoenix",
-            "America/Denver"
-          ],
+          "zones": ["America/Phoenix", "America/Denver"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15183,9 +14357,7 @@
         },
         "AR": {
           "name": "Arkansas",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15204,9 +14376,7 @@
         },
         "CA": {
           "name": "California",
-          "zones": [
-            "America/Los_Angeles"
-          ],
+          "zones": ["America/Los_Angeles"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15266,9 +14436,7 @@
         },
         "CO": {
           "name": "Colorado",
-          "zones": [
-            "America/Denver"
-          ],
+          "zones": ["America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15282,9 +14450,7 @@
         },
         "CT": {
           "name": "Connecticut",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "02-12": {
               "name": {
@@ -15372,9 +14538,7 @@
         },
         "HI": {
           "name": "Hawaii",
-          "zones": [
-            "Pacific/Honolulu"
-          ],
+          "zones": ["Pacific/Honolulu"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15411,10 +14575,7 @@
         },
         "ID": {
           "name": "Idaho",
-          "zones": [
-            "America/Boise",
-            "America/Los_Angeles"
-          ],
+          "zones": ["America/Boise", "America/Los_Angeles"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15430,9 +14591,7 @@
         },
         "IL": {
           "name": "Illinois",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "02-12": {
               "name": {
@@ -15491,9 +14650,7 @@
         },
         "IA": {
           "name": "Iowa",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "02-12": {
               "name": {
@@ -15504,10 +14661,7 @@
         },
         "KS": {
           "name": "Kansas",
-          "zones": [
-            "America/Chicago",
-            "America/Denver"
-          ],
+          "zones": ["America/Chicago", "America/Denver"],
           "days": {
             "3rd monday in February": false
           }
@@ -15533,9 +14687,7 @@
         },
         "LA": {
           "name": "Louisiana",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "easter -2": {
               "_name": "easter -2"
@@ -15562,9 +14714,7 @@
         },
         "ME": {
           "name": "Maine",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15580,9 +14730,7 @@
         },
         "MD": {
           "name": "Maryland",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15603,9 +14751,7 @@
         },
         "MA": {
           "name": "Massachusetts",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "03-17": {
               "name": {
@@ -15626,10 +14772,7 @@
         },
         "MI": {
           "name": "Michigan",
-          "zones": [
-            "America/Detroit",
-            "America/Menominee"
-          ],
+          "zones": ["America/Detroit", "America/Menominee"],
           "days": {
             "12-24": {
               "_name": "12-24"
@@ -15641,9 +14784,7 @@
         },
         "MN": {
           "name": "Minnesota",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15674,9 +14815,7 @@
         },
         "MS": {
           "name": "Mississippi",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15692,9 +14831,7 @@
         },
         "MO": {
           "name": "Missouri",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "02-12": {
               "name": {
@@ -15710,9 +14847,7 @@
         },
         "MT": {
           "name": "Montana",
-          "zones": [
-            "America/Denver"
-          ],
+          "zones": ["America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15734,10 +14869,7 @@
         },
         "NE": {
           "name": "Nebraska",
-          "zones": [
-            "America/Chicago",
-            "America/Denver"
-          ],
+          "zones": ["America/Chicago", "America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15753,9 +14885,7 @@
         },
         "NV": {
           "name": "Nevada",
-          "zones": [
-            "America/Los_Angeles"
-          ],
+          "zones": ["America/Los_Angeles"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15788,9 +14918,7 @@
         },
         "NH": {
           "name": "New Hampshire",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in January": {
               "name": {
@@ -15819,9 +14947,7 @@
         },
         "NJ": {
           "name": "New Jersey",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "02-12": {
               "name": {
@@ -15845,9 +14971,7 @@
         },
         "NM": {
           "name": "New Mexico",
-          "zones": [
-            "America/Denver"
-          ],
+          "zones": ["America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15863,9 +14987,7 @@
         },
         "NY": {
           "name": "New York",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "02-12": {
               "name": {
@@ -15886,9 +15008,7 @@
         },
         "NC": {
           "name": "North Carolina",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": false,
             "2nd monday in October": false,
@@ -15923,9 +15043,7 @@
         },
         "OH": {
           "name": "Ohio",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15936,9 +15054,7 @@
         },
         "OK": {
           "name": "Oklahoma",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15954,9 +15070,7 @@
         },
         "OR": {
           "name": "Oregon",
-          "zones": [
-            "America/Los_Angeles"
-          ],
+          "zones": ["America/Los_Angeles"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15967,9 +15081,7 @@
         },
         "PA": {
           "name": "Pennsylvania",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -15985,9 +15097,7 @@
         },
         "RI": {
           "name": "Rhode Island",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "2nd monday in August": {
               "name": {
@@ -15998,9 +15108,7 @@
         },
         "SC": {
           "name": "South Carolina",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "05-10": {
               "name": {
@@ -16014,10 +15122,7 @@
         },
         "SD": {
           "name": "South Dakota",
-          "zones": [
-            "America/Chicago",
-            "America/Denver"
-          ],
+          "zones": ["America/Chicago", "America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16048,10 +15153,7 @@
         },
         "TN": {
           "name": "Tennessee",
-          "zones": [
-            "America/Chicago",
-            "America/New_York"
-          ],
+          "zones": ["America/Chicago", "America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16068,10 +15170,7 @@
         },
         "TX": {
           "name": "Texas",
-          "zones": [
-            "America/Chicago",
-            "America/Denver"
-          ],
+          "zones": ["America/Chicago", "America/Denver"],
           "days": {
             "01-19": {
               "name": {
@@ -16141,9 +15240,7 @@
         },
         "UT": {
           "name": "Utah",
-          "zones": [
-            "America/Denver"
-          ],
+          "zones": ["America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16159,9 +15256,7 @@
         },
         "VT": {
           "name": "Vermont",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16202,9 +15297,7 @@
         },
         "VA": {
           "name": "Virginia",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16220,9 +15313,7 @@
         },
         "WA": {
           "name": "Washington",
-          "zones": [
-            "America/Los_Angeles"
-          ],
+          "zones": ["America/Los_Angeles"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16233,9 +15324,7 @@
         },
         "WV": {
           "name": "West Virginia",
-          "zones": [
-            "America/New_York"
-          ],
+          "zones": ["America/New_York"],
           "days": {
             "02-15": {
               "name": {
@@ -16261,9 +15350,7 @@
         },
         "WI": {
           "name": "Wisconsin",
-          "zones": [
-            "America/Chicago"
-          ],
+          "zones": ["America/Chicago"],
           "days": {
             "02-15": {
               "name": {
@@ -16284,9 +15371,7 @@
         },
         "WY": {
           "name": "Wyoming",
-          "zones": [
-            "America/Denver"
-          ],
+          "zones": ["America/Denver"],
           "days": {
             "3rd monday in February": {
               "name": {
@@ -16303,12 +15388,8 @@
         "en": "Uruguay"
       },
       "dayoff": "sunday",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Montevideo"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Montevideo"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -16405,12 +15486,8 @@
         "la": "Status Civitatis Vaticanae",
         "en": "Vatican City"
       },
-      "langs": [
-        "it"
-      ],
-      "zones": [
-        "Europe/Rome"
-      ],
+      "langs": ["it"],
+      "zones": ["Europe/Rome"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -16568,12 +15645,8 @@
         "en": "Venezuela"
       },
       "dayoff": "sundays",
-      "langs": [
-        "es"
-      ],
-      "zones": [
-        "America/Caracas"
-      ],
+      "langs": ["es"],
+      "zones": ["America/Caracas"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -16792,13 +15865,8 @@
         "en": "Vietnam"
       },
       "dayoff": null,
-      "langs": [
-        "vi"
-      ],
-      "zones": [
-        "Asia/Ho_Chi_Minh",
-        "Asia/Bangkok"
-      ],
+      "langs": ["vi"],
+      "zones": ["Asia/Ho_Chi_Minh", "Asia/Bangkok"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -16981,13 +16049,8 @@
         "sr": "Република Косово",
         "en": "Kosovo"
       },
-      "langs": [
-        "sq",
-        "sr"
-      ],
-      "zones": [
-        "Europe/Belgrade"
-      ],
+      "langs": ["sq", "sr"],
+      "zones": ["Europe/Belgrade"],
       "dayoff": "sunday",
       "days": {
         "01-01": {
@@ -17033,12 +16096,8 @@
         "fr": "Mayotte",
         "en": "Mayotte"
       },
-      "langs": [
-        "fr"
-      ],
-      "zones": [
-        "Africa/Nairobi"
-      ],
+      "langs": ["fr"],
+      "zones": ["Africa/Nairobi"],
       "dayoff": "sunday",
       "_days": "FR",
       "days": {
@@ -17052,12 +16111,8 @@
         "en": "South Africa"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Johannesburg"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Johannesburg"],
       "days": {
         "01-01": {
           "_name": "01-01"
@@ -17186,12 +16241,8 @@
         "en": "Zambia"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01 and if sunday then next monday": {
           "substitute": true,
@@ -17263,12 +16314,8 @@
         "en": "Zimbabwe"
       },
       "dayoff": "sunday",
-      "langs": [
-        "en"
-      ],
-      "zones": [
-        "Africa/Maputo"
-      ],
+      "langs": ["en"],
+      "zones": ["Africa/Maputo"],
       "days": {
         "01-01": {
           "_name": "01-01"

@@ -183,13 +183,15 @@ describe('#Holidays', function () {
       let res = hd.setHoliday('06-22')
       assert.ok(res)
       res = hd.isHoliday(localDate('2011-06-22 00:00'))
-      const exp = [{
-        date: '2011-06-22 00:00:00',
-        start: localDate('2011-06-22 00:00'),
-        end: localDate('2011-06-23 00:00'),
-        name: '06-22',
-        type: 'public'
-      }]
+      const exp = [
+        {
+          date: '2011-06-22 00:00:00',
+          start: localDate('2011-06-22 00:00'),
+          end: localDate('2011-06-23 00:00'),
+          name: '06-22',
+          type: 'public'
+        }
+      ]
       assert.ok(res)
       assert.deepStrictEqual(res, exp)
     })
@@ -199,13 +201,15 @@ describe('#Holidays', function () {
       let res = hd.setHoliday('06-22', 'someones birthday')
       assert.ok(res)
       res = hd.isHoliday(localDate('2011-06-22 00:00'))
-      const exp = [{
-        date: '2011-06-22 00:00:00',
-        start: localDate('2011-06-22 00:00'),
-        end: localDate('2011-06-23 00:00'),
-        name: 'someones birthday',
-        type: 'public'
-      }]
+      const exp = [
+        {
+          date: '2011-06-22 00:00:00',
+          start: localDate('2011-06-22 00:00'),
+          end: localDate('2011-06-23 00:00'),
+          name: 'someones birthday',
+          type: 'public'
+        }
+      ]
       assert.ok(res)
       assert.deepStrictEqual(res, exp)
     })
@@ -218,27 +222,23 @@ describe('#Holidays', function () {
 
     it('throws if setting a holiday with false .active array', function () {
       const hd = new Holidays(fixtures.holidays, 'it')
-      assert.throws(
-        () => {
-          hd.setHoliday('01-07', {
-            name: 'throws',
-            active: { from: 2010, to: 2015 }
-          })
-        }, /\.active is not of type Array: 01-07/
-      )
+      assert.throws(() => {
+        hd.setHoliday('01-07', {
+          name: 'throws',
+          active: { from: 2010, to: 2015 }
+        })
+      }, /\.active is not of type Array: 01-07/)
       // assert.ok(!hd.holidays['01-01'])
     })
 
     it('throws if setting a holiday with .active array but missing prop', function () {
       const hd = new Holidays(fixtures.holidays, 'it')
-      assert.throws(
-        () => {
-          hd.setHoliday('01-07', {
-            name: 'throws',
-            active: [{ to: '2000' }, {}]
-          })
-        }, /\.active needs .from or .to property: 01-07/
-      )
+      assert.throws(() => {
+        hd.setHoliday('01-07', {
+          name: 'throws',
+          active: [{ to: '2000' }, {}]
+        })
+      }, /\.active needs .from or .to property: 01-07/)
       // assert.ok(!hd.holidays['01-01'])
     })
 
@@ -308,7 +308,7 @@ describe('#Holidays', function () {
     it('for current year', function () {
       const hd = new Holidays(fixtures.holidays, 'at')
       const res = hd.getHolidays()[0]
-      const str = localDate((new Date()).getFullYear() + '-01-01 00:00:00')
+      const str = localDate(new Date().getFullYear() + '-01-01 00:00:00')
       const exp = moveToTimezone(new Date(str), 'Europe/Vienna')
       assert.strictEqual(toIso(res.start), toIso(exp))
     })
@@ -459,20 +459,23 @@ describe('#Holidays', function () {
 
     it('should get only holidays of type "public"', function () {
       const hd = new Holidays(fixtures.holidays, 'de', { types: ['public'] })
-      const res = Array.from(new Set(hd.getHolidays(2018).map(i => i.type)))
+      const res = Array.from(new Set(hd.getHolidays(2018).map((i) => i.type)))
       assert.deepStrictEqual(res, ['public'])
     })
 
     it('should get holidays of type "public" and "observance"', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', { types: ['public', 'observance'] })
-      const res = Array.from(new Set(hd.getHolidays(2018).map(i => i.type)))
+      const hd = new Holidays(fixtures.holidays, 'de', {
+        types: ['public', 'observance']
+      })
+      const res = Array.from(new Set(hd.getHolidays(2018).map((i) => i.type)))
       assert.deepStrictEqual(res, ['public', 'observance'])
     })
 
     it('should set holidays country with object', function () {
-      const hd = new Holidays(fixtures.holidays,
-        { country: 'au', state: 'nsw' }
-      )
+      const hd = new Holidays(fixtures.holidays, {
+        country: 'au',
+        state: 'nsw'
+      })
       const res = hd.getHolidays(2018)
       assert.ok(res.length)
       assert.ok(res[1].name === 'Australia Day')
@@ -531,7 +534,9 @@ describe('#Holidays', function () {
     })
 
     it('if 2017-12-24:16:00 is a holiday in Germany Brandenburg', function () {
-      const hd = new Holidays(fixtures.holidays, 'de', 'bb', { observance: true })
+      const hd = new Holidays(fixtures.holidays, 'de', 'bb', {
+        observance: true
+      })
       hd.setTimezone() // use local time to pass tests in other timezone other than `Europe/Berlin`
       const res = hd.isHoliday(localDate('2017-12-24 16:00'))
       assert.ok(res)
@@ -661,14 +666,15 @@ describe('#Holidays', function () {
         rule: '4th thursday in November',
         name: { en: 'Thanksgiving Day' },
         type: 'public',
-        disable: [
-          '2020'
-        ]
+        disable: ['2020']
       })
 
       assert.deepStrictEqual(rule, exp)
       assert.deepStrictEqual(hd.isHoliday('2020-11-26T05:00:00Z'), false)
-      assert.strictEqual(hd.isHoliday('2021-11-25T05:00:00Z')[0].name, 'Thanksgiving Day')
+      assert.strictEqual(
+        hd.isHoliday('2021-11-25T05:00:00Z')[0].name,
+        'Thanksgiving Day'
+      )
     })
   })
 })

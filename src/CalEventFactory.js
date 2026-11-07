@@ -29,8 +29,12 @@ import BengaliRevised from './BengaliRevised.js'
 import Tibetan from './Tibetan.js'
 // #endif
 
-export default class CalEventFactory {
-  constructor (opts) {
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+
+export class CalEventFactory extends CalEvent {
+  /** @param {EventOptions} opts */
+  constructor(opts) {
+    super(opts)
     switch (opts.fn) {
       case 'easter':
         return new Easter(opts)
