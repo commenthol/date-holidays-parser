@@ -483,7 +483,6 @@ describe('#DateFn', function () {
         }]
         assert.deepStrictEqual(fixResult(res), exp)
       })
-
     })
   })
 

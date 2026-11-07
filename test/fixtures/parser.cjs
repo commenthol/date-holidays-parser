@@ -413,7 +413,7 @@ module.exports = {
       leapMonth: false,
       leapDay: false,
       year: undefined,
-      cycle: undefined,
+      cycle: undefined
     }
   ],
   'mongolian 01-1-01': [
@@ -424,7 +424,7 @@ module.exports = {
       leapMonth: true,
       leapDay: false,
       year: undefined,
-      cycle: undefined,
+      cycle: undefined
     }
   ],
   'bhutanese 01-1-01-1': [
@@ -435,7 +435,7 @@ module.exports = {
       leapMonth: true,
       leapDay: true,
       year: undefined,
-      cycle: undefined,
+      cycle: undefined
     }
   ],
   '1 day before vietnamese 01-0-01': [

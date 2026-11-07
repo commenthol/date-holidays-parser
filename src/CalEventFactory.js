@@ -25,7 +25,7 @@ import Chinese from './Chinese.js'
 // #ifndef nobengali
 import BengaliRevised from './BengaliRevised.js'
 // #endif
-// #ifndef notibet
+// #ifndef notibetan
 import Tibetan from './Tibetan.js'
 // #endif
 

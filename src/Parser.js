@@ -436,7 +436,7 @@ export default class Parser {
         month: toNumber(cap.shift()),
         leapMonth: !!toNumber(cap.shift()),
         day: toNumber(cap.shift()),
-        leapDay: !!toNumber(cap.shift()),
+        leapDay: !!toNumber(cap.shift())
       }
       this.tokens.push(res)
       return true

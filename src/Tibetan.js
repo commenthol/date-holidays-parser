@@ -2,7 +2,7 @@ import {
   CalendarTibetan,
   CalendarMongolian,
   CalendarBhutanese
-} from '@hnw/date-tibetan';
+} from '@hnw/date-tibetan'
 import CalEvent from './CalEvent.js'
 import CalDate from 'caldate'
 
@@ -27,12 +27,10 @@ export default class Tibetan extends CalEvent {
   }
 
   inYear (year) {
-    let d
-    let date
     const opts = this.opts
     this.cal.set(opts.cycle, opts.year, opts.month, opts.leapMonth, opts.day, opts.leapDay)
-    date = this.cal.toGregorian(year)
-    d = new CalDate(date)
+    const date = this.cal.toGregorian(year)
+    const d = new CalDate(date)
     this.dates.push(d)
     return this
   }
