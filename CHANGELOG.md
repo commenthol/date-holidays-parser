@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.6.0](https://github.com/commenthol/date-holidays-parser/3.5.0..3.6.0) (2026-11-07)
+
+- feat(types): generate and publish TypeScript declarations [#18ea3c6](https://github.com/commenthol/date-holidays-parser/18ea3c676f25094cb502d50f03c3ebdeabef8da5)
+
 ## [3.5.0](https://github.com/commenthol/date-holidays-parser/3.4.7..3.5.0) (2026-11-07)
 
 - fix: linter errors integrating @hnw/date-tibetan [#892ff32](https://github.com/commenthol/date-holidays-parser/892ff32f23ab7ba1d1a620f3634988d9669dd8e9)
