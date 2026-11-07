@@ -405,6 +405,39 @@ module.exports = {
       year: undefined
     }
   ],
+  'tibetan 01-0-01': [
+    {
+      fn: 'tibetan',
+      day: 1,
+      month: 1,
+      leapMonth: false,
+      leapDay: false,
+      year: undefined,
+      cycle: undefined,
+    }
+  ],
+  'mongolian 01-1-01': [
+    {
+      fn: 'mongolian',
+      day: 1,
+      month: 1,
+      leapMonth: true,
+      leapDay: false,
+      year: undefined,
+      cycle: undefined,
+    }
+  ],
+  'bhutanese 01-1-01-1': [
+    {
+      fn: 'bhutanese',
+      day: 1,
+      month: 1,
+      leapMonth: true,
+      leapDay: true,
+      year: undefined,
+      cycle: undefined,
+    }
+  ],
   '1 day before vietnamese 01-0-01': [
     {
       fn: 'vietnamese',

@@ -25,6 +25,9 @@ import Chinese from './Chinese.js'
 // #ifndef nobengali
 import BengaliRevised from './BengaliRevised.js'
 // #endif
+// #ifndef notibet
+import Tibetan from './Tibetan.js'
+// #endif
 
 export default class CalEventFactory {
   constructor (opts) {
@@ -60,6 +63,12 @@ export default class CalEventFactory {
       // #ifndef nobengali
       case 'bengali-revised':
         return new BengaliRevised(opts)
+      // #endif
+      // #ifndef notibetan
+      case 'tibetan':
+      case 'mongolian':
+      case 'bhutanese':
+        return new Tibetan(opts)
       // #endif
       default:
         return new CalEvent(opts)
