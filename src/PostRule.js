@@ -2,21 +2,26 @@ import { get as _get, toNumber } from './utils.js'
 import Rule from './Rule.js'
 import CalEvent from './CalEvent.js'
 
+/** @typedef {import('./types.js').HolidayMap} HolidayMap */
+/** @typedef {import('./types.js').HolidayOptions} HolidayOptions */
+/** @typedef {import('./types.js').RuleToken} RuleToken */
+
 export default class PostRule {
   /**
-   * @param {String} ruleStr
-   * @param {Object} opts
-   * @param {Array} [holidays]
+   * @param {string} ruleStr
+   * @param {HolidayOptions|false} [opts]
+   * @param {HolidayMap} [holidays]
    */
-  constructor (ruleStr, opts, holidays) {
+  constructor(ruleStr, opts, holidays) {
     this.opts = opts
     this.ruleStr = ruleStr
     this.ruleSet = holidays && holidays[ruleStr]
     this.holidays = holidays
+    /** @type {CalEvent[]} */
     this.events = []
   }
 
-  push (calEvent) {
+  push(calEvent) {
     this.events.push(calEvent)
   }
 
@@ -24,7 +29,7 @@ export default class PostRule {
    * @param {number} year
    * @returns {CalEvent}
    */
-  getEvent (year) {
+  getEvent(year) {
     const active = this.ruleSet && this.ruleSet.active
     this.disable(year)
     const ev = this.events[0]
@@ -33,27 +38,28 @@ export default class PostRule {
   }
 
   /**
-   * @param {Array} rule
+   * @param {RuleToken} rule
    * @param {number} year
    */
-  resolve (rule, year) {
+  resolve(rule, year) {
     if (rule.rule && typeof this[rule.rule] === 'function') {
       this[rule.rule](rule, year)
     }
   }
 
   /**
-   * @param {Array} rule
+   * @param {RuleToken} rule
    * @param {number} year
    */
-  bridge (rule, year) {
+  bridge(rule, year) {
     const found = new Array(this.events.length).fill(false)
     found[0] = true
     const type = rule.type || 'public'
 
     // get all holidays of the given year
     for (const ruleStr in this.holidays) {
-      const dateFn = this.holidays[ruleStr].fn
+      const holiday = this.holidays[ruleStr]
+      const dateFn = holiday && holiday.fn
       if (dateFn && dateFn.ruleStr !== this.ruleStr) {
         const tmpEv = dateFn.inYear(year)
         const tmpEvType = _get(tmpEv, 'opts.type') || 'public'
@@ -65,7 +71,8 @@ export default class PostRule {
           }
         }
       }
-      if (!~found.indexOf(false)) { // pre-exit if all found
+      if (!~found.indexOf(false)) {
+        // pre-exit if all found
         break
       }
     }
@@ -75,14 +82,20 @@ export default class PostRule {
     }
   }
 
-  ruleIfHoliday (rule, year) {
+  /** @param {RuleToken} rule @param {number} year */
+  ruleIfHoliday(rule, year) {
     const type = rule.type || 'public'
 
     // get all holidays of the given year
     for (const ruleStr in this.holidays) {
-      const dateFn = this.holidays[ruleStr].fn
+      const holiday = this.holidays[ruleStr]
+      const dateFn = holiday && holiday.fn
       // Avoid recursively resolving a conditional rule already in progress.
-      if (dateFn && dateFn.ruleStr !== this.ruleStr && !dateFn.isCalculating(year)) {
+      if (
+        dateFn &&
+        dateFn.ruleStr !== this.ruleStr &&
+        !dateFn.isCalculating(year)
+      ) {
         const tmpEv = dateFn.inYear(year)
         const tmpEvType = _get(tmpEv, 'opts.type') || 'public'
         for (let i = 0; i < this.events.length; i++) {
@@ -99,7 +112,7 @@ export default class PostRule {
   /**
    * @param {number} year
    */
-  disable (year) {
+  disable(year) {
     const { disable, enable } = this.opts || {}
     if (!disable || !disable.length) return
 
@@ -122,9 +135,13 @@ export default class PostRule {
   }
 }
 
-const isoDate = (isoDateStr) => String(isoDateStr).split('-').map(v => toNumber(v))
+const isoDate = (isoDateStr) =>
+  String(isoDateStr)
+    .split('-')
+    .map((v) => toNumber(v))
 
-function _findEventInYear (_year, arr = []) {
+/** @param {number} _year @param {string[]} [arr] */
+function _findEventInYear(_year, arr = []) {
   for (const item of arr) {
     const [year, month, day] = isoDate(item)
     if (year === _year && month && day) {
@@ -133,7 +150,8 @@ function _findEventInYear (_year, arr = []) {
   }
 }
 
-function _findDisabled (_year, arr = []) {
+/** @param {number} _year @param {string[]} [arr] */
+function _findDisabled(_year, arr = []) {
   for (const isoDateStr of arr) {
     const [year, month] = isoDate(isoDateStr)
     if (_year === year) {

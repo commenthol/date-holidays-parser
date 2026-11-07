@@ -40,21 +40,21 @@ describe('#issue-translate', function () {
 
   it('should translate holiday names by default lang of state for Ticino in italian', function () {
     const hd = new Holidays(fixtures.holidays, 'ch-ti')
-    const res = hd.getHolidays(2018).map(i => i.name)
+    const res = hd.getHolidays(2018).map((i) => i.name)
     assert.ok(res.includes('Epifania'))
     assert.ok(res.includes('Santo Stefano'))
   })
 
   it('should translate holiday names by subtag "de-ch"', function () {
     const hd = new Holidays(fixtures.holidays, 'ch-ur')
-    const res = hd.getHolidays(2018).map(i => i.name)
+    const res = hd.getHolidays(2018).map((i) => i.name)
     assert.ok(res.includes('Dreikönigstag'))
     assert.ok(res.includes('Stephanstag'))
   })
 
   it('should translate holiday names by subtag "de-ch" for "Graubünden"', function () {
     const hd = new Holidays(fixtures.holidays, 'ch-gr')
-    const res = hd.getHolidays(2018, 'de-ch').map(i => i.name)
+    const res = hd.getHolidays(2018, 'de-ch').map((i) => i.name)
     assert.ok(res.includes('Dreikönigstag'))
     assert.ok(res.includes('Stephanstag'))
   })

@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "3.5.0",
+  "version": "3.6.0-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -21,11 +21,22 @@
     "commenthol <commenthol@gmail.com>"
   ],
   "contributors": [
+    "Christian Schinnerl <Schinnerl.Christian@gmail.com>",
+    "Lukas Eipert <git@leipert.io>",
+    "davidan90 <david16an@gmail.com>",
+    "0xflotus <0xflotus@gmail.com>",
+    "Stefan <stefan@devliert.info>",
+    "Leonidas Villeneuve <leonidas@leonidasv.com>",
+    "mohammadyaser <m.y.ahmadi22@gmail.com>",
+    "oprogramador <uomodislesia@gmail.com>",
+    "pzien <paulina.zientarska@areo.io>",
+    "Daniel Belfiore <belfiore@gmx.net>",
     "Yoshio HANAWA <y@hnw.jp>"
   ],
   "type": "module",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./src/index.js",
       "require": "./lib/index.cjs"
     },
@@ -33,7 +44,7 @@
   },
   "main": "./lib/index.cjs",
   "module": "./src/index.js",
-  "typings": "./types",
+  "types": "./types/index.d.ts",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -47,22 +58,21 @@
     "README.md"
   ],
   "scripts": {
-    "__disabled__test:ts": "dtslint types",
-    "all": "npm-run-all clean lint build postbuild test",
-    "build": "rollup -c && cp scripts/rollup-fix/* lib",
+    "all": "run-s clean pretty lint build postbuild test types",
+    "build": "rollup -c",
     "postbuild": "node scripts/postbuild.cjs",
-    "ci": "npm-run-all build test",
+    "ci": "run-s all",
     "clean": "rimraf lib es coverage .nyc_output",
-    "clean:all": "npm-run-all clean clean:node_modules",
+    "clean:all": "run-s clean clean:node_modules",
     "clean:node_modules": "rimraf node_modules",
     "coverage": "c8 -r text -r html npm test",
-    "doc": "jsdox -o docs src/Holidays.js",
-    "lint": "eslint --fix --ext .js,.cjs .",
+    "lint": "eslint src test",
+    "pretty": "prettier -w src test",
     "prepublishOnly": "npm run all",
-    "test": "npm-run-all test:*",
+    "test": "run-s test:*",
     "test:ci": "mocha",
     "test:tz": "TZ=UTC-10 mocha && TZ=UTC+10 mocha",
-    "zuul": "zuul test/Holidays.test.js"
+    "types": "tsc -p ./tsconfig.json"
   },
   "mocha": {
     "checkLeaks": true,
@@ -70,36 +80,32 @@
   },
   "dependencies": {
     "@hnw/date-tibetan": "^1.0.2",
-    "astronomia": "^4.1.1",
+    "astronomia": "^4.2.0",
     "caldate": "^2.0.5",
     "date-bengali-revised": "^2.0.2",
     "date-chinese": "^2.1.4",
     "date-easter": "^1.0.3",
     "deepmerge": "^4.3.1",
-    "jalaali-js": "^1.2.7",
-    "moment-timezone": "^0.5.47"
+    "jalaali-js": "^2.0.1",
+    "moment-timezone": "^0.6.6"
   },
   "devDependencies": {
-    "c8": "^10.1.3",
-    "dtslint": "^4.2.1",
-    "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.6.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "c8": "^12.0.0",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
     "hashtree": "^0.7.0",
-    "mocha": "^11.1.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^6.0.1",
-    "rollup": "^2.79.2",
+    "mocha": "^12.0.3",
+    "npm-run-all2": "^9.0.4",
+    "prettier": "^3.9.10",
+    "rimraf": "^6.1.4",
+    "rollup": "^4.67.5",
     "serialize-to-module": "^1.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "engines": {
     "node": ">=12.0.0"
-  },
-  "c4uIgnore": {
-    "rollup": "^2.79.1 // v3 changed exports; needs refactoring first."
   }
 }

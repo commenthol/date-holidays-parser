@@ -13,7 +13,8 @@ module.exports = {
       year: undefined,
       month: 3,
       day: 12
-    }, {
+    },
+    {
       rule: 'time',
       hour: 16,
       minute: 0
@@ -152,7 +153,8 @@ module.exports = {
       day: 1,
       month: 10,
       year: undefined
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 72
     }
@@ -447,7 +449,8 @@ module.exports = {
       year: undefined,
       cycle: undefined,
       timezone: undefined
-    }, {
+    },
+    {
       count: 1,
       direction: 'before',
       rule: 'dateDir',
@@ -462,7 +465,8 @@ module.exports = {
       year: 32,
       cycle: 78,
       timezone: undefined
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'friday',
@@ -481,7 +485,8 @@ module.exports = {
       fn: 'equinox',
       season: 'march',
       timezone: 'Europe\u002FVienna'
-    }, {
+    },
+    {
       count: 4,
       direction: 'before',
       rule: 'dateDir',
@@ -507,7 +512,8 @@ module.exports = {
       fn: 'equinox',
       season: 'march',
       timezone: 'Asia\u002FTokyo'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -519,7 +525,8 @@ module.exports = {
       fn: 'equinox',
       season: 'september',
       timezone: 'GMT'
-    }, {
+    },
+    {
       count: 3,
       direction: 'after',
       rule: 'dateDir',
@@ -531,7 +538,8 @@ module.exports = {
       fn: 'equinox',
       season: 'june',
       timezone: 'GMT'
-    }, {
+    },
+    {
       count: 1,
       direction: 'before',
       rule: 'dateDir',
@@ -543,7 +551,8 @@ module.exports = {
       fn: 'equinox',
       season: 'december',
       timezone: 'GMT'
-    }, {
+    },
+    {
       count: 1,
       direction: 'after',
       rule: 'dateDir',
@@ -555,7 +564,8 @@ module.exports = {
       fn: 'equinox',
       season: 'december',
       timezone: 'GMT'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 3,
       weekday: 'monday',
@@ -568,7 +578,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
@@ -579,7 +590,8 @@ module.exports = {
       fn: 'easter',
       type: 'easter',
       offset: -3
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
@@ -590,7 +602,8 @@ module.exports = {
       fn: 'easter',
       type: 'easter',
       offset: -6
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 120
     }
@@ -601,11 +614,13 @@ module.exports = {
       year: undefined,
       month: 9,
       day: 4
-    }, {
+    },
+    {
       rule: 'time',
       hour: 8,
       minute: 0
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 14
     }
@@ -616,11 +631,13 @@ module.exports = {
       year: undefined,
       month: 9,
       day: 4
-    }, {
+    },
+    {
       rule: 'time',
       hour: 8,
       minute: 0
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 321.5
     }
@@ -630,11 +647,13 @@ module.exports = {
       fn: 'easter',
       type: 'easter',
       offset: -3
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 4
     }
@@ -644,11 +663,13 @@ module.exports = {
       fn: 'easter',
       type: 'easter',
       offset: -3
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
-    }, {
+    },
+    {
       rule: 'duration',
       duration: 72
     }
@@ -659,11 +680,13 @@ module.exports = {
       year: undefined,
       month: 5,
       day: 1
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: undefined,
@@ -673,7 +696,8 @@ module.exports = {
           rule: 'time',
           hour: 0,
           minute: 0
-        }]
+        }
+      ]
     }
   ],
   '05-01 14:00 if sunday then next sunday 00:00': [
@@ -682,11 +706,13 @@ module.exports = {
       year: undefined,
       month: 5,
       day: 1
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -696,7 +722,8 @@ module.exports = {
           rule: 'time',
           hour: 0,
           minute: 0
-        }]
+        }
+      ]
     }
   ],
   '01-01 if sunday then next monday 14:10 if sunday then 01:59': [
@@ -705,7 +732,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -715,8 +743,10 @@ module.exports = {
           rule: 'time',
           hour: 14,
           minute: 10
-        }]
-    }, {
+        }
+      ]
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: undefined,
@@ -726,7 +756,8 @@ module.exports = {
           rule: 'time',
           hour: 1,
           minute: 59
-        }]
+        }
+      ]
     }
   ],
   '12-31 14:00 if sunday then 00:00': [
@@ -735,11 +766,13 @@ module.exports = {
       year: undefined,
       month: 12,
       day: 31
-    }, {
+    },
+    {
       rule: 'time',
       hour: 14,
       minute: 0
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: undefined,
@@ -749,7 +782,8 @@ module.exports = {
           rule: 'time',
           hour: 0,
           minute: 0
-        }]
+        }
+      ]
     }
   ],
   'wednesday before 11-23': [
@@ -758,7 +792,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 23
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'wednesday',
@@ -771,7 +806,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 23
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 4,
       weekday: 'day',
@@ -784,7 +820,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 27
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 4,
       weekday: 'day',
@@ -797,7 +834,8 @@ module.exports = {
       day: 1,
       month: 10,
       year: undefined
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'wednesday',
@@ -810,7 +848,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 2,
       weekday: 'sunday',
@@ -823,7 +862,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 2,
       weekday: 'sunday',
@@ -836,12 +876,14 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 4,
       weekday: 'thursday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'tuesday',
@@ -854,12 +896,14 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 2,
       weekday: 'tuesday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'tuesday',
@@ -872,12 +916,14 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 4,
       weekday: 'thursday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'sunday',
@@ -915,25 +961,31 @@ module.exports = {
       year: undefined,
       month: 5,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 2,
       weekday: 'sunday',
       direction: 'after'
-    }, {
+    },
+    {
       modifier: 'if equal'
-    }, {
+    },
+    {
       fn: 'easter',
       type: 'easter',
       offset: 49
-    }, {
+    },
+    {
       modifier: 'then'
-    }, {
+    },
+    {
       fn: 'gregorian',
       year: undefined,
       month: 5,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 3,
       weekday: 'sunday',
@@ -946,7 +998,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['monday'],
       direction: 'next',
@@ -959,7 +1012,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['monday'],
       direction: 'next',
@@ -972,7 +1026,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'previous',
@@ -985,7 +1040,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -998,7 +1054,8 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'previous',
@@ -1011,9 +1068,11 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       modifier: 'and'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['monday'],
       direction: 'next',
@@ -1026,9 +1085,11 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       modifier: 'and'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['monday'],
       direction: 'next',
@@ -1041,9 +1102,11 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       modifier: 'substitutes'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -1056,9 +1119,11 @@ module.exports = {
       year: undefined,
       month: 1,
       day: 1
-    }, {
+    },
+    {
       modifier: 'substitutes'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['sunday'],
       direction: 'next',
@@ -1071,9 +1136,11 @@ module.exports = {
       day: 1,
       month: 10,
       year: undefined
-    }, {
+    },
+    {
       modifier: 'substitutes'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['wednesday', 'saturday', 'sunday'],
       direction: 'next',
@@ -1086,9 +1153,11 @@ module.exports = {
       day: 1,
       month: 10,
       year: undefined
-    }, {
+    },
+    {
       modifier: 'substitutes'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['wednesday', 'saturday', 'sunday'],
       direction: 'next',
@@ -1101,63 +1170,73 @@ module.exports = {
       day: 4,
       month: 10,
       year: undefined
-    }, {
+    },
+    {
       modifier: 'and'
-    }, {
+    },
+    {
       rule: 'dateIfThen',
       if: ['saturday'],
       direction: 'next',
       then: 'monday'
     }
   ],
-  '10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday': [
-    {
-      fn: 'gregorian',
-      year: undefined,
-      month: 10,
-      day: 12
-    }, {
-      rule: 'dateIfThen',
-      if: ['tuesday', 'wednesday'],
-      direction: 'previous',
-      then: 'monday'
-    }, {
-      rule: 'dateIfThen',
-      if: ['thursday', 'friday', 'saturday', 'sunday'],
-      direction: 'next',
-      then: 'monday'
-    }
-  ],
-  '01-10 if saturday,sunday then next monday if tuesday then previous monday if wednesday,thursday then next friday': [
-    {
-      fn: 'gregorian',
-      year: undefined,
-      month: 1,
-      day: 10
-    }, {
-      rule: 'dateIfThen',
-      if: ['saturday', 'sunday'],
-      direction: 'next',
-      then: 'monday'
-    }, {
-      rule: 'dateIfThen',
-      if: ['tuesday'],
-      direction: 'previous',
-      then: 'monday'
-    }, {
-      rule: 'dateIfThen',
-      if: ['wednesday', 'thursday'],
-      direction: 'next',
-      then: 'friday'
-    }
-  ],
+  '10-12 if tuesday,wednesday then previous monday if thursday,friday,saturday,sunday then next monday':
+    [
+      {
+        fn: 'gregorian',
+        year: undefined,
+        month: 10,
+        day: 12
+      },
+      {
+        rule: 'dateIfThen',
+        if: ['tuesday', 'wednesday'],
+        direction: 'previous',
+        then: 'monday'
+      },
+      {
+        rule: 'dateIfThen',
+        if: ['thursday', 'friday', 'saturday', 'sunday'],
+        direction: 'next',
+        then: 'monday'
+      }
+    ],
+  '01-10 if saturday,sunday then next monday if tuesday then previous monday if wednesday,thursday then next friday':
+    [
+      {
+        fn: 'gregorian',
+        year: undefined,
+        month: 1,
+        day: 10
+      },
+      {
+        rule: 'dateIfThen',
+        if: ['saturday', 'sunday'],
+        direction: 'next',
+        then: 'monday'
+      },
+      {
+        rule: 'dateIfThen',
+        if: ['tuesday'],
+        direction: 'previous',
+        then: 'monday'
+      },
+      {
+        rule: 'dateIfThen',
+        if: ['wednesday', 'thursday'],
+        direction: 'next',
+        then: 'friday'
+      }
+    ],
   '11-01 in even years': [
     {
       fn: 'gregorian',
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'even',
       every: undefined,
@@ -1170,7 +1249,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'odd',
       every: undefined,
@@ -1183,7 +1263,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'leap',
       every: undefined,
@@ -1196,7 +1277,8 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'non-leap',
       every: undefined,
@@ -1209,17 +1291,20 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'monday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'tuesday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'even',
       every: undefined,
@@ -1232,17 +1317,20 @@ module.exports = {
       year: undefined,
       month: 11,
       day: 1
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'monday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'dateDir',
       count: 1,
       weekday: 'tuesday',
       direction: 'after'
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: 'odd',
       every: undefined,
@@ -1255,7 +1343,8 @@ module.exports = {
       year: undefined,
       month: 12,
       day: 1
-    }, {
+    },
+    {
       rule: 'year',
       cardinality: undefined,
       every: 6,
@@ -1284,21 +1373,26 @@ module.exports = {
       year: undefined,
       month: 9,
       day: 22
-    }, {
+    },
+    {
       modifier: 'if'
-    }, {
+    },
+    {
       fn: 'gregorian',
       year: undefined,
       month: 9,
       day: 21
-    }, {
+    },
+    {
       modifier: 'and'
-    }, {
+    },
+    {
       fn: 'gregorian',
       year: undefined,
       month: 9,
       day: 23
-    }, {
+    },
+    {
       rule: 'bridge',
       type: 'public'
     }
@@ -1309,14 +1403,17 @@ module.exports = {
       year: undefined,
       month: 9,
       day: 22
-    }, {
+    },
+    {
       modifier: 'if'
-    }, {
+    },
+    {
       fn: 'gregorian',
       year: undefined,
       month: 9,
       day: 21
-    }, {
+    },
+    {
       rule: 'bridge',
       type: undefined
     }
@@ -1343,40 +1440,38 @@ module.exports = {
       omit: []
     }
   ],
-  '03-01 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022': [
-    {
-      day: 1,
-      fn: 'gregorian',
-      month: 3,
-      year: undefined
-    },
-    {
-      modifier: 'and'
-    },
-    {
-      direction: 'next',
-      if: [
-        'saturday',
-        'sunday'
-      ],
-      rule: 'dateIfThen',
-      then: 'monday'
-    },
-    {
-      rule: 'ruleIfHoliday',
-      type: undefined,
-      count: 2,
-      direction: 'next',
-      weekday: 'tuesday',
-      omit: []
-    },
-    {
-      day: 1,
-      month: 1,
-      rule: 'activeFrom',
-      year: 2022
-    }
-  ],
+  '03-01 and if Saturday, Sunday then next Monday if is holiday then 2nd next Tuesday since 2022':
+    [
+      {
+        day: 1,
+        fn: 'gregorian',
+        month: 3,
+        year: undefined
+      },
+      {
+        modifier: 'and'
+      },
+      {
+        direction: 'next',
+        if: ['saturday', 'sunday'],
+        rule: 'dateIfThen',
+        then: 'monday'
+      },
+      {
+        rule: 'ruleIfHoliday',
+        type: undefined,
+        count: 2,
+        direction: 'next',
+        weekday: 'tuesday',
+        omit: []
+      },
+      {
+        day: 1,
+        month: 1,
+        rule: 'activeFrom',
+        year: 2022
+      }
+    ],
   '05-01 if is holiday then next day omit Sunday': [
     {
       day: 1,
@@ -1390,9 +1485,7 @@ module.exports = {
       count: 1,
       direction: 'next',
       weekday: 'day',
-      omit: [
-        'sunday'
-      ]
+      omit: ['sunday']
     }
   ],
   '05-01 if is holiday then next day omit Sunday, Saturday': [
@@ -1408,10 +1501,7 @@ module.exports = {
       weekday: 'day',
       count: 1,
       direction: 'next',
-      omit: [
-        'sunday',
-        'saturday'
-      ]
+      omit: ['sunday', 'saturday']
     }
   ],
   '09-22 on sunday, saturday': [
@@ -1420,11 +1510,9 @@ module.exports = {
       fn: 'gregorian',
       month: 9,
       year: undefined
-    }, {
-      if: [
-        'sunday',
-        'saturday'
-      ],
+    },
+    {
+      if: ['sunday', 'saturday'],
       not: false,
       rule: 'weekday'
     }
@@ -1435,11 +1523,9 @@ module.exports = {
       fn: 'gregorian',
       month: 9,
       year: undefined
-    }, {
-      if: [
-        'sunday',
-        'saturday'
-      ],
+    },
+    {
+      if: ['sunday', 'saturday'],
       not: false,
       rule: 'weekday'
     }
@@ -1450,11 +1536,9 @@ module.exports = {
       fn: 'gregorian',
       month: 12,
       year: undefined
-    }, {
-      if: [
-        'friday',
-        'monday'
-      ],
+    },
+    {
+      if: ['friday', 'monday'],
       not: true,
       rule: 'weekday'
     }

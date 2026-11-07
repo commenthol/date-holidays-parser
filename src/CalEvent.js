@@ -1,34 +1,36 @@
 import { isDate } from './internal/utils.js'
 import CalDate from 'caldate'
 
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+/** @typedef {import('./types.js').ActiveRange} ActiveRange */
+
 export default class CalEvent {
   /**
-   * @param {object|Date} opts
-   * @param {string} opts.fn function type
-   * @param {number} [opts.day]
-   * @param {number} [opts.month]
-   * @param {number} [opts.year]
-   * @param {number} [opts.offset]
-   * @param {boolean} [opts.substitute]
+   * @param {EventOptions|Date} [opts={}] event options or a date
    */
-  constructor (opts) {
-    opts = opts || {}
-    this.substitute = opts.substitute
-    this.opts = opts
-    this.offset = opts.offset
-    this.dates = []
-    this.active = undefined // active props from prior to rule
+  constructor(opts = {}) {
     if (isDate(opts)) {
+      this.substitute = undefined
+      /** @type {EventOptions} */
       this.opts = new CalDate(opts)
+      this.offset = undefined
+    } else {
+      this.substitute = opts.substitute
+      this.opts = opts
+      this.offset = opts.offset
     }
+    /** @type {import('caldate').default[]} */
+    this.dates = []
+    /** @type {ActiveRange[]|undefined} */
+    this.active = undefined // active props from prior to rule
   }
 
   /**
    * @param {number} year
    * @returns {this}
    */
-  inYear (year) {
-    const d = (new CalDate(this.opts)).setOffset(this.offset)
+  inYear(year) {
+    const d = new CalDate(this.opts).setOffset(this.offset)
     if (!(d.year && d.year !== year)) {
       d.year = year
       this.dates.push(d)
@@ -36,7 +38,7 @@ export default class CalEvent {
     return this
   }
 
-  reset () {
+  reset() {
     this.dates = []
   }
 
@@ -44,11 +46,11 @@ export default class CalEvent {
    * @param {CalEvent} calEvent
    * @returns {boolean}
    */
-  isEqualDate (calEvent) {
+  isEqualDate(calEvent) {
     let res = false
     for (const thisDate of this.dates) {
       for (const date of calEvent.dates) {
-        res |= thisDate.isEqualDate(date)
+        res = res || thisDate.isEqualDate(date)
       }
     }
     return !!res
@@ -60,7 +62,7 @@ export default class CalEvent {
    * @param {number} month
    * @returns {this}
    */
-  filterDisabled (year, month) {
+  filterDisabled(year, month) {
     if (!year) {
       return this
     }
@@ -77,10 +79,10 @@ export default class CalEvent {
 
   /**
    * @param {number} year - year to filter
-   * @param {object[]} active - definition of active ranges `{from: {Date}, [to]: {Date}}`
+   * @param {ActiveRange[]} [active=this.active] - active date ranges
    * @return {this} for chaining
    */
-  filterActive (year, active = this.active) {
+  filterActive(year, active = this.active) {
     this.dates = this.dates.filter((date) => {
       if (!date._filter && isActive(date, year, active)) {
         return date
@@ -91,12 +93,10 @@ export default class CalEvent {
   }
 
   /**
-   * @param {object} active
-   * @param {Date} [active.from ]
-   * @param {Date} [active.to]
-   * @returns
+   * @param {ActiveRange} active
+   * @returns {this}
    */
-  setActive (active) {
+  setActive(active) {
     const { from, to } = active
     let pushIt = true
     this.active = this.active || []
@@ -117,7 +117,7 @@ export default class CalEvent {
   /**
    * @param {CalEvent} calEvent
    */
-  push (calEvent) {
+  push(calEvent) {
     if (calEvent && Array.isArray(calEvent.dates)) {
       this.dates = this.dates.concat(calEvent.dates)
     }
@@ -127,7 +127,7 @@ export default class CalEvent {
    * @param {string} timezone
    * @returns
    */
-  get (timezone) {
+  get(timezone) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)
       const o = {
@@ -141,12 +141,18 @@ export default class CalEvent {
     return arr
   }
 
-  _addSubstitute (date, obj) {
+  _addSubstitute(date, obj) {
     if (this.substitute || date.substitute) obj.substitute = true
   }
 }
 
-function isActive (date, year, active) {
+/**
+ * @param {import('caldate').default} date
+ * @param {number} year
+ * @param {ActiveRange[]} [active]
+ * @returns {boolean|undefined}
+ */
+function isActive(date, year, active) {
   if (!active) {
     return date.year === year
   }

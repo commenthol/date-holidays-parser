@@ -40,7 +40,7 @@ holidays:
       en: D
     _days:
       - A
-      - unknown      
+      - unknown
 names:
   01-01:
     name:

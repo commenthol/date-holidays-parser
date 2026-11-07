@@ -8,9 +8,7 @@ const fixture = {
         en: 'Australia'
       },
       dayoff: 'sunday',
-      langs: [
-        'en'
-      ],
+      langs: ['en'],
       zones: [
         'Australia/Sydney',
         'Australia/Lord_Howe',

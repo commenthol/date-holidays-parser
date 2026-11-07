@@ -2,13 +2,13 @@ import easter from 'date-easter'
 import CalDate from 'caldate'
 import CalEvent from './CalEvent.js'
 
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+
 export default class Easter extends CalEvent {
   /**
-   * @param {object} [opts]
-   * @param {string} opts.type - type of eastern (easter|orthodox)
-   * @param {number|string} opts.offset - offset in days
+   * @param {EventOptions} [opts]
    */
-  constructor (opts) {
+  constructor(opts) {
     opts = opts || {}
     super(opts)
 
@@ -18,8 +18,8 @@ export default class Easter extends CalEvent {
     }
   }
 
-  inYear (year) {
-    const d = (new CalDate(this._fn(year))).setOffset(this.offset)
+  inYear(year) {
+    const d = new CalDate(this._fn(year)).setOffset(this.offset)
     this.dates.push(d)
     return this
   }

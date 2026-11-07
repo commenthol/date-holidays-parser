@@ -9,7 +9,7 @@ import _ from './utils.js'
  * @param {String} [region]
  */
 export default class Data {
-  constructor (data, country, state, region) {
+  constructor(data, country, state, region) {
     this.opts = Data.splitName(country, state, region) || {}
     this.data = data || {}
   }
@@ -19,7 +19,7 @@ export default class Data {
    * @param {String} lang - Iso-639 shortcode
    * @return {Object} shortcode-name value pairs. E.g. `{ AT: 'Österreich', ... }`
    */
-  getCountries (lang) {
+  getCountries(lang) {
     const o = {}
     const countries = _.get(this.data, 'holidays', {})
     Object.keys(countries).forEach((country) => {
@@ -34,9 +34,10 @@ export default class Data {
    * @param {String} [lang] - Iso-639 shortcode
    * @return {Object} shortcode-name value pairs. E.g. `{ b: 'Burgenland', ... }`
    */
-  getStates (country, lang) {
+  getStates(country, lang) {
     const opts = Object.assign({}, Data.splitName(country))
-    const states = _.get(this.data, ['holidays', opts.country, 'states']) ||
+    const states =
+      _.get(this.data, ['holidays', opts.country, 'states']) ||
       _.get(this.data, ['holidays', opts.country, 'regions'])
     if (states) {
       const o = {}
@@ -55,9 +56,15 @@ export default class Data {
    * @param {String} [lang] - Iso-639 shortcode
    * @return {Object} shortcode-name value pairs.
    */
-  getRegions (country, state, lang) {
+  getRegions(country, state, lang) {
     const opts = Object.assign({}, Data.splitName(country, state))
-    const regions = _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions'])
+    const regions = _.get(this.data, [
+      'holidays',
+      opts.country,
+      'states',
+      opts.state,
+      'regions'
+    ])
 
     if (regions) {
       const o = {}
@@ -72,11 +79,15 @@ export default class Data {
   /**
    * @private
    */
-  _name (obj, key, lang, opts) {
+  _name(obj, key, lang, opts) {
     const names = obj[key].names
     const _lang = lang || this.getLanguages(opts)[0] || Object.keys(names)[0]
     const mlang = Data.majorLang(_lang)
-    const name = obj[key].name || names[_lang] || names[mlang] || names[Object.keys(names)[0]]
+    const name =
+      obj[key].name ||
+      names[_lang] ||
+      names[mlang] ||
+      names[Object.keys(names)[0]]
     return name
   }
 
@@ -84,7 +95,7 @@ export default class Data {
    * get languages for selected country, state, region
    * @return {Array} containing ISO 639-1 language shortcodes
    */
-  getLanguages (opts) {
+  getLanguages(opts) {
     return this._getValue('langs', opts) || []
   }
 
@@ -92,7 +103,7 @@ export default class Data {
    * get default day off as weekday
    * @return {String} weekday of day off
    */
-  getDayOff () {
+  getDayOff() {
     return this._getValue('dayoff')
   }
 
@@ -100,7 +111,7 @@ export default class Data {
    * get timezones for country, state, region
    * @return {Array} of {String}s containing the timezones
    */
-  getTimezones () {
+  getTimezones() {
     return this._getValue('zones') || []
   }
 
@@ -111,7 +122,7 @@ export default class Data {
    * @param {String} [region]
    * @return {Object} holidayname <-> unparsed rule or date pairs
    */
-  getRules (country, state, region) {
+  getRules(country, state, region) {
     const rules = {}
     const opts = Data.splitName(country, state, region) || this.opts
 
@@ -126,8 +137,9 @@ export default class Data {
 
     if (tmp) {
       this._assign(rules, tmp)
-      if ((state && tmp.regions && (tmp = tmp.regions[state])) ||
-          (state && tmp.states && (tmp = tmp.states[state]))
+      if (
+        (state && tmp.regions && (tmp = tmp.regions[state])) ||
+        (state && tmp.states && (tmp = tmp.states[state]))
       ) {
         this._assign(rules, tmp)
         if (region && tmp.regions && (tmp = tmp.regions[region])) {
@@ -151,7 +163,7 @@ export default class Data {
    * get name for substitute name
    * @return {Object} translations of substitute day names
    */
-  getSubstitueNames () {
+  getSubstitueNames() {
     return _.get(this.data, ['names', 'substitutes', 'name'])
   }
 
@@ -162,9 +174,10 @@ export default class Data {
    * @param {Object} obj - input obj
    * @return {Object}
    */
-  _assign (out, obj) {
+  _assign(out, obj) {
     let days = {}
-    if (obj._days) { // resolve reference
+    if (obj._days) {
+      // resolve reference
       const path = ['holidays'].concat(obj._days, 'days')
       const ref = _.get(this.data, path)
       if (!ref) throw new Error('unknown path for _days: ' + path.join('.'))
@@ -173,7 +186,8 @@ export default class Data {
     if (days || obj.days) {
       days = Object.assign(days, obj.days)
       Object.keys(days).forEach(function (p) {
-        if (days[p] === false) { // remove rules
+        if (days[p] === false) {
+          // remove rules
           if (out[p]) {
             delete out[p]
           }
@@ -194,9 +208,17 @@ export default class Data {
    * @param {String} key - key to look at
    * @return {Object} return object
    */
-  _getValue (key, opts = this.opts) {
+  _getValue(key, opts = this.opts) {
     return (
-      _.get(this.data, ['holidays', opts.country, 'states', opts.state, 'regions', opts.region, key]) ||
+      _.get(this.data, [
+        'holidays',
+        opts.country,
+        'states',
+        opts.state,
+        'regions',
+        opts.region,
+        key
+      ]) ||
       _.get(this.data, ['holidays', opts.country, 'states', opts.state, key]) ||
       _.get(this.data, ['holidays', opts.country, key])
     )
@@ -232,8 +254,8 @@ Data.majorLang = function (lang) {
 /**
  * @private
  */
-function toUpperCase (obj) {
-  ;['country', 'state', 'region'].forEach(key => {
+function toUpperCase(obj) {
+  ;['country', 'state', 'region'].forEach((key) => {
     if (typeof obj[key] === 'string') {
       obj[key] = obj[key].toUpperCase()
     }

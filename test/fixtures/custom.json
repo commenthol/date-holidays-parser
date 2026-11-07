@@ -4,9 +4,7 @@
       "name": {
         "en": "custom"
       },
-      "langs": [
-        "en"
-      ],
+      "langs": ["en"],
       "days": {
         "01-01": {
           "name": {

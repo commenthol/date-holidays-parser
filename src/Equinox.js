@@ -5,15 +5,15 @@ import moment from 'moment-timezone'
 import CalDate from 'caldate'
 import CalEvent from './CalEvent.js'
 
+/** @typedef {import('./types.js').EventOptions} EventOptions */
+
 const earth = new planetposition.Planet(vsop87Bearth)
 
 export default class Equinox extends CalEvent {
   /**
-   * @param {object} [opts]
-   * @param {string} opts.season - type of season (spring|summer|autumn|winter)
-   * @param {number|string} opts.offset - offset in days
+   * @param {EventOptions} [opts]
    */
-  constructor (opts) {
+  constructor(opts) {
     opts = opts || {}
     super(opts)
 
@@ -21,7 +21,7 @@ export default class Equinox extends CalEvent {
     this._timezone = opts.timezone || 'GMT'
   }
 
-  inYear (year) {
+  inYear(year) {
     let jde
     switch (this._season) {
       case 'march': {
@@ -44,9 +44,11 @@ export default class Equinox extends CalEvent {
 
     const str = new julian.Calendar().fromJDE(jde).toDate().toISOString()
     let date
-    if (/^[+-]\d{2}:\d{2}?$/.test(this._timezone)) { // for '+08:00' formats
+    if (/^[+-]\d{2}:\d{2}?$/.test(this._timezone)) {
+      // for '+08:00' formats
       date = moment(str).utcOffset(this._timezone)
-    } else { // for 'Asia/Shanghai' formats
+    } else {
+      // for 'Asia/Shanghai' formats
       date = moment(str).tz(this._timezone) // move to timezone
     }
 

@@ -1,25 +1,32 @@
 import Parser from './Parser.js'
 import Rule from './Rule.js'
 import PostRule from './PostRule.js'
-import CalEventFactory from './CalEventFactory.js'
+import { CalEventFactory } from './CalEventFactory.js'
+
+/** @typedef {import('./types.js').RuleToken} RuleToken */
+/** @typedef {import('./types.js').HolidayMap} HolidayMap */
+/** @typedef {import('./types.js').HolidayOptions} HolidayOptions */
 
 /**
  * handles one rule
  */
 export default class DateFn {
   /**
-   * @param {string} rule - unparsed rule
-   * @param {array} holidays - all holidays rules (required for bridge day calculations)
+   * @param {string} ruleStr - unparsed rule
+   * @param {HolidayMap} [holidays] - all holiday rules, used for bridge-day calculations
    */
-  constructor (ruleStr, holidays) {
+  constructor(ruleStr, holidays) {
     const parser = new Parser()
     this.ruleStr = ruleStr
+    /** @type {RuleToken[]} */
     this.rules = parser.parse(ruleStr)
     this.ok = !parser.error
     this.holidays = holidays
     this.opts = holidays ? holidays[ruleStr] : {}
     this.event = undefined
+    /** @type {Map<number, import('./CalEvent.js').default>} */
     this.cache = new Map()
+    /** @type {Set<number>} */
     this.calculating = new Set()
   }
 
@@ -27,7 +34,7 @@ export default class DateFn {
    * @param {number} year
    * @returns {this}
    */
-  inYear (year) {
+  inYear(year) {
     if (this.cache.has(year)) {
       this.event = this.cache.get(year)
       return this
@@ -63,11 +70,11 @@ export default class DateFn {
     }
   }
 
-  isCalculating (year) {
+  isCalculating(year) {
     return this.calculating.has(year)
   }
 
-  get (timezone) {
+  get(timezone) {
     return this.event.get(timezone)
   }
 }
