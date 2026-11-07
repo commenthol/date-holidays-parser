@@ -5,23 +5,34 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: []
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Tag, or commit SHA to checkout (optional)"
+        required: false
+
+env:
+  CI: "true"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node: [24, 26]
+    name: Node ${{ matrix.node }}
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        # cache: 'npm'
-    - run: npm install --ignore-scripts
-    - run: npm run ci
+      # https://github.com/actions/checkout/tree/v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+      - name: Setup Node ${{ matrix.node }}
+        # https://github.com/actions/setup-node/tree/v7.1.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --ignore-scripts
+      - run: npm run ci
