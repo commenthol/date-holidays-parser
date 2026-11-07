@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "3.4.7",
+  "version": "3.5.0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -20,7 +20,9 @@
   "maintainers": [
     "commenthol <commenthol@gmail.com>"
   ],
-  "contributors": [],
+  "contributors": [
+    "Yoshio HANAWA <y@hnw.jp>"
+  ],
   "type": "module",
   "exports": {
     ".": {
@@ -37,7 +39,15 @@
     "doc": "docs",
     "test": "test"
   },
+  "files": [
+    "lib",
+    "src",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
+    "__disabled__test:ts": "dtslint types",
     "all": "npm-run-all clean lint build postbuild test",
     "build": "rollup -c && cp scripts/rollup-fix/* lib",
     "postbuild": "node scripts/postbuild.cjs",
@@ -51,7 +61,6 @@
     "prepublishOnly": "npm run all",
     "test": "npm-run-all test:*",
     "test:ci": "mocha",
-    "__disabled__test:ts": "dtslint types",
     "test:tz": "TZ=UTC-10 mocha && TZ=UTC+10 mocha",
     "zuul": "zuul test/Holidays.test.js"
   },
@@ -86,11 +95,11 @@
     "serialize-to-module": "^1.1.0",
     "typescript": "^5.7.3"
   },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "engines": {
     "node": ">=12.0.0"
   },
   "c4uIgnore": {
     "rollup": "^2.79.1 // v3 changed exports; needs refactoring first."
-  },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+  }
 }

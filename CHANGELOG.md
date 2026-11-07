@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.5.0](https://github.com/commenthol/date-holidays-parser/3.4.7..3.5.0) (2026-11-07)
+
+- fix: linter errors integrating @hnw/date-tibetan [#892ff32](https://github.com/commenthol/date-holidays-parser/892ff32f23ab7ba1d1a620f3634988d9669dd8e9)
+- chore: update gh actions to node 24, 26 [#b6c867c](https://github.com/commenthol/date-holidays-parser/b6c867c1b80cd2592a30d819954658640949c4fa)
+- fix(#67): prevent recursion in conditional holiday rules [#2118495](https://github.com/commenthol/date-holidays-parser/211849517274a4022dcbfc08795d224dc0c59544)
+- fix: read zones, langs and dayoff set on a region [#5fedda0](https://github.com/commenthol/date-holidays-parser/5fedda041580b6f2ee6f492bdb90c70f58394cdd)
+- feat: Add Tibetan calendar support [#74b5d36](https://github.com/commenthol/date-holidays-parser/74b5d361ce0815de195265404f842006e2afae26)
+
 ## [3.4.6](https://github.com/commenthol/date-holidays-parser/compare/v3.4.5...3.4.6) (2024-12-12)
 
 - chore: reliably run postbuild script [5d2ae8d](https://github.com/commenthol/date-holidays-parser/commit/5d2ae8d62dfd3421dfa7615a36761fcff3e5b826)
