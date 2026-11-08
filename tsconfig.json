@@ -12,9 +12,7 @@
     "skipLibCheck": true,
     "strict": false,
     "target": "ESNext",
-    "types": ["node"],
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.js"
-  ]
+  "include": ["src/**/*.js", "src/**/*.ts"]
 }

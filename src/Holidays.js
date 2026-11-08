@@ -28,9 +28,9 @@ const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
  * @param {HolidayOptions} [opts] - options
  * @example
  * ```js
- * new Holiday(data, 'US', 'la', 'no') // is the same as
- * new Holiday(data, 'us.la.no')       // is the same as
- * new Holiday(data, { country: 'us', state: 'la', region: 'no'})
+ * new Holidays(data, 'US', 'la', 'no') // is the same as
+ * new Holidays(data, 'us.la.no')       // is the same as
+ * new Holidays(data, { country: 'us', state: 'la', region: 'no'})
  * ```
  */
 export class Holidays {

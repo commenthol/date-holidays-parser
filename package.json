@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "3.6.0",
+  "version": "3.7.0-0",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -80,11 +80,11 @@
   },
   "dependencies": {
     "@hnw/date-tibetan": "^1.0.2",
-    "astronomia": "^4.2.0",
-    "caldate": "^2.0.5",
-    "date-bengali-revised": "^2.0.2",
-    "date-chinese": "^2.1.4",
-    "date-easter": "^1.0.3",
+    "astronomia": "^4.3.0",
+    "caldate": "^2.1.0",
+    "date-bengali-revised": "^2.1.0",
+    "date-chinese": "^2.2.0",
+    "date-easter": "^1.1.0",
     "deepmerge": "^4.3.1",
     "jalaali-js": "^2.0.1",
     "moment-timezone": "^0.6.6"

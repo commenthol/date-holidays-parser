@@ -1,1 +1,1 @@
-export declare const vsop87Bearth: any;
+export declare const vsop87Bearth: import('astronomia/planetposition').PlanetSeries;

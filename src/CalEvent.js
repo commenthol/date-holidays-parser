@@ -3,6 +3,7 @@ import CalDate from 'caldate'
 
 /** @typedef {import('./types.js').EventOptions} EventOptions */
 /** @typedef {import('./types.js').ActiveRange} ActiveRange */
+/** @typedef {import('./types.js').RuleDate} RuleDate */
 
 export default class CalEvent {
   /**
@@ -19,7 +20,7 @@ export default class CalEvent {
       this.opts = opts
       this.offset = opts.offset
     }
-    /** @type {import('caldate').default[]} */
+    /** @type {RuleDate[]} */
     this.dates = []
     /** @type {ActiveRange[]|undefined} */
     this.active = undefined // active props from prior to rule
