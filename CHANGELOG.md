@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.7.0](https://github.com/commenthol/date-holidays-parser/3.6.0..3.7.0) (2026-11-08)
+
+- chore: update calendar dependencies and typings [#95044ee](https://github.com/commenthol/date-holidays-parser/95044eebd4390902631c90ca233125a52680ae3b)
+- refactor(types): migrate shared definitions to TypeScript [#2bf54da](https://github.com/commenthol/date-holidays-parser/2bf54da1d1ebe14e3525ab566c3ae77d42071a98)
+
 ## [3.6.0](https://github.com/commenthol/date-holidays-parser/3.5.0..3.6.0) (2026-11-07)
 
 - feat(types): generate and publish TypeScript declarations [#18ea3c6](https://github.com/commenthol/date-holidays-parser/18ea3c676f25094cb502d50f03c3ebdeabef8da5)
