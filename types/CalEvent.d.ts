@@ -1,14 +1,16 @@
 export type EventOptions = import('./types.js').EventOptions;
 export type ActiveRange = import('./types.js').ActiveRange;
+export type RuleDate = import('./types.js').RuleDate;
 /** @typedef {import('./types.js').EventOptions} EventOptions */
 /** @typedef {import('./types.js').ActiveRange} ActiveRange */
+/** @typedef {import('./types.js').RuleDate} RuleDate */
 export default class CalEvent {
     substitute: boolean;
     /** @type {EventOptions} */
     opts: EventOptions;
     offset: number;
-    /** @type {import('caldate').default[]} */
-    dates: import('caldate').default[];
+    /** @type {RuleDate[]} */
+    dates: RuleDate[];
     /** @type {ActiveRange[]|undefined} */
     active: ActiveRange[] | undefined;
     /**
@@ -53,9 +55,9 @@ export default class CalEvent {
      * @returns
      */
     get(timezone: string): {
-        date: any;
-        start: any;
-        end: any;
+        date: string;
+        start: Date;
+        end: Date;
     }[];
     _addSubstitute(date: any, obj: any): void;
 }

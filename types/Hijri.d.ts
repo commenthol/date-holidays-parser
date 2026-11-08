@@ -4,7 +4,7 @@ export default class Hijri extends CalEventMap {
     constructor(opts: any);
     get(timezone: any): {
         date: string;
-        start: any;
-        end: any;
+        start: Date;
+        end: Date;
     }[];
 }

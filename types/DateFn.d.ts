@@ -31,8 +31,8 @@ export default class DateFn {
     inYear(year: number): this;
     isCalculating(year: any): boolean;
     get(timezone: any): {
-        date: any;
-        start: any;
-        end: any;
+        date: string;
+        start: Date;
+        end: Date;
     }[];
 }

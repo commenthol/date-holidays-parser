@@ -6,7 +6,7 @@ all: lint lib docs
 lib: src/*
 	npm run build
 
-test: v14 v16 v17
+test: v24. v26.
 
 v%:
 	n $@; \
