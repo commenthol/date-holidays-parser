@@ -2,7 +2,11 @@ import CalEventMap from './CalEventMap.js';
 export default class Hebrew extends CalEventMap {
     calendar: import("./types.js").CalendarData;
     constructor(opts: any);
-    get(timezone: any): {
+    /**
+     * @param {string} timezone
+     * @returns {{date: string, start: Date, end: Date}[]}
+     */
+    get(timezone: string): {
         date: string;
         start: Date;
         end: Date;

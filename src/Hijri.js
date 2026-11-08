@@ -8,6 +8,10 @@ export default class Hijri extends CalEventMap {
     this.calendar = calendar
   }
 
+  /**
+   * @param {string} timezone
+   * @returns {{date: string, start: Date, end: Date}[]}
+   */
   get(timezone) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)

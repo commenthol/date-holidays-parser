@@ -55,9 +55,9 @@ export default class CalEvent {
      * @returns
      */
     get(timezone: string): {
-        date: string;
-        start: Date;
-        end: Date;
+        date: any;
+        start: any;
+        end: any;
     }[];
     _addSubstitute(date: any, obj: any): void;
 }
