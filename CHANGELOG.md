@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Replace `deepmerge` with `@fastify/deepmerge` for holiday data merging, retaining array concatenation and enumerable symbol support.
+- Require Node.js 14 or newer. Reserved keys `__proto__`, `constructor`, and `prototype` are omitted from merged data.
+
 ## [3.7.0](https://github.com/commenthol/date-holidays-parser/3.6.0..3.7.0) (2026-11-08)
 
 - chore: update calendar dependencies and typings [#95044ee](https://github.com/commenthol/date-holidays-parser/95044eebd4390902631c90ca233125a52680ae3b)

@@ -85,7 +85,7 @@
     "date-bengali-revised": "^2.1.0",
     "date-chinese": "^2.2.0",
     "date-easter": "^1.1.0",
-    "deepmerge": "^4.3.1",
+    "@fastify/deepmerge": "^3.2.4",
     "jalaali-js": "^2.0.1",
     "moment-timezone": "^0.6.6"
   },
@@ -106,6 +106,6 @@
     "typescript": "^7.0.2"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   }
 }

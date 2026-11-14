@@ -2,7 +2,9 @@
  * lodash compatible methods
  */
 
-import deepmerge from 'deepmerge'
+import createDeepmerge from '@fastify/deepmerge'
+
+const mergeAll = createDeepmerge({ all: true, symbols: true })
 
 /**
  * get value at `keys` from `object`
@@ -66,7 +68,7 @@ export const omit = (object, props = []) =>
  * @param {...object} args
  * @returns {object}
  */
-export const merge = (...args) => deepmerge.all(args)
+export const merge = (...args) => mergeAll({}, ...args)
 
 /**
  * @param {string|number} num
