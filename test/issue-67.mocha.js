@@ -1,5 +1,5 @@
 import assert from 'assert'
-import Holidays from '../src/index.js'
+import Holidays from './support.js'
 
 const beforeRule =
   'Monday after 2nd saturday in June prior to 2022-09-09 if is public holiday then next monday'

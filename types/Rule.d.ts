@@ -3,8 +3,7 @@
  */
 export type CalEvent = import('./CalEvent.js').default;
 export type RuleToken = import('./types.js').RuleToken;
-/** @typedef {import('./CalEvent.js').default} CalEvent */
-/** @typedef {import('./types.js').RuleToken} RuleToken */
+export type RuleDate = import('./types.js').RuleDate;
 export default class Rule {
     calEvent: import("./CalEvent.js").default;
     modifier: string;

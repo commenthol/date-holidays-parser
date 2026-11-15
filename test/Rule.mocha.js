@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { fixResult } from './helpers.js'
 import Rule from '../src/Rule.js'
-import { CalEventFactory } from '../src/CalEventFactory.js'
+import CalEvent from '../src/CalEvent.js'
 
 import testcases from './fixtures/parser.cjs'
 
@@ -9,7 +9,7 @@ describe('#Rule', function () {
   it('can resolve rule dateIfThen', function () {
     const tc = testcases['01-01 if monday then next monday']
     const ruleFn = new Rule()
-    const calEvent = new CalEventFactory(tc[0]).inYear(2018)
+    const calEvent = new CalEvent(tc[0]).inYear(2018)
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
       {
@@ -24,7 +24,7 @@ describe('#Rule', function () {
   it('can resolve time rule', function () {
     const tc = testcases['01-01 14:00']
     const ruleFn = new Rule()
-    const calEvent = new CalEventFactory(tc[0]).inYear(2015)
+    const calEvent = new CalEvent(tc[0]).inYear(2015)
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
       {
@@ -39,7 +39,7 @@ describe('#Rule', function () {
   it('can resolve rule dateIfThen with time', function () {
     const tc = testcases['05-01 14:00 if sunday then 00:00']
     const ruleFn = new Rule()
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     ruleFn.setEvent(calEvent).resolve(tc[1]).resolve(tc[2])
     const exp = [
       {
@@ -53,7 +53,7 @@ describe('#Rule', function () {
 
   it('can resolve rule dateDir', function () {
     const tc = testcases['wednesday before 11-23']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -68,7 +68,7 @@ describe('#Rule', function () {
 
   it('can resolve rule dateDir using day count before', function () {
     const tc = testcases['4 days before 11-23']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -92,7 +92,7 @@ describe('#Rule', function () {
         omit: ['saturday']
       }
     ]
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -116,7 +116,7 @@ describe('#Rule', function () {
         omit: ['saturday', 'sunday']
       }
     ]
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -131,7 +131,7 @@ describe('#Rule', function () {
 
   it('can resolve rule dateDir using day count after', function () {
     const tc = testcases['4 days after 11-27']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2016)
+    const calEvent = new CalEvent(tc[0]).inYear(2016)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -146,7 +146,7 @@ describe('#Rule', function () {
 
   it('can resolve rule year', function () {
     const tc = testcases['11-01 in odd years']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2015)
+    const calEvent = new CalEvent(tc[0]).inYear(2015)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -161,7 +161,7 @@ describe('#Rule', function () {
 
   it('can resolve rule bridge', function () {
     const tc = testcases['09-22 if 09-21 is holiday']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2015)
+    const calEvent = new CalEvent(tc[0]).inYear(2015)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [
@@ -178,7 +178,7 @@ describe('#Rule', function () {
     const ruleStr = 'Thursday after 04-02 if is holiday then next Thursday'
     const tc = testcases[ruleStr]
 
-    const calEvent = new CalEventFactory(tc[0]).inYear(2019)
+    const calEvent = new CalEvent(tc[0]).inYear(2019)
     const ruleFn = new Rule(calEvent)
     ruleFn.resolve(tc[1])
     ruleFn.resolve(tc[2])
@@ -195,7 +195,7 @@ describe('#Rule', function () {
 
   it('can resolve rule weekday', function () {
     const tc = testcases['09-22 on sunday, saturday']
-    const calEvent = new CalEventFactory(tc[0]).inYear(2013)
+    const calEvent = new CalEvent(tc[0]).inYear(2013)
     const ruleFn = new Rule()
     ruleFn.setEvent(calEvent).resolve(tc[1])
     const exp = [

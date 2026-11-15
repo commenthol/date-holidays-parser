@@ -4,6 +4,8 @@
 
 import deepmerge from 'deepmerge'
 
+const PROTO_KEYS = ['__proto__', 'constructor', 'prototype']
+
 /**
  * get value at `keys` from `object`
  * @param {any} obj
@@ -14,16 +16,16 @@ import deepmerge from 'deepmerge'
  * get({a: {b: {c: 2}}}, ['a', 'b', 'c']) //> 2
  */
 export const get = (obj, keys = [], def) => {
-  let o = obj
+  let tmp = obj
   if (typeof keys === 'string') keys = keys.split('.')
   for (const key of keys) {
-    if (o && o[key]) {
-      o = o[key]
+    if (tmp && tmp[key]) {
+      tmp = tmp[key]
     } else {
       return def
     }
   }
-  return o
+  return tmp
 }
 
 /**
@@ -38,13 +40,24 @@ export const get = (obj, keys = [], def) => {
 export const set = (obj, keys = [], value) => {
   let key
   let ref
-  let o = obj
-  for (key of keys) {
-    ref = o
-    if (toString.call(o[key]) !== '[object Object]') o[key] = {}
-    o = o[key]
+  let tmp = obj
+  // prevent prototype pollution
+  if (PROTO_KEYS.includes(keys[0])) {
+    return obj
   }
-  ref[key] = value
+  for (key of keys) {
+    ref = tmp
+    const type = Object.prototype.toString.call(tmp[key])
+    if (type !== '[object Object]' && type !== '[object Array]') {
+      tmp[key] = {}
+    }
+    tmp = tmp[key]
+  }
+  if (Array.isArray(ref[key])) {
+    ref[key].push(value)
+  } else {
+    ref[key] = value
+  }
   return obj
 }
 

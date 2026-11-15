@@ -1,7 +1,8 @@
 export default {
-  input: [
-    './src/index.js'
-  ],
+  input: {
+    index: './src/index.js',
+    'plugins/index': './src/plugins/index.js'
+  },
   output: {
     dir: 'lib',
     format: 'cjs',

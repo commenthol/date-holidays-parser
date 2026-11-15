@@ -1,10 +1,13 @@
+import CalendarPluginRegistry from './CalendarPluginRegistry.js';
 export type RuleToken = import('./types.js').RuleToken;
+export type CalendarPluginRegistryType = import('./CalendarPluginRegistry.js').default;
 export type ParserState = {
     str: string;
     rule: string;
 };
 export type RegexBuilder = ((name: string | RegExp, val: string | RegExp) => RegexBuilder) & (() => RegExp);
 export default class Parser {
+    calendarPluginRegistry: CalendarPluginRegistry;
     fns: string[];
     /** @type {RuleToken[]} */
     tokens: RuleToken[];
@@ -13,8 +16,13 @@ export default class Parser {
         rule: string;
     };
     error: number;
-    /** @param {string[]} [fns] */
-    constructor(fns?: string[]);
+    /** @type {string|undefined} */
+    errorMessage: string | undefined;
+    /**
+     * @param {string[]} [fns]
+     * @param {CalendarPluginRegistryType} [calendarPluginRegistry]
+     */
+    constructor(fns?: string[], calendarPluginRegistry?: CalendarPluginRegistryType);
     /** @param {string} rule @returns {RuleToken[]} */
     parse(rule: string): RuleToken[];
     /**
@@ -28,16 +36,6 @@ export default class Parser {
     /** @param {ParserState} o @param {string} cap0 */
     _shorten(o: ParserState, cap0: string): void;
     _date(o: any): boolean;
-    _julian(o: any): boolean;
-    _easter(o: any): boolean;
-    _equinox(o: any): boolean;
-    _hebrew(o: any): boolean;
-    _islamic(o: any): boolean;
-    _jalaali(o: any): boolean;
-    _chineseSolar(o: any): boolean;
-    _chineseLunar(o: any): boolean;
-    _bengaliRevised(o: any): boolean;
-    _tibetanLunar(o: any): boolean;
     _dateMonth(o: any): boolean;
     _space(o: any): boolean;
     _ruleSameDay(o: any): boolean;

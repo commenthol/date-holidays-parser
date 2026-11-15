@@ -3,14 +3,16 @@
  * @license ISC
  */
 
-import CalDate from 'caldate'
+import CalDate, { temporalTimezoneAdapter } from 'caldate'
 import _ from './utils.js'
 import { toYear, toDate } from './internal/utils.js'
 import Data from './Data.js'
 import DateFn from './DateFn.js'
+import CalendarPluginRegistry from './CalendarPluginRegistry.js'
 import { HolidayRule } from './HolidayRule.js'
 
 /** @typedef {import('./types.js').HolidayOptions} HolidayOptions */
+/** @typedef {import('./types.js').HolidaysOptions} HolidaysOptions */
 /** @typedef {import('./types.js').HolidayRuleOptions} HolidayRuleOptions */
 /** @typedef {import('./types.js').Holiday} Holiday */
 /** @typedef {import('./types.js').Location} Location */
@@ -22,10 +24,10 @@ const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
 /**
  * @class
  * @param {object} data - holiday data object - see data/holidays.json
- * @param {string|Location} [country] - country code or location object
- * @param {string} [state] - specifies state
- * @param {string} [region] - specifies region
- * @param {HolidayOptions} [opts] - options
+ * @param {string|Location|HolidaysOptions} [country] - country code, location, or options
+ * @param {string|HolidaysOptions} [state] - specifies state or options
+ * @param {string|HolidaysOptions} [region] - specifies region or options
+ * @param {HolidaysOptions} [opts] - options
  * @example
  * ```js
  * new Holidays(data, 'US', 'la', 'no') // is the same as
@@ -34,23 +36,49 @@ const TYPES = ['observance', 'optional', 'school', 'bank', 'public']
  * ```
  */
 export class Holidays {
+  /**
+   * @param {object} data - holiday data object
+   * @param {string|Location|HolidaysOptions} [country]
+   * @param {string|HolidaysOptions} [state]
+   * @param {string|HolidaysOptions} [region]
+   * @param {HolidaysOptions} [opts]
+   */
   constructor(data, country, state, region, opts) {
     if (!data) {
       throw new TypeError('need holiday data')
     }
     this._data = data
+    /** @type {import('./types.js').CalendarPlugin<unknown>[]} */
+    this.__plugins = []
     this.init(country, state, region, opts)
   }
 
   /**
    * initialize holidays for a country/state/region
-   * @param {string|Location|HolidayOptions} [country]
-   * @param {string|HolidayOptions} [state]
-   * @param {string|HolidayOptions} [region]
-   * @param {HolidayOptions} [opts]
+   * @param {string|Location|HolidaysOptions} [country]
+   * @param {string|HolidaysOptions} [state]
+   * @param {string|HolidaysOptions} [region]
+   * @param {HolidaysOptions} [opts]
    */
   init(country, state, region, opts) {
     ;[country, state, region, opts] = getArgs(country, state, region, opts)
+
+    if (opts.plugins !== undefined) this.__plugins = opts.plugins
+    this.__calendarPluginRegistry = new CalendarPluginRegistry(this.__plugins)
+    const timezoneAdapter = opts.timezoneAdapter ?? temporalTimezoneAdapter
+    if (
+      typeof timezoneAdapter.toTimezone !== 'function' ||
+      typeof timezoneAdapter.fromTimezone !== 'function'
+    ) {
+      throw new TypeError(
+        'timezoneAdapter must provide toTimezone and fromTimezone functions'
+      )
+    }
+    /** @type {import('./types.js').CalendarContext} */
+    this.__calendarContext = {
+      timezone: opts.timezone || this.__timezone,
+      timezoneAdapter
+    }
 
     // reset settings
     this.__conf = null
@@ -61,6 +89,7 @@ export class Holidays {
 
     this.__conf = Data.splitName(country, state, region)
     this.__data = new Data(opts.data || this._data, this.__conf)
+    this.__calendarContext.coordinates = this.__data.getCoordinates()
 
     if (opts.languages) {
       this.setLanguages(opts.languages)
@@ -71,6 +100,7 @@ export class Holidays {
     const holidays = this.__data.getRules()
     if (holidays) {
       this.__timezone = opts.timezone || this.__data.getTimezones()[0]
+      this.__calendarContext.timezone = this.__timezone
       Object.keys(holidays).forEach((rule) => {
         this.setHoliday(rule, holidays[rule])
       })
@@ -128,13 +158,19 @@ export class Holidays {
 
     this.holidays[rule] = holidayOptions
 
-    const fn = new DateFn(rule, this.holidays)
+    const fn = new DateFn(
+      rule,
+      this.holidays,
+      this.__calendarPluginRegistry,
+      this.__calendarContext
+    )
     if (fn.ok) {
       holidayOptions.fn = fn
       return true
     } else {
       // throw Error('could not parse rule: ' + rule) // NEXT
-      console.error('could not parse rule: ' + rule)
+      const reason = fn.errorMessage ? ': ' + fn.errorMessage : ''
+      console.error('could not parse rule: ' + rule + reason)
     }
     return false
   }
@@ -210,7 +246,11 @@ export class Holidays {
   isHoliday(date) {
     date = date ? new Date(date) : new Date()
     const d = new CalDate()
-    d.fromTimezone(date, this.__timezone)
+    d.fromTimezone(
+      date,
+      this.__timezone,
+      this.__calendarContext.timezoneAdapter
+    )
     const year = d.year
     const rules = Object.keys(this.holidays)
     const days = []
@@ -326,11 +366,14 @@ export class Holidays {
 
   /**
    * sets timezone
-   * @param {String} timezone - see `moment-timezone`
+   * @param {String} timezone - IANA time zone or fixed offset
    * if `timezone` is `undefined`, then all dates are considered local dates
    */
   setTimezone(timezone) {
     this.__timezone = timezone
+    if (this.__calendarContext) {
+      this.__calendarContext.timezone = timezone
+    }
   }
 
   /**
@@ -452,11 +495,11 @@ export class Holidays {
 }
 
 /**
- * @param {string|Location|HolidayOptions} [country]
- * @param {string|HolidayOptions} [state]
- * @param {string|HolidayOptions} [region]
- * @param {HolidayOptions} [opts]
- * @returns {[string|Location|undefined, string|undefined, string|undefined, HolidayOptions]}
+ * @param {string|Location|HolidaysOptions} [country]
+ * @param {string|HolidaysOptions} [state]
+ * @param {string|HolidaysOptions} [region]
+ * @param {HolidaysOptions} [opts]
+ * @returns {[string|Location|undefined, string|undefined, string|undefined, HolidaysOptions]}
  */
 function getArgs(country, state, region, opts) {
   let options = opts

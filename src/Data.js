@@ -116,6 +116,18 @@ export default class Data {
   }
 
   /**
+   * get coordinates for the most specific selected location
+   * @returns {import('./types.js').CalendarContext['coordinates']}
+   */
+  getCoordinates() {
+    const country = _.get(this.data, ['holidays', this.opts.country])
+    const state =
+      country?.regions?.[this.opts.state] || country?.states?.[this.opts.state]
+    const region = state?.regions?.[this.opts.region]
+    return region?.coordinates || state?.coordinates || country?.coordinates
+  }
+
+  /**
    * get list of raw holiday rules for country/ state/ region
    * @param {Object|String} [country]
    * @param {String} [state]

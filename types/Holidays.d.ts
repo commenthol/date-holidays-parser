@@ -3,8 +3,10 @@
  * @license ISC
  */
 import Data from './Data.js';
+import CalendarPluginRegistry from './CalendarPluginRegistry.js';
 import { HolidayRule } from './HolidayRule.js';
 export type HolidayOptions = import('./types.js').HolidayOptions;
+export type HolidaysOptions = import('./types.js').HolidaysOptions;
 export type HolidayRuleOptions = import('./types.js').HolidayRuleOptions;
 export type Holiday = import('./types.js').Holiday;
 export type Location = import('./types.js').Location;
@@ -12,10 +14,10 @@ export type HolidayMap = import('./types.js').HolidayMap;
 /**
  * @class
  * @param {object} data - holiday data object - see data/holidays.json
- * @param {string|Location} [country] - country code or location object
- * @param {string} [state] - specifies state
- * @param {string} [region] - specifies region
- * @param {HolidayOptions} [opts] - options
+ * @param {string|Location|HolidaysOptions} [country] - country code, location, or options
+ * @param {string|HolidaysOptions} [state] - specifies state or options
+ * @param {string|HolidaysOptions} [region] - specifies region or options
+ * @param {HolidaysOptions} [opts] - options
  * @example
  * ```js
  * new Holidays(data, 'US', 'la', 'no') // is the same as
@@ -24,7 +26,12 @@ export type HolidayMap = import('./types.js').HolidayMap;
  * ```
  */
 export declare class Holidays {
-    _data: any;
+    _data: object;
+    /** @type {import('./types.js').CalendarPlugin<unknown>[]} */
+    __plugins: import('./types.js').CalendarPlugin<unknown>[];
+    __calendarPluginRegistry: CalendarPluginRegistry;
+    /** @type {import('./types.js').CalendarContext} */
+    __calendarContext: import('./types.js').CalendarContext;
     __conf: any;
     __types: string[];
     /** @type {HolidayMap} */
@@ -32,15 +39,22 @@ export declare class Holidays {
     __data: Data;
     __timezone: any;
     __languages: any[];
-    constructor(data: any, country: any, state: any, region: any, opts: any);
+    /**
+     * @param {object} data - holiday data object
+     * @param {string|Location|HolidaysOptions} [country]
+     * @param {string|HolidaysOptions} [state]
+     * @param {string|HolidaysOptions} [region]
+     * @param {HolidaysOptions} [opts]
+     */
+    constructor(data: object, country?: string | Location | HolidaysOptions, state?: string | HolidaysOptions, region?: string | HolidaysOptions, opts?: HolidaysOptions);
     /**
      * initialize holidays for a country/state/region
-     * @param {string|Location|HolidayOptions} [country]
-     * @param {string|HolidayOptions} [state]
-     * @param {string|HolidayOptions} [region]
-     * @param {HolidayOptions} [opts]
+     * @param {string|Location|HolidaysOptions} [country]
+     * @param {string|HolidaysOptions} [state]
+     * @param {string|HolidaysOptions} [region]
+     * @param {HolidaysOptions} [opts]
      */
-    init(country?: string | Location | HolidayOptions, state?: string | HolidayOptions, region?: string | HolidayOptions, opts?: HolidayOptions): boolean;
+    init(country?: string | Location | HolidaysOptions, state?: string | HolidaysOptions, region?: string | HolidaysOptions, opts?: HolidaysOptions): boolean;
     /**
      * set (custom) holiday
      * @throws {TypeError}
@@ -141,7 +155,7 @@ export declare class Holidays {
     getRegions(country: string, state: string, lang?: string): any;
     /**
      * sets timezone
-     * @param {String} timezone - see `moment-timezone`
+     * @param {String} timezone - IANA time zone or fixed offset
      * if `timezone` is `undefined`, then all dates are considered local dates
      */
     setTimezone(timezone: string): void;

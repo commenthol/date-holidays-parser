@@ -1,5 +1,7 @@
 import assert from 'assert'
-import DateFn from '../src/DateFn.js'
+import moment from 'moment-timezone'
+import { DateFn } from './support.js'
+import { momentTimezoneAdapter } from 'caldate/moment-timezone'
 import { fixResult } from './helpers.js'
 
 describe('#DateFn', function () {
@@ -144,6 +146,69 @@ describe('#DateFn', function () {
         assert.deepStrictEqual(fixResult(res), exp)
       })
 
+      it('5 Jumada al-awwal 1440', function () {
+        const fn = new DateFn('5 Jumada al-awwal 1440')
+        const res = fn.inYear(2019).get()
+        const exp = [
+          {
+            date: '2019-01-11 00:00:00 -0600',
+            end: 'fri 2019-01-11 18:00',
+            start: 'thu 2019-01-10 18:00'
+          }
+        ]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('5 Jumada al-awwal 1441', function () {
+        const fn = new DateFn('5 Jumada al-awwal 1441')
+        const res = fn.inYear(2019).get()
+        const exp = [
+          {
+            date: '2019-12-31 00:00:00 -0600',
+            end: 'tue 2019-12-31 18:00',
+            start: 'mon 2019-12-30 18:00'
+          }
+        ]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('27 Rabi al-awwal', function () {
+        const fn = new DateFn('27 Rabi al-awwal')
+        const res = fn.inYear(2016).get()
+        const exp = [
+          {
+            date: '2016-01-07 00:00:00 -0600',
+            start: 'wed 2016-01-06 18:00',
+            end: 'thu 2016-01-07 18:00'
+          },
+          {
+            date: '2016-12-26 00:00:00 -0600',
+            start: 'sun 2016-12-25 18:00',
+            end: 'mon 2016-12-26 18:00'
+          }
+        ]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('27 Rabi al-awwal 1438', function () {
+        const fn = new DateFn('27 Rabi al-awwal 1438')
+        const res = fn.inYear(2016).get()
+        const exp = [
+          {
+            date: '2016-12-26 00:00:00 -0600',
+            start: 'sun 2016-12-25 18:00',
+            end: 'mon 2016-12-26 18:00'
+          }
+        ]
+        assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('27 Rabi al-awwal outside supported range', function () {
+        const fn = new DateFn('27 Rabi al-awwal')
+        const res = fn.inYear(1800).get()
+        assert.deepStrictEqual(res, [])
+      })
+
       it('29 Dhu al-Hijjah 1442', function () {
         const fn = new DateFn('29 Dhu al-Hijjah 1442')
         const res = fn.inYear(2021).get()
@@ -246,6 +311,12 @@ describe('#DateFn', function () {
         assert.deepStrictEqual(fixResult(res), exp)
       })
 
+      it('18 Tevet in gregorian year 2016', function () {
+        const fn = new DateFn('18 Tevet')
+        const res = fn.inYear(2016).get()
+        assert.deepStrictEqual(res, [])
+      })
+
       it('No Tevet 1 in gregorian year 2024', function () {
         const fn = new DateFn('1 Tevet')
         const res = fn.inYear(2024).get()
@@ -344,6 +415,25 @@ describe('#DateFn', function () {
           }
         ])
       })
+
+      it('uses the timezone adapter for local calendar offsets', function () {
+        const fn = new DateFn('15 Nisan', undefined, undefined, {
+          timezone: 'America/New_York',
+          timezoneAdapter: momentTimezoneAdapter
+        })
+        const [result] = fn.inYear(2015).get('America/New_York')
+        assert.strictEqual(result.date, '2015-04-04 00:00:00 -0600')
+        assert.strictEqual(
+          moment(result.start)
+            .tz('America/New_York')
+            .format('YYYY-MM-DD HH:mm'),
+          '2015-04-03 18:00'
+        )
+        assert.strictEqual(
+          moment(result.end).tz('America/New_York').format('YYYY-MM-DD HH:mm'),
+          '2015-04-04 18:00'
+        )
+      })
     })
 
     describe('equinox', function () {
@@ -371,6 +461,32 @@ describe('#DateFn', function () {
           }
         ]
         assert.deepStrictEqual(fixResult(res), exp)
+      })
+
+      it('march equinox in +01:00', function () {
+        const fn = new DateFn('march equinox in +01:00')
+        const res = fn.inYear(2015).get()
+        assert.strictEqual(res[0].date, '2015-03-20 00:00:00')
+      })
+
+      it('uses the selected adapter for equinox conversion', function () {
+        let converted = false
+        const timezoneAdapter = {
+          toTimezone: momentTimezoneAdapter.toTimezone,
+          fromTimezone(dateUTC, timezone) {
+            converted = timezone === 'Asia/Tokyo'
+            return momentTimezoneAdapter.fromTimezone(dateUTC, timezone)
+          }
+        }
+        const fn = new DateFn(
+          'march equinox in Asia/Tokyo',
+          undefined,
+          undefined,
+          { timezoneAdapter }
+        )
+
+        fn.inYear(2015)
+        assert.strictEqual(converted, true)
       })
 
       it('3 days after september equinox', function () {
