@@ -1,5 +1,5 @@
 import assert from 'assert'
-import Holidays from '../src/index.js'
+import Holidays from './support.js'
 
 const fixture = {
   holidays: {

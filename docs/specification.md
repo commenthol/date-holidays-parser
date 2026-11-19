@@ -1,6 +1,6 @@
 # Specification for `holidays.yaml`
 
-Version: 2.2.0
+Version: 4.0.0
 
 This document describes the data contained within the files `holidays.yaml` and
 `names.yaml`.
@@ -9,44 +9,44 @@ This document describes the data contained within the files `holidays.yaml` and
 
 <!-- !toc (level=4 minlevel=2 omit="Table of Contents") -->
 
-* [structure of `names.yaml`](#structure-of-namesyaml)
-* [structure of `holidays.yaml`](#structure-of-holidaysyaml)
-* [Citations, Sources, and Attribution](#citations-sources-and-attribution)
-  * [Source Guidelines](#source-guidelines)
-* [Types of holidays](#types-of-holidays)
-* [Grammar for day rules](#grammar-for-day-rules)
-  * [Fixed Date](#fixed-date)
-  * [Fixed Date at beginning of a Month](#fixed-date-at-beginning-of-a-month)
-  * [Movable Date](#movable-date)
-    * [Easter Dates](#easter-dates)
-    * [Hijra Dates](#hijra-dates)
-    * [Dates in Hebrew calendar](#dates-in-hebrew-calendar)
-    * [Dates in Chinese calendar (lunar)](#dates-in-chinese-calendar-lunar)
-    * [Dates in Chinese calendar (solar)](#dates-in-chinese-calendar-solar)
-    * [Dates in Bengali Revised calendar](#dates-in-bengali-revised-calendar)
-    * [Dates in Tibetan calendar](#dates-in-tibetan-calendar)
-    * [Dates in Persian calendar](#dates-in-persian-calendar)
-    * [Equinox, Solstice](#equinox-solstice)
-  * [Different start-time for Fixed Date other than midnight](#different-start-time-for-fixed-date-other-than-midnight)
-  * [Different duration other than 24 hours](#different-duration-other-than-24-hours)
-  * [Start-time of holiday changes per weekday](#start-time-of-holiday-changes-per-weekday)
-  * [Changes to different weekday from a given fixed Date](#changes-to-different-weekday-from-a-given-fixed-date)
-  * [Changes to different weekday from a given Month](#changes-to-different-weekday-from-a-given-month)
-  * [Change to a different weekday from a changed fixed Date](#change-to-a-different-weekday-from-a-changed-fixed-date)
-  * [Change to different weekday if date falls on a certain weekday](#change-to-different-weekday-if-date-falls-on-a-certain-weekday)
-  * [Substitute a holiday if date falls on a certain weekday](#substitute-a-holiday-if-date-falls-on-a-certain-weekday)
-  * [Observe the holiday as well as on a substitute day, if date falls on a certain weekday](#observe-the-holiday-as-well-as-on-a-substitute-day-if-date-falls-on-a-certain-weekday)
-  * [Enable Date only for odd/ even numbered years](#enable-date-only-for-odd-even-numbered-years)
-  * [Enable Date only for certain periods of years](#enable-date-only-for-certain-periods-of-years)
-  * [Enable Date only for certain weekdays](#enable-date-only-for-certain-weekdays)
-  * [Holiday based on other holidays (bridge days)](#holiday-based-on-other-holidays-bridge-days)
-  * [Change to different weekday if date already falls on a holiday](#change-to-different-weekday-if-date-already-falls-on-a-holiday)
-  * [Enabling a rule since or in certain years](#enabling-a-rule-since-or-in-certain-years)
-  * [Disabling a rule](#disabling-a-rule)
-  * [Moving a date](#moving-a-date)
-  * [Disabling a rule in states/ regions](#disabling-a-rule-in-states-regions)
-  * [Renaming or discontinuing holidays](#renaming-or-discontinuing-holidays)
-* [Generation of `holidays.json`](#generation-of-holidaysjson)
+- [structure of `names.yaml`](#structure-of-namesyaml)
+- [structure of `holidays.yaml`](#structure-of-holidaysyaml)
+- [Citations, Sources, and Attribution](#citations-sources-and-attribution)
+  - [Source Guidelines](#source-guidelines)
+- [Types of holidays](#types-of-holidays)
+- [Grammar for day rules](#grammar-for-day-rules)
+  - [Fixed Date](#fixed-date)
+  - [Fixed Date at beginning of a Month](#fixed-date-at-beginning-of-a-month)
+  - [Movable Date](#movable-date)
+    - [Easter Dates](#easter-dates)
+    - [Hijra Dates](#hijra-dates)
+    - [Dates in Hebrew calendar](#dates-in-hebrew-calendar)
+    - [Dates in Chinese calendar (lunar)](#dates-in-chinese-calendar-lunar)
+    - [Dates in Chinese calendar (solar)](#dates-in-chinese-calendar-solar)
+    - [Dates in Bengali Revised calendar](#dates-in-bengali-revised-calendar)
+    - [Dates in Tibetan calendar](#dates-in-tibetan-calendar)
+    - [Dates in Persian calendar](#dates-in-persian-calendar)
+    - [Equinox, Solstice](#equinox-solstice)
+  - [Different start-time for Fixed Date other than midnight](#different-start-time-for-fixed-date-other-than-midnight)
+  - [Different duration other than 24 hours](#different-duration-other-than-24-hours)
+  - [Start-time of holiday changes per weekday](#start-time-of-holiday-changes-per-weekday)
+  - [Changes to different weekday from a given fixed Date](#changes-to-different-weekday-from-a-given-fixed-date)
+  - [Changes to different weekday from a given Month](#changes-to-different-weekday-from-a-given-month)
+  - [Change to a different weekday from a changed fixed Date](#change-to-a-different-weekday-from-a-changed-fixed-date)
+  - [Change to different weekday if date falls on a certain weekday](#change-to-different-weekday-if-date-falls-on-a-certain-weekday)
+  - [Substitute a holiday if date falls on a certain weekday](#substitute-a-holiday-if-date-falls-on-a-certain-weekday)
+  - [Observe the holiday as well as on a substitute day, if date falls on a certain weekday](#observe-the-holiday-as-well-as-on-a-substitute-day-if-date-falls-on-a-certain-weekday)
+  - [Enable Date only for odd/ even numbered years](#enable-date-only-for-odd-even-numbered-years)
+  - [Enable Date only for certain periods of years](#enable-date-only-for-certain-periods-of-years)
+  - [Enable Date only for certain weekdays](#enable-date-only-for-certain-weekdays)
+  - [Holiday based on other holidays (bridge days)](#holiday-based-on-other-holidays-bridge-days)
+  - [Change to different weekday if date already falls on a holiday](#change-to-different-weekday-if-date-already-falls-on-a-holiday)
+  - [Enabling a rule since or in certain years](#enabling-a-rule-since-or-in-certain-years)
+  - [Disabling a rule](#disabling-a-rule)
+  - [Moving a date](#moving-a-date)
+  - [Disabling a rule in states/ regions](#disabling-a-rule-in-states-regions)
+  - [Renaming or discontinuing holidays](#renaming-or-discontinuing-holidays)
+- [Generation of `holidays.json`](#generation-of-holidaysjson)
 
 <!-- toc! -->
 
@@ -60,8 +60,8 @@ The basic structure looks as follows:
 ```yaml
 names:
   <identifier>:
-    <lang_1>: {String} # name in language 1
-    <lang_2>: {String} # name in language 2
+    <lang_1>: { String } # name in language 1
+    <lang_2>: { String } # name in language 2
 ```
 
 - The `<identifier>` can be referenced using `_name:`.
@@ -77,27 +77,27 @@ The basic structure look as follows:
 version: <versionNumber>
 
 holidays:
-  <country_code_1>:     # IANA country code
-    names:              # name of country
-    dayoff: {String}    # name of weekday which is a default day off (Friday|Saturday|Sunday|...)
-    days:               # see days structure
+  <country_code_1>: # IANA country code
+    names: # name of country
+    dayoff: { String } # name of weekday which is a default day off (Friday|Saturday|Sunday|...)
+    days: # see days structure
       ...
-    states:             # (optional) specify special holidays per state
-      <state_code_1>:   # short code of state (ISO 3166-2)
-        names:          # name of state
-        days:           # see days structure
+    states: # (optional) specify special holidays per state
+      <state_code_1>: # short code of state (ISO 3166-2)
+        names: # name of state
+        days: # see days structure
           ...
-        regions:        # (optional) specify special holidays per region
-          <region_code_1>:  # short code of region (ISO 3166-2 if applicable)
-            names:      # name of region in local language
-            days:       # see days structure
+        regions: # (optional) specify special holidays per region
+          <region_code_1>: # short code of region (ISO 3166-2 if applicable)
+            names: # name of region in local language
+            days: # see days structure
               ...
-    regions:            # (optional) specify special holidays per region (for small countries without states)
-      <region_code_1>:  # short code of region
-        names:          # name of region
-        days:           # see days structure
+    regions: # (optional) specify special holidays per region (for small countries without states)
+      <region_code_1>: # short code of region
+        names: # name of region
+        days: # see days structure
           ...
-  <country_code_2>:     # next country ...
+  <country_code_2>: # next country ...
     ...
 ```
 
@@ -121,42 +121,51 @@ To specify the rules to calculate the holidays per country, state, region is as 
 
 ```yaml
 <country/state/region>:
-  names:                   # name of country/state/region
-    <lang_1>: {String}     # name in local language
-    <lang_2>: {String}     # name in other language
-  name: {String}           # name of country/state/region in local language of country (use only if `names` not present)
-  langs:                   # (mandatory for country) list of language codes (ISO 639-1)
-    - <lang_1>             # spoken in country, state, region
+  names: # name of country/state/region
+    <lang_1>: { String } # name in local language
+    <lang_2>: { String } # name in other language
+  name: { String } # name of country/state/region in local language of country (use only if `names` not present)
+  coordinates: # (optional) representative point of the country/state/region
+    latitude: { Number } # decimal degrees, -90 to 90
+    longitude: { Number } # decimal degrees, -180 to 180
+  langs: # (mandatory for country) list of language codes (ISO 639-1)
+    - <lang_1> # spoken in country, state, region
     - <lang_2>
-  zones:                   # (mandatory for country) list of timezone(s)
+  zones: # (mandatory for country) list of timezone(s)
     - <timezone_1>
     - <timezone_2>
-  _days:                   # (optional) reference days of other country, state, region
+  _days: # (optional) reference days of other country, state, region
     - <country_code_x>
     - states
     - <state_code_x>
     - regions
     - <regions_code_x>
   days:
-    <rule_1>:              # see grammar
+    <rule_1>: # see grammar
       name:
-        <lang_1>: {String} # name of day in language 1
-        <lang_2>: {String} # name of day in language 2
-      type: {String}       # type of holiday (public|bank|school|optional|observance)
-      note: {String}       # (optional) note
-      substitute: true     # (optional) if set to true then '(substitute day)' gets appended to name
-      disable:             # (optional) disables a date
-        - '<YYYY-MM-DD>'   # list of date stings in quotes declaring the dates to disable the rule
-      enable:              # (optional) enables the days, such moving it to the given date. Only use with `disable`
-        - '<YYYY-MM-DD>'   # list of date stings in quotes declaring the dates to enable the disabled rule
+        <lang_1>: { String } # name of day in language 1
+        <lang_2>: { String } # name of day in language 2
+      type: { String } # type of holiday (public|bank|school|optional|observance)
+      note: { String } # (optional) note
+      substitute: true # (optional) if set to true then '(substitute day)' gets appended to name
+      disable: # (optional) disables a date
+        - '<YYYY-MM-DD>' # list of date stings in quotes declaring the dates to disable the rule
+      enable: # (optional) enables the days, such moving it to the given date. Only use with `disable`
+        - '<YYYY-MM-DD>' # list of date stings in quotes declaring the dates to enable the disabled rule
     <rule_2>:
-      _name: <ref>    # reference of name translated within `names.yaml` file
+      _name: <ref> # reference of name translated within `names.yaml` file
 ```
 
 - `<county/state/region>` is the shortcode to identify country, state or region
 - `<lang_?>` represents the ISO 639-1 language code for the assigned language.
 - `<timezone_?>` is a string representing the timezone. See file `data/meta/latest.json` of [moment-timezone][]
 - `<rule_?>` is the rule for that holiday
+
+`coordinates` contains a representative point, not a boundary. Both latitude and
+longitude are required when it is present; positive values indicate north and
+east. Calendar plugins receive the coordinates of the most specific selected
+location in `CalendarContext.coordinates`, falling back to its parent location
+when absent. If no selected location provides coordinates, it is undefined.
 
 ## Citations, Sources, and Attribution
 
@@ -191,13 +200,13 @@ Primary sources are preferable to secondary sources. Examples of good primary so
 
 Currently the following type with their meaning are supported
 
-| type        | meaning                                    |
-| ----------- | ------------------------------------------ |
-| public      | public holiday                             |
-| bank        | bank holiday, banks and offices are closed |
-| school      | school holiday, schools are closed         |
-| optional    | majority of people take a day off          |
-| observance  | optional festivity, no paid day off        |
+| type       | meaning                                    |
+| ---------- | ------------------------------------------ |
+| public     | public holiday                             |
+| bank       | bank holiday, banks and offices are closed |
+| school     | school holiday, schools are closed         |
+| optional   | majority of people take a day off          |
+| observance | optional festivity, no paid day off        |
 
 Additionally a `note` field is sometimes available for further clarification.
 
@@ -242,7 +251,7 @@ Rule: `(easter|orthodox) (+|-)?<number-of-days>`
 
 #### Hijra Dates
 
-> __Note__: Islamic days start at sunset which depends on latitude/ longitude.
+> **Note**: Islamic days start at sunset which depends on latitude/ longitude.
 > To avoid such calculations, the approximation of using 18:00 as hour of sunset
 > is made.
 
@@ -256,7 +265,7 @@ Rule: `<day-of-month> (Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwa
 
 #### Dates in Hebrew calendar
 
-> __Note__: Days in the Hebrew calendar start at sunset which depends on latitude/ longitude.
+> **Note**: Days in the Hebrew calendar start at sunset which depends on latitude/ longitude.
 > To avoid such calculations, the approximation of using 18:00 as hour of sunset is made.
 
 Dates in the islamic calendar can be attributed using the following rule:
@@ -264,6 +273,7 @@ Dates in the islamic calendar can be attributed using the following rule:
 Rule: `<day-of-month> (Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|Adar)`
 
 Where:
+
 - `<day-of-month>` [1..28]
 
 **Examples**:
@@ -277,6 +287,7 @@ Dates in the chinese calendar can be attributed using the following rule:
 Rule: `chinese <cycle>-<year>-<month>-<leapmonth>-<day>`
 
 Where:
+
 - `<cycle>` (optional) Chinese cycle - current is 78
 - `<year>` (optional) year in Chinese cycle (1 ... 60)
 - `<month>` (mandatory) lunar month
@@ -293,6 +304,7 @@ Where:
 Rule: `chinese <cycle>-<year>-<count>-<day> solarterm`
 
 Where:
+
 - `<cycle>` (optional) Chinese cycle - current is 78
 - `<year>` (optional) year in Chinese cycle (1 ... 60)
 - `<count>` (mandatory) Number of solar term. (1 .. 24)
@@ -308,6 +320,7 @@ Where:
 Rule: `bengali-revised <year>-<month>-<day>`
 
 Where:
+
 - `<year>` (optional) year
 - `<month>` (mandatory) month (1..12)
 - `<day>` (mandatory) day of month (1..31)
@@ -324,6 +337,7 @@ Dates in the tibetan lunar calendar can be attributed using the following rule:
 Rule: `(tibetan|mongolian|bhutanese) <cycle>-<year>-<month>-<leapmonth>-<day>-<leapday>`
 
 Where:
+
 - `<cycle>` (optional) Tibetan cycle - current is 17
 - `<year>` (optional) year in Tibetan cycle (1 ... 60)
 - `<month>` (mandatory) lunar month
@@ -343,6 +357,7 @@ Dates in the persian calendar can be attributed using the following rule:
 Rule: `<day-of-month> (Farvardin|Ordibehesht|Khordad|Tir|Mordad|Shahrivar|Mehr|Aban|Azar|Dey|Bahman|Esfand) [<year>]`
 
 Where:
+
 - `<day-of-month>` [1..30]
 - `<year>` optional year
 
@@ -359,6 +374,7 @@ Rule: `(<number-of-days>|<count>? <weekday>) (after|before) (March|September) eq
 Rule: `(<number-of-days> (d|days)?|<count>? <weekday>) (after|before) (June|December) solstice (in <timezone>)?`
 
 Where:
+
 - `<number-of-days>` e.g. 5 days
 - `<count>` 1st, 2nd, 3rd, 4th ... 100th
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
@@ -380,6 +396,7 @@ A holiday might start in the afternoon of a given day ` HH:MM`
 Rule: append ` HH:MM`
 
 **Examples**:
+
 - `12-31 14:00` holiday starts at 14h on December 31st
 
 ### Different duration other than 24 hours
@@ -395,6 +412,7 @@ Rule: append `P0DT0H0M`
 - years, months and seconds are not supported
 
 **Examples**:
+
 - `12-31 14:00 PT5H` holiday starts at 14h on December 31st and ends at 21h as duration is 5 hours
 - `easter P1DT12H` holiday starts on midnight Easter Sunday and ends at the following Tuesday at 12h
 
@@ -405,9 +423,11 @@ A holiday might start in the afternoon of a given day ` HH:MM` but on a differen
 Rule: `MM-DD HH:MM if <weekday> then HH:MM`
 
 Where:
+
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
 **Examples**:
+
 - `12-31 14:00 if Sunday then 00:00` holiday starts at 14h on December 31st but if December 31st falls on a Sunday start date will be 00:00
 
 ### Changes to different weekday from a given fixed Date
@@ -417,6 +437,7 @@ A holiday may change to a weekday starting from a given fixed Date.
 Rule: `<count> <weekday> (after|before) MM-DD`
 
 Where:
+
 - `<count>` 1st, 2nd, 3rd, 4th ... 100th
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
@@ -439,6 +460,7 @@ A holiday may change to a weekday starting from the first day of a month.
 Rule: `<count> <weekday> (before|in) <month>`
 
 Where:
+
 - `<count>` 1st, 2nd, 3rd, 4th ... 100th
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
@@ -459,6 +481,7 @@ Where:
 Rule: `<weekday> (after|before) <count> <weekday> (after|before) MM-DD`
 
 Where:
+
 - `<count>` 1st, 2nd, 3rd, 4th ... 100th
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
@@ -472,6 +495,7 @@ Where:
 Rule: `MM-DD if <weekday> then (next|previous) <weekday>`
 
 Where:
+
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
 Holiday is moved if the rule matches, otherwise it stays on the date given.
@@ -486,6 +510,7 @@ Holiday is moved if the rule matches, otherwise it stays on the date given.
 Rule: `substitutes MM-DD if <weekday> then (next|previous) <weekday>`
 
 Where:
+
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
 If `substitute: true` is given then the translated string from `names.yaml/names/substitutes` will be appended to the name.
@@ -503,6 +528,7 @@ Holiday is active if the rule matches for the moved date.
 Rule: `MM-DD and if <weekday> then (next|previous) <weekday>`
 
 Where:
+
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
 This line generates two holidays. One for `MM-DD` plus the observed substitute day following the rule.
@@ -539,18 +565,20 @@ Rule: `MM-DD every <count> years since <year>`
 Rule: `MM-DD (not) on <weekday>`
 
 Where:
+
 - `<weekday>` Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 
 **Examples**:
 
 - `02-01 on Monday, Tuesday` February, 1st is a holiday only if weekday is a Monday or Tuesday
-- `12-26 not on Friday, Monday` December, 26nd is a holiday only if weekday is *not* Monday or Friday
+- `12-26 not on Friday, Monday` December, 26nd is a holiday only if weekday is _not_ Monday or Friday
 
 ### Holiday based on other holidays (bridge days)
 
 Rule: `<date> if MM-DD (and MM-DD)? is (<type>)? holiday`
 
 Where:
+
 - `<date>` MM-DD(-YYYY)?
 - `<type>` public
 
@@ -566,6 +594,7 @@ Rule: `<rule> if is (<type>)? holiday then (<count>)? (next|previous) <weekday>`
 Rule: `<rule> if is (<type>)? holiday then (<count>)? (next|previous) day (omit <weekdays>)?`
 
 Where:
+
 - `<rule>` any rule
 - `<type>` public, bank, school, observance, optional (defaults to public if omitted)
 - `<count>` 1...31, 1st, 2nd, 3rd
@@ -580,7 +609,7 @@ Where:
 
 ### Enabling a rule since or in certain years
 
-> __Note:__ Use quotes around dates!
+> **Note:** Use quotes around dates!
 
 ```yaml
 days:
@@ -605,7 +634,7 @@ On any rule it is possible to disable it for a given date. For every year an ent
 
 E.g. in case that the 4th Monday in November is the 2015-11-23 then the day will not be a holiday.
 
-> __Note__: Use quotes around date!
+> **Note**: Use quotes around date!
 
 ```yaml
 days:
@@ -622,7 +651,7 @@ In order to move a date for a rule use `disable` together with `enable`.
 
 E.g. in case that the 4th Monday in November is the 2015-11-23 then the day gets moved to 2015-11-27.
 
-> __Note__: Use quotes around dates!
+> **Note**: Use quotes around dates!
 
 ```yaml
 days:
@@ -665,6 +694,7 @@ Rule: `<rule> since YYYY(-MM-DD)?`
 Rule: `<rule> since YYYY(-MM-DD)? and prior to YYYY(-MM-DD)?`
 
 Where:
+
 - `<rule>` is a valid holiday rule
 
 **Examples**:
@@ -723,7 +753,6 @@ days:
       - to: 1900-01-01
 ```
 
-
 ## Generation of `holidays.json`
 
 To generate the file `holidays.json` which is used by the module run:
@@ -738,11 +767,12 @@ This concatenates the two files `holidays.yaml` and `names.yaml` and generates t
 
 <!-- !ref -->
 
-* [moment-timezone][moment-timezone]
+- [moment-timezone][moment-timezone]
 
 <!-- ref! -->
 
 [moment-timezone]: https://github.com/moment/moment-timezone
 
-----
+---
+
 End of file

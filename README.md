@@ -31,17 +31,18 @@ Happy holidays!
 
 <!-- !toc (minlevel=2 omit="Table of Contents") -->
 
-* [Usage](#usage)
-* [Holiday object](#holiday-object)
-  * [Dates](#dates)
-  * [Name](#name)
-  * [Types of holidays](#types-of-holidays)
-* [API](#api)
-* [Browser](#browser)
-* [Data](#data)
-* [Contribution and License Agreement](#contribution-and-license-agreement)
-* [License](#license)
-* [References](#references)
+- [Usage](#usage)
+- [Calendar plugins](#calendar-plugins)
+- [Holiday object](#holiday-object)
+  - [Dates](#dates)
+  - [Name](#name)
+  - [Types of holidays](#types-of-holidays)
+- [API](#api)
+- [Browser](#browser)
+- [Data](#data)
+- [Contribution and License Agreement](#contribution-and-license-agreement)
+- [License](#license)
+- [References](#references)
 
 <!-- toc! -->
 
@@ -49,8 +50,9 @@ Happy holidays!
 
 ```js
 const data = require('date-holidays/data/holidays.json')
-const Holidays = require('date-holidays-parser')
-const hd = new Holidays(data)
+const { default: Holidays } = require('date-holidays-parser')
+const { plugins } = require('date-holidays-parser/plugins')
+const hd = new Holidays(data, { plugins })
 
 // get supported countries
 hd.getCountries()
@@ -115,18 +117,37 @@ hd.isHoliday(new Date('2016-02-09 10:00:00 GMT-0600'))
 */
 ```
 
+## Calendar plugins
+
+Calendar-specific rule syntax is opt-in. Import only the built-in plugins your data needs to keep bundles small. The supplied `plugins` array is the complete set enabled for that instance; if omitted, no calendar plugins are loaded.
+
+```js
+import Holidays from 'date-holidays-parser'
+import { EasterCalendarPlugin } from 'date-holidays-parser/plugins/EasterCalendarPlugin'
+
+const hd = new Holidays(data, 'US', { plugins: [EasterCalendarPlugin] })
+```
+
+To enable the complete built-in plugin bundle instead:
+
+```js
+import plugins from 'date-holidays-parser/plugins'
+
+const hd = new Holidays(data, 'US', { plugins })
+```
+
 ## Holiday object
 
 `getHolidays()` as well as a matching `isHoliday()` call return either
 a list or a single holiday object which consists of:
 
-* {String} date - ISO Date String of (start)-date in local format
-* {Date} start - start date of holiday
-* {Date} end - end date of holiday
-* {String} name - name of holiday using `language` (if available)
-* {String} type - type of holiday `public|bank|school|optional|observance`
-* {Boolean} substitute - (optional) if true holiday substitutes another holiday`
-* {String} note - (optional) note`
+- {String} date - ISO Date String of (start)-date in local format
+- {Date} start - start date of holiday
+- {Date} end - end date of holiday
+- {String} name - name of holiday using `language` (if available)
+- {String} type - type of holiday `public|bank|school|optional|observance`
+- {Boolean} substitute - (optional) if true holiday substitutes another holiday`
+- {String} note - (optional) note`
 
 ### Dates
 
@@ -154,13 +175,13 @@ All holiday names should support an English translation.
 
 Currently the following type with their meaning are supported
 
-type        | meaning                                   
------------ | ------------------------------------------
-public      | public holiday                            
-bank        | bank holiday, banks and offices are closed
-school      | school holiday, schools are closed        
-optional    | majority of people take a day off         
-observance  | optional festivity, no paid day off       
+| type       | meaning                                    |
+| ---------- | ------------------------------------------ |
+| public     | public holiday                             |
+| bank       | bank holiday, banks and offices are closed |
+| school     | school holiday, schools are closed         |
+| optional   | majority of people take a day off          |
+| observance | optional festivity, no paid day off        |
 
 Additionally a `note` field is sometimes available for further
 clarification.
@@ -173,36 +194,29 @@ See [Holidays API][] for further information.
 
 This project also runs in all modern browsers. See `./examples/browser`
 
-Browser | Version | Notes
----     | ---     | ---
-Chrome  | >=45    |
-Firefox | >=45    |
-Safari  | >=10    |
-Edge    | >=13    |
-IE      | >=10    | needs polyfill `core-js/es6`
+| Browser | Version | Notes                        |
+| ------- | ------- | ---------------------------- |
+| Chrome  | >=45    |                              |
+| Firefox | >=45    |                              |
+| Safari  | >=10    |                              |
+| Edge    | >=13    |                              |
+| IE      | >=10    | needs polyfill `core-js/es6` |
 
 Please do not forget to set the correct charset!
 
 ```html
 <html>
-<head>
-  <!-- set page-wide -->
-  <meta charset="UTF-8">
-  ...
-</head>
-<body>
-  ...
-  <!-- or per script -->
-  <script src="your-bundle.js" charset="UTF-8"></script>
-```
-
-Testing was done with `zuul`. For local browser tests run `npm run zuul
--- --local 3000` and open <http://localhost:3000/__zuul>.
-
-requires manual install of
-
-```
-npm i zuul@3 browserify@10
+  <head>
+    <!-- set page-wide -->
+    <meta charset="UTF-8" />
+    ...
+  </head>
+  <body>
+    ...
+    <!-- or per script -->
+    <script src="your-bundle.js" charset="UTF-8"></script>
+  </body>
+</html>
 ```
 
 ## Data
@@ -230,12 +244,12 @@ See [LICENSE][] for more information.
 
 <!-- !ref -->
 
-* [date-holidays][date-holidays]
-* [date-holidays-ical][date-holidays-ical]
-* [Holidays API][Holidays API]
-* [holidays.yaml specification][holidays.yaml specification]
-* [ISC License][ISC License]
-* [LICENSE][LICENSE]
+- [date-holidays][date-holidays]
+- [date-holidays-ical][date-holidays-ical]
+- [Holidays API][Holidays API]
+- [holidays.yaml specification][holidays.yaml specification]
+- [ISC License][ISC License]
+- [LICENSE][LICENSE]
 
 <!-- ref! -->
 

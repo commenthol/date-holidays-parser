@@ -51,6 +51,11 @@ export default class Data {
      */
     getTimezones(): any[];
     /**
+     * get coordinates for the most specific selected location
+     * @returns {import('./types.js').CalendarContext['coordinates']}
+     */
+    getCoordinates(): import('./types.js').CalendarContext['coordinates'];
+    /**
      * get list of raw holiday rules for country/ state/ region
      * @param {Object|String} [country]
      * @param {String} [state]

@@ -4,8 +4,10 @@
  */
 
 import { toNumber } from './internal/utils.js'
+import CalendarPluginRegistry from './CalendarPluginRegistry.js'
 
 /** @typedef {import('./types.js').RuleToken} RuleToken */
+/** @typedef {import('./CalendarPluginRegistry.js').default} CalendarPluginRegistryType */
 /** @typedef {{ str: string, rule: string }} ParserState */
 /** @typedef {((name: string|RegExp, val: string|RegExp) => RegexBuilder) & (() => RegExp)} RegexBuilder */
 
@@ -60,39 +62,16 @@ const grammar = (function () {
       '[Ss]unday|[Mm]onday|[Tt]uesday|[Ww]ednesday|[Tt]hursday|[Ff]riday|[Ss]aturday|day',
     _months:
       'January|February|March|April|May|June|July|August|September|October|November|December',
-    _islamicMonths:
-      'Muharram|Safar|Rabi al-awwal|Rabi al-thani|Jumada al-awwal|Jumada al-thani|Rajab|Shaban|Ramadan|Shawwal|Dhu al-Qidah|Dhu al-Hijjah',
-    _hebrewMonths:
-      'Nisan|Iyyar|Sivan|Tamuz|Av|Elul|Tishrei|Cheshvan|Kislev|Tevet|Shvat|AdarII|Adar',
-    _jalaaliMonths:
-      'Farvardin|Ordibehesht|Khordad|Tir|Mordad|Shahrivar|Mehr|Aban|Azar|Dey|Bahman|Esfand',
     _days: /(_weekdays)s?/,
     _direction: /(before|after|next|previous|in)/,
     _counts: /(\d+)(?:st|nd|rd|th)?/,
     _count_days: /([-+]?\d{1,2}) ?(?:days?|d)?/,
-    _timezone: / in ([^\s]*|[+-]\d{2}:\d{2})/,
     _type: /(public|bank|school|observance|optional)/,
 
     dateMonth: /^(_months)/,
     date: /^(?:0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
     time: /^(?:T?0?(\d{1,2}):0?(\d{1,2})|T0?(\d{1,2}))/,
     duration: /^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?/, // follows ISO 8601
-
-    julian: /^julian date/,
-    easter: /^(easter|orthodox)(?: _count_days)?/,
-    equinox:
-      /^([Mm]arch|[Jj]une|[Ss]eptember|[Dd]ecember) (?:equinox|solstice)(?:_timezone)?/,
-    hebrew: /^0?(\d{1,2}) (_hebrewMonths)(?: 0*(\d{1,}))?/,
-    islamic: /^0?(\d{1,2}) (_islamicMonths)(?: 0*(\d{1,}))?/,
-    jalaali: /^0?(\d{1,2}) (_jalaaliMonths)(?: 0*(\d{1,}))?/,
-    chineseLunar:
-      /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})/,
-    chineseSolar:
-      /^(chinese|korean|vietnamese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-(\d{1,2}) solarterm/,
-    bengaliRevised:
-      /^(bengali-revised) (?:-?0*(\d{1,4})-)?0?(\d{1,2})-0?(\d{1,2})/,
-    tibetanLunar:
-      /^(tibetan|mongolian|bhutanese) (?:(\d+)-(\d{1,2})-)?(\d{1,2})-([01])-(\d{1,2})(?:-([01]))?/,
 
     modifier: /^(substitutes|and|if equal|then|if)\b/,
     rule_year:
@@ -117,15 +96,6 @@ const grammar = (function () {
   }
 
   raw._days = replace(raw._days)(/_weekdays/, raw._weekdays)()
-  raw.julian = replace(raw.julian, '')(/date/, raw.date)()
-  raw.easter = replace(raw.easter, '')(/_count_days/, raw._count_days)()
-  raw.equinox = replace(raw.equinox, '')(/_count_days/g, raw._count_days)(
-    /_direction/g,
-    raw._direction
-  )(/_timezone/g, raw._timezone)()
-  raw.hebrew = replace(raw.hebrew, '')(/_hebrewMonths/, raw._hebrewMonths)()
-  raw.islamic = replace(raw.islamic, '')(/_islamicMonths/, raw._islamicMonths)()
-  raw.jalaali = replace(raw.jalaali, '')(/_jalaaliMonths/, raw._jalaaliMonths)()
   raw.dateMonth = replace(raw.dateMonth)(/_months/, raw._months)()
 
   raw.rule_weekday = replace(raw.rule_weekday, '')(
@@ -159,47 +129,21 @@ const grammar = (function () {
     raw.months[m] = i++
   })
 
-  i = 1
-  raw.islamicMonths = {}
-  raw._islamicMonths.split('|').forEach(function (m) {
-    raw.islamicMonths[m] = i++
-  })
-
-  i = 1
-  raw.hebrewMonths = {}
-  raw._hebrewMonths.split('|').forEach(function (m) {
-    raw.hebrewMonths[m] = i++
-  })
-  // parser regex needs larger string before shorter AdarII and Adar pos needs correction
-  raw.hebrewMonths.Adar = 12
-  raw.hebrewMonths.AdarII = 13
-
-  i = 1
-  raw.jalaaliMonths = {}
-  raw._jalaaliMonths.split('|').forEach(function (m) {
-    raw.jalaaliMonths[m] = i++
-  })
-
   return raw
 })()
 
 // console.log(grammar)
 
 export default class Parser {
-  /** @param {string[]} [fns] */
-  constructor(fns) {
+  /**
+   * @param {string[]} [fns]
+   * @param {CalendarPluginRegistryType} [calendarPluginRegistry]
+   */
+  constructor(fns, calendarPluginRegistry) {
+    this.calendarPluginRegistry =
+      calendarPluginRegistry || new CalendarPluginRegistry()
     this.fns = fns || [
-      '_julian',
       '_date',
-      '_easter',
-      '_islamic',
-      '_hebrew',
-      '_jalaali',
-      '_equinox',
-      '_chineseSolar',
-      '_chineseLunar',
-      '_bengaliRevised',
-      '_tibetanLunar',
       '_dateMonth',
       '_ruleDateIfThen',
       '_ruleWeekday',
@@ -222,6 +166,8 @@ export default class Parser {
   parse(rule) {
     this.setup = { str: rule, rule }
     this.error = 0
+    /** @type {string|undefined} */
+    this.errorMessage = undefined
     this.tokens = []
     this._tokenize(this.setup)
     this._reorder()
@@ -263,8 +209,35 @@ export default class Parser {
   _tokenize(o) {
     let last
     while (o.str) {
-      for (let i = 0; i < this.fns.length; i++) {
-        if (this[this.fns[i]](o)) break
+      const result = this.calendarPluginRegistry.parse(o.str)
+      if (result.kind === 'invalid') {
+        this.error++
+        this.errorMessage = result.message
+        break
+      }
+      if (result.kind === 'match') {
+        const valueFn =
+          result.value &&
+          typeof result.value === 'object' &&
+          'fn' in result.value
+            ? result.value.fn
+            : undefined
+        const token = {
+          fn:
+            typeof valueFn === 'string' &&
+            result.plugin.fnNames.includes(valueFn)
+              ? valueFn
+              : result.plugin.fnNames[0]
+        }
+        Object.defineProperty(token, 'calendar', {
+          value: { plugin: result.plugin, value: result.value }
+        })
+        this.tokens.push(token)
+        this._shorten(o, o.str.substr(0, result.consumed))
+      } else {
+        for (let i = 0; i < this.fns.length; i++) {
+          if (this[this.fns[i]](o)) break
+        }
       }
       this._space(o)
       if (last === o.str) {
@@ -290,173 +263,6 @@ export default class Parser {
         year: toNumber(cap.shift()),
         month: toNumber(cap.shift()),
         day: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _julian(o) {
-    let cap
-    if ((cap = grammar.julian.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'julian',
-        year: toNumber(cap.shift()),
-        month: toNumber(cap.shift()),
-        day: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _easter(o) {
-    let cap
-    if ((cap = grammar.easter.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'easter',
-        type: cap.shift(),
-        offset: toNumber(cap.shift()) || 0
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _equinox(o) {
-    let cap
-    if ((cap = grammar.equinox.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'equinox',
-        season: cap.shift().toLowerCase(),
-        timezone: cap.shift() || 'GMT'
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _hebrew(o) {
-    let cap
-
-    if ((cap = grammar.hebrew.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'hebrew',
-        day: toNumber(cap.shift()),
-        month: grammar.hebrewMonths[cap.shift()],
-        year: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _islamic(o) {
-    let cap
-    if ((cap = grammar.islamic.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'islamic',
-        day: toNumber(cap.shift()),
-        month: grammar.islamicMonths[cap.shift()],
-        year: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _jalaali(o) {
-    let cap
-    if ((cap = grammar.jalaali.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: 'jalaali',
-        day: toNumber(cap.shift()),
-        month: grammar.jalaaliMonths[cap.shift()],
-        year: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _chineseSolar(o) {
-    let cap
-    if ((cap = grammar.chineseSolar.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: cap.shift(),
-        cycle: toNumber(cap.shift()),
-        year: toNumber(cap.shift()),
-        solarterm: toNumber(cap.shift()),
-        day: toNumber(cap.shift()),
-        timezone: cap.shift()
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _chineseLunar(o) {
-    let cap
-    if ((cap = grammar.chineseLunar.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: cap.shift(),
-        cycle: toNumber(cap.shift()),
-        year: toNumber(cap.shift()),
-        month: toNumber(cap.shift()),
-        leapMonth: !!toNumber(cap.shift()),
-        day: toNumber(cap.shift()),
-        timezone: cap.shift()
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _bengaliRevised(o) {
-    let cap
-    if ((cap = grammar.bengaliRevised.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: cap.shift(),
-        year: toNumber(cap.shift()),
-        month: toNumber(cap.shift()),
-        day: toNumber(cap.shift())
-      }
-      this.tokens.push(res)
-      return true
-    }
-  }
-
-  _tibetanLunar(o) {
-    let cap
-    if ((cap = grammar.tibetanLunar.exec(o.str))) {
-      this._shorten(o, cap[0])
-      cap.shift()
-      const res = {
-        fn: cap.shift(),
-        cycle: toNumber(cap.shift()),
-        year: toNumber(cap.shift()),
-        month: toNumber(cap.shift()),
-        leapMonth: !!toNumber(cap.shift()),
-        day: toNumber(cap.shift()),
-        leapDay: !!toNumber(cap.shift())
       }
       this.tokens.push(res)
       return true

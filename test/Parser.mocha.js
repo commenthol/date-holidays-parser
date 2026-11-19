@@ -1,6 +1,6 @@
 import path from 'path'
 import assert from 'assert'
-import Parser from '../src/Parser.js'
+import { Parser } from './support.js'
 import pkgSerializeToModule from 'serialize-to-module'
 
 import exp from './fixtures/parser.cjs'

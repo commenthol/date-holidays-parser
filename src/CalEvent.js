@@ -126,15 +126,34 @@ export default class CalEvent {
 
   /**
    * @param {string} timezone
+   * @param {import('caldate').TimezoneAdapter} [timezoneAdapter]
    * @returns
    */
-  get(timezone) {
+  get(timezone, timezoneAdapter) {
     const arr = this.dates.map((date) => {
       const cdate = new CalDate(date)
+      const offsetMinutes = date._calendarOffsetMinutes
+      const start = new CalDate(cdate)
+      if (offsetMinutes !== undefined) {
+        start.setOffset(offsetMinutes, 'm')
+      }
+      /** @type {import('caldate').default} */
+      let end
+      if (date._calendarDuration !== undefined) {
+        end = new CalDate(start).setDuration(date._calendarDuration).toEndDate()
+      } else if (offsetMinutes !== undefined) {
+        end = new CalDate(start).setOffset(1, 'd')
+      } else {
+        end = cdate.toEndDate()
+      }
       const o = {
-        date: cdate.toString(),
-        start: cdate.toTimezone(timezone),
-        end: cdate.toEndDate().toTimezone(timezone)
+        date:
+          cdate.toString() +
+          (offsetMinutes === undefined
+            ? ''
+            : ` ${formatOffsetMinutes(offsetMinutes)}`),
+        start: start.toTimezone(timezone, timezoneAdapter),
+        end: end.toTimezone(timezone, timezoneAdapter)
       }
       this._addSubstitute(date, o)
       return o
@@ -142,9 +161,19 @@ export default class CalEvent {
     return arr
   }
 
+  /** @param {RuleDate} date @param {{ date: string, start: Date, end: Date, substitute?: boolean }} obj */
   _addSubstitute(date, obj) {
     if (this.substitute || date.substitute) obj.substitute = true
   }
+}
+
+/** @param {number} offsetMinutes */
+function formatOffsetMinutes(offsetMinutes) {
+  const sign = offsetMinutes < 0 ? '-' : '+'
+  const absolute = Math.abs(offsetMinutes)
+  const hours = String(Math.floor(absolute / 60)).padStart(2, '0')
+  const minutes = String(absolute % 60).padStart(2, '0')
+  return `${sign}${hours}${minutes}`
 }
 
 /**

@@ -14,5 +14,8 @@
   },
   "devDependencies": {
     "hebcal": "^2.3.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

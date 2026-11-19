@@ -1,7 +1,8 @@
 // import 'core-js/es6/index.js' // for IE11
 
 import assert from 'assert'
-import Holidays, { HolidayRule } from '../src/index.js'
+import Holidays, { HolidayRule } from './support.js'
+import { momentTimezoneAdapter } from 'caldate/moment-timezone'
 import { toIso, localDate, moveToTimezone } from './helpers.js'
 
 import fixtures from './fixtures/index.cjs'
@@ -17,6 +18,42 @@ describe('#Holidays', function () {
     it('can set opts without given country', function () {
       const hd = new Holidays(fixtures.custom, { timezone: 'UTC' })
       assert.strictEqual(hd.__timezone, 'UTC')
+    })
+
+    it('rejects an invalid timezone adapter', function () {
+      assert.throws(
+        () =>
+          new Holidays(fixtures.custom, {
+            timezoneAdapter: { toTimezone() {} }
+          }),
+        /timezoneAdapter must provide toTimezone and fromTimezone functions/
+      )
+    })
+
+    it('uses the selected timezone adapter for holiday dates', function () {
+      const temporal = new Holidays(fixtures.custom, 'CUSTOM', {
+        timezone: 'America/Havana'
+      })
+      const moment = new Holidays(fixtures.custom, 'CUSTOM', {
+        timezone: 'America/Havana',
+        timezoneAdapter: momentTimezoneAdapter
+      })
+      const startFor = (hd) =>
+        hd.getHolidays(2026).find(({ rule }) => rule === '12-25').start
+
+      assert.strictEqual(
+        startFor(temporal).toISOString(),
+        '2026-12-25T05:00:00.000Z'
+      )
+      assert.strictEqual(
+        startFor(moment).toISOString(),
+        '2026-12-25T04:00:00.000Z'
+      )
+      assert.strictEqual(
+        temporal.isHoliday(new Date('2026-12-25T04:30:00Z')),
+        false
+      )
+      assert.ok(moment.isHoliday(new Date('2026-12-25T04:30:00Z')))
     })
   })
 

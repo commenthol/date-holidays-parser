@@ -1,5 +1,5 @@
 import assert from 'assert'
-import Holidays from '../src/index.js'
+import Holidays from './support.js'
 
 import fixtures from './fixtures/index.cjs'
 

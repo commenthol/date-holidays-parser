@@ -7,6 +7,26 @@ import { DAYS, isNil } from './internal/utils.js'
 
 /** @typedef {import('./CalEvent.js').default} CalEvent */
 /** @typedef {import('./types.js').RuleToken} RuleToken */
+/** @typedef {import('./types.js').RuleDate} RuleDate */
+
+/** @param {RuleDate} source @param {RuleDate} target */
+function copyCalendarMetadata(source, target) {
+  target._calendarOffsetMinutes = source._calendarOffsetMinutes
+  target._calendarDuration = source._calendarDuration
+}
+
+/** @param {RuleDate} date @param {number} duration */
+function setCalendarDuration(date, duration) {
+  date.duration = duration
+  date._calendarDuration = duration
+}
+
+/** @param {RuleDate} date @param {number} hour @param {number} minute */
+function setCalendarTime(date, hour, minute) {
+  date._calendarOffsetMinutes = undefined
+  date._calendarDuration = undefined
+  date.setTime(hour, minute)
+}
 
 export default class Rule {
   /**
@@ -136,7 +156,10 @@ export default class Rule {
       const weekday = date.getDay()
       if (~rule.if.indexOf(DAYS[weekday])) {
         if (this.modifier === 'and') {
-          dates.push(new CalDate(date))
+          /** @type {RuleDate} */
+          const copy = new CalDate(date)
+          copyCalendarMetadata(date, copy)
+          dates.push(copy)
           date.substitute = true
         }
         date._filter = false
@@ -161,10 +184,10 @@ export default class Rule {
         ;(rule.rules || []).forEach((rule) => {
           switch (rule.rule) {
             case 'time':
-              date.setTime(rule.hour, rule.minute)
+              setCalendarTime(date, rule.hour, rule.minute)
               break
             case 'duration':
-              date.duration = rule.duration
+              setCalendarDuration(date, rule.duration)
               break
           }
         })
@@ -198,14 +221,14 @@ export default class Rule {
   /** @param {RuleToken} rule */
   time(rule) {
     this.calEvent.dates.forEach((date) => {
-      date.setTime(rule.hour, rule.minute)
+      setCalendarTime(date, rule.hour, rule.minute)
     })
   }
 
   /** @param {RuleToken} rule */
   duration(rule) {
     this.calEvent.dates.forEach((date) => {
-      date.duration = rule.duration
+      setCalendarDuration(date, rule.duration)
     })
   }
 

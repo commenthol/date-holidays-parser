@@ -1,3 +1,8 @@
+/** @typedef {import('./types.js').CalendarDate} CalendarDate */
+/** @typedef {import('./types.js').CalendarContext} CalendarContext */
+/** @template TParsed @typedef {import('./types.js').CalendarParseResult<TParsed>} CalendarParseResult */
+/** @template TParsed @typedef {import('./types.js').CalendarPlugin<TParsed>} CalendarPlugin */
+/** @typedef {import('./types.js').HolidaysOptions} HolidaysOptions */
 /** @typedef {import('./types.js').Location} Location */
 /** @typedef {import('./types.js').ActiveRange} ActiveRange */
 /** @typedef {import('./types.js').HolidayOptions} HolidayOptions */

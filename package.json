@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "3.7.0",
+  "version": "4.0.0-1",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -40,11 +40,18 @@
       "import": "./src/index.js",
       "require": "./lib/index.cjs"
     },
+    "./plugins": {
+      "types": "./types/plugins/index.d.ts",
+      "import": "./src/plugins/index.js",
+      "require": "./lib/plugins/index.cjs"
+    },
+    "./plugins/*": {
+      "types": "./types/plugins/*.d.ts",
+      "import": "./src/plugins/*.js",
+      "require": "./lib/plugins/*.cjs"
+    },
     "./package.json": "./package.json"
   },
-  "main": "./lib/index.cjs",
-  "module": "./src/index.js",
-  "types": "./types/index.d.ts",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -53,9 +60,7 @@
   "files": [
     "lib",
     "src",
-    "types",
-    "LICENSE",
-    "README.md"
+    "types"
   ],
   "scripts": {
     "all": "run-s clean pretty lint build postbuild test types",
@@ -70,8 +75,8 @@
     "pretty": "prettier -w src test",
     "prepublishOnly": "npm run all",
     "test": "run-s test:*",
-    "test:ci": "mocha",
-    "test:tz": "TZ=UTC-10 mocha && TZ=UTC+10 mocha",
+    "test:ci": "mocha --node-option harmony-temporal",
+    "test:tz": "TZ=UTC-10 mocha --node-option harmony-temporal && TZ=UTC+10 mocha --node-option harmony-temporal",
     "types": "tsc -p ./tsconfig.json"
   },
   "mocha": {
@@ -81,7 +86,7 @@
   "dependencies": {
     "@hnw/date-tibetan": "^1.0.2",
     "astronomia": "^4.3.0",
-    "caldate": "^2.1.0",
+    "caldate": "^3.0.0-1",
     "date-bengali-revised": "^2.1.0",
     "date-chinese": "^2.2.0",
     "date-easter": "^1.1.0",
@@ -106,6 +111,6 @@
     "typescript": "^7.0.2"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=22.0.0"
   }
 }

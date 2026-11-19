@@ -55,104 +55,67 @@ module.exports = {
   ],
   'julian 2015-01-09': [
     {
-      fn: 'julian',
-      year: 2015,
-      month: 1,
-      day: 9
+      fn: 'julian'
     }
   ],
   'easter -3': [
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: -3
+      fn: 'easter'
     }
   ],
   'orthodox 50': [
     {
-      fn: 'easter',
-      type: 'orthodox',
-      offset: 50
+      fn: 'easter'
     }
   ],
   '10 Muharram': [
     {
-      fn: 'islamic',
-      day: 10,
-      month: 1,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '1 Safar': [
     {
-      fn: 'islamic',
-      day: 1,
-      month: 2,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '12 Rabi al-awwal': [
     {
-      fn: 'islamic',
-      day: 12,
-      month: 3,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '13 Rabi al-thani': [
     {
-      fn: 'islamic',
-      day: 13,
-      month: 4,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '14 Jumada al-awwal': [
     {
-      fn: 'islamic',
-      day: 14,
-      month: 5,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '25 Jumada al-thani': [
     {
-      fn: 'islamic',
-      day: 25,
-      month: 6,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '15 Rajab': [
     {
-      fn: 'islamic',
-      day: 15,
-      month: 7,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '1 Shaban': [
     {
-      fn: 'islamic',
-      day: 1,
-      month: 8,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '2 Ramadan': [
     {
-      fn: 'islamic',
-      day: 2,
-      month: 9,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '1 Shawwal P3D': [
     {
-      fn: 'islamic',
-      day: 1,
-      month: 10,
-      year: undefined
+      fn: 'islamic'
     },
     {
       rule: 'duration',
@@ -161,294 +124,167 @@ module.exports = {
   ],
   '3 Shawwal': [
     {
-      fn: 'islamic',
-      day: 3,
-      month: 10,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '4 Dhu al-Qidah': [
     {
-      fn: 'islamic',
-      day: 4,
-      month: 11,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '5 Dhu al-Hijjah': [
     {
-      fn: 'islamic',
-      day: 5,
-      month: 12,
-      year: undefined
+      fn: 'islamic'
     }
   ],
   '15 Nisan': [
     {
-      fn: 'hebrew',
-      day: 15,
-      month: 1,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '2 Iyyar': [
     {
-      fn: 'hebrew',
-      day: 2,
-      month: 2,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '3 Sivan': [
     {
-      fn: 'hebrew',
-      day: 3,
-      month: 3,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '4 Tamuz': [
     {
-      fn: 'hebrew',
-      day: 4,
-      month: 4,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '5 Av': [
     {
-      fn: 'hebrew',
-      day: 5,
-      month: 5,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '6 Elul': [
     {
-      fn: 'hebrew',
-      day: 6,
-      month: 6,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '1 Tishrei': [
     {
-      fn: 'hebrew',
-      day: 1,
-      month: 7,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '10 Tishrei': [
     {
-      fn: 'hebrew',
-      day: 10,
-      month: 7,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '7 Cheshvan': [
     {
-      fn: 'hebrew',
-      day: 7,
-      month: 8,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '18 Kislev': [
     {
-      fn: 'hebrew',
-      day: 18,
-      month: 9,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '18 Tevet': [
     {
-      fn: 'hebrew',
-      day: 18,
-      month: 10,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '22 Shvat': [
     {
-      fn: 'hebrew',
-      day: 22,
-      month: 11,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '25 Adar': [
     {
-      fn: 'hebrew',
-      day: 25,
-      month: 12,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '13 Adar': [
     {
-      fn: 'hebrew',
-      day: 13,
-      month: 12,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '13 AdarII': [
     {
-      fn: 'hebrew',
-      day: 13,
-      month: 13,
-      year: undefined
+      fn: 'hebrew'
     }
   ],
   '1 Farvardin': [
     {
-      day: 1,
-      fn: 'jalaali',
-      month: 1,
-      year: undefined
+      fn: 'jalaali'
     }
   ],
   '31 Shahrivar 1401': [
     {
-      day: 31,
-      fn: 'jalaali',
-      month: 6,
-      year: 1401
+      fn: 'jalaali'
     }
   ],
   '29 Esfand 1401': [
     {
-      day: 29,
-      fn: 'jalaali',
-      month: 12,
-      year: 1401
+      fn: 'jalaali'
     }
   ],
   'chinese 01-0-01': [
     {
-      fn: 'chinese',
-      day: 1,
-      month: 1,
-      leapMonth: false,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'chinese'
     }
   ],
   'chinese 8-1-15': [
     {
-      fn: 'chinese',
-      day: 15,
-      month: 8,
-      leapMonth: true,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'chinese'
     }
   ],
   'chinese 8-1-16': [
     {
-      fn: 'chinese',
-      day: 16,
-      month: 8,
-      leapMonth: true,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'chinese'
     }
   ],
   'chinese 8-15 solarterm': [
     {
-      fn: 'chinese',
-      day: 15,
-      solarterm: 8,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'chinese'
     }
   ],
   'chinese 78-32-8-15 solarterm': [
     {
-      fn: 'chinese',
-      day: 15,
-      solarterm: 8,
-      year: 32,
-      cycle: 78,
-      timezone: undefined
+      fn: 'chinese'
     }
   ],
   'korean 01-0-01': [
     {
-      fn: 'korean',
-      day: 1,
-      month: 1,
-      leapMonth: false,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'korean'
     }
   ],
   'bengali-revised 1425-1-1': [
     {
-      fn: 'bengali-revised',
-      day: 1,
-      month: 1,
-      year: 1425
+      fn: 'bengali-revised'
     }
   ],
   'bengali-revised 1-1': [
     {
-      fn: 'bengali-revised',
-      day: 1,
-      month: 1,
-      year: undefined
+      fn: 'bengali-revised'
     }
   ],
   'tibetan 01-0-01': [
     {
-      fn: 'tibetan',
-      day: 1,
-      month: 1,
-      leapMonth: false,
-      leapDay: false,
-      year: undefined,
-      cycle: undefined
+      fn: 'tibetan'
     }
   ],
   'mongolian 01-1-01': [
     {
-      fn: 'mongolian',
-      day: 1,
-      month: 1,
-      leapMonth: true,
-      leapDay: false,
-      year: undefined,
-      cycle: undefined
+      fn: 'mongolian'
     }
   ],
   'bhutanese 01-1-01-1': [
     {
-      fn: 'bhutanese',
-      day: 1,
-      month: 1,
-      leapMonth: true,
-      leapDay: true,
-      year: undefined,
-      cycle: undefined
+      fn: 'bhutanese'
     }
   ],
   '1 day before vietnamese 01-0-01': [
     {
-      fn: 'vietnamese',
-      day: 1,
-      month: 1,
-      leapMonth: false,
-      year: undefined,
-      cycle: undefined,
-      timezone: undefined
+      fn: 'vietnamese'
     },
     {
       count: 1,
@@ -459,12 +295,7 @@ module.exports = {
   ],
   'friday before chinese 78-32-8-15 solarterm': [
     {
-      fn: 'chinese',
-      day: 15,
-      solarterm: 8,
-      year: 32,
-      cycle: 78,
-      timezone: undefined
+      fn: 'chinese'
     },
     {
       rule: 'dateDir',
@@ -475,16 +306,12 @@ module.exports = {
   ],
   'march equinox': [
     {
-      fn: 'equinox',
-      season: 'march',
-      timezone: 'GMT'
+      fn: 'equinox'
     }
   ],
   '4 days before march equinox in Europe/Vienna': [
     {
-      fn: 'equinox',
-      season: 'march',
-      timezone: 'Europe\u002FVienna'
+      fn: 'equinox'
     },
     {
       count: 4,
@@ -495,23 +322,17 @@ module.exports = {
   ],
   'march equinox in Asia/Tokyo': [
     {
-      fn: 'equinox',
-      season: 'march',
-      timezone: 'Asia\u002FTokyo'
+      fn: 'equinox'
     }
   ],
   'March equinox in +09:00': [
     {
-      fn: 'equinox',
-      season: 'march',
-      timezone: '+09:00'
+      fn: 'equinox'
     }
   ],
   'march equinox in Asia/Tokyo if sunday then next monday': [
     {
-      fn: 'equinox',
-      season: 'march',
-      timezone: 'Asia\u002FTokyo'
+      fn: 'equinox'
     },
     {
       rule: 'dateIfThen',
@@ -522,9 +343,7 @@ module.exports = {
   ],
   '3 days after september equinox': [
     {
-      fn: 'equinox',
-      season: 'september',
-      timezone: 'GMT'
+      fn: 'equinox'
     },
     {
       count: 3,
@@ -535,9 +354,7 @@ module.exports = {
   ],
   '1 day before june solstice': [
     {
-      fn: 'equinox',
-      season: 'june',
-      timezone: 'GMT'
+      fn: 'equinox'
     },
     {
       count: 1,
@@ -548,9 +365,7 @@ module.exports = {
   ],
   '1 day after december solstice': [
     {
-      fn: 'equinox',
-      season: 'december',
-      timezone: 'GMT'
+      fn: 'equinox'
     },
     {
       count: 1,
@@ -561,9 +376,7 @@ module.exports = {
   ],
   '3rd monday before December solstice': [
     {
-      fn: 'equinox',
-      season: 'december',
-      timezone: 'GMT'
+      fn: 'equinox'
     },
     {
       rule: 'dateDir',
@@ -587,9 +400,7 @@ module.exports = {
   ],
   'easter -3 14:00': [
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: -3
+      fn: 'easter'
     },
     {
       rule: 'time',
@@ -599,9 +410,7 @@ module.exports = {
   ],
   'easter -6 P5D': [
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: -6
+      fn: 'easter'
     },
     {
       rule: 'duration',
@@ -644,9 +453,7 @@ module.exports = {
   ],
   'easter -3 14:00 PT4H': [
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: -3
+      fn: 'easter'
     },
     {
       rule: 'time',
@@ -660,9 +467,7 @@ module.exports = {
   ],
   'easter -3 14:00 P3D': [
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: -3
+      fn: 'easter'
     },
     {
       rule: 'time',
@@ -972,9 +777,7 @@ module.exports = {
       modifier: 'if equal'
     },
     {
-      fn: 'easter',
-      type: 'easter',
-      offset: 49
+      fn: 'easter'
     },
     {
       modifier: 'then'
@@ -1132,10 +935,7 @@ module.exports = {
   ],
   'substitutes 1 Shawwal if wednesday,saturday,sunday then next monday': [
     {
-      fn: 'islamic',
-      day: 1,
-      month: 10,
-      year: undefined
+      fn: 'islamic'
     },
     {
       modifier: 'substitutes'
@@ -1149,10 +949,7 @@ module.exports = {
   ],
   'substitutes 1 Shawwal if Wednesday,Saturday,Sunday then next Monday': [
     {
-      fn: 'islamic',
-      day: 1,
-      month: 10,
-      year: undefined
+      fn: 'islamic'
     },
     {
       modifier: 'substitutes'
@@ -1166,10 +963,7 @@ module.exports = {
   ],
   '4 Shawwal and if saturday then next monday': [
     {
-      fn: 'islamic',
-      day: 4,
-      month: 10,
-      year: undefined
+      fn: 'islamic'
     },
     {
       modifier: 'and'

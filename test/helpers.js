@@ -3,7 +3,6 @@ import { pad0 } from '../src/internal/utils.js'
 
 export function toIso(date) {
   const days = 'sun,mon,tue,wed,thu,fri,sat'.split(',')
-
   const y = pad0(date.getFullYear(), 4)
   const m = pad0(date.getMonth() + 1, 2)
   const d = pad0(date.getDate(), 2)
@@ -15,12 +14,12 @@ export function toIso(date) {
 }
 
 export function fixResult(arr) {
-  return arr.map((item) => {
-    return Object.assign({}, item, {
+  return arr.map((item) =>
+    Object.assign({}, item, {
       start: toIso(item.start),
       end: toIso(item.end)
     })
-  })
+  )
 }
 
 function toString(date) {

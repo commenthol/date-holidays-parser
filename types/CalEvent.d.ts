@@ -52,12 +52,19 @@ export default class CalEvent {
     push(calEvent: CalEvent): void;
     /**
      * @param {string} timezone
+     * @param {import('caldate').TimezoneAdapter} [timezoneAdapter]
      * @returns
      */
-    get(timezone: string): {
-        date: any;
-        start: any;
-        end: any;
+    get(timezone: string, timezoneAdapter?: import('caldate').TimezoneAdapter): {
+        date: string;
+        start: Date;
+        end: Date;
     }[];
-    _addSubstitute(date: any, obj: any): void;
+    /** @param {RuleDate} date @param {{ date: string, start: Date, end: Date, substitute?: boolean }} obj */
+    _addSubstitute(date: RuleDate, obj: {
+        date: string;
+        start: Date;
+        end: Date;
+        substitute?: boolean;
+    }): void;
 }

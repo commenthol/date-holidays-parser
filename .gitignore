@@ -4,7 +4,7 @@ node_modules/
 tmp/
 
 .DS_Store
-.eslintcache
+.codegraph
 .idea/
 .nyc_output
 
