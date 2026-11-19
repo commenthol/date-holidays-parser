@@ -1,6 +1,6 @@
 {
   "name": "date-holidays-parser",
-  "version": "4.0.0-0",
+  "version": "4.0.0-1",
   "description": "parser for worldwide holidays",
   "keywords": [
     "holidays",
@@ -86,7 +86,7 @@
   "dependencies": {
     "@hnw/date-tibetan": "^1.0.2",
     "astronomia": "^4.3.0",
-    "caldate": "^3.0.0-0",
+    "caldate": "^3.0.0-1",
     "date-bengali-revised": "^2.1.0",
     "date-chinese": "^2.2.0",
     "date-easter": "^1.1.0",
